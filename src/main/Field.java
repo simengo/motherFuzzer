@@ -1,11 +1,14 @@
-public class Field {
+public abstract class Field {
 
     int posX;
     int posY;
     Character type;
 
+
     public Field(Character type, int x, int y) {
 
     }
+
+
 
 }

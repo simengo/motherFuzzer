@@ -3,4 +3,9 @@ public class Jump extends Instruction {
     public Jump(int jumpPC) {
         this.jumpPC=jumpPC;
     }
+
+    @Override
+    public void execute(World world, Ant ant) {
+        ant.setPc(jumpPC);
+    }
 }

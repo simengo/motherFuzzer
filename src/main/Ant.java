@@ -8,7 +8,9 @@ public class Ant implements AntInfo {
     private Swarm swarm;
     private int pc = 0;
     private boolean isDead = false;
-    private DirEnum direction = DirEnum.northwest;
+
+
+    private String direction = "northwest";
     private int restTime = 0;
     private boolean hasFood = false;
     private boolean[] regs = new boolean[]{false, false, false, false, false, false, false};
@@ -24,6 +26,42 @@ public class Ant implements AntInfo {
         return isDead;
     }
 
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public void setRestTime(int restTime) {
+        this.restTime = restTime;
+    }
+
+    public void setHasFood(boolean hasFood) {
+        this.hasFood = hasFood;
+    }
+
+    public void setRegs(boolean[] regs) {
+        this.regs = regs;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setField(Field field) {
+        this.field = field;
+    }
+
+    public void setSwarm(Swarm swarm) {
+        this.swarm = swarm;
+    }
+
+    public void setPc(int pc) {
+        this.pc = pc;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
+    }
     public void incrasePC(){
         pc++;
     }
@@ -65,6 +103,6 @@ public class Ant implements AntInfo {
 
     @Override
     public String getDirection() {
-        return null;
+        return direction;
     }
 }
