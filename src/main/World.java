@@ -1,7 +1,7 @@
 import java.util.*;
 
 
-// removeAnt()/ logger mit funktionen ...
+// removeAnt()/ logger mit funktionen ...//
 public class World implements WorldInfo{
 
     final private int width;
