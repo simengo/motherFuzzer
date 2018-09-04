@@ -1,8 +1,12 @@
+import saarland.cispa.sopra.systemtests.AntInfo;
+import saarland.cispa.sopra.systemtests.FieldInfo;
+import saarland.cispa.sopra.systemtests.WorldInfo;
+
 import java.util.*;
 
 
 // removeAnt()/ logger mit funktionen ...//
-public class World implements WorldInfo{
+public class World implements WorldInfo {
 
     final private int width;
     final private int height;
@@ -57,9 +61,9 @@ public class World implements WorldInfo{
 
 
 
-    public Field getFieldAt(int x,int y){
+    public FieldInfo getFieldAt(int x,int y){
 
-        return fields[x][y];
+        return (FieldInfo) fields[x][y];
     }
 
 
@@ -227,8 +231,13 @@ public class World implements WorldInfo{
         return ants.get(id);
     }
 
+    public List<AntInfo> getAnts(){
 
-    public int getPointsSwarm(char swarm){
+        return ants.get(id);
+    }
+
+
+    public int getScore(char swarm){
 
         return points.get(swarm);
     }
