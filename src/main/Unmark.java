@@ -10,7 +10,8 @@ public class Unmark extends Instruction {
 
         char swarm = ant.getSwarm();
         if(ant.getField().getType() != '=' || ant.getField().getType() != '#'){
-            ant.getField().setMarker(swarm,marker,false);
+            Field field = (Field) ant.getField();
+            field.setMarker(swarm,marker,false);
         }
 
         ant.increasePC();

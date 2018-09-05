@@ -20,6 +20,7 @@ public class Sense extends Instruction {
 
 
 
+        Field field = (Field) ant.getField();
 
         switch (direction) {
             case left:
@@ -29,28 +30,33 @@ public class Sense extends Instruction {
                 switch (antDirLeft){
                     case "northwest":
                         newDirectionLeft ="west";
+                        break;
                     case "northeast":
                         newDirectionLeft = "northwest";
+                        break;
                     case "east":
                         newDirectionLeft = "northeast";
+                        break;
                     case "southeast":
                         newDirectionLeft = "east";
+                        break;
                     case "southwest":
                         newDirectionLeft = "southeast";
+                        break;
                     case "west":
                         newDirectionLeft = "southwest";
-                    default: newDirectionLeft = "Baum";
+                        break;
+                    default:
+                        throw new IllegalArgumentException();
+
 
 
 
 
                 }
-                if(world.getFieldInDirection(ant.getField(),newDirectionLeft) == '.'){
-                    Normal field = world.getFieldInDirection(ant.getField(),newDirectionLeft);
-                }
-                if(world.getFieldInDirection(ant.getField(),newDirectionLeft) != '#' && world.getFieldInDirection(ant.getField(),newDirectionLeft) != '='){
-                    Base field = world.getFieldInDirection(ant.getField(),newDirectionLeft);;
-                }
+
+                    field =  world.getFieldInDirection(ant.getField(),newDirectionLeft);
+                break;
 
             case right:
 
@@ -59,36 +65,117 @@ public class Sense extends Instruction {
                 switch (antDirRight) {
                     case "northwest":
                         newDirectionRight = "northeast";
+                        break;
                     case "northeast":
                         newDirectionRight = "east";
+                        break;
                     case "east":
                         newDirectionRight = "northeast";
+                        break;
                     case "southeast":
                         newDirectionRight = "east";
+                        break;
                     case "southwest":
                         newDirectionRight = "southeast";
+                        break;
                     case "west":
                         newDirectionRight = "southwest";
+                        break;
+                    default:
+                        throw new IllegalArgumentException();
+
                 }
 
+                   field =  world.getFieldInDirection(ant.getField(), newDirectionRight);
+
+                    break;
             case ahead:
-                if(world.getFieldInDirection(ant.getField(),ant.getDirection()) == '.'){
-                    Normal field = world.getFieldInDirection(ant.getField(),ant.getDirection());
-                }
-                if(world.getFieldInDirection(ant.getField(),ant.getDirection()) != '#' && world.getFieldInDirection(ant.getField(),ant.getDirection()) != '='){
-                    Base field = world.getFieldInDirection(ant.getField(),ant.getDirection());;
-                }
+                   field = world.getFieldInDirection(ant.getField(), ant.getDirection());
 
 
 
 
+                break;
             case here:
-                if(ant.getField().getType() == '.'){
-                    Normal field = ant.getField();
-                }
-                if(ant.getField().getType() != '#' && ant.getField().getType() != '='){
-                    Base field = ant.getField();
-                }
+
+                    field = (Field) ant.getField();
+
+                break;
+            default:
+                throw new IllegalArgumentException();
         }
+
+        //switch on target
+        //friend, foe, food, rock, home, foehome, marker,foemarker,friendfood,foefood,antlion
+        switch(target){
+            case friend:
+                if(!(field.getAnt().isPresent())){
+                    ant.setPc(jumpPC);}
+                    else {
+                    if (field.getAnt().get().getSwarm() == ant.getSwarm()) {
+                        ant.increasePC();
+                    } else {
+                        ant.setPc(jumpPC);
+                    }
+                }
+
+
+                break;
+            case foe:
+                if(!(field.getAnt().isPresent())){
+                    ant.setPc(jumpPC);}
+                else {
+                    if (field.getAnt().get().getSwarm() != ant.getSwarm()) {
+                        ant.increasePC();
+                    } else {
+                        ant.setPc(jumpPC);
+                    }
+                }
+                break;
+            case food:
+                if(field.getFood() != 0 ){ant.increasePC();}
+                else{ant.setPc(jumpPC);}
+                break;
+            case rock:
+                if(field.getType() == '#'){ant.increasePC();}
+                else{ant.setPc(jumpPC);}
+                break;
+            case home:
+                if(field.getType() == ant.getSwarm()){
+                    ant.increasePC();
+                }
+                else{ant.setPc(jumpPC);}
+                break;
+            case foehome:
+                if(field.getType() != ant.getSwarm() && field.getType() != '#' && field.getType() != '='){
+                    ant.increasePC();}
+                else{ant.setPc(jumpPC);}
+                break;
+            case marker:
+                if(field.getMarker(ant.getSwarm(),marker)){
+                    ant.increasePC();
+                }
+                else{
+                    ant.setPc(jumpPC);
+                }
+                break;
+            case foemarker:
+
+            case friendfood:
+                if(field.getAnt().isPresent() && field.getAnt().get().hasFood() && field.getAnt().get().getSwarm() == ant.getSwarm()){ant.increasePC();}
+                else{ant.setPc(jumpPC);}
+                break;
+            case foefood:
+                if(field.getAnt().isPresent() && field.getAnt().get().hasFood() && field.getAnt().get().getSwarm() != ant.getSwarm()){ant.increasePC();}
+                else{ant.setPc(jumpPC);}
+                break;
+            case antlion:
+                if(field.getType() == '=' || field.isNextToAntlion()){
+                    ant.increasePC();
+                }
+                else{ant.setPc(jumpPC);}
+                break;
+        }
+
     }
 }

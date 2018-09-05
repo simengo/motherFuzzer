@@ -57,7 +57,7 @@ abstract class Field implements FieldInfo {
         return isNextToAntlion;
     }
 
-    public boolean isChanged() {
+    public boolean getChanged() {
         return changed;
     }
 

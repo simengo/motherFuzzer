@@ -25,6 +25,7 @@ public class Turn extends Instruction {
                         ant.setDirection("southeast");
                     case "west":
                         ant.setDirection("southwest");
+                        default: throw new IllegalArgumentException();
 
                 }
             case right:
@@ -41,6 +42,7 @@ public class Turn extends Instruction {
                         ant.setDirection("west");
                     case "west":
                         ant.setDirection("northwest");
+                    default: throw new IllegalArgumentException();
 
                 }
 
