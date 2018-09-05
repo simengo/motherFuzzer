@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import  java.util.Optional;
 
-public class Field {
+public class Field implements FieldInfo {
 
     int posX;
     int posY;

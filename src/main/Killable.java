@@ -1,3 +1,6 @@
+import saarland.cispa.sopra.systemtests.FieldInfo;
+
+import java.util.Optional;
 public class Killable extends Instruction {
     int jumpPc;
 
@@ -7,17 +10,20 @@ public class Killable extends Instruction {
 
     }
 
-    public void execute(world World, ant Ant){
-        for(world.)
-    }
-
-    private void killcheck() {
+    public void execute(World world, Ant ant) {
 
     }
 
-    private boolean isSurrounded()
-    {
-        return false;
+    private void killcheck(World world,Optional<Ant> ant) {
+
+
+    }
+
+    private boolean isSurrounded(World world, Ant ant){
+        Field field = ant.getField();
+        ant 0 = world.getNeighbours(field)[0];
+
+
     }
 
 }
