@@ -1,8 +1,10 @@
+public class Set extends Instruction {
+
+    private int reg;
+
+    public Set(int reg){this.reg = reg;}
 
 
-public class
-
-Set extends Instruction {
     @Override
     public void execute(World world, Ant ant) {
 

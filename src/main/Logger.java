@@ -1,20 +1,14 @@
-import javax.json.Json;
+import java.util.List;
 
-public class Logger {
+public interface Logger {
 
-    //TODO reminder : JSON bekommt <key,value> pairs
 
-    String log;
 
-    public Logger() {
+    public void addRoundInfo(List<Field> changes);
 
-    }
+    public void addInitialRound(Field[][] map);
 
-    public void addInitialRound(Field[][] map){
+    public void writeToFile();
 
-    }
 
-    public void addOneRound(Field[] changes){
-
-    }
 }

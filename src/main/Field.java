@@ -81,4 +81,15 @@ public class Field implements FieldInfo {
         this.ant = null;
     }
 
+    public int getPosY() {
+        return posY;
+    }
+
+    public Character getType() {
+        return type;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
 }
