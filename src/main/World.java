@@ -66,7 +66,7 @@ public class World implements WorldInfo {
     }
 
 
-    public Field getFieldInDirection(FieldInfo hereField, String direction) {
+    public Field getFieldInDirection(Field hereField, String direction) {
 
         int x = hereField.getX();
         int y = hereField.getY();
