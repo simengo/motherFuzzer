@@ -8,4 +8,15 @@ public class Field {
 
     }
 
+    public int getPosY() {
+        return posY;
+    }
+
+    public Character getType() {
+        return type;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
 }
