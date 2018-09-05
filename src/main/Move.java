@@ -1,5 +1,24 @@
-public class  Move extends Killable {
+import java.util.Optional;
+
+public class Move extends Killable {
     public Move(int jumpPc) {
         super(jumpPc);
+    }
+
+    @Override
+    public void execute(World world, Ant ant) {
+        Field field = (Field) ant.getField();
+        String direction = ant.getDirection();
+        Field fieldInDirection = world.getFieldInDirection(field, direction);
+        if (ant.getRestTime() == 0 && fieldInDirection.isAccessible()) {
+            field.removeAnt();
+            fieldInDirection.setAnt(ant);
+            fieldInDirection.setChanged();
+            killcheck(world, Optional.of(ant));
+            ant.increasePC();
+        } else {
+            field.setChanged();
+            ant.setPc(jumpPc);
+        }
     }
 }
