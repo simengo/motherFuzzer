@@ -15,12 +15,14 @@ public class NOPLogger implements Logger {
     @Override
     public void addInitialRound(Field[][] map) {
 
+        return;
     }
 
 
     @Override
     public void addRoundInfo(List<Field> changes) {
 
+        return;
     }
 
 
@@ -28,6 +30,7 @@ public class NOPLogger implements Logger {
     @Override
     public void writeToFile() {
 
+        return;
     }
 
 

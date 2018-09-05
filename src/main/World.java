@@ -8,6 +8,7 @@ import java.util.*;
 // removeAnt()/ logger mit funktionen ...//
 public class World implements WorldInfo {
 
+
     final private int width;
     final private int height;
     final private long seed;
@@ -229,7 +230,9 @@ public class World implements WorldInfo {
 
     public List<AntInfo> getAnts(){
 
-        return ants.get(id);
+        List<AntInfo> antList = new ArrayList<AntInfo>(ants.values());
+
+        return antList;
     }
 
 
