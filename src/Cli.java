@@ -16,8 +16,8 @@ public class Cli {
 
         this.args = args;
         options.addOption("protocol", "Log-Dateiname", true, "Protokollpfad");
-        options.addOption("brains", "Brainfiles", true, "Here you can set parameter .");
-        options.addOption("rounds" );
+        options.addOption("brains", "Brainfiles", true, "Brains");
+        options.addOption("rounds", "Rundenanzahl", true, "" );
         options.addOption("seed" );
         options.addOption( "world " );
     }

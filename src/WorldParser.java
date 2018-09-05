@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class WorldParser {
-    public World parseMap(File mapFile, long seed, HashMap<Character, Swarm> swarms, Logger logger) throws IOException {
+    public static World parseMap(File mapFile, long seed, HashMap<Character, Swarm> swarms, Logger logger) throws IOException {
 
         int i = 0;
         int j = 0;

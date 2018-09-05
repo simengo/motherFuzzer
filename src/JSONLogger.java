@@ -12,14 +12,11 @@ public class JSONLogger implements Logger {
     File output;
 
 
-    public JSONLogger(File protocol){
+    public JSONLogger(File protocol) {
 
         this.output = protocol;
 
-
     }
-
-
 
     @Override
     public void addInitialRound(Field[][] map, Map<Character, Integer> points) {
@@ -43,21 +40,17 @@ public class JSONLogger implements Logger {
             .build();
 
 
-
     }
-
 
 
     @Override
-    public void addRoundInfo(List<Field> changes,Map<Character, Integer> points) {
-
-
+    public void addRoundInfo(List<Field> changes, Map<Character, Integer> points) {
 
 
     }
 
-//TODO
-    private JsonArray createInitialFieldsArray (Field[][] fields,JsonArray marker){
+    //TODO
+    private JsonArray createInitialFieldsArray(Field[][] fields, JsonArray marker) {
 
 
         JsonArrayBuilder arrBuild = Json.createArrayBuilder();
@@ -66,11 +59,9 @@ public class JSONLogger implements Logger {
         int height = fields.length;
         int width = fields[0].length;
 
-        for(int y = 0 ; y < height; y++){
+        for (int y = 0; y < height; y++) {
 
-            for(int x = 0; x < width; x++){
-
-
+            for (int x = 0; x < width; x++) {
 
 
             }
@@ -79,60 +70,47 @@ public class JSONLogger implements Logger {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-    private JsonArray createMarkerArray(Field field){
+    private JsonArray createMarkerArray(Field field) {
 
 
         boolean breakout = false;
         JsonArrayBuilder jsArr = Json.createArrayBuilder(); // am Ende ausgegebener merkers Array
 
-        Map<Character,boolean[]> marker = field.getMarkers();
+        Map<Character, boolean[]> marker = field.getMarkers();
         int keySize = marker.keySet().size();
 
 
-        for(int i = 0; i < keySize; i++){
+        for (int i = 0; i < keySize; i++) {
 
             char swarmId = 'A';
             boolean[] marks = marker.get(swarmId);
 
 
             // falls alle marker false soll kein JsonObject erzeugt werden
-            for(int h = 0; h < 7 ; h++){
-                if(marks[h]){
+            for (int h = 0; h < 7; h++) {
+                if (marks[h]) {
                     break;
-                }
-                else if(h == 6){
+                } else if (h == 6) {
                     breakout = true;
                 }
             }
 
-            if(breakout){
+            if (breakout) {
                 continue;
             }
-
-
 
 
             JsonArrayBuilder jsAHelp = Json.createArrayBuilder();  ////////wird tatsächlich jedes Mal ein neuer ArrayBuilder erzeugt oder nicht??? !!!
             JsonObjectBuilder jBuilder = Json.createObjectBuilder(); // Objekt das im markers Array gespeichert wird
 
-            for(int j = 0; j < 7 ; j++){
+            for (int j = 0; j < 7; j++) {
 
                 jsAHelp.add(marks[j]);
 
             }
 
-            jBuilder.add("swarm_id",swarmId);
-            jBuilder.add("values",jsA);
+            jBuilder.add("swarm_id", swarmId);
+            jBuilder.add("values", jsA);
             JsonObject obj = jBuilder.build();
             jsArr.add(obj);
 
@@ -145,8 +123,7 @@ public class JSONLogger implements Logger {
     }
 
 
-
-    private JsonObject createAntJsObject(AntInfo antI,JsonArray register){
+    private JsonObject createAntJsObject(AntInfo antI, JsonArray register) {
         JsonObjectBuilder jsBuilder = Json.createObjectBuilder();
         int id = antI.getId();
         int pc = antI.getPc();
@@ -160,19 +137,11 @@ public class JSONLogger implements Logger {
     }
 
 
-
-
-
-
-
-
-
     @Override
     public void writeToFile() {
 
 
     }
-
 
 
 }

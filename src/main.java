@@ -7,8 +7,7 @@ public class main {
     public static void main(String args[]) {
 
         CommandLine parsedArguments = new Cli(args).parse();
-
-
+        Game game = new Game();
 
     }
 }
