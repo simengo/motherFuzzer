@@ -48,7 +48,7 @@ public class Turn extends Instruction {
 
         }
 
-        ant.incrasePC();
+        ant.increasePC();
 
     }
 }

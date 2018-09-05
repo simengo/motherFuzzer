@@ -12,8 +12,8 @@ public class Pickup extends Instruction {
             Normal field = ant.getField();
             if((field.getFood() != 0)){
                 ant.setHasFood(true);
-                field.decrementFood();
-                ant.incrasePC();
+                field.removeFood();
+                ant.increasePC();
 
             }
 

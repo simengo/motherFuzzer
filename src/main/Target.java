@@ -1,3 +1,3 @@
 public enum Target {
-    friend, foe, food, rock, home, foehome, marker;
+    friend, foe, food, rock, home, foehome, marker,foemarker,friendfood,foefood,antlion;
 }
