@@ -1,6 +1,7 @@
 package saarland.cispa.sopra;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import saarland.cispa.sopra.systemtests.FieldInfo;
@@ -8,54 +9,59 @@ import saarland.cispa.sopra.systemtests.AntInfo;
 
 abstract class Field implements FieldInfo {
 
-    private int posX;
-    private int posY;
-    private char type;
+    private final int posX;
+    private final int posY;
+    private final char type;
     private AntInfo ant;
-    private HashMap<Character, boolean[]> marker;
+    private final Map<Character, boolean[]> marker = new HashMap<Character, boolean[]>();
     private boolean isNextToAntlion;
     private boolean changed;
 
-    public Field(char type, int x, int y) {
-        this.posX = x;
-        this.posY = y;
+    public Field(char type, int posX, int posY) {
+        this.posX = posX;
+        this.posY = posY;
         this.type = type;
         this.ant = null;
-        this.marker = new HashMap<>();
         this.isNextToAntlion = false;
         this.changed = false;
     }
 
+    @Override
     public int getFood() {
         return 0;
     }
 
+    @Override
     public Optional<AntInfo> getAnt() {
         return Optional.of(ant);
     }
 
+    @Override
     public int getX() {
         return posX;
     }
 
+    @Override
     public int getY() {
         return posY;
     }
 
+    @Override
     public char getType() {
         return type;
     }
 
-    public HashMap<Character, boolean[]> getMarkers() {
+    @Override
+    public Map<Character, boolean[]> getMarkers() {
 
         return marker;
     }
 
-    public boolean getMarker(char c, int i) {
-        return marker.get(c)[i];
+    public boolean getMarker(char ident, int num) {
+        return marker.get(ident)[num];
     }
 
-    public boolean isNextToAntlion() {
+    public boolean getIsNextToAntlion() {
         return isNextToAntlion;
     }
 
@@ -64,15 +70,12 @@ abstract class Field implements FieldInfo {
     }
 
     public boolean isAccessible() {
-        if (this.ant == null && this.type != '#') {
-            return true;
-        }
-        return false;
+        return this.ant == null && this.type != '#';
     }
 
 
-    public void setMarker(char c, int i, boolean b) {
-        this.marker.get(c)[i] = b;
+    public void setMarker(char ident, int num, boolean bool) {
+        this.marker.get(ident)[num] = bool;
     }
 
     public void setAnt(Ant ant) {

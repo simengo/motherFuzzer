@@ -20,7 +20,7 @@ public class Move extends Killable {
             ant.increasePC();
         } else {
             field.setChanged();
-            ant.setPc(jumpPc);
+            ant.setPc(getJumpPc());
         }
     }
 }

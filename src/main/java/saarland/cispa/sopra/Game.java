@@ -20,7 +20,7 @@ public class Game implements GameInfo {
     @Override
     public WorldInfo simulate(int rounds, long seed, File world, File... brains) {
         this.world = initialize(seed, world, brains);
-        logger.addInitialRound();
+        //logger.addInitialRound();
         for (int i = 0; i < rounds; i++) {
             simulateOnce();
         }
@@ -42,7 +42,7 @@ public class Game implements GameInfo {
         for (AntInfo ant : ants) {
             oneAnt((Ant) ant);
         }
-        logger.
+
     }
 
     private void oneAnt(Ant ant) {
@@ -50,6 +50,6 @@ public class Game implements GameInfo {
     }
 
     private World initialize(long seed, File world, File[] brains) {
-
+    return null;
     }
 }
