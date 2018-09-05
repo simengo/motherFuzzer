@@ -7,6 +7,7 @@ public class BrainParser {
             //TODO get string out of file
             String instr = "";
             int jumpPC = 0;
+            int max = 0;
             Instruction instruction;
             if (instr == "move") {
                 instruction = new Move(jumpPC);
@@ -15,7 +16,7 @@ public class BrainParser {
                 instruction = new Sense();
             }
             if (instr == "flip") {
-                instruction = new Flip();
+                instruction = new Flip(max);
             }
             if (instr == "mark") {
                 instruction = new Mark();
@@ -30,16 +31,16 @@ public class BrainParser {
                 instruction = new Unset();
             }
             if (instr == "drop") {
-                instruction = new Drop();
+                instruction = new Drop(jumpPC);
             }
             if (instr == "pickup") {
                 instruction = new Pickup();
             }
             if (instr == "direction") {
-                instruction = new Direction();
+                instruction = new Direction(jumpPC);
             }
             if (instr == "jump"){
-                instruction = new Jump();
+                instruction = new Jump(jumpPC);
             }
             if (instr == "breed"){
                 instruction = new Breed(jumpPC);
