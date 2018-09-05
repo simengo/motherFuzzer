@@ -112,10 +112,4 @@ public class Ant implements AntInfo {
     public void setDirection(String direction) {
         this.direction = direction;
     }
-
-    public Instruction getNextInstruction() {
-
-        return swarm.getBrain()[pc];
-
-    }
 }
