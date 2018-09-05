@@ -16,7 +16,7 @@ public class NOPLogger implements Logger {
 
 
     @Override
-    public void addInitialRound(Field[][] map) {
+    public void addInitialRound(Field[][] map, Map<Character,Swarm> swarms) {
 
         return;
     }

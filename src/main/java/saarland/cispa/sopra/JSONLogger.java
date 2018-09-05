@@ -1,3 +1,5 @@
+package saarland.cispa.sopra;
+
 import saarland.cispa.sopra.systemtests.AntInfo;
 
 import java.io.File;
@@ -22,7 +24,7 @@ public class JSONLogger implements Logger {
 
 
     @Override
-    public void addInitialRound(Field[][] map, Map<Character, Integer> points) {
+    public void addInitialRound(Field[][] map, Map<Character,Swarm> swarms) {
 
 
         JsonObject model = Json.createObjectBuilder()
@@ -49,7 +51,7 @@ public class JSONLogger implements Logger {
 
 
     @Override
-    public void addRoundInfo(List<Field> changes,Map<Character, Integer> points, Map<Character,Swarm> swarms) {
+    public void addRoundInfo(List<Field> changes,Map<Character, Integer> points) {
 
 
 
@@ -260,6 +262,10 @@ public class JSONLogger implements Logger {
 
         private JsonArray createJsInstructions(Swarm swarm){
 
+
+        JsonArrayBuilder jsA = Json.createArrayBuilder();
+
+        JsonObjectBuilder joB = Json.createObjectBuilder();
 
 
 
