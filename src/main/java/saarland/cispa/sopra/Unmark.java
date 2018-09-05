@@ -1,19 +1,19 @@
 package saarland.cispa.sopra;
 
 public class Unmark extends Instruction {
-    private int marker;
+    private int markerFalse;
 
     public Unmark(int marker){
-        this.marker = marker;
+        this.markerFalse = marker;
     }
 
     @Override
     public void execute(World world, Ant ant) {
 
         char swarm = ant.getSwarm();
-        if(ant.getField().getType() != '=' || ant.getField().getType() != '#'){
+        if(ant.getField().getType() != '#' || ant.getField().getType() != '='){
             Field field = (Field) ant.getField();
-            field.setMarker(swarm,marker,false);
+            field.setMarker(swarm,markerFalse,false);
         }
 
         ant.increasePC();
