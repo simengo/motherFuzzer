@@ -1,4 +1,4 @@
-public class Field {
+public abstract class Field {
 
     int posX;
     int posY;

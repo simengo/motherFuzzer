@@ -45,10 +45,11 @@ public class Sense extends Instruction {
 
 
                 }
-                if(world.getFieldInDirection(ant.getField(),newDirectionLeft) == '.'){
+                if(world.getFieldInDirection(ant.getField(),newDirectionLeft).getType() == '.'){
                     Normal field = world.getFieldInDirection(ant.getField(),newDirectionLeft);
+
                 }
-                if(world.getFieldInDirection(ant.getField(),newDirectionLeft) != '#' && world.getFieldInDirection(ant.getField(),newDirectionLeft) != '='){
+                if(world.getFieldInDirection(ant.getField(),newDirectionLeft).getType() != '#' && world.getFieldInDirection(ant.getField(),newDirectionLeft).getType() != '='){
                     Base field = world.getFieldInDirection(ant.getField(),newDirectionLeft);;
                 }
 
