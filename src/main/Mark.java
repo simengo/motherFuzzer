@@ -11,7 +11,8 @@ public class Mark extends Instruction {
 
         char swarm = ant.getSwarm();
         if(ant.getField().getType() != '=' || ant.getField().getType() != '#'){
-            ant.getField().setMarker(swarm,marker,true);
+            Field field = (Field) ant.getField();
+            field.setMarker(swarm,marker,true);
         }
 
         ant.increasePC();

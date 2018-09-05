@@ -1,5 +1,7 @@
+import saarland.cispa.sopra.systemtests.AntInfo;
+
 import java.io.File;
-import java.io.FileWriter;
+
 
 import java.util.List;
 import java.util.Map;
@@ -54,11 +56,116 @@ public class JSONLogger implements Logger {
 
     }
 
+//TODO
+    private JsonArray createInitialFieldsArray (Field[][] fields,JsonArray marker){
 
-    private JSONObject createFieldsArray (Field[][] fields){
 
+        JsonArrayBuilder arrBuild = Json.createArrayBuilder();
+
+
+        int height = fields.length;
+        int width = fields[0].length;
+
+        for(int y = 0 ; y < height; y++){
+
+            for(int x = 0; x < width; x++){
+
+
+
+
+            }
+        }
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    private JsonArray createMarkerArray(Field field){
+
+
+        boolean breakout = false;
+        JsonArrayBuilder jsArr = Json.createArrayBuilder(); // am Ende ausgegebener merkers Array
+
+        Map<Character,boolean[]> marker = field.getMarkers();
+        int keySize = marker.keySet().size();
+
+
+        for(int i = 0; i < keySize; i++){
+
+            char swarmId = 'A';
+            boolean[] marks = marker.get(swarmId);
+
+
+            // falls alle marker false soll kein JsonObject erzeugt werden
+            for(int h = 0; h < 7 ; h++){
+                if(marks[h]){
+                    break;
+                }
+                else if(h == 6){
+                    breakout = true;
+                }
+            }
+
+            if(breakout){
+                continue;
+            }
+
+
+
+
+            JsonArrayBuilder jsAHelp = Json.createArrayBuilder();  ////////wird tatsächlich jedes Mal ein neuer ArrayBuilder erzeugt oder nicht??? !!!
+            JsonObjectBuilder jBuilder = Json.createObjectBuilder(); // Objekt das im markers Array gespeichert wird
+
+            for(int j = 0; j < 7 ; j++){
+
+                jsAHelp.add(marks[j]);
+
+            }
+
+            jBuilder.add("swarm_id",swarmId);
+            jBuilder.add("values",jsA);
+            JsonObject obj = jBuilder.build();
+            jsArr.add(obj);
+
+            swarmId += 1;  // naechster Ascii-Buchstabe
+        }
+
+        JsonArray array = jsArr.build();
+        return array;
+
+    }
+
+
+
+    private JsonObject createAntJsObject(AntInfo antI,JsonArray register){
+        JsonObjectBuilder jsBuilder = Json.createObjectBuilder();
+        int id = antI.getId();
+        int pc = antI.getPc();
+        int swarm_id = antI.getSwarm();
+        boolean carries_food = antI.hasFood();
+        String direction = antI.getDirection();
+        int rest_time = antI.getRestTime();
+
+        //register dran denken Todo!
+
+    }
+
+
+
+
+
+
+
+
 
     @Override
     public void writeToFile() {
