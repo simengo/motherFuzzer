@@ -1,7 +1,7 @@
 public class Test extends Instruction {
 
-    int register;
-    int jumpPC;
+    private int register;
+    private int jumpPC;
     public Test(int reg,int jumpPC) {
         this.register = reg;
         this.jumpPC=jumpPC;

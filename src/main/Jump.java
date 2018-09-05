@@ -1,5 +1,5 @@
 public class Jump extends Instruction {
-    int jumpPC;
+    private int jumpPC;
     public Jump(int jumpPC) {
         this.jumpPC=jumpPC;
     }

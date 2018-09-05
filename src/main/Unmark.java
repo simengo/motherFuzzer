@@ -1,5 +1,5 @@
 public class Unmark extends Instruction {
-    int marker;
+    private int marker;
 
     public Unmark(int marker){
         this.marker = marker;

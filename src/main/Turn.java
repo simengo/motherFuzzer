@@ -1,5 +1,5 @@
 public class Turn extends Instruction {
-    TurnDirection direction;
+    private TurnDirection direction;
     public Turn(TurnDirection dir) {
         this.direction=dir;
     }
