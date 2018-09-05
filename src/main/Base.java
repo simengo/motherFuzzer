@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Optional;
 
-public class Base extends AccessibleField {
+public class Base extends Field {
 
     Optional<Ant> ant;
     HashMap<Character,boolean[]> marker;

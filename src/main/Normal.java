@@ -10,10 +10,10 @@ public class Normal  extends Field {
         return food;
     }
     public void addFood(int i){
-        this.food = i;
+        this.food = food + i;
     }
 
-    public void decrementFood(){
+    public void removeFood(){
         food = food -1;
     }
 }

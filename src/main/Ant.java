@@ -62,7 +62,7 @@ public class Ant implements AntInfo {
     public void setDead(boolean dead) {
         isDead = dead;
     }
-    public void incrasePC(){
+    public void increasePC(){
         pc++;
     }
 
