@@ -5,22 +5,11 @@ public class Normal  extends Field {
         this.food = food;
     }
     public void addFood(int i){
-        this.food =+ food;
+        this.food =+ i;
     }
 
     public void removeFood(){
         this.food--;
     }
 
-
-    public int getFood(){
-        return food;
-    }
-    public void addFood(int i){
-        this.food = food + i;
-    }
-
-    public void removeFood(){
-        food = food -1;
-    }
 }

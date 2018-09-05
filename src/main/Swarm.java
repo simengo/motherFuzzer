@@ -1,18 +1,19 @@
 public class Swarm {
-    private Character swarm;
+    private char ident;
     private Instruction[] brain;
+    private String name;
 
-    public Swarm(Character swarm, Instruction[] brain) {
-        this.swarm = swarm;
+    public Swarm(char ident, Instruction[] brain) {
+        this.ident = ident;
         this.brain = brain;
     }
 
-    public Character getSwarm() {
-        return swarm;
+    public char getIdent() {
+        return ident;
     }
 
-    public void setSwarm(Character swarm) {
-        this.swarm = swarm;
+    public void setSwarm(char ident) {
+        this.ident = ident;
     }
 
     public Instruction[] getBrain() {

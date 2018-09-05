@@ -8,52 +8,34 @@ import java.util.List;
 
 public class Game implements GameInfo {
 
-    World world1;
+    World world;
     Logger logger;
-
 
     public Game() {
 
     }
 
-    public Game(String logname, String rounds, String seed, String world, ArrayList<String> brains) {
-
-    }
-
     @Override
     public WorldInfo simulate(int rounds, long seed, File world, File... brains) {
-
         initialize(seed, world, brains);
-
-        logger.addInitialRound(world1.getFields());
-
+        logger.addInitialRound();
         for (int i = 0; i < rounds; i++) {
             simulateOnce();
         }
-
-        return (WorldInfo) world1;
-
+        return (WorldInfo) world;
     }
 
     @Override
     public WorldInfo simulate(int rounds, long seed, String world, String... brains) {
-
-        ArrayList<File> files = new ArrayList<File>();
-
-        for (String brain : brains) {
-            File file = new File(brain);
-
-            if (!file.exists()) {
-                try {
-                    throw new Exception("invalid path");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else files.add(file);
-
+        ArrayList<File> files = new ArrayList<>();
+        for (int i = 0; i < brains.length; i++) {
+            files.add(new File(brains[i]));
         }
-
-        return simulate(rounds, seed, new File(world), (File[]) files.toArray());
+        File[] brainFiles = new File[brains.length - 1];
+        for (int i = 0; i < files.size(); i++) {
+            brainFiles[i] = files.get(i);
+        }
+        return simulate(rounds, seed, new File(world), brainFiles);
     }
 
     private void simulateOnce() {
@@ -69,7 +51,6 @@ public class Game implements GameInfo {
     }
 
     private void initialize(long seed, File world, File[] brains) {
-
 
     }
 }

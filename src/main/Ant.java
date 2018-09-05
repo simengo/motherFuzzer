@@ -98,7 +98,7 @@ public class Ant implements AntInfo {
 
     @Override
     public char getSwarm() {
-        return swarm.getSwarm();
+        return swarm.getIdent();
     }
 
     public void setSwarm(Swarm swarm) {

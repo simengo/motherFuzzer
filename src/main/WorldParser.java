@@ -22,7 +22,20 @@ public class WorldParser {
             while ((line = br.readLine()) != null) {
                 char[] row = line.toCharArray();
                 for (Character c : row) {
-                    fields[i][j] = new Field(c, i, j);
+                    switch (c) {
+                        case '.': {
+                            fields[i][j] = new Normal(i, j, 0);
+                        }
+                        case '=': {
+                            fields[i][j] = new Antlion(i, j);
+                        }
+                        case '#': {
+                            fields[i][j] = new Rock(i, j);
+                        }
+                        default: {
+                            fields[i][j] = new Base(c, i, j);
+                        }
+                    }
                     j++;
                 }
                 j = 0;
