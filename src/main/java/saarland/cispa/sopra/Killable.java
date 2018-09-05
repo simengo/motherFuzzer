@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 abstract class Killable extends Instruction {
-    private int jumpPc;
+    private final int jumpPc;
 
     public Killable(int jumpPc) {
 
@@ -23,7 +23,7 @@ abstract class Killable extends Instruction {
             Field field = (Field) suspect.getField();
             if (!suspect.isDead()) {
                 if (suspect.equals(ant)) {
-                    if (field.isNextToAntlion() || field.getType() == '=') {
+                    if (field.getIsNextToAntlion() || field.getType() == '=') {
                         suspect.setDead(true);
                         if (field.getType() == '.') {
                             field = (Normal) field;

@@ -15,25 +15,25 @@ public class Breed extends Killable {
 
         if (ant.hasFood() && partner.hasFood() && ant.getSwarm() == partner.getSwarm()) {
             Field[] fields = world.getNeighbours(field);
-            for (int i = 0; i < fields.length; i++) {
-                if (fields[i].isAccessible()) {
-                    spawnAnt(ant.getSwarmInstance(), fields[i], world);
+            for (Field f : fields) {
+                if (f.isAccessible()) {
+                    spawnAnt(ant.getSwarmInstance(), f, world);
                     antSpawned = true;
                     break;
                 }
             }
             if (!antSpawned) {
                 fields = world.getNeighbours(fieldInDirection);
-                for (int i = 0; i < fields.length; i++) {
-                    if (fields[i].isAccessible()) {
-                        spawnAnt(ant.getSwarmInstance(), fields[i], world);
+                for (Field f : fields) {
+                    if (f.isAccessible()) {
+                        spawnAnt(ant.getSwarmInstance(), f, world);
                         antSpawned = true;
                         break;
                     }
                 }
             }
         }
-        
+
     }
 
 
