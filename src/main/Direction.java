@@ -1,6 +1,6 @@
 public class Direction extends Instruction {
-    String direction;
-    int jumpPC;
+    private String direction;
+    private int jumpPC;
     public Direction(int jumpPC,String dir) {
         this.jumpPC=jumpPC;
         this.direction = dir;

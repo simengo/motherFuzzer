@@ -1,11 +1,14 @@
 import saarland.cispa.sopra.systemtests.FieldInfo;
+import java.util.Iterator;
+
+import java.util.Map;
 
 public class Sense extends Instruction {
 
-    SenseDir direction;
-    Target target;
-    int marker;
-    int jumpPC;
+    private SenseDir direction;
+    private Target target;
+    private int marker;
+    private int jumpPC;
 
     public Sense(SenseDir dir, Target target, int marker, int jumpPC) {
         this.direction = dir;
@@ -20,7 +23,7 @@ public class Sense extends Instruction {
 
 
 
-        Field field = (Field) ant.getField();
+        Field field;
 
         switch (direction) {
             case left:
@@ -55,7 +58,7 @@ public class Sense extends Instruction {
 
                 }
 
-                    field =  world.getFieldInDirection(ant.getField(),newDirectionLeft);
+                    field =  world.getFieldInDirection((Field) ant.getField(),newDirectionLeft);
                 break;
 
             case right:
@@ -86,11 +89,11 @@ public class Sense extends Instruction {
 
                 }
 
-                   field =  world.getFieldInDirection(ant.getField(), newDirectionRight);
+                   field =  world.getFieldInDirection((Field) ant.getField(), newDirectionRight);
 
                     break;
             case ahead:
-                   field = world.getFieldInDirection(ant.getField(), ant.getDirection());
+                   field = world.getFieldInDirection((Field) ant.getField(), ant.getDirection());
 
 
 
@@ -147,7 +150,7 @@ public class Sense extends Instruction {
                 else{ant.setPc(jumpPC);}
                 break;
             case foehome:
-                if(field.getType() != ant.getSwarm() && field.getType() != '#' && field.getType() != '='){
+                if(field.getType() != ant.getSwarm() && field.getType() != '#' && field.getType() != '=' && field.getType() != '.'){
                     ant.increasePC();}
                 else{ant.setPc(jumpPC);}
                 break;
@@ -160,6 +163,17 @@ public class Sense extends Instruction {
                 }
                 break;
             case foemarker:
+                Map<Character,boolean[]> markers = field.getMarkers();
+                for (Character key : markers.keySet()) {
+                    if(key !=ant.getSwarm()){
+                        if(field.getMarker(key,marker)){
+                            ant.increasePC();
+                            break;
+                        }
+                    }
+                }
+                ant.setPc(jumpPC);
+                break;
 
             case friendfood:
                 if(field.getAnt().isPresent() && field.getAnt().get().hasFood() && field.getAnt().get().getSwarm() == ant.getSwarm()){ant.increasePC();}

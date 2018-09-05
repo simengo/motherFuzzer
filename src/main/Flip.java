@@ -1,6 +1,6 @@
 public class Flip extends Instruction {
-    int maxNum;
-    int jumpPC;
+    private int maxNum;
+    private int jumpPC;
     public Flip(int maxNum,int jumpPC) {
         this.maxNum = maxNum;
         this.jumpPC = jumpPC;
