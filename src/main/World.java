@@ -8,6 +8,7 @@ import java.util.*;
 // removeAnt()/ logger mit funktionen ...//
 public class World implements WorldInfo {
 
+
     final private int width;
     final private int height;
     final private long seed;
@@ -229,7 +230,9 @@ public class World implements WorldInfo {
 
     public List<AntInfo> getAnts(){
 
-        return ants;
+        List<AntInfo> antList = new ArrayList<AntInfo>(ants.values());
+
+        return antList;
     }
 
 
@@ -293,7 +296,7 @@ public class World implements WorldInfo {
 
                 Field field = fields[x][y];
 
-                if (field.isChanged()){
+                if (field.getChanged()){
                     changedFields.add(field);
                 }
 
@@ -321,7 +324,7 @@ public class World implements WorldInfo {
                     Field[] neighbours = getNeighbours(field);
 
                     for(int i = 0; i < 6; i++ ){
-                        neighbours[i].isNextToAntlion(true);
+                        neighbours[i].setisNextToAntlion(true);
                     }
 
                 }
