@@ -2,7 +2,7 @@ public class Test extends Instruction {
 
     int register;
     int jumpPC;
-    public Direction(int reg,int jumpPC) {
+    public Test(int reg,int jumpPC) {
         this.register = reg;
         this.jumpPC=jumpPC;
     }

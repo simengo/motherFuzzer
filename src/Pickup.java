@@ -9,7 +9,7 @@ public class Pickup extends Instruction {
     public void execute(World world, Ant ant) {
 
         if(ant.getField().getType()==('.')){
-            Normal field = ant.getField();
+            Normal field = (Normal) ant.getField();
             if((field.getFood() != 0)){
                 ant.setHasFood(true);
                 field.removeFood();

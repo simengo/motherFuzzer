@@ -1,8 +1,7 @@
-public class Mark extends Instruction {
-
+public class Unmark extends Instruction {
     int marker;
 
-    public Mark(int marker){
+    public Unmark(int marker){
         this.marker = marker;
     }
 
@@ -11,7 +10,8 @@ public class Mark extends Instruction {
 
         char swarm = ant.getSwarm();
         if(ant.getField().getType() != '=' || ant.getField().getType() != '#'){
-            ant.getField().setMarker(swarm,marker,true);
+            Field field = (Field) ant.getField();
+            field.setMarker(swarm,marker,false);
         }
 
         ant.increasePC();
