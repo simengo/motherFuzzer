@@ -10,7 +10,7 @@ abstract class Field implements FieldInfo {
     int posY;
     char type;
     AntInfo ant;
-    HashMap<Character, Boolean[]> marker;
+    HashMap<Character, boolean[]> marker;
     boolean isNextToAntlion;
     boolean changed;
 
@@ -44,9 +44,9 @@ abstract class Field implements FieldInfo {
         return type;
     }
 
-    public Boolean[] getMarkers(char c) {
+    public HashMap<Character, boolean[]> getMarkers() {
 
-        return marker.get(c);
+        return marker;
     }
 
     public boolean getMarker(char c, int i) {
