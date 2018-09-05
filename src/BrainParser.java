@@ -1,13 +1,11 @@
 import gen.AcolaParser;
-import org.antlr.runtime.TokenStream;
+
 
 import java.io.File;
 import java.util.HashMap;
 
 public class BrainParser {
     public static HashMap<Character, Swarm> parse(File[] brains) {
-        TokenStream stream = new TokenStream() {
-        }
         AcolaParser parser = new AcolaParser();
         for (File brain : brains) {
             //TODO get string out of file

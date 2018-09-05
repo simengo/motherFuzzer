@@ -9,7 +9,6 @@ public class Ant implements AntInfo {
     private int pc = 0;
     private boolean isDead = false;
 
-
     private String direction = "northwest";
     private int restTime = 0;
     private boolean hasFood = false;
