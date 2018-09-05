@@ -1,18 +1,17 @@
 import java.util.HashMap;
-import java.util.Optional;
-
+import  java.util.Optional;
 import saarland.cispa.sopra.systemtests.FieldInfo;
 import saarland.cispa.sopra.systemtests.AntInfo;
 
 abstract class Field implements FieldInfo {
 
-    private int posX;
-    private int posY;
-    private char type;
-    private AntInfo ant;
-    private HashMap<Character, boolean[]> marker;
-    private boolean isNextToAntlion;
-    private boolean changed;
+    int posX;
+    int posY;
+    char type;
+    Optional<AntInfo> ant;
+    HashMap<Character, Boolean[]> marker;
+    boolean isNextToAntlion;
+    boolean changed;
 
     public Field(char type, int x, int y) {
         this.posX = x;
@@ -24,12 +23,8 @@ abstract class Field implements FieldInfo {
         this.changed = false;
     }
 
-    public int getFood() {
+    public int getFood(){
         return 0;
-    }
-
-    public Optional<AntInfo> getAnt() {
-        return Optional.of(ant);
     }
 
     public int getX() {
@@ -44,9 +39,13 @@ abstract class Field implements FieldInfo {
         return type;
     }
 
-    public HashMap<Character, boolean[]> getMarkers() {
+    public Optional<AntInfo> getAnt() {
+        return ant;
+    }
 
-        return marker;
+    public Boolean[] getMarkers(char c) {
+
+        return marker.get(c);
     }
 
     public boolean getMarker(char c, int i) {
@@ -57,7 +56,7 @@ abstract class Field implements FieldInfo {
         return isNextToAntlion;
     }
 
-    public boolean getChanged() {
+    public boolean isChanged() {
         return changed;
     }
 
@@ -73,8 +72,8 @@ abstract class Field implements FieldInfo {
         this.marker.get(c)[i] = b;
     }
 
-    public void setAnt(Ant ant) {
-        this.ant = ant;
+    public void setAnt(Optional<AntInfo> ant) {
+        this.ant =ant;
     }
 
     public void setNextToAntlion(boolean nextToAntlion) {
@@ -85,7 +84,7 @@ abstract class Field implements FieldInfo {
         this.changed = true;
     }
 
-    public void removeAnt() {
+    public void removeAnt(){
         this.ant = null;
     }
 
