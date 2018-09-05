@@ -21,18 +21,21 @@ public class Ant implements AntInfo {
         this.field = field;
     }
 
+    public boolean getRegister(int location) {
+        return regs[location];
+    }
+
+    public void setRegister(int location, boolean value) {
+        regs[location] = value;
+    }
+
     public boolean isDead() {
 
         return isDead;
     }
 
-
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
-    public void setRestTime(int restTime) {
-        this.restTime = restTime;
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 
     public void setHasFood(boolean hasFood) {
@@ -43,32 +46,17 @@ public class Ant implements AntInfo {
         this.regs = regs;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setField(Field field) {
-        this.field = field;
-    }
-
-    public void setSwarm(Swarm swarm) {
-        this.swarm = swarm;
-    }
-
-    public void setPc(int pc) {
-        this.pc = pc;
-    }
-
-    public void setDead(boolean dead) {
-        isDead = dead;
-    }
-    public void increasePC(){
+    public void increasePC() {
         pc++;
     }
 
     @Override
     public int getId() {
         return 0;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -81,6 +69,10 @@ public class Ant implements AntInfo {
         return 0;
     }
 
+    public void setRestTime(int restTime) {
+        this.restTime = restTime;
+    }
+
     @Override
     public boolean[] getRegister() {
         return new boolean[0];
@@ -91,9 +83,17 @@ public class Ant implements AntInfo {
         return 0;
     }
 
+    public void setPc(int pc) {
+        this.pc = pc;
+    }
+
     @Override
     public FieldInfo getField() {
         return null;
+    }
+
+    public void setField(Field field) {
+        this.field = field;
     }
 
     @Override
@@ -101,8 +101,16 @@ public class Ant implements AntInfo {
         return swarm.getSwarm();
     }
 
+    public void setSwarm(Swarm swarm) {
+        this.swarm = swarm;
+    }
+
     @Override
     public String getDirection() {
         return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 }
