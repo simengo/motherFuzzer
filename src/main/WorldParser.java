@@ -1,3 +1,5 @@
+import com.ibm.icu.impl.IllegalIcuArgumentException;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -5,7 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class WorldParser {
-    public World parseMap(File mapFile, int runden, long seed, HashMap<Character, Swarm> swarms, Logger logger) throws IOException {
+    public World parseMap(File mapFile, long seed, HashMap<Character, Swarm> swarms, Logger logger) throws IOException {
 
         int i = 0;
         int j = 0;
@@ -23,7 +25,7 @@ public class WorldParser {
                     fields[i][j] = new Field(c, i, j);
                     j++;
                 }
-                j=0;
+                j = 0;
                 i++;
             }
             HashMap<Integer, Ant> ants = spawnAnts(swarms, fields);
@@ -31,12 +33,15 @@ public class WorldParser {
         }
     }
 
-    private HashMap<Integer, Ant> spawnAnts(HashMap<Character, Swarm> swarms, Field[][] fields) {
+    private HashMap<Integer, Ant> spawnAnts(HashMap<Character, Swarm> swarms, Field[][] fields) throws IllegalArgumentException {
         HashMap<Integer, Ant> ants = new HashMap<>();
         for (int i = 0; i < fields.length; i++) {
             for (int j = 0; i < fields[0].length; i++) {
                 Character type = fields[i][j].getType();
                 if (type != '.' && type != '=' && type != '#') {
+                    if (swarms.get(type).getSwarm() != fields[i][j].getType()) {
+                        throw new IllegalIcuArgumentException("wrong swarm");
+                    }
                     Ant ant = new Ant(swarms.get(type), ants.size(), fields[i][j]);
                     ants.put(ants.size(), ant);
                 }

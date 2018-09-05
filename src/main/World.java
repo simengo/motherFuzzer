@@ -18,7 +18,7 @@ public class World implements WorldInfo {
         return rand.nextInt(i);
     }
 
-    public World(Field[][] fields, long seed, HashMap<Integer, Ant> ants) {
+    public World(Field[][] fields, long seed, HashMap<Integer, Ant> ants, Logger logger) {
         this.ants = ants;
         width = fields.length;
         height = fields[0].length;
