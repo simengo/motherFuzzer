@@ -3,12 +3,12 @@ import  java.util.Optional;
 import saarland.cispa.sopra.systemtests.FieldInfo;
 import saarland.cispa.sopra.systemtests.AntInfo;
 
-public class Field implements FieldInfo {
+abstract class Field implements FieldInfo {
 
     int posX;
     int posY;
     char type;
-    Ant ant;
+    Optional<AntInfo> ant;
     HashMap<Character, Boolean[]> marker;
     boolean isNextToAntlion;
     boolean changed;
@@ -40,7 +40,7 @@ public class Field implements FieldInfo {
     }
 
     public Optional<AntInfo> getAnt() {
-        return (Optional<AntInfo>) ant;
+        return ant;
     }
 
     public Boolean[] getMarkers(char c) {
@@ -72,8 +72,8 @@ public class Field implements FieldInfo {
         this.marker.get(c)[i] = b;
     }
 
-    public void setAnt(Optional<Ant> ant) {
-        this.ant = ant;
+    public void setAnt(Optional<AntInfo> ant) {
+        this.ant =ant;
     }
 
     public void setNextToAntlion(boolean nextToAntlion) {
