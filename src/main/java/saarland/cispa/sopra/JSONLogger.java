@@ -5,6 +5,8 @@ import saarland.cispa.sopra.systemtests.AntInfo;
 import java.io.File;
 
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import javax.json.*;
@@ -27,25 +29,35 @@ public class JSONLogger implements Logger {
     public void addInitialRound(Field[][] map, Map<Character,Swarm> swarms) {
 
 
-        JsonObject model = Json.createObjectBuilder()
-            .add("firstName", "Duke")
-            .add("lastName", "Java")
-            .add("age", 18)
-            .add("streetAddress", "100 Internet Dr")
-            .add("city", "JavaTown")
-            .add("state", "JA")
-            .add("postalCode", "12345")
-            .add("phoneNumbers", Json.createArrayBuilder()
-                .add(Json.createObjectBuilder()
-                    .add("type", "mobile")
-                    .add("number", "111-111-1111"))
-                .add(Json.createObjectBuilder()
-                    .add("type", "home")
-                    .add("number", "222-222-2222")))
-            .build();
+       int height = map.length;
+       int width = map[0].length;
+
+       JsonObjectBuilder jsO = Json.createObjectBuilder();
+
+       jsO.add("width",width);
+       jsO.add("height",height);
+       jsO.add("brains",createJsBrain(swarms));
+       jsO.add("fields",createInitialFieldsArray(map));
+
+       JsonObject jsOb = jsO.build();
+
+        JsonObjectBuilder jsIni = Json.createObjectBuilder();
+
+        jsIni.add("init",jsOb);
+
+        JsonObject initOb = jsIni.build();
 
 
-
+        //write JsonObbject to File
+        try {
+            FileWriter fWriter = new FileWriter(this.output);
+            JsonWriter jsonWriter = Json.createWriter(fWriter);
+            jsonWriter.writeObject(initOb);
+            jsonWriter.close();
+            fWriter.close();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -265,10 +277,16 @@ public class JSONLogger implements Logger {
 
         JsonArrayBuilder jsA = Json.createArrayBuilder();
 
-        JsonObjectBuilder joB = Json.createObjectBuilder();
 
 
+        Instruction[] instr = swarm.getInstruction();
 
+        for(int i = 0; i < instr.length; i++){
+
+            jsA.add(instr[i].toString());
+        }
+
+        return jsA.build();
         }
 
 
