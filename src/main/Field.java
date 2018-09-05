@@ -6,13 +6,13 @@ import saarland.cispa.sopra.systemtests.AntInfo;
 
 abstract class Field implements FieldInfo {
 
-    int posX;
-    int posY;
-    char type;
-    AntInfo ant;
-    HashMap<Character, boolean[]> marker;
-    boolean isNextToAntlion;
-    boolean changed;
+    private int posX;
+    private int posY;
+    private char type;
+    private AntInfo ant;
+    private HashMap<Character, boolean[]> marker;
+    private boolean isNextToAntlion;
+    private boolean changed;
 
     public Field(char type, int x, int y) {
         this.posX = x;
@@ -74,7 +74,7 @@ abstract class Field implements FieldInfo {
     }
 
     public void setAnt(Ant ant) {
-        this.ant = (AntInfo) ant;
+        this.ant = ant;
     }
 
     public void setNextToAntlion(boolean nextToAntlion) {
