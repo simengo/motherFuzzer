@@ -22,6 +22,7 @@ abstract class Killable extends Instruction {
                 if(suspect.equals(ant)){
                     if(field.isNextToAntlion(){
                         suspect.setDead(true);
+
                     }
                 }
                 if(isSurrounded(world,suspect)){
