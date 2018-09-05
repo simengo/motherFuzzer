@@ -77,11 +77,11 @@ abstract class Field implements FieldInfo {
         this.ant = ant;
     }
 
-    public void setNextToAntlion(boolean nextToAntlion) {
+    public void setIsNextToAntlion(boolean nextToAntlion) {
         isNextToAntlion = nextToAntlion;
     }
 
-    public void setChanged() {
+    public void setIsChanged() {
         this.changed = true;
     }
 

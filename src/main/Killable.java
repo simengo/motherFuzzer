@@ -20,8 +20,12 @@ public class Killable extends Instruction {
     }
 
     private boolean isSurrounded(World world, Ant ant){
-        Field field = ant.getField();
-        ant 0 = world.getNeighbours(field)[0];
+        FieldInfo field = ant.getField();
+        Field[] neighbours = world.getNeighbours((Field)field);
+
+        for(int i = 0; i<neighbours.length;i++){
+            if(neighbours[i].getAnt().get().getSwarm()
+        }
 
 
     }
