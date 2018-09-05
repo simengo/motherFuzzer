@@ -1,5 +1,6 @@
 import java.util.HashMap;
-import  java.util.Optional;
+import java.util.Optional;
+
 import saarland.cispa.sopra.systemtests.FieldInfo;
 import saarland.cispa.sopra.systemtests.AntInfo;
 
@@ -8,7 +9,7 @@ abstract class Field implements FieldInfo {
     int posX;
     int posY;
     char type;
-    Optional<AntInfo> ant;
+    AntInfo ant;
     HashMap<Character, Boolean[]> marker;
     boolean isNextToAntlion;
     boolean changed;
@@ -23,8 +24,12 @@ abstract class Field implements FieldInfo {
         this.changed = false;
     }
 
-    public int getFood(){
+    public int getFood() {
         return 0;
+    }
+
+    public Optional<AntInfo> getAnt() {
+        return Optional.of(ant);
     }
 
     public int getX() {
@@ -37,10 +42,6 @@ abstract class Field implements FieldInfo {
 
     public char getType() {
         return type;
-    }
-
-    public Optional<AntInfo> getAnt() {
-        return ant;
     }
 
     public Boolean[] getMarkers(char c) {
@@ -72,8 +73,8 @@ abstract class Field implements FieldInfo {
         this.marker.get(c)[i] = b;
     }
 
-    public void setAnt(Optional<AntInfo> ant) {
-        this.ant =ant;
+    public void setAnt(Ant ant) {
+        this.ant = (AntInfo) ant;
     }
 
     public void setNextToAntlion(boolean nextToAntlion) {
@@ -84,7 +85,7 @@ abstract class Field implements FieldInfo {
         this.changed = true;
     }
 
-    public void removeAnt(){
+    public void removeAnt() {
         this.ant = null;
     }
 
