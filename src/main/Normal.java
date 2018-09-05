@@ -1,4 +1,3 @@
-
 public class Normal  extends Field {
     int food;
     public Normal(int x, int y, int food){

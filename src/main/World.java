@@ -229,7 +229,7 @@ public class World implements WorldInfo {
 
     public List<AntInfo> getAnts(){
 
-        return ants.get(id);
+        return ants;
     }
 
 
@@ -293,7 +293,7 @@ public class World implements WorldInfo {
 
                 Field field = fields[x][y];
 
-                if (field.getChanged()){
+                if (field.isChanged()){
                     changedFields.add(field);
                 }
 
@@ -321,7 +321,7 @@ public class World implements WorldInfo {
                     Field[] neighbours = getNeighbours(field);
 
                     for(int i = 0; i < 6; i++ ){
-                        neighbours[i].setisNextToAntlion(true);
+                        neighbours[i].isNextToAntlion(true);
                     }
 
                 }
