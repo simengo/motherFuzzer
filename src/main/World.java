@@ -22,8 +22,8 @@ public class World implements WorldInfo {
 
     public World(Field[][] fields, long seed, Map<Integer, Ant> ants, Logger logger) {
         this.fields = fields;
-        this.width = fields.length;
-        this.height = fields[0].length;
+        this.height = fields.length;
+        this.width = fields[0].length;
         this.points = new HashMap<Character, Integer>();
         this.ants = ants;
         this.logger = logger;
