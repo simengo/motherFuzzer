@@ -1,6 +1,5 @@
 public class Unset extends Instruction {
 
-
     private int reg;
 
     public Unset(int reg){this.reg = reg;}

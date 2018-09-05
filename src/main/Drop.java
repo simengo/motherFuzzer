@@ -20,8 +20,8 @@ public class Drop extends Instruction {
 
             else{
                 if(ant.getField().getType() == ('.')){
-                    FieldInfo field = ant.getField();
-                    (Normal)
+                    Normal field = (Normal) ant.getField();
+
                     field.addFood(1);
                     ant.setHasFood(false);
                     ant.increasePC();
@@ -43,4 +43,4 @@ public class Drop extends Instruction {
 
         }
     }
-}
+
