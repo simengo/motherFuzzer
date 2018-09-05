@@ -1,17 +1,18 @@
 import java.util.HashMap;
-import  java.util.Optional;
+import java.util.Optional;
+
 import saarland.cispa.sopra.systemtests.FieldInfo;
 import saarland.cispa.sopra.systemtests.AntInfo;
 
-public class Field implements FieldInfo {
+abstract class Field implements FieldInfo {
 
-    int posX;
-    int posY;
-    char type;
-    Ant ant;
-    HashMap<Character, Boolean[]> marker;
-    boolean isNextToAntlion;
-    boolean changed;
+    private int posX;
+    private int posY;
+    private char type;
+    private AntInfo ant;
+    private HashMap<Character, boolean[]> marker;
+    private boolean isNextToAntlion;
+    private boolean changed;
 
     public Field(char type, int x, int y) {
         this.posX = x;
@@ -23,8 +24,12 @@ public class Field implements FieldInfo {
         this.changed = false;
     }
 
-    public int getFood(){
+    public int getFood() {
         return 0;
+    }
+
+    public Optional<AntInfo> getAnt() {
+        return Optional.of(ant);
     }
 
     public int getX() {
@@ -39,13 +44,9 @@ public class Field implements FieldInfo {
         return type;
     }
 
-    public Optional<AntInfo> getAnt() {
-        return (Optional<AntInfo>) ant;
-    }
+    public HashMap<Character, boolean[]> getMarkers() {
 
-    public Boolean[] getMarkers(char c) {
-
-        return marker.get(c);
+        return marker;
     }
 
     public boolean getMarker(char c, int i) {
@@ -72,7 +73,7 @@ public class Field implements FieldInfo {
         this.marker.get(c)[i] = b;
     }
 
-    public void setAnt(Optional<Ant> ant) {
+    public void setAnt(Ant ant) {
         this.ant = ant;
     }
 
@@ -84,7 +85,7 @@ public class Field implements FieldInfo {
         this.changed = true;
     }
 
-    public void removeAnt(){
+    public void removeAnt() {
         this.ant = null;
     }
 
