@@ -324,7 +324,7 @@ public class World implements WorldInfo {
                     Field[] neighbours = getNeighbours(field);
 
                     for(int i = 0; i < 6; i++ ){
-                        neighbours[i].setisNextToAntlion(true);
+                        neighbours[i].setNextToAntlion(true);
                     }
 
                 }

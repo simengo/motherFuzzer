@@ -1,55 +1,66 @@
+import gen.AcolaParser;
+import org.antlr.runtime.TokenStream;
+
 import java.io.File;
 import java.util.HashMap;
 
 public class BrainParser {
     public static HashMap<Character, Swarm> parse(File[] brains) {
+        TokenStream stream = new TokenStream() {
+        }
+        AcolaParser parser = new AcolaParser();
         for (File brain : brains) {
             //TODO get string out of file
-            String instr = "";
+            String instr = "move";
             int jumpPC = 0;
             int max = 0;
+            int marker;
+            Target target;
+            String direction;
             Instruction instruction;
-            if (instr == "move") {
-                instruction = new Move(jumpPC);
-            }
-            if (instr == "sense") {
-                instruction = new Sense();
-            }
-            if (instr == "flip") {
-                instruction = new Flip(max);
-            }
-            if (instr == "mark") {
-                instruction = new Mark();
-            }
-            if (instr == "unmark") {
-                instruction = new Unmark();
-            }
-            if (instr == "set") {
-                instruction = new Set();
-            }
-            if (instr == "unset") {
-                instruction = new Unset();
-            }
-            if (instr == "drop") {
-                instruction = new Drop(jumpPC);
-            }
-            if (instr == "pickup") {
-                instruction = new Pickup();
-            }
-            if (instr == "direction") {
-                instruction = new Direction(jumpPC);
-            }
-            if (instr == "jump"){
-                instruction = new Jump(jumpPC);
-            }
-            if (instr == "breed"){
-                instruction = new Breed(jumpPC);
-            }
-            if (instr == "turn"){
-                instruction = new Turn();
-            }
-            if (instr == "test"){
-                instruction = new Test();
+            switch (instr) {
+                case "move": {
+                    instruction = new Move(jumpPC);
+                }
+                case "sense": {
+                    instruction = new Sense(direction, target, marker, jumpPC);
+                }
+                case ("flip"): {
+                    instruction = new Flip(max);
+                }
+                case ("mark"): {
+                    instruction = new Mark();
+                }
+                case ("unmark"): {
+                    instruction = new Unmark();
+                }
+                case ("set"): {
+                    instruction = new Set();
+                }
+                case ("unset"): {
+                    instruction = new Unset();
+                }
+                case ("drop"): {
+                    instruction = new Drop(jumpPC);
+                }
+                case ("pickup"): {
+                    instruction = new Pickup();
+                }
+                case ("direction"): {
+                    instruction = new Direction(jumpPC);
+                }
+                case ("jump"): {
+                    instruction = new Jump(jumpPC);
+                }
+                case ("breed"): {
+                    instruction = new Breed(jumpPC);
+                }
+                case ("turn"): {
+                    instruction = new Turn();
+                }
+                case ("test"): {
+                    instruction = new Test();
+                }
             }
             //Instruction[] outBrain = new Instruction[];
         }
