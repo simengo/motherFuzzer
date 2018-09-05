@@ -7,13 +7,21 @@ import java.io.File;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.json.*;
 
+
+
+// brauche toString() Methoden der Instruktionen // wenn alle runden gespielt wurden muss nochmal der Logger aufgerufen werden zum schreiben
+
 public class JSONLogger implements Logger {
 
     File output;
+    private JsonObject initialObject;
+    private JsonArrayBuilder stepsArraybuilder = Json.createArrayBuilder();
+    private int numOfSwarms;
 
 
     public JSONLogger(File protocol){
@@ -25,12 +33,19 @@ public class JSONLogger implements Logger {
 
 
 
+
+
+
+
     @Override
     public void addInitialRound(Field[][] map, Map<Character,Swarm> swarms) {
 
 
        int height = map.length;
        int width = map[0].length;
+
+       this.numOfSwarms = swarms.keySet().size();
+
 
        JsonObjectBuilder jsO = Json.createObjectBuilder();
 
@@ -41,44 +56,85 @@ public class JSONLogger implements Logger {
 
        JsonObject jsOb = jsO.build();
 
-        JsonObjectBuilder jsIni = Json.createObjectBuilder();
-
-        jsIni.add("init",jsOb);
-
-        JsonObject initOb = jsIni.build();
+       this.initialObject = jsOb;
 
 
-        //write JsonObbject to File
-        try {
-            FileWriter fWriter = new FileWriter(this.output);
-            JsonWriter jsonWriter = Json.createWriter(fWriter);
-            jsonWriter.writeObject(initOb);
-            jsonWriter.close();
-            fWriter.close();
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
+
+
+
+
     }
+
+
+
+
+
 
 
 
     @Override
-    public void addRoundInfo(List<Field> changes,Map<Character, Integer> points) {
+    public void addRoundInfo(List<Field> changes,Map<Character, Integer> points, Map<Character,Integer> numOfAntsInSwarm) {
 
+            JsonObjectBuilder jsOB = Json.createObjectBuilder();
 
+            jsOB.add("standings",createJsStandingsArray(points,numOfAntsInSwarm));
+            jsOB.add("fields",createJsChangedFieldsArray(changes));
+
+            JsonObject jsO = jsOB.build();
+            this.stepsArraybuilder.add(jsO);
 
 
     }
+
+
+
+
+
 
 
     @Override
     public void writeToFile() {
 
 
+        // baue das Endprodukt zusammen
+
+        JsonObjectBuilder jsOB = Json.createObjectBuilder();
+        JsonArray stepsArray = this.stepsArraybuilder.build();
+
+        jsOB.add("init",this.initialObject);
+        jsOB.add("steps",stepsArray);
+
+        JsonObject endObject = jsOB.build();
+
+
+
+
+
+
+             //  write JsonObbject to File
+
+        try {
+
+            FileWriter fWriter = new FileWriter(this.output);
+            JsonWriter jsonWriter = Json.createWriter(fWriter);
+            jsonWriter.writeObject(endObject);
+            jsonWriter.close();
+            fWriter.close();
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        return;
     }
 
 
-    //TODO
+
+
+
+
+
+
     private JsonArray createInitialFieldsArray (Field[][] fields){
 
 
@@ -145,7 +201,7 @@ public class JSONLogger implements Logger {
 
             Map<Character,boolean[]> marker = field.getMarkers();
             int keySize = marker.keySet().size();
-
+            this.numOfSwarms = keySize;
 
             for(int i = 0; i < keySize; i++){
 
@@ -290,6 +346,89 @@ public class JSONLogger implements Logger {
         }
 
 
+
+
+
+
+
+
+
+
+        public JsonArray createJsStandingsArray(Map<Character, Integer> points, Map<Character,Integer> numOfAntsInSwarm){
+
+        JsonArrayBuilder jsAB = Json.createArrayBuilder();
+
+        char recentSwarm = 'A';
+
+        for(int i = 0; i < this.numOfSwarms; i++){
+
+            JsonObjectBuilder jsOB = Json.createObjectBuilder();
+            jsOB.add("swarm_id", recentSwarm);
+            jsOB.add("score",points.get(recentSwarm));
+            jsOB.add("ants",numOfAntsInSwarm.get(recentSwarm));
+
+            JsonObject  jsO = jsOB.build();
+
+            jsAB.add(jsO);
+
+            recentSwarm += 1;
+
+        }
+
+
+        return jsAB.build();
+
+        }
+
+
+
+        public JsonArray createJsChangedFieldsArray(List<Field> changes){
+
+
+            JsonArrayBuilder arrBuild = Json.createArrayBuilder();
+
+
+            int len = changes.size();
+
+            Iterator<Field> it = changes.iterator();
+
+            for(int i = 0 ; i < len; i++){
+
+
+
+                    Field field = it.next();
+                    JsonObjectBuilder jsOb = Json.createObjectBuilder();
+
+                    jsOb.add("x",field.getX());
+                    jsOb.add("y",field.getY());
+                    jsOb.add("markers",createMarkerArray(field));
+                    jsOb.add("type", field.getType());
+
+                    if(field.getFood()!= 0){
+
+                        jsOb.add("food",field.getFood());
+                    }
+
+                    if(field.getAnt().isPresent()){
+
+                        AntInfo ant = field.getAnt().get();
+                        jsOb.add("ant",createAntJsObject(ant));
+
+                    }
+
+
+                    arrBuild.add(jsOb.build());
+
+                }
+
+
+
+            return arrBuild.build();
+
+
+
+
+        }
 
 
 
