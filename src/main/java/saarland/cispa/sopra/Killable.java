@@ -32,7 +32,6 @@ abstract class Killable extends Instruction {
                 suspect.setDead(true);
                 switch (fieldType) {
                     case '.':
-                        field = (Normal) field;
                         if (ant.get().hasFood()) {
                             ((Normal) field).addFood(4);
                         } else {
@@ -64,7 +63,6 @@ abstract class Killable extends Instruction {
             ant.setDead(true);
             switch (fieldType) {
                 case '.':
-                    field = (Normal) field;
                     ((Normal) field).addFood(1);
                     break;
                 case '#':
