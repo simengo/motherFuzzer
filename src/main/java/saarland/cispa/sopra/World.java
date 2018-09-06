@@ -55,12 +55,12 @@ public class World implements WorldInfo {
         return this.height;
     }
 
- /*
+
     public Field[][] getFields() {
 
         return this.fields;
     }
-*/
+
 
     public long getSeed() {
 
