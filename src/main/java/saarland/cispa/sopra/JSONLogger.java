@@ -1,12 +1,16 @@
 package saarland.cispa.sopra;
 
+import org.slf4j.LoggerFactory;
 import saarland.cispa.sopra.systemtests.AntInfo;
 
+import java.io.BufferedWriter;
 import java.io.File;
 
 
-import java.io.FileWriter;
+
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -18,15 +22,15 @@ import javax.json.*;
 
 public class JSONLogger implements Logger {
 
-    private final File output;
+    private final String output;
     private JsonObject initialObject;
     private final JsonArrayBuilder stepsArraybuilder = Json.createArrayBuilder();
     private int numOfSwarms;
-
+    private static String swarmHelp = "swarm_id";
 
     public JSONLogger(File protocol){
 
-        this.output = protocol;
+        this.output = protocol.toString();
 
 
     }
@@ -116,17 +120,18 @@ public class JSONLogger implements Logger {
 
         try {
 
-            FileWriter fWriter = new FileWriter(this.output);
+            BufferedWriter fWriter = Files.newBufferedWriter(Paths.get(this.output));
             JsonWriter jsonWriter = Json.createWriter(fWriter);
             jsonWriter.writeObject(endObject);
             jsonWriter.close();
             fWriter.close();
 
         } catch(IOException e) {
-            e.printStackTrace();
+            org.slf4j.Logger printSth = LoggerFactory.getLogger("noSuchFile");
+            printSth.debug("Wrong File Name!");
         }
 
-        return;
+
     }
 
 
@@ -203,6 +208,7 @@ public class JSONLogger implements Logger {
             Map<Character,boolean[]> marker = field.getMarkers();
             int keySize = marker.keySet().size();
             this.numOfSwarms = keySize;
+            int markerSize = 6;
 
             for(int i = 0; i < keySize; i++){
 
@@ -215,7 +221,7 @@ public class JSONLogger implements Logger {
                     if(marks[h]){
                         break;
                     }
-                    else if(h == 6){
+                    else if(h == markerSize){
                         breakout = true;
                     }
                 }
@@ -236,7 +242,7 @@ public class JSONLogger implements Logger {
 
                 }
 
-                jBuilder.add("swarm_id",swarmId);
+                jBuilder.add(swarmHelp,swarmId);
                 jBuilder.add("values",jsAHelp);
                 JsonObject obj = jBuilder.build();
                 jsArr.add(obj);
@@ -244,8 +250,8 @@ public class JSONLogger implements Logger {
                 swarmId += 1;  // naechster Ascii-Buchstabe
             }
 
-            JsonArray array = jsArr.build();
-            return array;
+
+            return jsArr.build();
 
         }
 
@@ -255,20 +261,20 @@ public class JSONLogger implements Logger {
 
         private JsonObject createAntJsObject(AntInfo antI){
             JsonObjectBuilder jsBuilder = Json.createObjectBuilder();
-            int id = antI.getId();
-            int pc = antI.getPc();
-            int swarm_id = antI.getSwarm();
-            boolean carries_food = antI.hasFood();
+            int antId = antI.getId();
+            int antPc = antI.getPc();
+            int swarmId = antI.getSwarm();
+            boolean carriesFood = antI.hasFood();
             String direction = antI.getDirection();
-            int rest_time = antI.getRestTime();
+            int restTime = antI.getRestTime();
 
 
-            jsBuilder.add("id",id);
-            jsBuilder.add("pc",pc);
-            jsBuilder.add("swarm_id",swarm_id);
-            jsBuilder.add("carries_food",carries_food);
+            jsBuilder.add("id",antId);
+            jsBuilder.add("pc",antPc);
+            jsBuilder.add(swarmHelp,swarmId);
+            jsBuilder.add("carries_food",carriesFood);
             jsBuilder.add("direction",direction);
-            jsBuilder.add("rest_time",rest_time);
+            jsBuilder.add("rest_time",restTime);
             jsBuilder.add("register",createJsRegister(antI.getRegister()));
 
 
@@ -313,7 +319,7 @@ public class JSONLogger implements Logger {
             char swarmId = 'A';
             JsonObjectBuilder jsB = Json.createObjectBuilder();
             jsB.add("name", swarms.get(swarmId).getSwarmName());
-            jsB.add("swarm_id",swarmId);
+            jsB.add(swarmHelp,swarmId);
             jsB.add("instructions",createJsInstructions(swarms.get(swarmId))); // soll SwarmObject zurueckgeben
 
 
@@ -338,9 +344,9 @@ public class JSONLogger implements Logger {
 
         Instruction[] instr = swarm.getInstruction();
 
-        for(int i = 0; i < instr.length; i++){
+        for(Instruction recentInst :instr){
 
-            jsA.add(instr[i].toString());
+            jsA.add(recentInst.toString());
         }
 
         return jsA.build();
@@ -364,7 +370,7 @@ public class JSONLogger implements Logger {
         for(int i = 0; i < this.numOfSwarms; i++){
 
             JsonObjectBuilder jsOB = Json.createObjectBuilder();
-            jsOB.add("swarm_id", recentSwarm);
+            jsOB.add(swarmHelp, recentSwarm);
             jsOB.add("score",points.get(recentSwarm));
             jsOB.add("ants",numOfAntsInSwarm.get(recentSwarm));
 
@@ -393,13 +399,13 @@ public class JSONLogger implements Logger {
 
             int len = changes.size();
 
-            Iterator<Field> it = changes.iterator();
+            Iterator<Field> iter = changes.iterator();
 
             for(int i = 0 ; i < len; i++){
 
 
 
-                    Field field = it.next();
+                    Field field = iter.next();
                     JsonObjectBuilder jsO = Json.createObjectBuilder();
 
                     jsO.add("x",field.getX());

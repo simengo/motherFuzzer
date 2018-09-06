@@ -1,4 +1,7 @@
 package saarland.cispa.sopra.JunitTests;
 
-public class TestTest {
+public class main {
+
+
+
 }

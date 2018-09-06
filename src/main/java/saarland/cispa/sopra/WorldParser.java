@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class WorldParser {
-    public World parseMap(File mapFile, long seed, HashMap<Character, Swarm> swarms, Logger logger) throws IOException {
+    public static World parseMap(File mapFile, long seed, HashMap<Character, Swarm> swarms, Logger logger) throws IOException {
 
         int i = 0;
         int j = 0;
@@ -46,12 +46,13 @@ public class WorldParser {
                 j = 0;
                 i++;
             }
+
             HashMap<Integer, Ant> ants = spawnAnts(swarms, fields);
-            return new World(fields, seed, ants, logger, swarms);
+            return new World(fields, seed, ants);
         }
     }
 
-    private HashMap<Integer, Ant> spawnAnts(HashMap<Character, Swarm> swarms, Field[][] fields) throws IllegalArgumentException {
+    private static HashMap<Integer, Ant> spawnAnts(HashMap<Character, Swarm> swarms, Field[][] fields) throws IllegalArgumentException {
         HashMap<Integer, Ant> ants = new HashMap<>();
         for (int i = 0; i < fields.length; i++) {
             for (int j = 0; i < fields[0].length; i++) {
