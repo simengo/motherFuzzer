@@ -5,7 +5,7 @@ public interface Logger {
 
     public void addRoundInfo(List<Field> changes, Map<Character, Integer> points);
 
-    public void addInitialRound(Field[][] map, Map<Character, Integer> points);
+    public void addInitialRound(Field[][] map);
 
     public void writeToFile();
     

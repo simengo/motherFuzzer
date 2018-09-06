@@ -14,16 +14,17 @@ public class BrainParser {
             String instr = "move";
             int jumpPC = 0;
             int max = 0;
-            int marker;
-            Target target;
-            String direction;
-            Instruction instruction;
+            int marker=0;
+            Target target=null;
+            String direction="";
+            Instruction instruction=null;
             switch (instr) {
                 case "move": {
                     instruction = new Move(jumpPC);
                 }
                 case "sense": {
                     instruction = new Sense(direction, target, marker, jumpPC);
+
                 }
                 case ("flip"): {
                     instruction = new Flip(max);
