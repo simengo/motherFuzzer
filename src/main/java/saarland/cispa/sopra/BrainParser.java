@@ -8,6 +8,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import gen.AcolaBaseVisitor;
 import gen.AcolaLexer;
 import gen.AcolaParser;
+import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class BrainParser {
             // starting point for
             // parsing a java file
 
-            AcolaBaseVisitor visitor = new AcolaBaseVisitor(); // extends JavaBaseVisitor<Void>
+            ParseTreeVisitor visitor = new AcolaBaseVisitor(); // extends JavaBaseVisitor<Void>
             // and overrides the methods
             // you're interested
             visitor.visit(tree);
