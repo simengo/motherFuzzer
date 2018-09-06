@@ -43,5 +43,6 @@ public class main {
         Game game = new Game(logfile);
         game.simulate(rounds,seed,worldpath,brainpaths);
 
+
     }
 }

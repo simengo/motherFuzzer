@@ -1,5 +1,6 @@
-import saarland.cispa.sopra.Instruction;
-import saarland.cispa.sopra.Swarm;
+package saarland.cispa.sopra;
+
+
 import saarland.cispa.sopra.systemtests.AntInfo;
 import saarland.cispa.sopra.systemtests.FieldInfo;
 
@@ -126,5 +127,7 @@ public class Ant implements AntInfo {
 
     }
 
-    public Swarm getSwarmInstance(){return this.swarm;}
+    public Swarm getSwarmInstance() {
+        return this.swarm;
+    }
 }
