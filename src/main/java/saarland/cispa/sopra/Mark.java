@@ -2,10 +2,10 @@ package saarland.cispa.sopra;
 
 public class Mark extends Instruction {
 
-    int marker;
+    private final int marker;
 
-    public Mark(int marker){
-        this.marker = marker;
+    public Mark(int marker1){
+        this.marker = marker1;
     }
 
     @Override
@@ -19,5 +19,11 @@ public class Mark extends Instruction {
 
         ant.increasePC();
 
+        Field field = (Field) ant.getField();
+        field.setChanged();
+    }
+    @Override
+    public String toString(){
+        return "mark" + marker;
     }
 }

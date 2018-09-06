@@ -27,12 +27,15 @@ public class WorldParser {
                     switch (c) {
                         case '.': {
                             fields[i][j] = new Normal(i, j, 0);
+                            break;
                         }
                         case '=': {
                             fields[i][j] = new Antlion(i, j);
+                            break;
                         }
                         case '#': {
                             fields[i][j] = new Rock(i, j);
+                            break;
                         }
                         default: {
                             fields[i][j] = new Base(c, i, j);

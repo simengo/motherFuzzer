@@ -6,26 +6,22 @@ import java.util.Map;
 public class NOPLogger implements Logger {
 
 
-    public NOPLogger(){
-
-
-
-    }
-
 
 
 
     @Override
     public void addInitialRound(Field[][] map, Map<Character,Swarm> swarms) {
 
-        return;
+        //extra leer, da NOPLogger nix loggen soll
+
     }
 
 
     @Override
     public void addRoundInfo(List<Field> changes,Map<Character,Integer> points, Map<Character,Integer> numOfAntsInSwarm) {
 
-        return;
+        //extra leer, da NOPLogger nix loggen soll
+
     }
 
 
@@ -33,7 +29,8 @@ public class NOPLogger implements Logger {
     @Override
     public void writeToFile() {
 
-        return;
+        //extra leer, da NOPLogger nix loggen soll
+
     }
 
 

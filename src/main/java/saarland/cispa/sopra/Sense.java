@@ -4,10 +4,10 @@ import java.util.Map;
 
 public class Sense extends Instruction {
 
-    private SenseDir direction;
-    private Target target;
-    private int marker;
-    private int jumpPC;
+    private final SenseDir direction;
+    private final  Target target;
+    private final  int marker;
+    private final int jumpPC;
 
     public Sense(SenseDir dir, Target target, int marker, int jumpPC) {
         this.direction = dir;
@@ -183,12 +183,22 @@ public class Sense extends Instruction {
                 else{ant.setPc(jumpPC);}
                 break;
             case antlion:
-                if(field.getType() == '=' || field.isNextToAntlion()){
+                if(field.getType() == '=' || field.getIsNextToAntlion()){
                     ant.increasePC();
                 }
                 else{ant.setPc(jumpPC);}
                 break;
         }
 
+        Field field1 = (Field) ant.getField();
+        field1.setChanged();
+
+    }
+    @Override
+    public String toString(){
+        if(target == Target.marker) {
+            return "sense" + direction + "marker" + marker + "else" + jumpPC;
+        }
+        else return "sense" + direction + target + "else" + jumpPC;
     }
 }

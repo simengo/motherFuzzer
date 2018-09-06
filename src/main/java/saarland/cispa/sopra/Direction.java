@@ -1,20 +1,26 @@
 package saarland.cispa.sopra;
 
 public class Direction extends Instruction {
-    private String direction;
-    private int jumpPC;
+    private final String directionToLookAt;
+    private final int jumpPC;
     public Direction(int jumpPC,String dir) {
         this.jumpPC=jumpPC;
-        this.direction = dir;
+        this.directionToLookAt = dir;
     }
 
     @Override
     public void execute(World world, Ant ant) {
-        if(ant.getDirection() == direction){
+        if(ant.getDirection() == directionToLookAt){
             ant.increasePC();
         }
         else{
             ant.setPc(jumpPC);
         }
+        Field field = (Field) ant.getField();
+        field.setChanged();
+    }
+    @Override
+    public String toString(){
+        return "direction" + directionToLookAt + "else" + jumpPC;
     }
 }

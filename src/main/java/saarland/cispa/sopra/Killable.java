@@ -18,42 +18,65 @@ abstract class Killable extends Instruction {
 
     public void killcheck(World world, Optional<Ant> ant) {
         List<AntInfo> ants = world.getAnts();
-        for (int i = 0; i < ants.size(); i++) {
-            Ant suspect = (Ant) ants.get(i);
+        for (AntInfo a : ants) {
+            Ant suspect = (Ant) a;
             Field field = (Field) suspect.getField();
-            if (!suspect.isDead()) {
-                if (suspect.equals(ant)) {
-                    if (field.getIsNextToAntlion() || field.getType() == '=') {
-                        suspect.setDead(true);
-                        if (field.getType() == '.') {
-                            field = (Normal) field;
-                            ((Normal) field).addFood(1);
-                        }
-                        if (field.getType() != '#' || field.getType() != '.' || field.getType() != '=') {
-                            world.increasePoints(field.getType(), 1);
-                        }
-                    }
-                }
-                if (isSurrounded(world, suspect)) {
-                    suspect.setDead(true);
-                    if (field.getType() == '.') {
+            char fieldType = field.getType();
+            if (suspect.isDead()) {
+                continue;
+            }
+            if (suspect.equals(ant)) {
+                checkAnt(world,suspect);
+            }
+            if (isSurrounded(world, suspect)) {
+                suspect.setDead(true);
+                switch (fieldType) {
+                    case '.':
                         field = (Normal) field;
                         if (ant.get().hasFood()) {
                             ((Normal) field).addFood(4);
                         } else {
                             ((Normal) field).addFood(3);
                         }
-                    }
-                    if (field.getType() != '.' || field.getType() != '#' || field.getType() != '=') {
+                        break;
+                    case '#':
+                        break;
+                    case '=':
+                        break;
+                    default:
                         if (ant.get().hasFood()) {
-                            world.increasePoints(field.getType(), 4);
+                            world.increasePoints(fieldType, 4);
                         } else {
-                            world.increasePoints(field.getType(), 3);
+                            world.increasePoints(fieldType, 3);
                         }
-                    }
+                        break;
                 }
             }
         }
+    }
+
+
+    public void checkAnt(World world, Ant ant){
+        char antLionField = '=';
+        Field field = (Field)ant.getField();
+        char fieldType = field.getType();
+        if (field.getIsNextToAntlion() || fieldType == antLionField) {
+            ant.setDead(true);
+            switch (fieldType) {
+                case '.':
+                    field = (Normal) field;
+                    ((Normal) field).addFood(1);
+                    break;
+                case '#':
+                    break;
+                case '=':
+                    break;
+                default:
+                    world.increasePoints(fieldType, 1);
+                    break;
+            }
+        }
+
     }
 
     private boolean isSurrounded(World world, Ant ant) {
@@ -61,20 +84,17 @@ abstract class Killable extends Instruction {
         Field[] neighbours = world.getNeighbours((Field) field);
         int enemies = 0;
 
-        for (int i = 0; i < neighbours.length; i++) {
-            if (neighbours[i].getAnt().get().getSwarm() != ant.getSwarm()) {
+        for (Field neighbour : neighbours) {
+            if (neighbour.getAnt().get().getSwarm() != ant.getSwarm()) {
                 enemies++;
             }
         }
-
-        if (enemies >= 5) {
-            return true;
-        }
-        return false;
+        return enemies >= 5;
 
     }
 
-    public int getJumpPc(){
+    public int getJumpPc() {
         return jumpPc;
     }
+
 }

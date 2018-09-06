@@ -4,7 +4,7 @@ import saarland.cispa.sopra.systemtests.FieldInfo;
 
 public class Pickup extends Instruction {
 
-    private int jumpPC;
+    private final int jumpPC;
 
     public Pickup(int jumpPC){this.jumpPC = jumpPC;}
     @Override
@@ -25,5 +25,11 @@ public class Pickup extends Instruction {
 
         }
 
+        Field field = (Field) ant.getField();
+        field.setChanged();
+    }
+    @Override
+    public String toString(){
+        return "direction" + "else" + jumpPC;
     }
 }
