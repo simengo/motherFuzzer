@@ -7,9 +7,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class WorldParser {
-    public static World parseMap(File mapFile, long seed, HashMap<Character, Swarm> swarms, Logger logger) throws IOException {
+    public static World parseMap(File mapFile, long seed, HashMap<Character, Swarm> swarms) throws IOException {
 
         int i = 0;
         int j = 0;
@@ -52,7 +53,7 @@ public class WorldParser {
         }
     }
 
-    private static HashMap<Integer, Ant> spawnAnts(HashMap<Character, Swarm> swarms, Field[][] fields) throws IllegalArgumentException {
+    private static HashMap<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) throws IllegalArgumentException {
         HashMap<Integer, Ant> ants = new HashMap<>();
         for (int i = 0; i < fields.length; i++) {
             for (int j = 0; i < fields[0].length; i++) {
