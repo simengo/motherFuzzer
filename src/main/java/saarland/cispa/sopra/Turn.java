@@ -36,6 +36,7 @@ public class Turn extends Instruction {
                      default: throw new IllegalArgumentException();
 
                 }
+                break;
             case right:
                 switch (antDir){
                     case "northwest":
