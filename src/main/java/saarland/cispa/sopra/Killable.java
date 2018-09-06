@@ -2,12 +2,13 @@ package saarland.cispa.sopra;
 
 import saarland.cispa.sopra.systemtests.FieldInfo;
 import saarland.cispa.sopra.systemtests.AntInfo;
+
 import java.util.List;
 
 import java.util.Optional;
 
 abstract class Killable extends Instruction {
-    int jumpPc;
+    private final int jumpPc;
 
     public Killable(int jumpPc) {
 
@@ -17,17 +18,39 @@ abstract class Killable extends Instruction {
 
     public void killcheck(World world, Optional<Ant> ant) {
         List<AntInfo> ants = world.getAnts();
-        for(int i = 0; i < ants.size(); i++){
+        for (int i = 0; i < ants.size(); i++) {
             Ant suspect = (Ant) ants.get(i);
             Field field = (Field) suspect.getField();
-            if(!suspect.isDead()){
-                if(suspect.equals(ant)){
-                    if(field.isNextToAntlion()){
+            if (!suspect.isDead()) {
+                if (suspect.equals(ant)) {
+                    if (field.getIsNextToAntlion() || field.getType() == '=') {
                         suspect.setDead(true);
+                        if (field.getType() == '.') {
+                            field = (Normal) field;
+                            ((Normal) field).addFood(1);
+                        }
+                        if (field.getType() != '#' || field.getType() != '.' || field.getType() != '=') {
+                            world.increasePoints(field.getType(), 1);
+                        }
                     }
                 }
-                if(isSurrounded(world,suspect)){
+                if (isSurrounded(world, suspect)) {
                     suspect.setDead(true);
+                    if (field.getType() == '.') {
+                        field = (Normal) field;
+                        if (ant.get().hasFood()) {
+                            ((Normal) field).addFood(4);
+                        } else {
+                            ((Normal) field).addFood(3);
+                        }
+                    }
+                    if (field.getType() != '.' || field.getType() != '#' || field.getType() != '=') {
+                        if (ant.get().hasFood()) {
+                            world.increasePoints(field.getType(), 4);
+                        } else {
+                            world.increasePoints(field.getType(), 3);
+                        }
+                    }
                 }
             }
         }
@@ -49,5 +72,9 @@ abstract class Killable extends Instruction {
         }
         return false;
 
+    }
+
+    public int getJumpPc(){
+        return jumpPc;
     }
 }

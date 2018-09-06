@@ -7,9 +7,9 @@ public interface Logger {
 
 
 
-    public void addRoundInfo(List<Field> changes,Map<Character, Integer> points);
+    public void addRoundInfo(List<Field> changes,Map<Character,Integer> points, Map<Character,Integer> numOfAntsInSwarm);
 
-    public void addInitialRound(Field[][] map, Map<Character, Integer> points);
+    public void addInitialRound(Field[][] map, Map<Character,Swarm> swarms);
 
     public void writeToFile();
 
