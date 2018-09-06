@@ -14,32 +14,41 @@ public class World implements WorldInfo {
     final private int width;
     final private int height;
     final private long seed;
-    private Field[][] fields;
-    private Map<Character, Integer> points;
-    private Map<Integer, Ant> ants;
-    private Random randGen;
-    private Map<Character, Integer> numOfAntsInSwarm;
-    private Logger logger;
+    private final Field[][] fields;
+    private final Map<Character, Integer> points;
+    private final Map<Integer, Ant> ants;
+    private final Random randGen;
+    //private Map<Character, Integer> numOfAntsInSwarm;
+    //private Logger logger;
+    //private final Map<Character,Swarm> swarms;
 
 
-    public World(Field[][] fields, long seed, Map<Integer, Ant> ants, Logger logger,  HashMap<Character, Swarm> swarms) {
-        this.fields = fields;
+    public World(Field[][] fields, long seed, Map<Integer, Ant> ants) {
+
+
         this.width = fields.length;
         this.height = fields[0].length;
-        this.points = new HashMap<Character, Integer>();
+        this.fields = new Field[width][height];
+
+        for(int i=0; i<fields.length; i++)
+            for(int j=0; j<fields[i].length; j++)
+                this.fields[i][j] = fields[i][j];
+
+        this.points = new HashMap<>();
         this.ants = ants;
-        this.logger = logger;
-        this.numOfAntsInSwarm = new HashMap<Character, Integer>();
+        //this.logger = logger;
+        //this.numOfAntsInSwarm = new HashMap<>();
         this.seed = seed;
         randGen = new Random(this.seed);
+        //this.swarms = swarms;
     }
 
-
+    @Override
     public int getWidth() {
         return this.width;
     }
 
-
+    @Override
     public int getHeight() {
         return this.height;
     }
