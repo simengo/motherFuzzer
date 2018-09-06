@@ -2,7 +2,7 @@ package saarland.cispa.sopra;
 
 public class Mark extends Instruction {
 
-    int marker;
+    private final int marker;
 
     public Mark(int marker1){
         this.marker = marker1;
