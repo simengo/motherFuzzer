@@ -4,7 +4,7 @@ import org.apache.commons.cli.*;
 
 import static java.lang.System.exit;
 
-public class main {
+public class Main {
 
     public static void main(String[] args) {
 
