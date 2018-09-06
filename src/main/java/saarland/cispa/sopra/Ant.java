@@ -1,3 +1,5 @@
+import saarland.cispa.sopra.Instruction;
+import saarland.cispa.sopra.Swarm;
 import saarland.cispa.sopra.systemtests.AntInfo;
 import saarland.cispa.sopra.systemtests.FieldInfo;
 
@@ -8,8 +10,6 @@ public class Ant implements AntInfo {
     private Swarm swarm;
     private int pc = 0;
     private boolean isDead = false;
-
-
     private String direction = "northwest";
     private int restTime = 0;
     private boolean hasFood = false;
@@ -117,6 +117,12 @@ public class Ant implements AntInfo {
     public Instruction getNextInstruction() {
 
         return swarm.getBrain()[pc];
+
+    }
+
+    public void decreaseResttime() {
+
+        restTime--;
 
     }
 
