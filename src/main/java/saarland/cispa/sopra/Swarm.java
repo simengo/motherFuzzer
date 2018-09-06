@@ -27,4 +27,8 @@ public class Swarm {
 
         return brain;
     }
+
+    public Instruction[] getBrain() {
+        return brain;
+    }
 }
