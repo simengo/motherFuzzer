@@ -17,4 +17,8 @@ public class Direction extends Instruction {
             ant.setPc(jumpPC);
         }
     }
+
+    public String toString(){
+        return "direction" + direction + "else" + jumpPC;
+    }
 }

@@ -10,4 +10,8 @@ public class Jump extends Instruction {
     public void execute(World world, Ant ant) {
         ant.setPc(jumpPC);
     }
+
+    public String toString(){
+        return "jump" + jumpPC;
+    }
 }

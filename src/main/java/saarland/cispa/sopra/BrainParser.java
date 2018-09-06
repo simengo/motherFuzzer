@@ -12,8 +12,10 @@ public class BrainParser {
             int jumpPC = 0;
             int max = 0;
             int marker;
+            int register;
             Target target;
             String direction;
+            TurnDirection turnD;
             Instruction instruction;
             switch (instr) {
                 case "move": {
@@ -26,16 +28,16 @@ public class BrainParser {
                     instruction = new Flip(max);
                 }
                 case ("mark"): {
-                    instruction = new Mark();
+                    instruction = new Mark(marker);
                 }
                 case ("unmark"): {
-                    instruction = new Unmark();
+                    instruction = new Unmark(marker);
                 }
                 case ("set"): {
-                    instruction = new Set();
+                    instruction = new Set(register);
                 }
                 case ("unset"): {
-                    instruction = new Unset();
+                    instruction = new Unset(register);
                 }
                 case ("drop"): {
                     instruction = new Drop(jumpPC);
@@ -53,10 +55,10 @@ public class BrainParser {
                     instruction = new Breed(jumpPC);
                 }
                 case ("turn"): {
-                    instruction = new Turn();
+                    instruction = new Turn(turnD);
                 }
                 case ("test"): {
-                    instruction = new Test();
+                    instruction = new Test(turnD);
                 }
             }
             //Instruction[] outBrain = new Instruction[];

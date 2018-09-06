@@ -14,4 +14,8 @@ public class Flip extends Instruction {
         if(randomInt == 0){ant.increasePC();}
         else{ant.setPc(jumpPC);}
     }
+
+    public String toString(){
+        return "flip" + maxNum + "else" + jumpPC;
+    }
 }

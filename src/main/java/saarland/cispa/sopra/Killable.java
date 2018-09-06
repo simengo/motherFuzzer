@@ -22,7 +22,7 @@ abstract class Killable extends Instruction {
             Field field = (Field) suspect.getField();
             if(!suspect.isDead()){
                 if(suspect.equals(ant)){
-                    if(field.isNextToAntlion(){
+                    if(field.isNextToAntlion()){
                         suspect.setDead(true);
                     }
                 }

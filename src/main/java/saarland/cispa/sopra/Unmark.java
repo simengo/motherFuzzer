@@ -19,4 +19,7 @@ public class Unmark extends Instruction {
         ant.increasePC();
 
     }
+    public String toString(){
+        return "unmark" + markerFalse;
+    }
 }

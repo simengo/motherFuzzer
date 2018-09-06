@@ -54,5 +54,7 @@ public class Turn extends Instruction {
 
         ant.increasePC();
 
+    }public String toString(){
+        return "turn" + direction;
     }
 }

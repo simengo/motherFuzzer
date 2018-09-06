@@ -191,4 +191,11 @@ public class Sense extends Instruction {
         }
 
     }
+
+    public String toString(){
+        if(target == Target.marker) {
+            return "sense" + direction + "marker" + marker + "else" + jumpPC;
+        }
+        else return "sense" + direction + target + "else" + jumpPC;
+    }
 }

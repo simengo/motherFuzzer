@@ -19,4 +19,8 @@ public class Test extends Instruction {
         else{ant.setPc(jumpPC);}
 
     }
+
+    public String toString(){
+        return "test" + register + "else" + jumpPC;
+    }
 }

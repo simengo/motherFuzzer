@@ -20,4 +20,8 @@ public class Mark extends Instruction {
         ant.increasePC();
 
     }
+
+    public String toString(){
+        return "mark" + marker;
+    }
 }

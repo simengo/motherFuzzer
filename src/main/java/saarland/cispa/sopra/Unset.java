@@ -14,4 +14,8 @@ public class Unset extends Instruction {
         ant.increasePC();
 
     }
+
+    public String toString(){
+        return "unset" + reg;
+    }
 }

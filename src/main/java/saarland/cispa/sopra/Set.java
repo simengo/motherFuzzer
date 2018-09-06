@@ -13,4 +13,8 @@ public class Set extends Instruction {
         ant.setRegister(reg,true);
         ant.increasePC();
     }
+
+    public String toString(){
+        return "set" + reg;
+    }
 }

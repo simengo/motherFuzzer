@@ -26,4 +26,8 @@ public class Pickup extends Instruction {
         }
 
     }
+
+    public String toString(){
+        return "direction" + "else" + jumpPC;
+    }
 }
