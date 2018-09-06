@@ -127,7 +127,7 @@ String newAntLooking;
 
     }
 
-    public void senseFoeMarkers (World world,Field field, Ant ant){
+    private void senseFoeMarkers (World world,Field field, Ant ant){
         Map<Character,boolean[]> markers = field.getMarkers();
         for (Character key : markers.keySet()) {
             if(key !=ant.getSwarm()){
