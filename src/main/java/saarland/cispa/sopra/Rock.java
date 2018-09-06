@@ -6,4 +6,8 @@ public class Rock extends Field {
         super('#',posX,posY);
 
     }
+    @Override
+    public int getFood(){
+        return 0;
+    }
 }
