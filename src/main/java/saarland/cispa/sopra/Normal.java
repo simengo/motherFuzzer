@@ -2,12 +2,12 @@ package saarland.cispa.sopra;
 
 public class Normal  extends Field {
     int food;
-    public Normal(int x, int y, int food){
-        super('.',x,y);
+    public Normal(int posX, int posY, int food){
+        super('.',posX,posY);
         this.food = food;
     }
-    public void addFood(int i){
-        this.food =+ i;
+    public void addFood(int food){
+        this.food =+ food;
     }
 
     public void removeFood(){

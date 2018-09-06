@@ -2,8 +2,8 @@ package saarland.cispa.sopra;
 
 public class Rock extends Field {
 
-    public Rock(int x, int y){
-        super('#',x,y);
+    public Rock(int posX, int posY){
+        super('#',posX,posY);
 
     }
 }
