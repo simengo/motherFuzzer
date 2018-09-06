@@ -13,6 +13,9 @@ public class Unset extends Instruction {
         ant.setRegister(reg,false);
         ant.increasePC();
 
+
+        Field field = (Field) ant.getField();
+        field.setChanged();
     }
 
     public String toString(){

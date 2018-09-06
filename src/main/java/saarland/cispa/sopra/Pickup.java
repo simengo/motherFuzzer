@@ -25,6 +25,8 @@ public class Pickup extends Instruction {
 
         }
 
+        Field field = (Field) ant.getField();
+        field.setChanged();
     }
 
     public String toString(){

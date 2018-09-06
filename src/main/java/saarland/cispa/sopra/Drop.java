@@ -27,26 +27,28 @@ public class Drop extends Instruction {
                     field.addFood(1);
                     ant.setHasFood(false);
                     ant.increasePC();
-                    field.setChanged();
+
                 }
                 if(ant.getField().getType() != ('=') && ant.getField().getType() != ('#')){
                     char BaseType = ant.getField().getType();
 
                     Map<Character,Integer> points =  world.getPoints();
                     if(points.containsKey(BaseType)){
-                        Base field = (Base) ant.getField();
+
                         int altPoints = points.get(BaseType);
                         altPoints = altPoints + 1;
                         points.replace(BaseType,altPoints);
                         ant.setHasFood(false);
                         ant.increasePC();
-                        field.setChanged();
+
 
                     }
 
                 }
             }
 
+            Field field = (Field) ant.getField();
+            field.setChanged();
         }
 
     public String toString(){

@@ -16,6 +16,8 @@ public class Direction extends Instruction {
         else{
             ant.setPc(jumpPC);
         }
+        Field field = (Field) ant.getField();
+        field.setChanged();
     }
 
     public String toString(){

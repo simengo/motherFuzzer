@@ -19,6 +19,8 @@ public class Mark extends Instruction {
 
         ant.increasePC();
 
+        Field field = (Field) ant.getField();
+        field.setChanged();
     }
 
     public String toString(){
