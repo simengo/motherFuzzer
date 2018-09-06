@@ -54,7 +54,7 @@ public class WorldParser {
             for (int j = 0; i < fields[0].length; i++) {
                 Character type = fields[i][j].getType();
                 if (type != '.' && type != '=' && type != '#') {
-                    if (swarms.get(type).getSwarm() != fields[i][j].getType()) {
+                    if (swarms.get(type).getIdent() != fields[i][j].getType()) {
                         throw new IllegalIcuArgumentException("wrong swarm");
                     }
                     Ant ant = new Ant(swarms.get(type), ants.size(), fields[i][j]);
