@@ -18,9 +18,9 @@ import javax.json.*;
 
 public class JSONLogger implements Logger {
 
-    File output;
+    private final File output;
     private JsonObject initialObject;
-    private JsonArrayBuilder stepsArraybuilder = Json.createArrayBuilder();
+    private final JsonArrayBuilder stepsArraybuilder = Json.createArrayBuilder();
     private int numOfSwarms;
 
 
@@ -81,6 +81,7 @@ public class JSONLogger implements Logger {
             jsOB.add("fields",createJsChangedFieldsArray(changes));
 
             JsonObject jsO = jsOB.build();
+
             this.stepsArraybuilder.add(jsO);
 
 
