@@ -1,11 +1,11 @@
 package saarland.cispa.sopra;
 
-import com.ibm.icu.impl.IllegalIcuArgumentException;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,13 +16,14 @@ public class WorldParser {
         int jPMDlaenger = 0;
         Field[][] fields;
 
-        try (BufferedReader bReader = new BufferedReader(new FileReader(mapFile))) {
+        try (BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()))) {
             String line;
             int width = bReader.readLine().toCharArray()[0];
             int broadth = bReader.readLine().toCharArray()[0];
 
             fields = new Field[width][broadth];
-            while ((line = bReader.readLine()) != null) {
+            while (bReader.readLine() != null) {
+                line = bReader.readLine();
                 char[] row = line.toCharArray();
                 for (Character chara : row) {
                     switch (chara) {
@@ -56,14 +57,14 @@ public class WorldParser {
 
     private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) throws IllegalArgumentException {
         HashMap<Integer, Ant> ants = new HashMap<>();
-        for (int i = 0; i < fields.length; i++) {
-            for (int j = 0; j < fields[0].length; j++) {
-                Character type = fields[i][j].getType();
+        for (Field[] fieldh : fields) {
+            for (Field field : fieldh) {
+                Character type = field.getType();
                 if (type != '.' && type != '=' && type != '#') {
-                    if (swarms.get(type).getIdent() != fields[i][j].getType()) {
-                        throw new IllegalIcuArgumentException("wrong swarm");
+                    if (swarms.get(type).getIdent() != field.getType()) {
+                        throw new IllegalArgumentException("wrong swarm");
                     }
-                    Ant ant = new Ant(swarms.get(type), ants.size(), fields[i][j]);
+                    Ant ant = new Ant(swarms.get(type), ants.size(), field);
                     ants.put(ants.size(), ant);
                 }
             }
