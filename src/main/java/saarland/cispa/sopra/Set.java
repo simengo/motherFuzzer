@@ -12,5 +12,12 @@ public class Set extends Instruction {
 
         ant.setRegister(reg,true);
         ant.increasePC();
+
+        Field field = (Field) ant.getField();
+        field.setChanged();
+    }
+    @Override
+    public String toString(){
+        return "set" + reg;
     }
 }

@@ -16,5 +16,11 @@ public class Direction extends Instruction {
         else{
             ant.setPc(jumpPC);
         }
+        Field field = (Field) ant.getField();
+        field.setChanged();
+    }
+    @Override
+    public String toString(){
+        return "direction" + direction + "else" + jumpPC;
     }
 }

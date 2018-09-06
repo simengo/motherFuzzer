@@ -18,5 +18,12 @@ public class Unmark extends Instruction {
 
         ant.increasePC();
 
+        Field field = (Field) ant.getField();
+        field.setChanged();
+
+    }
+    @Override
+    public String toString(){
+        return "unmark" + markerFalse;
     }
 }

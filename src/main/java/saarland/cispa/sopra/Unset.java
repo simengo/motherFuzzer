@@ -4,7 +4,7 @@ public class Unset extends Instruction {
 
     private int reg;
 
-    public Unset(int reg){this.reg = reg;}
+    public Unset(int reg1){this.reg = reg1;}
 
 
     @Override
@@ -13,5 +13,12 @@ public class Unset extends Instruction {
         ant.setRegister(reg,false);
         ant.increasePC();
 
+
+        Field field = (Field) ant.getField();
+        field.setChanged();
+    }
+    @Override
+    public String toString(){
+        return "unset" + reg;
     }
 }

@@ -190,5 +190,15 @@ public class Sense extends Instruction {
                 break;
         }
 
+        Field field1 = (Field) ant.getField();
+        field1.setChanged();
+
+    }
+    @Override
+    public String toString(){
+        if(target == Target.marker) {
+            return "sense" + direction + "marker" + marker + "else" + jumpPC;
+        }
+        else return "sense" + direction + target + "else" + jumpPC;
     }
 }
