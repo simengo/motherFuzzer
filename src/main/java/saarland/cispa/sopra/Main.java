@@ -4,8 +4,11 @@ import org.apache.commons.cli.*;
 
 import static java.lang.System.exit;
 
-public class Main {
+public final class Main {
 
+    private  Main(){
+
+    }
     public static void main(String[] args) {
 
         Options options = new Options();
