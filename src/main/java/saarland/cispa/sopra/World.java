@@ -30,8 +30,8 @@ public class World implements WorldInfo {
         this.height = fields[0].length;
         this.fields = new Field[width][height];
 
-        for(int i=0; i<fields.length; i++)
-            for(int j=0; j<fields[i].length; j++)
+        for (int i = 0; i < fields.length; i++)
+            for (int j = 0; j < fields[i].length; j++)
                 this.fields[i][j] = fields[i][j];
 
         this.points = new HashMap<>();
@@ -113,12 +113,7 @@ public class World implements WorldInfo {
             }
 
 
-
-
-        }
-
-
-        else if ("northeast".equals(direction)) {
+        } else if ("northeast".equals(direction)) {
 
             if (!even) {
                 y -= 1;
@@ -143,8 +138,6 @@ public class World implements WorldInfo {
             }
 
 
-
-
         } else if ("east".equals(direction)) {
             x += 1;
             if (x == this.width) {
@@ -152,13 +145,7 @@ public class World implements WorldInfo {
             }
             return fields[x][y];
 
-        }
-
-
-
-
-
-        else if ("southeast".equals(direction)) {
+        } else if ("southeast".equals(direction)) {
 
             if (!even) {
                 if (y == this.height - 1) {
@@ -185,10 +172,7 @@ public class World implements WorldInfo {
             }
 
 
-        }
-
-
-        else if ("southwest".equals(direction)) {
+        } else if ("southwest".equals(direction)) {
 
             if (!even) {
 
@@ -210,12 +194,7 @@ public class World implements WorldInfo {
                 return fields[x][y];
             }
 
-        }
-
-
-
-
-        else if ("west".equals(direction)) {
+        } else if ("west".equals(direction)) {
             x -= 1;
             if (x < 0) {
                 x = this.width - 1;
@@ -224,22 +203,17 @@ public class World implements WorldInfo {
 
         }
 
-        assert(false);
+        assert (false);
         return null;
     }
 
 
-
-
-
-
-
-    public Ant getAnt(int id){
+    public Ant getAnt(int id) {
 
         return ants.get(id);
     }
 
-    public List<AntInfo> getAnts(){
+    public List<AntInfo> getAnts() {
 
         List<AntInfo> antList = new ArrayList<AntInfo>(ants.values());
 
@@ -247,67 +221,61 @@ public class World implements WorldInfo {
     }
 
 
-    public int getScore(char swarm){
+    public int getScore(char swarm) {
 
         return points.get(swarm);
     }
 
-    public Map<Character,Integer> getPoints(){
+    public Map<Character, Integer> getPoints() {
 
         return points;
     }
 
 
-    public void increasePoints(char swarm,int plus){
+    public void increasePoints(char swarm, int plus) {
 
         int pointsSwarm = points.get(swarm);
         pointsSwarm += plus;
-        points.put(swarm,pointsSwarm);
+        points.put(swarm, pointsSwarm);
     }
 
 
-
-
-
-    public Field[] getNeighbours(Field field){
+    public Field[] getNeighbours(Field field) {
 
         Field[] surrFields = new Field[6];
 
-        surrFields[0] = getFieldInDirection(field,"northwest");
-        surrFields[1] = getFieldInDirection(field,"northeast");
-        surrFields[2] = getFieldInDirection(field,"east");
-        surrFields[3] = getFieldInDirection(field,"southeast");
-        surrFields[4] = getFieldInDirection(field,"southwest");
-        surrFields[5] = getFieldInDirection(field,"west");
+        surrFields[0] = getFieldInDirection(field, "northwest");
+        surrFields[1] = getFieldInDirection(field, "northeast");
+        surrFields[2] = getFieldInDirection(field, "east");
+        surrFields[3] = getFieldInDirection(field, "southeast");
+        surrFields[4] = getFieldInDirection(field, "southwest");
+        surrFields[5] = getFieldInDirection(field, "west");
 
         return surrFields;
     }
 
 
-
-
     // creates a random number between 0 and max-1  ?? richtig so ??
 
-    public int getRand(int max){
+    public int getRand(int max) {
 
         return randGen.nextInt(max);
     }
 
 
-
     //iterates over the fields and reads the changed field -> when changed -> add to Array
 
-    public List<Field> logChanges(){
+    public List<Field> logChanges() {
 
         List<Field> changedFields = new ArrayList<Field>();
 
-        for(int y = 0; y<height; y++){
+        for (int y = 0; y < height; y++) {
 
-            for(int x = 0; x < width; x++){
+            for (int x = 0; x < width; x++) {
 
                 Field field = fields[x][y];
 
-                if (field.getChanged()){
+                if (field.getChanged()) {
                     changedFields.add(field);
                 }
 
@@ -319,22 +287,21 @@ public class World implements WorldInfo {
     }
 
 
-
 // initially sets the isNextToAntlion Flag in the fields
 
-    private void setAntlion(){
+    private void setAntlion() {
 
-        for(int y = 0; y<height; y++) {
+        for (int y = 0; y < height; y++) {
 
             for (int x = 0; x < width; x++) {
 
 
                 Field field = fields[x][y];
-                if(field.getType() == '='){
+                if (field.getType() == '=') {
 
                     Field[] neighbours = getNeighbours(field);
 
-                    for(int i = 0; i < 6; i++ ){
+                    for (int i = 0; i < 6; i++) {
                         neighbours[i].setNextToAntlion(true);
                     }
 
@@ -344,14 +311,7 @@ public class World implements WorldInfo {
         }
 
 
-
-
-
-
     }
-
-
-
 
 
 }

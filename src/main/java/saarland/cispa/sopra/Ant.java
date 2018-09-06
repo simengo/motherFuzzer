@@ -9,17 +9,18 @@ public class Ant implements AntInfo {
     private int id;
     private Field field;
     private Swarm swarm;
-    private int pc = 0;
-    private boolean isDead = false;
+    private int pc;
+    private boolean dead;
     private String direction = "northwest";
-    private int restTime = 0;
-    private boolean hasFood = false;
-    private boolean[] regs = new boolean[]{false, false, false, false, false, false, false};
+    private int restTime;
+    private boolean food;
+    private boolean[] regs = new boolean[6];
 
     public Ant(Swarm swarm, int id, Field field) {
         this.swarm = swarm;
         this.id = id;
         this.field = field;
+        this.pc = 0;
     }
 
     public boolean getRegister(int location) {
@@ -32,20 +33,17 @@ public class Ant implements AntInfo {
 
     public boolean isDead() {
 
-        return isDead;
+        return dead;
     }
 
-    public void setDead(boolean dead) {
-        isDead = dead;
+    public void setDead(boolean isDead) {
+        dead = isDead;
     }
 
     public void setHasFood(boolean hasFood) {
-        this.hasFood = hasFood;
+        this.food = hasFood;
     }
 
-    public void setRegs(boolean[] regs) {
-        this.regs = regs;
-    }
 
     public void increasePC() {
         pc++;
@@ -53,7 +51,7 @@ public class Ant implements AntInfo {
 
     @Override
     public int getId() {
-        return 0;
+        return id;
     }
 
     public void setId(int id) {
@@ -62,12 +60,13 @@ public class Ant implements AntInfo {
 
     @Override
     public boolean hasFood() {
-        return false;
+        return food;
+
     }
 
     @Override
     public int getRestTime() {
-        return 0;
+        return restTime;
     }
 
     public void setRestTime(int restTime) {
@@ -81,7 +80,7 @@ public class Ant implements AntInfo {
 
     @Override
     public int getPc() {
-        return 0;
+        return pc;
     }
 
     public void setPc(int pc) {
@@ -90,7 +89,7 @@ public class Ant implements AntInfo {
 
     @Override
     public FieldInfo getField() {
-        return null;
+        return field;
     }
 
     public void setField(Field field) {
@@ -123,8 +122,8 @@ public class Ant implements AntInfo {
 
     public void decreaseResttime() {
 
+        assert restTime > 0;
         restTime--;
-
     }
 
     public Swarm getSwarmInstance() {
