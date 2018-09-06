@@ -6,7 +6,7 @@ import saarland.cispa.sopra.systemtests.FieldInfo;
 import java.util.Map;
 
 public class Drop extends Instruction {
-    private int jumpPC;
+    private final int jumpPC;
 
     public Drop(int jumpPC) {
         this.jumpPC = jumpPC;

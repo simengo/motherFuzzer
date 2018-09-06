@@ -1,7 +1,7 @@
 package saarland.cispa.sopra;
 
 public class Unmark extends Instruction {
-    private int markerFalse;
+    private final int markerFalse;
 
     public Unmark(int marker){
         this.markerFalse = marker;

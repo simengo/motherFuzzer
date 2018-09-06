@@ -1,8 +1,8 @@
 package saarland.cispa.sopra;
 
 public class Flip extends Instruction {
-    private int maxNum;
-    private int jumpPC;
+    private final int maxNum;
+    private final int jumpPC;
     public Flip(int maxNum,int jumpPC) {
         this.maxNum = maxNum;
         this.jumpPC = jumpPC;

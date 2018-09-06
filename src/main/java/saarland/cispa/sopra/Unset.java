@@ -2,7 +2,7 @@ package saarland.cispa.sopra;
 
 public class Unset extends Instruction {
 
-    private int reg;
+    private final int reg;
 
     public Unset(int reg1){this.reg = reg1;}
 

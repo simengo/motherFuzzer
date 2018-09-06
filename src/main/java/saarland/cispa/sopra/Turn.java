@@ -1,7 +1,7 @@
 package saarland.cispa.sopra;
 
 public class Turn extends Instruction {
-    private TurnDirection direction;
+    private final TurnDirection direction;
     public Turn(TurnDirection dir) {
         this.direction=dir;
     }
