@@ -13,7 +13,7 @@ import java.util.Map;
 import javax.json.*;
 
 
-
+//TODO
 // brauche toString() Methoden der Instruktionen // wenn alle runden gespielt wurden muss nochmal der Logger aufgerufen werden zum schreiben
 
 public class JSONLogger implements Logger {
@@ -382,6 +382,8 @@ public class JSONLogger implements Logger {
 
 
 
+
+
         public JsonArray createJsChangedFieldsArray(List<Field> changes){
 
 
@@ -397,27 +399,27 @@ public class JSONLogger implements Logger {
 
 
                     Field field = it.next();
-                    JsonObjectBuilder jsOb = Json.createObjectBuilder();
+                    JsonObjectBuilder jsO = Json.createObjectBuilder();
 
-                    jsOb.add("x",field.getX());
-                    jsOb.add("y",field.getY());
-                    jsOb.add("markers",createMarkerArray(field));
-                    jsOb.add("type", field.getType());
+                    jsO.add("x",field.getX());
+                    jsO.add("y",field.getY());
+                    jsO.add("markers",createMarkerArray(field));
+                    jsO.add("type", field.getType());
 
                     if(field.getFood()!= 0){
 
-                        jsOb.add("food",field.getFood());
+                        jsO.add("food",field.getFood());
                     }
 
                     if(field.getAnt().isPresent()){
 
                         AntInfo ant = field.getAnt().get();
-                        jsOb.add("ant",createAntJsObject(ant));
+                        jsO.add("ant",createAntJsObject(ant));
 
                     }
 
 
-                    arrBuild.add(jsOb.build());
+                    arrBuild.add(jsO.build());
 
                 }
 
