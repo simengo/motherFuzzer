@@ -1,4 +1,4 @@
-package saarland.cispa.sopra.gen;// Generated from /home/wep/IdeaProjects/group22/src/main/ressources/Acola.g4 by ANTLR 4.7
+// Generated from /home/wep/IdeaProjects/group22/src/main/ressources/Acola.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 
-//@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class AcolaParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.7", RuntimeMetaData.VERSION); }
 
@@ -16,32 +16,30 @@ public class AcolaParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9,
-		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17,
-		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, T__23=24,
-		TURNDIRECTION=25, IDENTIFIER=26, NUMBER=27, FIELD=28, TARGET=29, COMMENT=30,
-		DIRECTION=31;
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
+		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
+		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, T__23=24, 
+		TURNDIRECTION=25, IDENTIFIER=26, NUMBER=27, FIELD=28, TARGET=29, COMMENT=30;
 	public static final int
-		RULE_brain = 0, RULE_instruction = 1, RULE_mark = 2, RULE_unmark = 3,
-		RULE_turn = 4, RULE_move = 5, RULE_sense = 6, RULE_set = 7, RULE_unset = 8,
-		RULE_pickup = 9, RULE_drop = 10, RULE_jump = 11, RULE_flip = 12, RULE_test = 13,
+		RULE_brain = 0, RULE_instruction = 1, RULE_mark = 2, RULE_unmark = 3, 
+		RULE_turn = 4, RULE_move = 5, RULE_sense = 6, RULE_set = 7, RULE_unset = 8, 
+		RULE_pickup = 9, RULE_drop = 10, RULE_jump = 11, RULE_flip = 12, RULE_test = 13, 
 		RULE_directions = 14, RULE_direction = 15;
 	public static final String[] ruleNames = {
-		"brain", "instruction", "mark", "unmark", "turn", "move", "sense", "set",
+		"brain", "instruction", "mark", "unmark", "turn", "move", "sense", "set", 
 		"unset", "pickup", "drop", "jump", "flip", "test", "directions", "direction"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'brain'", "'\"\"'", "'{'", "'}'", "'mark'", "'unmark'", "'turn'",
-		"'move'", "'else'", "'sense'", "'set'", "'unset'", "'pickup'", "'drop'",
-		"'jump'", "'flip'", "'test'", "'directions'", "'northwest'", "'west'",
+		null, "'brain'", "'\"\"'", "'{'", "'}'", "'mark'", "'unmark'", "'turn'", 
+		"'move'", "'else'", "'sense'", "'set'", "'unset'", "'pickup'", "'drop'", 
+		"'jump'", "'flip'", "'test'", "'directions'", "'northwest'", "'west'", 
 		"'southwest'", "'southeast'", "'east'", "'northeast'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, null, null, null, null, null, null, null, null, null, null,
-		null, null, null, null, null, null, null, null, null, null, null, null,
-		null, "TURNDIRECTION", "IDENTIFIER", "NUMBER", "FIELD", "TARGET", "COMMENT",
-		"DIRECTION"
+		null, null, null, null, null, null, null, null, null, null, null, null, 
+		null, null, null, null, null, null, null, null, null, null, null, null, 
+		null, "TURNDIRECTION", "IDENTIFIER", "NUMBER", "FIELD", "TARGET", "COMMENT"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -340,7 +338,7 @@ public class AcolaParser extends Parser {
 	}
 
 	public static class TurnContext extends ParserRuleContext {
-		public TerminalNode DIRECTION() { return getToken(AcolaParser.DIRECTION, 0); }
+		public TerminalNode TURNDIRECTION() { return getToken(AcolaParser.TURNDIRECTION, 0); }
 		public TurnContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -369,7 +367,7 @@ public class AcolaParser extends Parser {
 			setState(60);
 			match(T__6);
 			setState(61);
-			match(DIRECTION);
+			match(TURNDIRECTION);
 			}
 		}
 		catch (RecognitionException re) {
@@ -895,7 +893,7 @@ public class AcolaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3!o\4\2\t\2\4\3\t\3"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3 o\4\2\t\2\4\3\t\3"+
 		"\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f"+
 		"\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\3\2\3\2\3\2\3\2\3"+
 		"\2\3\2\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
@@ -910,15 +908,15 @@ public class AcolaParser extends Parser {
 		")*\7\2\2\3*\3\3\2\2\2+,\5\6\4\2,-\5\b\5\2-.\5\n\6\2./\5\f\7\2/\60\5\16"+
 		"\b\2\60\61\5\20\t\2\61\62\5\22\n\2\62\63\5\24\13\2\63\64\5\26\f\2\64\65"+
 		"\5\30\r\2\65\66\5\32\16\2\66\67\5\34\17\2\67\5\3\2\2\289\7\7\2\29:\7\35"+
-		"\2\2:\7\3\2\2\2;<\7\b\2\2<=\7\35\2\2=\t\3\2\2\2>?\7\t\2\2?@\7!\2\2@\13"+
-		"\3\2\2\2AB\7\n\2\2BC\7\13\2\2CD\7\35\2\2D\r\3\2\2\2EF\7\f\2\2FG\7\36\2"+
-		"\2GH\7\37\2\2HI\7\13\2\2IJ\7\35\2\2J\17\3\2\2\2KL\7\r\2\2LM\7\35\2\2M"+
-		"\21\3\2\2\2NO\7\16\2\2OP\7\35\2\2P\23\3\2\2\2QR\7\17\2\2RS\7\13\2\2ST"+
-		"\7\35\2\2T\25\3\2\2\2UV\7\20\2\2VW\7\13\2\2WX\7\35\2\2X\27\3\2\2\2YZ\7"+
-		"\21\2\2Z[\7\35\2\2[\31\3\2\2\2\\]\7\22\2\2]^\7\13\2\2^_\7\35\2\2_\33\3"+
-		"\2\2\2`a\7\23\2\2ab\7\13\2\2bc\7\35\2\2c\35\3\2\2\2de\7\24\2\2ef\5 \21"+
-		"\2f\37\3\2\2\2gh\7\25\2\2hi\7\26\2\2ij\7\27\2\2jk\7\30\2\2kl\7\31\2\2"+
-		"lm\7\32\2\2m!\3\2\2\2\2";
+		"\2\2:\7\3\2\2\2;<\7\b\2\2<=\7\35\2\2=\t\3\2\2\2>?\7\t\2\2?@\7\33\2\2@"+
+		"\13\3\2\2\2AB\7\n\2\2BC\7\13\2\2CD\7\35\2\2D\r\3\2\2\2EF\7\f\2\2FG\7\36"+
+		"\2\2GH\7\37\2\2HI\7\13\2\2IJ\7\35\2\2J\17\3\2\2\2KL\7\r\2\2LM\7\35\2\2"+
+		"M\21\3\2\2\2NO\7\16\2\2OP\7\35\2\2P\23\3\2\2\2QR\7\17\2\2RS\7\13\2\2S"+
+		"T\7\35\2\2T\25\3\2\2\2UV\7\20\2\2VW\7\13\2\2WX\7\35\2\2X\27\3\2\2\2YZ"+
+		"\7\21\2\2Z[\7\35\2\2[\31\3\2\2\2\\]\7\22\2\2]^\7\13\2\2^_\7\35\2\2_\33"+
+		"\3\2\2\2`a\7\23\2\2ab\7\13\2\2bc\7\35\2\2c\35\3\2\2\2de\7\24\2\2ef\5 "+
+		"\21\2f\37\3\2\2\2gh\7\25\2\2hi\7\26\2\2ij\7\27\2\2jk\7\30\2\2kl\7\31\2"+
+		"\2lm\7\32\2\2m!\3\2\2\2\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

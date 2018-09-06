@@ -15,7 +15,7 @@ instruction : mark
 
 mark: 'mark' NUMBER;
 unmark: 'unmark'NUMBER;
-turn: 'turn' DIRECTION;
+turn: 'turn' TURNDIRECTION;
 move: 'move' 'else' NUMBER;
 sense: 'sense' FIELD TARGET 'else' NUMBER;
 set: 'set' NUMBER;
@@ -27,7 +27,7 @@ flip: 'flip' 'else' NUMBER;
 test: 'test' 'else' NUMBER;
 directions: 'directions' direction;
 
-direction :  'northwest' //TODO so oder wie unten ?
+direction :  'northwest'
               'west'
               'southwest'
               'southeast'
@@ -40,5 +40,5 @@ TURNDIRECTION : 'left' | 'right';
 IDENTIFIER : [a-zA-Z_.-][a-zA-Z0-9_.-]+;
 NUMBER : [0-9]+;
 FIELD : 'here' | 'ahead' | 'left' | 'right';
-TARGET : 'foe' | 'foehome' | 'friend' | 'marker' | 'food' | 'antlion' | 'rock' | 'foefood';
+TARGET : 'foe' | 'foehome' | 'friend' | 'marker' | 'food' | 'antlion' | 'rock' | 'foefood' | 'antlion' | 'foefood' | 'friendfood' | 'foemarker';
 COMMENT : ('/*' .*? '*/' | '//' .*? '\n') -> skip;
