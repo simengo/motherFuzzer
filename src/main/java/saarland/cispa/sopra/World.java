@@ -30,9 +30,11 @@ public class World implements WorldInfo {
         this.height = fields[0].length;
         this.fields = new Field[width][height];
 
-        for (int i = 0; i < fields.length; i++)
-            for (int j = 0; j < fields[i].length; j++)
+        for(int i=0; i<fields.length; i++) {
+            for (int j = 0; j < fields[i].length; j++) {
                 this.fields[i][j] = fields[i][j];
+            }
+        }
 
         this.points = new HashMap<>();
         this.ants = ants;
@@ -56,7 +58,14 @@ public class World implements WorldInfo {
 
     public Field[][] getFields() {
 
-        return this.fields;
+        Field[][] copiedFields = new Field[width][height];
+
+        for(int i=0; i<fields.length; i++) {
+            for (int j = 0; j < fields[i].length; j++) {
+                copiedFields[i][j] = fields[i][j];
+            }
+        }
+        return copiedFields;
     }
 
 
@@ -70,7 +79,7 @@ public class World implements WorldInfo {
         return randGen;
     }
 
-
+    @Override
     public FieldInfo getFieldAt(int x, int y) {
 
         return (FieldInfo) fields[x][y];
@@ -82,200 +91,242 @@ public class World implements WorldInfo {
         int x = hereField.getX();
         int y = hereField.getY();
 
-        boolean even = y % 2 == 0;
+        boolean uneven = y % 2 != 0;
+
+        switch (direction) {
+
+            case "northwest":
+
+                return getFieldInNorthwest(uneven, hereField, x,  y);
 
 
-        if ("northwest".equals(direction)) {
+            case "northeast":
+
+               return getFieldInNortheast(uneven, hereField, x, y);
 
 
-            if (!even) {
-                return fields[x][y - 1];
-            } else {
-
-                if (y == 0) {
-                    y = this.height - 1;
-                    if (x == 0) {
-                        x = this.width - 1;
-                    } else {
-                        x -= 1;
-                    }
-                } else {
-
-                    y -= 1;
-
-                    if (x == 0) {
-                        x = this.width - 1;
-                    } else {
-                        x -= 1;
-                    }
-                }
-                return fields[x][y];
-            }
-
-
-        } else if ("northeast".equals(direction)) {
-
-            if (!even) {
-                y -= 1;
-                if (x == this.width - 1) {
+            case "east":
+                x += 1;
+                if (x == this.width) {
                     x = 0;
-                } else {
-                    x += 1;
                 }
                 return fields[x][y];
 
-            } else {
+            case "southeast":
 
-                if (y == 0) {
+               return getFieldInSoutheast(uneven,  hereField, x,  y);
 
-                    y = this.height - 1;
-                } else {
-                    y -= 1;
-                }
+            case "southwest":
 
-                return fields[x][y];
+               return getFieldInSouthwest(uneven, hereField,x, y);
 
-            }
-
-
-        } else if ("east".equals(direction)) {
-            x += 1;
-            if (x == this.width) {
-                x = 0;
-            }
-            return fields[x][y];
-
-        } else if ("southeast".equals(direction)) {
-
-            if (!even) {
-                if (y == this.height - 1) {
-                    y = 0;
-
-                    if (x == this.width - 1) {
-                        x = 0;
-                    } else {
-                        x += 1;
-                    }
-                } else {
-
-                    y += 1;
-
-                    if (x == this.width - 1) {
-                        x = 0;
-                    } else {
-                        x += 1;
-                    }
-                }
-                return fields[x][y];
-            } else {
-                return fields[x][y + 1];
-            }
-
-
-        } else if ("southwest".equals(direction)) {
-
-            if (!even) {
-
-                if (y == this.height - 1) {
-                    y = 0;
-                } else {
-                    y += 1;
-                }
-                return fields[x][y];
-            } else {
-
-                y += 1;
-                if (x == 0) {
+            case "west":
+                x -= 1;
+                if (x < 0) {
                     x = this.width - 1;
-                } else {
-                    x -= 1;
                 }
-
                 return fields[x][y];
-            }
 
-        } else if ("west".equals(direction)) {
-            x -= 1;
-            if (x < 0) {
-                x = this.width - 1;
-            }
-            return fields[x][y];
-
+            default:
+                assert false;
+                return null;
         }
 
-        assert (false);
-        return null;
+
     }
 
 
-    public Ant getAnt(int id) {
+
+    //Hilfsmethoden, da sonst zu lange getFieldInDirection Methodes
+
+    private Field getFieldInNorthwest(boolean uneven, Field hereField,int x, int y){
+
+        int xCoord = x;
+        int yCoord = y;
+
+        if (uneven) {
+            return fields[xCoord][yCoord - 1];
+        } else {
+
+            if (yCoord == 0) {
+                yCoord = this.height - 1;
+                if (xCoord == 0) {
+                    xCoord = this.width - 1;
+                } else {
+                    xCoord -= 1;
+                }
+            } else {
+
+                yCoord -= 1;
+
+                if (xCoord == 0) {
+                    xCoord = this.width - 1;
+                } else {
+                    xCoord -= 1;
+                }
+            }
+            return fields[xCoord][yCoord];
+        }
+    }
+
+    private Field getFieldInNortheast(boolean uneven, Field hereField,int x, int y){
+
+        int xCoord = x;
+        int yCoord = y;
+
+        if (uneven) {
+            yCoord -= 1;
+            if (xCoord == this.width - 1) {
+                xCoord = 0;
+            } else {
+                xCoord += 1;
+            }
+            return fields[xCoord][yCoord];
+
+        } else {
+
+            if (yCoord == 0) {
+
+                yCoord = this.height - 1;
+            } else {
+                yCoord -= 1;
+            }
+
+            return fields[xCoord][yCoord];
+
+        }
+
+    }
+
+    private Field getFieldInSouthwest(boolean uneven, Field hereField,int x, int y){
+
+        int xCoord = x;
+        int yCoord = y;
+        if (uneven) {
+
+            if (yCoord == this.height - 1) {
+                yCoord = 0;
+            } else {
+                yCoord += 1;
+            }
+            return fields[xCoord][yCoord];
+        } else {
+
+            yCoord += 1;
+            if (xCoord == 0) {
+                xCoord = this.width - 1;
+            } else {
+                xCoord -= 1;
+            }
+
+            return fields[xCoord][yCoord];
+        }
+    }
+
+    private Field getFieldInSoutheast(boolean uneven, Field hereField,int x, int y){
+
+        int xCoord = x;
+        int yCoord = y;
+        if (uneven) {
+            if (yCoord == this.height - 1) {
+                yCoord = 0;
+
+                if (xCoord == this.width - 1) {
+                    xCoord = 0;
+                } else {
+                    xCoord += 1;
+                }
+            } else {
+
+                yCoord += 1;
+
+                if (xCoord == this.width - 1) {
+                    xCoord = 0;
+                } else {
+                    xCoord += 1;
+                }
+            }
+            return fields[xCoord][yCoord];
+        } else {
+            return fields[xCoord][yCoord + 1];
+        }
+
+    }
+
+    @Override
+     public Ant getAnt(int id){
 
         return ants.get(id);
     }
 
-    public List<AntInfo> getAnts() {
+    @Override
+    public List<AntInfo> getAnts(){
 
-        List<AntInfo> antList = new ArrayList<AntInfo>(ants.values());
-
-        return antList;
+        return new ArrayList<>(ants.values());
     }
 
-
-    public int getScore(char swarm) {
+    @Override
+    public int getScore(char swarm){
 
         return points.get(swarm);
     }
 
-    public Map<Character, Integer> getPoints() {
+    public Map<Character,Integer> getPoints(){
 
         return points;
     }
 
 
-    public void increasePoints(char swarm, int plus) {
+    public void increasePoints(char swarm,int plus){
 
         int pointsSwarm = points.get(swarm);
         pointsSwarm += plus;
-        points.put(swarm, pointsSwarm);
+        points.put(swarm,pointsSwarm);
     }
 
 
-    public Field[] getNeighbours(Field field) {
+
+
+
+    public Field[] getNeighbours(Field field){
 
         Field[] surrFields = new Field[6];
 
-        surrFields[0] = getFieldInDirection(field, "northwest");
-        surrFields[1] = getFieldInDirection(field, "northeast");
-        surrFields[2] = getFieldInDirection(field, "east");
-        surrFields[3] = getFieldInDirection(field, "southeast");
-        surrFields[4] = getFieldInDirection(field, "southwest");
-        surrFields[5] = getFieldInDirection(field, "west");
+        surrFields[0] = getFieldInDirection(field,"northwest");
+        surrFields[1] = getFieldInDirection(field,"northeast");
+        surrFields[2] = getFieldInDirection(field,"east");
+        surrFields[3] = getFieldInDirection(field,"southeast");
+        surrFields[4] = getFieldInDirection(field,"southwest");
+        surrFields[5] = getFieldInDirection(field,"west");
 
         return surrFields;
     }
 
 
+
+
     // creates a random number between 0 and max-1  ?? richtig so ??
 
-    public int getRand(int max) {
+    public int getRand(int max){
 
         return randGen.nextInt(max);
     }
 
 
+
     //iterates over the fields and reads the changed field -> when changed -> add to Array
 
-    public List<Field> logChanges() {
+    public List<Field> logChanges(){
 
         List<Field> changedFields = new ArrayList<Field>();
 
-        for (int y = 0; y < height; y++) {
+        for(int y = 0; y<height; y++){
 
-            for (int x = 0; x < width; x++) {
+            for(int x = 0; x < width; x++){
 
                 Field field = fields[x][y];
 
-                if (field.getChanged()) {
+                if (field.getChanged()){
                     changedFields.add(field);
                 }
 
@@ -287,21 +338,24 @@ public class World implements WorldInfo {
     }
 
 
+
 // initially sets the isNextToAntlion Flag in the fields
 
-    private void setAntlion() {
+    private void setAntlion(){
 
-        for (int y = 0; y < height; y++) {
+        char antLion = '=';
+
+        for(int y = 0; y<height; y++) {
 
             for (int x = 0; x < width; x++) {
 
 
                 Field field = fields[x][y];
-                if (field.getType() == '=') {
+                if(field.getType() == antLion){
 
                     Field[] neighbours = getNeighbours(field);
 
-                    for (int i = 0; i < 6; i++) {
+                    for(int i = 0; i < 6; i++ ){
                         neighbours[i].setNextToAntlion(true);
                     }
 
@@ -311,7 +365,14 @@ public class World implements WorldInfo {
         }
 
 
+
+
+
+
     }
+
+
+
 
 
 }

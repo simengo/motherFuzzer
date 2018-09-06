@@ -119,16 +119,15 @@ String newAntLooking;
     public void senseFriendOrFoe(Ant ant,Field field,boolean friendFoe){
         //wenn true dann wird nach freund geschaut, bei false nach feind
         if(friendFoe && field.getAnt().isPresent() && field.getAnt().get().getSwarm() == ant.getSwarm()){
-            ant.increasePC();}
-            else{
-                if(!(friendFoe) && field.getAnt().isPresent() && field.getAnt().get().getSwarm() != ant.getSwarm()){
-                ant.increasePC();}
-                else{ant.setPc(jumpPC);}
-        }
+            ant.increasePC();return;}
+            if(!(friendFoe) && field.getAnt().isPresent() && field.getAnt().get().getSwarm() != ant.getSwarm()){
+                ant.increasePC();return;}
+                ant.setPc(jumpPC);
+
 
     }
 
-    public void senseFoeMarkers (World world,Field field, Ant ant){
+    private void senseFoeMarkers (World world,Field field, Ant ant){
         Map<Character,boolean[]> markers = field.getMarkers();
         for (Character key : markers.keySet()) {
             if(key !=ant.getSwarm()){
@@ -141,14 +140,7 @@ String newAntLooking;
         ant.setPc(jumpPC);
     }
 
-    @Override
-    public void execute(World world, Ant ant) {
-
-
-        Field field =  getMyField(world,ant);
-
-        //switch on target
-        //friend, foe, food, rock, home, foehome, marker,foemarker,friendfood,foefood,antlion
+    private void doIt(World world,Field field,Ant ant){
         switch(target){
             case friend:
                 senseFriendOrFoe(ant,field,true);
@@ -185,6 +177,8 @@ String newAntLooking;
                 ant.setPc(jumpPC);
                 break;
             case foemarker:
+
+                senseFoeMarkers(world,field,ant);
                 break;
 
             case friendfood:
@@ -203,6 +197,19 @@ String newAntLooking;
                 ant.setPc(jumpPC);
                 break;
         }
+
+    }
+
+    @Override
+    public void execute(World world, Ant ant) {
+
+
+        Field field =  getMyField(world,ant);
+
+        //switch on target
+        //friend, foe, food, rock, home, foehome, marker,foemarker,friendfood,foefood,antlion
+
+        doIt(world,field,ant);
 
         Field field1 = (Field) ant.getField();
         field1.setChanged();
