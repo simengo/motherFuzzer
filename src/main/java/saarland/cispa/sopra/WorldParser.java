@@ -10,53 +10,53 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WorldParser {
-    public static World parseMap(File mapFile, long seed, HashMap<Character, Swarm> swarms) throws IOException {
+    public static World parseMap(File mapFile, long seed, Map<Character, Swarm> swarms) throws IOException {
 
-        int i = 0;
-        int j = 0;
+        int iPMDleanger = 0;
+        int jPMDlaenger = 0;
         Field[][] fields;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(mapFile))) {
+        try (BufferedReader bReader = new BufferedReader(new FileReader(mapFile))) {
             String line;
-            int width = br.readLine().toCharArray()[0];
-            int broadth = br.readLine().toCharArray()[0];
+            int width = bReader.readLine().toCharArray()[0];
+            int broadth = bReader.readLine().toCharArray()[0];
 
             fields = new Field[width][broadth];
-            while ((line = br.readLine()) != null) {
+            while ((line = bReader.readLine()) != null) {
                 char[] row = line.toCharArray();
-                for (Character c : row) {
-                    switch (c) {
-                        case '.': {
-                            fields[i][j] = new Normal(i, j, 0);
+                for (Character chara : row) {
+                    switch (chara) {
+                        case '.':
+                            fields[iPMDleanger][jPMDlaenger] = new Normal(iPMDleanger, jPMDlaenger, 0);
                             break;
-                        }
-                        case '=': {
-                            fields[i][j] = new Antlion(i, j);
+
+                        case '=':
+                            fields[iPMDleanger][jPMDlaenger] = new Antlion(iPMDleanger, jPMDlaenger);
                             break;
-                        }
-                        case '#': {
-                            fields[i][j] = new Rock(i, j);
+
+                        case '#':
+                            fields[iPMDleanger][jPMDlaenger] = new Rock(iPMDleanger, jPMDlaenger);
                             break;
-                        }
-                        default: {
-                            fields[i][j] = new Base(c, i, j);
-                        }
+
+                        default:
+                            fields[iPMDleanger][jPMDlaenger] = new Base(chara, iPMDleanger, jPMDlaenger);
+
                     }
-                    j++;
+                    jPMDlaenger++;
                 }
-                j = 0;
-                i++;
+                jPMDlaenger = 0;
+                iPMDleanger++;
             }
 
-            HashMap<Integer, Ant> ants = spawnAnts(swarms, fields);
+            Map<Integer, Ant> ants = spawnAnts(swarms, fields);
             return new World(fields, seed, ants);
         }
     }
 
-    private static HashMap<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) throws IllegalArgumentException {
+    private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) throws IllegalArgumentException {
         HashMap<Integer, Ant> ants = new HashMap<>();
         for (int i = 0; i < fields.length; i++) {
-            for (int j = 0; i < fields[0].length; i++) {
+            for (int j = 0; j < fields[0].length; j++) {
                 Character type = fields[i][j].getType();
                 if (type != '.' && type != '=' && type != '#') {
                     if (swarms.get(type).getIdent() != fields[i][j].getType()) {
