@@ -2,12 +2,9 @@ package saarland.cispa.sopra;
 
 import org.apache.commons.cli.*;
 
-import java.util.ArrayList;
-
 import static java.lang.System.exit;
 
 public class main {
-
 
     public static void main(String[] args) {
 

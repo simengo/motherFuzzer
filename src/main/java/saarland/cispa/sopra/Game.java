@@ -5,30 +5,25 @@ import saarland.cispa.sopra.systemtests.GameInfo;
 import saarland.cispa.sopra.systemtests.WorldInfo;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Game implements GameInfo {
 
-    World world;
-    JSONLogger logger;
-
-    public Game() {
-
-    }
+    private final JSONLogger logger;
+    private World world;
 
     public Game(String path) {
 
         File loggerpath = new File(path);
         if (!loggerpath.exists()) {
             try {
-                throw new Exception("Invalid Loggerpath");
-            } catch (Exception e) {
-                e.printStackTrace();
+                throw new FileNotFoundException("Invalid Loggerpath");
+            } catch (FileNotFoundException e) {
+                e.notifyAll();
             }
-
         }
 
         logger = new JSONLogger(loggerpath);
@@ -38,7 +33,7 @@ public class Game implements GameInfo {
     @Override
     public WorldInfo simulate(int rounds, long seed, File world1, File... brains) {
         initialize(seed, world1, brains);
-        for (int i = 0; i < rounds; i++) {
+        for (int count = 0; count< rounds; count++) {
             simulateOnce();
         }
 
@@ -48,11 +43,17 @@ public class Game implements GameInfo {
 
     @Override
     public WorldInfo simulate(int rounds, long seed, String world, String... brains) {
-        ArrayList<File> files = new ArrayList<>();
-        for (int i = 0; i < brains.length; i++) {
-            files.add(new File(brains[i]));
+
+        File[] filearray = new File[brains.length];
+        int count = 0;
+        for (String brain : brains) {
+            filearray[count] = new File(brain);
+            count++;
         }
-        return simulate(rounds, seed, new File(world), (File[]) files.toArray());
+        File worldfile = new File(world);
+
+        return simulate(rounds, seed, worldfile, filearray);
+
     }
 
     private void simulateOnce() {
@@ -77,9 +78,9 @@ public class Game implements GameInfo {
         HashMap<Character, Swarm> swarms = new HashMap<>();
         try {
             //  swarms = BrainParser.parse(brains);
-            world = WorldParser.parseMap(world1, seed, swarms, logger);
+            world = WorldParser.parseMap(world1, seed, swarms);
         } catch (IOException e) {
-            e.printStackTrace();
+            e.notifyAll();
         }
         logger.addInitialRound(world.getFields(), swarms);
 

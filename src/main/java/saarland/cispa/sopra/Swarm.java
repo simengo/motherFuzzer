@@ -1,34 +1,40 @@
 package saarland.cispa.sopra;
 
 public class Swarm {
+
     private char ident;
-    private Instruction[] brain;
+    private final Instruction[] brain;
     private String name;
 
     public Swarm(char ident, Instruction[] brain) {
+
         this.ident = ident;
-        this.brain = brain;
+        this.brain = brain.clone();
     }
 
     public char getIdent() {
         return ident;
     }
 
+    public void setIdent(char ident) {
+        this.ident = ident;
+    }
+
     public void setSwarm(char ident) {
         this.ident = ident;
     }
 
-    public String getSwarmName(){
+    public String getSwarmName() {
 
         return this.name;
     }
 
-    public Instruction[] getInstruction(){
+    public Instruction getInstruction(int position) {
 
-        return brain;
+        return brain[position];
     }
 
     public Instruction[] getBrain() {
-        return brain;
+        return brain.clone();
     }
 }
