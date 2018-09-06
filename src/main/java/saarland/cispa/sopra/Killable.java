@@ -17,26 +17,29 @@ abstract class Killable extends Instruction {
     }
 
     public void killcheck(World world, Optional<Ant> ant) {
+        char normalField = '.';
+        char antLionField = '=';
+        char rockField = '#';
         List<AntInfo> ants = world.getAnts();
-        for (int i = 0; i < ants.size(); i++) {
-            Ant suspect = (Ant) ants.get(i);
+        for (AntInfo a : ants) {
+            Ant suspect = (Ant) a;
             Field field = (Field) suspect.getField();
             if (!suspect.isDead()) {
                 if (suspect.equals(ant)) {
-                    if (field.getIsNextToAntlion() || field.getType() == '=') {
+                    if (field.getIsNextToAntlion() || field.getType() == antLionField) {
                         suspect.setDead(true);
-                        if (field.getType() == '.') {
+                        if (field.getType() == normalField) {
                             field = (Normal) field;
                             ((Normal) field).addFood(1);
                         }
-                        if (field.getType() != '#' || field.getType() != '.' || field.getType() != '=') {
+                        if (field.getType() != rockField || field.getType() != normalField || field.getType() != antLionField) {
                             world.increasePoints(field.getType(), 1);
                         }
                     }
                 }
                 if (isSurrounded(world, suspect)) {
                     suspect.setDead(true);
-                    if (field.getType() == '.') {
+                    if (field.getType() == normalField) {
                         field = (Normal) field;
                         if (ant.get().hasFood()) {
                             ((Normal) field).addFood(4);
@@ -44,7 +47,7 @@ abstract class Killable extends Instruction {
                             ((Normal) field).addFood(3);
                         }
                     }
-                    if (field.getType() != '.' || field.getType() != '#' || field.getType() != '=') {
+                    if (field.getType() != normalField || field.getType() != rockField || field.getType() != antLionField) {
                         if (ant.get().hasFood()) {
                             world.increasePoints(field.getType(), 4);
                         } else {
@@ -66,15 +69,11 @@ abstract class Killable extends Instruction {
                 enemies++;
             }
         }
-
-        if (enemies >= 5) {
-            return true;
-        }
-        return false;
+        return enemies >= 5;
 
     }
 
-    public int getJumpPc(){
+    public int getJumpPc() {
         return jumpPc;
     }
 }

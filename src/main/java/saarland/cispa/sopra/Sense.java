@@ -183,7 +183,7 @@ public class Sense extends Instruction {
                 else{ant.setPc(jumpPC);}
                 break;
             case antlion:
-                if(field.getType() == '=' || field.isNextToAntlion()){
+                if(field.getType() == '=' || field.getIsNextToAntlion()){
                     ant.increasePC();
                 }
                 else{ant.setPc(jumpPC);}
