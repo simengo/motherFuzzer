@@ -18,8 +18,8 @@ abstract class Killable extends Instruction {
 
     public void killcheck(World world, Optional<Ant> ant) {
         List<AntInfo> ants = world.getAnts();
-        for (AntInfo a : ants) {
-            Ant suspect = (Ant) a;
+        for (AntInfo iter : ants) {
+            Ant suspect = (Ant) iter;
             Field field = (Field) suspect.getField();
             char fieldType = field.getType();
             if (suspect.isDead()) {

@@ -1,4 +1,4 @@
-//package saarland.cispa.sopra.JunitTests;
+//package saarland.cispa.sopra.junittests;
 //
 //import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertFalse;
