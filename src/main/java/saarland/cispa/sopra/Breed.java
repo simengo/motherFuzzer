@@ -16,7 +16,7 @@ public class Breed extends Killable {
         if (ant.hasFood() && partner.hasFood() && ant.getSwarm() == partner.getSwarm()) {
             Field[] fields = world.getNeighbours(field);
             for (Field neighbour : fields) {
-                if (neighbour.isAccessible()) {
+                if (neighbour.isAccessible() && !antSpawned) {
                     spawnAnt(ant.getSwarmInstance(), neighbour, world);
                     antSpawned = true;
                     break;
@@ -27,7 +27,6 @@ public class Breed extends Killable {
                 for (Field neighbour : fields) {
                     if (neighbour.isAccessible()) {
                         spawnAnt(ant.getSwarmInstance(), neighbour, world);
-                        antSpawned = true;
                         break;
                     }
                 }
