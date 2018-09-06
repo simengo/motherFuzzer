@@ -1,6 +1,6 @@
 package saarland.cispa.sopra;
 
-import saarland.cispa.sopra.systemtests.FieldInfo;
+
 
 public class Pickup extends Instruction {
 
@@ -10,17 +10,18 @@ public class Pickup extends Instruction {
     @Override
     public void execute(World world, Ant ant) {
 
-        if(ant.getField().getType()==('.')){
+        char point = '.';
+        if(ant.getField().getType()==point){
             Normal field = (Normal) ant.getField();
-            if((field.getFood() != 0)){
-                ant.setHasFood(true);
-                field.removeFood();
-                ant.increasePC();
+            if(field.getFood() == 0){
+                ant.setPc(jumpPC);
 
             }
 
             else{
-                ant.setPc(jumpPC);
+                ant.setHasFood(true);
+                field.removeFood();
+                ant.increasePC();
             }
 
         }

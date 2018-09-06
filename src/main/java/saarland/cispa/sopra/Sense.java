@@ -17,8 +17,75 @@ public class Sense extends Instruction {
     }
 
 
-    @Override
-    public void execute(World world, Ant ant) {
+    private String toTheRight(String antLooking,  String[] dirs1){
+
+
+
+        String newAntLooking;
+        switch (antLooking){
+            case "northwest":
+                newAntLooking = dirs1[1];
+                break;
+            case "east":
+                newAntLooking = dirs1[3];
+                break;
+            case "northeast":
+                newAntLooking = dirs1[2];
+                break;
+            case "southeast":
+                newAntLooking= dirs1[4];
+                break;
+            case "southwest":
+                newAntLooking = dirs1[5];
+                break;
+            case "west":
+                newAntLooking =dirs1[0];
+                break;
+            default: throw new IllegalArgumentException();
+
+
+        }
+
+return newAntLooking;
+    }
+
+    private String toTheLeft(String antLooking,String[] dirs1){
+
+String newAntLooking;
+        switch (antLooking){
+            case "northwest":
+                newAntLooking = dirs1[5];
+                break;
+            case "northeast":
+                newAntLooking = dirs1[0];
+                break;
+            case "east":
+                newAntLooking = dirs1[1];
+                break;
+            case "west":
+                newAntLooking = dirs1[4];
+                break;
+            case "southeast":
+                newAntLooking = dirs1[2];
+                break;
+            case "southwest":
+                newAntLooking = dirs1[3];
+                break;
+            default: throw new IllegalArgumentException();
+
+        }
+        return newAntLooking;
+    }
+
+    public Field getMyField(World world, Ant ant){
+        final String[] directionsSense = new String[6];
+
+        directionsSense[0] = "northwest";
+        directionsSense[1] = "northeast";
+        directionsSense[2] = "east";
+        directionsSense[3] = "southeast";
+        directionsSense[4] = "southwest";
+        directionsSense[5] = "west";
 
 
 
@@ -26,167 +93,114 @@ public class Sense extends Instruction {
 
         switch (direction) {
             case left:
-
                 String antDirLeft = ant.getDirection();
                 String newDirectionLeft;
-                switch (antDirLeft){
-                    case "northwest":
-                        newDirectionLeft ="west";
-                        break;
-                    case "northeast":
-                        newDirectionLeft = "northwest";
-                        break;
-                    case "east":
-                        newDirectionLeft = "northeast";
-                        break;
-                    case "southeast":
-                        newDirectionLeft = "east";
-                        break;
-                    case "southwest":
-                        newDirectionLeft = "southeast";
-                        break;
-                    case "west":
-                        newDirectionLeft = "southwest";
-                        break;
-                    default:
-                        throw new IllegalArgumentException();
-
-
-
-
-
-                }
-
-                    field =  world.getFieldInDirection((Field) ant.getField(),newDirectionLeft);
+                newDirectionLeft = toTheLeft(antDirLeft,directionsSense);
+                field =  world.getFieldInDirection((Field) ant.getField(),newDirectionLeft);
                 break;
-
             case right:
-
                 String antDirRight = ant.getDirection();
                 String newDirectionRight;
-                switch (antDirRight) {
-                    case "northwest":
-                        newDirectionRight = "northeast";
-                        break;
-                    case "northeast":
-                        newDirectionRight = "east";
-                        break;
-                    case "east":
-                        newDirectionRight = "northeast";
-                        break;
-                    case "southeast":
-                        newDirectionRight = "east";
-                        break;
-                    case "southwest":
-                        newDirectionRight = "southeast";
-                        break;
-                    case "west":
-                        newDirectionRight = "southwest";
-                        break;
-                    default:
-                        throw new IllegalArgumentException();
-
-                }
-
-                   field =  world.getFieldInDirection((Field) ant.getField(), newDirectionRight);
-
-                    break;
+                newDirectionRight = toTheRight(antDirRight,directionsSense);
+                field =  world.getFieldInDirection((Field) ant.getField(), newDirectionRight);
+                break;
             case ahead:
-                   field = world.getFieldInDirection((Field) ant.getField(), ant.getDirection());
-
-
-
-
+                field = world.getFieldInDirection((Field) ant.getField(), ant.getDirection());
                 break;
             case here:
-
-                    field = (Field) ant.getField();
-
+                field = (Field) ant.getField();
                 break;
             default:
                 throw new IllegalArgumentException();
         }
+        return field;
+    }
+
+    public void senseFriendOrFoe(Ant ant,Field field,boolean friendFoe){
+        //wenn true dann wird nach freund geschaut, bei false nach feind
+        if(friendFoe && field.getAnt().isPresent() && field.getAnt().get().getSwarm() == ant.getSwarm()){
+            ant.increasePC();}
+            else{
+                if(!(friendFoe) && field.getAnt().isPresent() && field.getAnt().get().getSwarm() != ant.getSwarm()){
+                ant.increasePC();}
+                else{ant.setPc(jumpPC);}
+        }
+
+    }
+
+    public void senseFoeMarkers (World world,Field field, Ant ant){
+        Map<Character,boolean[]> markers = field.getMarkers();
+        for (Character key : markers.keySet()) {
+            if(key !=ant.getSwarm()){
+                if(field.getMarker(key,marker)){
+                    ant.increasePC();
+                    return;
+                }
+            }
+        }
+        ant.setPc(jumpPC);
+    }
+
+    @Override
+    public void execute(World world, Ant ant) {
+
+
+        Field field =  getMyField(world,ant);
 
         //switch on target
         //friend, foe, food, rock, home, foehome, marker,foemarker,friendfood,foefood,antlion
         switch(target){
             case friend:
-                if(!(field.getAnt().isPresent())){
-                    ant.setPc(jumpPC);}
-                    else {
-                    if (field.getAnt().get().getSwarm() == ant.getSwarm()) {
-                        ant.increasePC();
-                    } else {
-                        ant.setPc(jumpPC);
-                    }
-                }
-
-
+                senseFriendOrFoe(ant,field,true);
                 break;
             case foe:
-                if(!(field.getAnt().isPresent())){
-                    ant.setPc(jumpPC);}
-                else {
-                    if (field.getAnt().get().getSwarm() != ant.getSwarm()) {
-                        ant.increasePC();
-                    } else {
-                        ant.setPc(jumpPC);
-                    }
-                }
+                senseFriendOrFoe(ant,field,false);
                 break;
             case food:
-                if(field.getFood() != 0 ){ant.increasePC();}
-                else{ant.setPc(jumpPC);}
+                if(field.getFood() != 0 ){ant.increasePC();break;}
+                ant.setPc(jumpPC);
                 break;
             case rock:
-                if(field.getType() == '#'){ant.increasePC();}
-                else{ant.setPc(jumpPC);}
+                char rock = '#';
+                if(field.getType() == rock){ant.increasePC(); break;}
+                ant.setPc(jumpPC);
                 break;
             case home:
                 if(field.getType() == ant.getSwarm()){
                     ant.increasePC();
+                    break;
                 }
-                else{ant.setPc(jumpPC);}
+                ant.setPc(jumpPC);
                 break;
             case foehome:
                 if(field.getType() != ant.getSwarm() && field.getType() != '#' && field.getType() != '=' && field.getType() != '.'){
-                    ant.increasePC();}
-                else{ant.setPc(jumpPC);}
+                    ant.increasePC(); break;}
+                ant.setPc(jumpPC);
                 break;
             case marker:
                 if(field.getMarker(ant.getSwarm(),marker)){
                     ant.increasePC();
-                }
-                else{
-                    ant.setPc(jumpPC);
-                }
-                break;
-            case foemarker:
-                Map<Character,boolean[]> markers = field.getMarkers();
-                for (Character key : markers.keySet()) {
-                    if(key !=ant.getSwarm()){
-                        if(field.getMarker(key,marker)){
-                            ant.increasePC();
-                            break;
-                        }
-                    }
+                    break;
                 }
                 ant.setPc(jumpPC);
                 break;
+            case foemarker:
+                break;
 
             case friendfood:
-                if(field.getAnt().isPresent() && field.getAnt().get().hasFood() && field.getAnt().get().getSwarm() == ant.getSwarm()){ant.increasePC();}
-                else{ant.setPc(jumpPC);}
+                if(field.getAnt().isPresent() && field.getAnt().get().hasFood() && field.getAnt().get().getSwarm() == ant.getSwarm()){ant.increasePC();break;}
+                ant.setPc(jumpPC);
                 break;
             case foefood:
-                if(field.getAnt().isPresent() && field.getAnt().get().hasFood() && field.getAnt().get().getSwarm() != ant.getSwarm()){ant.increasePC();}
-                else{ant.setPc(jumpPC);}
+                if(field.getAnt().isPresent() && field.getAnt().get().hasFood() && field.getAnt().get().getSwarm() != ant.getSwarm()){ant.increasePC();break;}
+                ant.setPc(jumpPC);
                 break;
             case antlion:
                 if(field.getType() == '=' || field.getIsNextToAntlion()){
                     ant.increasePC();
+                    break;
                 }
-                else{ant.setPc(jumpPC);}
+                ant.setPc(jumpPC);
                 break;
         }
 
@@ -199,6 +213,6 @@ public class Sense extends Instruction {
         if(target == Target.marker) {
             return "sense" + direction + "marker" + marker + "else" + jumpPC;
         }
-        else return "sense" + direction + target + "else" + jumpPC;
+        else {return "sense" + direction + target + "else" + jumpPC;}
     }
 }

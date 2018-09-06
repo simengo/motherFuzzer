@@ -6,64 +6,98 @@ public class Turn extends Instruction {
         this.direction=dir;
     }
 
-    @Override
-    public void execute(World world, Ant ant) {
-
+    private void turnToTheRight(Ant ant,  String[] dirs){
         String antDir = ant.getDirection();
 
-        switch (direction){
 
-            case left:
-                switch (antDir){
-                    case "northwest":
-                        ant.setDirection("west");
-                        break;
-                    case "northeast":
-                        ant.setDirection("northwest");
-                        break;
-                    case "east":
-                        ant.setDirection("northeast");
-                        break;
-                    case "southeast":
-                        ant.setDirection("east");
-                        break;
-                    case "southwest":
-                        ant.setDirection("southeast");
-                        break;
-                    case "west":
-                        ant.setDirection("southwest");
-                        break;
-                     default: throw new IllegalArgumentException();
 
-                }
+        switch (antDir){
+            case "northwest":
+                ant.setDirection(dirs[1]);
                 break;
-            case right:
-                switch (antDir){
-                    case "northwest":
-                        ant.setDirection("northeast");
-                        break;
-                    case "northeast":
-                        ant.setDirection("east");
-                        break;
-                    case "east":
-                        ant.setDirection("southeast");
-                        break;
-                    case "southeast":
-                        ant.setDirection("southwest");
-                        break;
-                    case "southwest":
-                        ant.setDirection("west");
-                        break;
-                    case "west":
-                        ant.setDirection("northwest");
-                        break;
-                    default: throw new IllegalArgumentException();
-
-                }
-
+            case "northeast":
+                ant.setDirection(dirs[2]);
+                break;
+            case "east":
+                ant.setDirection(dirs[3]);
+                break;
+            case "southeast":
+                ant.setDirection(dirs[4]);
+                break;
+            case "southwest":
+                ant.setDirection(dirs[5]);
+                break;
+            case "west":
+                ant.setDirection(dirs[0]);
+                break;
+            default: throw new IllegalArgumentException();
 
 
         }
+
+
+    }
+
+    private void turnToTheLeft(Ant ant,String[] dirs){
+        String antDir = ant.getDirection();
+
+        switch (antDir){
+            case "northwest":
+                ant.setDirection(dirs[5]);
+                break;
+            case "northeast":
+                ant.setDirection(dirs[0]);
+                break;
+            case "east":
+                ant.setDirection(dirs[1]);
+                break;
+            case "southeast":
+                ant.setDirection(dirs[2]);
+                break;
+            case "southwest":
+                ant.setDirection(dirs[3]);
+                break;
+            case "west":
+                ant.setDirection(dirs[4]);
+                break;
+            default: throw new IllegalArgumentException();
+
+        }
+
+    }
+
+
+
+
+    @Override
+    public void execute(World world, Ant ant) {
+
+        final String[] directions = new String[6];
+
+        directions[0] = "northwest";
+        directions[1] = "northeast";
+        directions[2] = "east";
+        directions[3] = "southeast";
+        directions[4] = "southwest";
+        directions[5] = "west";
+
+
+
+
+
+
+
+
+        if(direction == TurnDirection.left){
+            turnToTheLeft(ant,directions);
+        }
+else
+        {turnToTheRight(ant,directions);}
+
+
+
+
+
 
         ant.increasePC();
 
