@@ -40,6 +40,7 @@ public class WorldParser {
 
                         default:
                             fields[iPMDleanger][jPMDlaenger] = new Base(chara, iPMDleanger, jPMDlaenger);
+                            break;
 
                     }
                     jPMDlaenger++;
