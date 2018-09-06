@@ -10,7 +10,7 @@ public class MoveTests {
 
     private World Szenario1() {
 
-        Normal[][] spielfeld = new Normal[4][4];
+        Normal[][] spielfeld = new Normal[2][2];
         Normal field00 = new Normal(0, 0, 0);
         Normal field01 = new Normal(0, 1, 0);
         Normal field10 = new Normal(1, 0, 0);
@@ -43,6 +43,8 @@ public class MoveTests {
     public void moveTest1() {
 
         World welt = Szenario1();
+        int x= welt.getWidth();
+        int y=welt.getHeight();
         Ant antA = welt.getAnt(0);
         Ant antB = welt.getAnt(1);
         Instruction move = antA.getNextInstruction();

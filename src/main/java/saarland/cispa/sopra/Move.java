@@ -14,6 +14,7 @@ public class Move extends Killable {
         Field fieldInDirection = world.getFieldInDirection(field, direction);
         if (ant.getRestTime() == 0 && fieldInDirection.isAccessible()) {
             field.removeAnt();
+            field.setChanged();
             fieldInDirection.setAnt(ant);
             fieldInDirection.setChanged();
             killcheck(world, Optional.of(ant));
