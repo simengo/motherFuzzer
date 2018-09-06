@@ -24,6 +24,8 @@ public class Ant implements AntInfo {
     }
 
     public boolean getRegister(int location) {
+
+
         return regs[location];
     }
 
@@ -32,7 +34,6 @@ public class Ant implements AntInfo {
     }
 
     public boolean isDead() {
-
         return dead;
     }
 
@@ -75,7 +76,9 @@ public class Ant implements AntInfo {
 
     @Override
     public boolean[] getRegister() {
-        return new boolean[0];
+
+        return regs.clone();
+
     }
 
     @Override
@@ -116,7 +119,7 @@ public class Ant implements AntInfo {
 
     public Instruction getNextInstruction() {
 
-        return swarm.getBrain()[pc];
+        return swarm.getInstruction(pc);
 
     }
 
