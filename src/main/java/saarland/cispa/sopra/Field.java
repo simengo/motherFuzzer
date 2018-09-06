@@ -27,11 +27,6 @@ abstract class Field implements FieldInfo {
     }
 
     @Override
-    public int getFood() {
-        return 0;
-    }
-
-    @Override
     public Optional<AntInfo> getAnt() {
         return Optional.of(ant);
     }
