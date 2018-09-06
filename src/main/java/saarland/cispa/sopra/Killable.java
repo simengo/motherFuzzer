@@ -26,7 +26,7 @@ abstract class Killable extends Instruction {
                 continue;
             }
             if (suspect.equals(ant)) {
-                checkAnt(world,suspect);
+                checkAnt(world, suspect);
             }
             if (isSurrounded(world, suspect)) {
                 suspect.setDead(true);
@@ -55,9 +55,9 @@ abstract class Killable extends Instruction {
     }
 
 
-    public void checkAnt(World world, Ant ant){
+    public void checkAnt(World world, Ant ant) {
         char antLionField = '=';
-        Field field = (Field)ant.getField();
+        Field field = (Field) ant.getField();
         char fieldType = field.getType();
         if (field.getIsNextToAntlion() || fieldType == antLionField) {
             ant.setDead(true);
@@ -83,6 +83,9 @@ abstract class Killable extends Instruction {
         int enemies = 0;
 
         for (Field neighbour : neighbours) {
+            if(neighbour.getAnt().get() == null){
+                continue;
+            }
             if (neighbour.getAnt().get().getSwarm() != ant.getSwarm()) {
                 enemies++;
             }
