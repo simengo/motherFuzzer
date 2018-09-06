@@ -57,7 +57,9 @@ public class Turn extends Instruction {
         Field field = (Field) ant.getField();
         field.setChanged();
 
-    }public String toString(){
+    }
+    @Override
+    public String toString(){
         return "turn" + direction;
     }
 }

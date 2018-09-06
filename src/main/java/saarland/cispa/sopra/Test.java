@@ -22,7 +22,7 @@ public class Test extends Instruction {
         field.setChanged();
 
     }
-
+    @Override
     public String toString(){
         return "test" + register + "else" + jumpPC;
     }

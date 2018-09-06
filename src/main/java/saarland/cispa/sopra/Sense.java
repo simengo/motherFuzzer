@@ -194,7 +194,7 @@ public class Sense extends Instruction {
         field1.setChanged();
 
     }
-
+    @Override
     public String toString(){
         if(target == Target.marker) {
             return "sense" + direction + "marker" + marker + "else" + jumpPC;

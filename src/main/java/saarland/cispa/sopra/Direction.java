@@ -19,7 +19,7 @@ public class Direction extends Instruction {
         Field field = (Field) ant.getField();
         field.setChanged();
     }
-
+    @Override
     public String toString(){
         return "direction" + direction + "else" + jumpPC;
     }

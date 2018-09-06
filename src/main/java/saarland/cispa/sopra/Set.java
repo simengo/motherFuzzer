@@ -16,7 +16,7 @@ public class Set extends Instruction {
         Field field = (Field) ant.getField();
         field.setChanged();
     }
-
+    @Override
     public String toString(){
         return "set" + reg;
     }
