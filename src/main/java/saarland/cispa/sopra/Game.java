@@ -78,7 +78,7 @@ public class Game implements GameInfo {
         HashMap<Character, Swarm> swarms = new HashMap<>();
         try {
             //  swarms = BrainParser.parse(brains);
-            world = WorldParser.parseMap(world1, seed, swarms, logger);
+            world = WorldParser.parseMap(world1, seed, swarms);
         } catch (IOException e) {
             e.notifyAll();
         }
