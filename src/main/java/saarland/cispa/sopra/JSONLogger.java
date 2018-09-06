@@ -7,7 +7,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 
 
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,13 +21,13 @@ import javax.json.*;
 
 public class JSONLogger implements Logger {
 
-    private final String output;
-    private JsonObject initialObject;
-    private final JsonArrayBuilder stepsArraybuilder = Json.createArrayBuilder();
-    private int numOfSwarms;
     private static String swarmHelp = "swarm_id";
+    private final String output;
+    private final JsonArrayBuilder stepsArraybuilder = Json.createArrayBuilder();
+    private JsonObject initialObject;
+    private int numOfSwarms;
 
-    public JSONLogger(File protocol){
+    public JSONLogger(File protocol) {
 
         this.output = protocol.toString();
 
@@ -36,65 +35,45 @@ public class JSONLogger implements Logger {
     }
 
 
-
-
-
-
-
     @Override
-    public void addInitialRound(Field[][] map, Map<Character,Swarm> swarms) {
+    public void addInitialRound(Field[][] map, Map<Character, Swarm> swarms) {
 
 
-       int height = map.length;
-       int width = map[0].length;
+        int height = map.length;
+        int width = map[0].length;
 
-       this.numOfSwarms = swarms.keySet().size();
-
-
-       JsonObjectBuilder jsO = Json.createObjectBuilder();
-
-       jsO.add("width",width);
-       jsO.add("height",height);
-       jsO.add("brains",createJsBrain(swarms));
-       jsO.add("fields",createInitialFieldsArray(map));
-
-       JsonObject jsOb = jsO.build();
-
-       this.initialObject = jsOb;
+        this.numOfSwarms = swarms.keySet().size();
 
 
+        JsonObjectBuilder jsO = Json.createObjectBuilder();
 
+        jsO.add("width", width);
+        jsO.add("height", height);
+        jsO.add("brains", createJsBrain(swarms));
+        jsO.add("fields", createInitialFieldsArray(map));
 
+        JsonObject jsOb = jsO.build();
+
+        this.initialObject = jsOb;
 
 
     }
 
 
-
-
-
-
-
-
     @Override
-    public void addRoundInfo(List<Field> changes,Map<Character, Integer> points, Map<Character,Integer> numOfAntsInSwarm) {
+    public void addRoundInfo(List<Field> changes, Map<Character, Integer> points, Map<Character, Integer> numOfAntsInSwarm) {
 
-            JsonObjectBuilder jsOB = Json.createObjectBuilder();
+        JsonObjectBuilder jsOB = Json.createObjectBuilder();
 
-            jsOB.add("standings",createJsStandingsArray(points,numOfAntsInSwarm));
-            jsOB.add("fields",createJsChangedFieldsArray(changes));
+        jsOB.add("standings", createJsStandingsArray(points, numOfAntsInSwarm));
+        jsOB.add("fields", createJsChangedFieldsArray(changes));
 
-            JsonObject jsO = jsOB.build();
+        JsonObject jsO = jsOB.build();
 
-            this.stepsArraybuilder.add(jsO);
+        this.stepsArraybuilder.add(jsO);
 
 
     }
-
-
-
-
-
 
 
     @Override
@@ -106,17 +85,13 @@ public class JSONLogger implements Logger {
         JsonObjectBuilder jsOB = Json.createObjectBuilder();
         JsonArray stepsArray = this.stepsArraybuilder.build();
 
-        jsOB.add("init",this.initialObject);
-        jsOB.add("steps",stepsArray);
+        jsOB.add("init", this.initialObject);
+        jsOB.add("steps", stepsArray);
 
         JsonObject endObject = jsOB.build();
 
 
-
-
-
-
-             //  write JsonObbject to File
+        //  write JsonObbject to File
 
         try {
 
@@ -126,7 +101,7 @@ public class JSONLogger implements Logger {
             jsonWriter.close();
             fWriter.close();
 
-        } catch(IOException e) {
+        } catch (IOException e) {
             org.slf4j.Logger printSth = LoggerFactory.getLogger("noSuchFile");
             printSth.debug("Wrong File Name!");
         }
@@ -135,13 +110,7 @@ public class JSONLogger implements Logger {
     }
 
 
-
-
-
-
-
-
-    private JsonArray createInitialFieldsArray (Field[][] fields){
+    private JsonArray createInitialFieldsArray(Field[][] fields) {
 
 
         JsonArrayBuilder arrBuild = Json.createArrayBuilder();
@@ -150,231 +119,194 @@ public class JSONLogger implements Logger {
         int height = fields.length;
         int width = fields[0].length;
 
-        for(int y = 0 ; y < height; y++){
+        for (int y = 0; y < height; y++) {
 
-            for(int x = 0; x < width; x++){
+            for (int x = 0; x < width; x++) {
 
                 Field field = fields[x][y];
                 JsonObjectBuilder jsOb = Json.createObjectBuilder();
 
-                jsOb.add("x",x);
-                jsOb.add("y",y);
-                jsOb.add("markers",createMarkerArray(field));
+                jsOb.add("x", x);
+                jsOb.add("y", y);
+                jsOb.add("markers", createMarkerArray(field));
                 jsOb.add("type", field.getType());
 
-                if(field.getFood()!= 0){
+                if (field.getFood() != 0) {
 
-                    jsOb.add("food",field.getFood());
+                    jsOb.add("food", field.getFood());
                 }
 
-                if(field.getAnt().isPresent()){
+                if (field.getAnt().isPresent()) {
 
                     AntInfo ant = field.getAnt().get();
-                    jsOb.add("ant",createAntJsObject(ant));
+                    jsOb.add("ant", createAntJsObject(ant));
 
                 }
 
 
                 arrBuild.add(jsOb.build());
 
+            }
+        }
+
+
+        return arrBuild.build();
+
+
+    }
+
+
+    private JsonArray createMarkerArray(Field field) {
+
+
+        boolean breakout = false;
+        JsonArrayBuilder jsArr = Json.createArrayBuilder(); // am Ende ausgegebener markers Array
+
+
+        Map<Character, boolean[]> marker = field.getMarkers();
+        int keySize = marker.keySet().size();
+        this.numOfSwarms = keySize;
+        int markerSize = 6;
+
+        for (int i = 0; i < keySize; i++) {
+
+            char swarmId = 'A';
+            boolean[] marks = marker.get(swarmId);
+
+
+            // falls alle marker false soll kein JsonObject erzeugt werden
+            for (int h = 0; h < 7; h++) {
+                if (marks[h]) {
+                    break;
+                } else if (h == markerSize) {
+                    breakout = true;
                 }
             }
 
-
-            return arrBuild.build();
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private JsonArray createMarkerArray(Field field){
-
-
-            boolean breakout = false;
-            JsonArrayBuilder jsArr = Json.createArrayBuilder(); // am Ende ausgegebener markers Array
-
-
-            Map<Character,boolean[]> marker = field.getMarkers();
-            int keySize = marker.keySet().size();
-            this.numOfSwarms = keySize;
-            int markerSize = 6;
-
-            for(int i = 0; i < keySize; i++){
-
-                char swarmId = 'A';
-                boolean[] marks = marker.get(swarmId);
-
-
-                // falls alle marker false soll kein JsonObject erzeugt werden
-                for(int h = 0; h < 7 ; h++){
-                    if(marks[h]){
-                        break;
-                    }
-                    else if(h == markerSize){
-                        breakout = true;
-                    }
-                }
-
-                if(breakout){
-                    continue;
-                }
-
-
-
-
-                JsonArrayBuilder jsAHelp = Json.createArrayBuilder();  ////////wird tatsächlich jedes Mal ein neuer ArrayBuilder erzeugt oder nicht??? !!!
-                JsonObjectBuilder jBuilder = Json.createObjectBuilder(); // Objekt das im markers Array gespeichert wird
-
-                for(int j = 0; j < 7 ; j++){
-
-                    jsAHelp.add(marks[j]);
-
-                }
-
-                jBuilder.add(swarmHelp,swarmId);
-                jBuilder.add("values",jsAHelp);
-                JsonObject obj = jBuilder.build();
-                jsArr.add(obj);
-
-                swarmId += 1;  // naechster Ascii-Buchstabe
+            if (breakout) {
+                continue;
             }
 
 
-            return jsArr.build();
+            JsonArrayBuilder jsAHelp = Json.createArrayBuilder();  ////////wird tatsächlich jedes Mal ein neuer ArrayBuilder erzeugt oder nicht??? !!!
+            JsonObjectBuilder jBuilder = Json.createObjectBuilder(); // Objekt das im markers Array gespeichert wird
 
-        }
+            for (int j = 0; j < 7; j++) {
 
+                jsAHelp.add(marks[j]);
 
-
-
-
-        private JsonObject createAntJsObject(AntInfo antI){
-            JsonObjectBuilder jsBuilder = Json.createObjectBuilder();
-            int antId = antI.getId();
-            int antPc = antI.getPc();
-            int swarmId = antI.getSwarm();
-            boolean carriesFood = antI.hasFood();
-            String direction = antI.getDirection();
-            int restTime = antI.getRestTime();
-
-
-            jsBuilder.add("id",antId);
-            jsBuilder.add("pc",antPc);
-            jsBuilder.add(swarmHelp,swarmId);
-            jsBuilder.add("carries_food",carriesFood);
-            jsBuilder.add("direction",direction);
-            jsBuilder.add("rest_time",restTime);
-            jsBuilder.add("register",createJsRegister(antI.getRegister()));
-
-
-            return jsBuilder.build();
-
-        }
-
-
-
-
-
-
-        private JsonArray createJsRegister(boolean[] reg){
-
-            JsonArrayBuilder jsABuilder = Json.createArrayBuilder();
-
-            for(int i = 0; i < 6 ; i++){
-
-                if(reg[i]){
-                    jsABuilder.add(true);
-                }
-                else{
-                    jsABuilder.add(false);
-                }
             }
 
-            return jsABuilder.build();
+            jBuilder.add(swarmHelp, swarmId);
+            jBuilder.add("values", jsAHelp);
+            JsonObject obj = jBuilder.build();
+            jsArr.add(obj);
+
+            swarmId += 1;  // naechster Ascii-Buchstabe
         }
 
 
+        return jsArr.build();
+
+    }
 
 
-        private JsonArray createJsBrain( Map<Character,Swarm> swarms){
+    private JsonObject createAntJsObject(AntInfo antI) {
+        JsonObjectBuilder jsBuilder = Json.createObjectBuilder();
+        int antId = antI.getId();
+        int antPc = antI.getPc();
+        int swarmId = antI.getSwarm();
+        boolean carriesFood = antI.hasFood();
+        String direction = antI.getDirection();
+        int restTime = antI.getRestTime();
+
+
+        jsBuilder.add("id", antId);
+        jsBuilder.add("pc", antPc);
+        jsBuilder.add(swarmHelp, swarmId);
+        jsBuilder.add("carries_food", carriesFood);
+        jsBuilder.add("direction", direction);
+        jsBuilder.add("rest_time", restTime);
+        jsBuilder.add("register", createJsRegister(antI.getRegister()));
+
+
+        return jsBuilder.build();
+
+    }
+
+
+    private JsonArray createJsRegister(boolean[] reg) {
+
+        JsonArrayBuilder jsABuilder = Json.createArrayBuilder();
+
+        for (int i = 0; i < 6; i++) {
+
+            if (reg[i]) {
+                jsABuilder.add(true);
+            } else {
+                jsABuilder.add(false);
+            }
+        }
+
+        return jsABuilder.build();
+    }
+
+
+    private JsonArray createJsBrain(Map<Character, Swarm> swarms) {
 
         JsonArrayBuilder jAB = Json.createArrayBuilder();
 
 
         int keySize = swarms.keySet().size();
 
-        for(int i = 0; i< keySize; i++){
+        for (int i = 0; i < keySize; i++) {
 
             char swarmId = 'A';
             JsonObjectBuilder jsB = Json.createObjectBuilder();
             jsB.add("name", swarms.get(swarmId).getSwarmName());
-            jsB.add(swarmHelp,swarmId);
-            jsB.add("instructions",createJsInstructions(swarms.get(swarmId))); // soll SwarmObject zurueckgeben
-
+            jsB.add(swarmHelp, swarmId);
+            jsB.add("instructions", createJsInstructions(swarms.get(swarmId))); // soll SwarmObject zurueckgeben
 
 
             JsonObject jobj = jsB.build();
             jAB.add(jobj);
 
-         swarmId += 1;
+            swarmId += 1;
         }
 
-            return jAB.build();
-        }
+        return jAB.build();
+    }
 
 
-
-        private JsonArray createJsInstructions(Swarm swarm){
-
+    private JsonArray createJsInstructions(Swarm swarm) {
 
         JsonArrayBuilder jsA = Json.createArrayBuilder();
 
+        Instruction[] instr = swarm.getBrain();
 
-
-        Instruction[] instr = swarm.getInstruction();
-
-        for(Instruction recentInst :instr){
+        for (Instruction recentInst : instr) {
 
             jsA.add(recentInst.toString());
         }
 
         return jsA.build();
-        }
+    }
 
 
-
-
-
-
-
-
-
-
-        public JsonArray createJsStandingsArray(Map<Character, Integer> points, Map<Character,Integer> numOfAntsInSwarm){
+    public JsonArray createJsStandingsArray(Map<Character, Integer> points, Map<Character, Integer> numOfAntsInSwarm) {
 
         JsonArrayBuilder jsAB = Json.createArrayBuilder();
 
         char recentSwarm = 'A';
 
-        for(int i = 0; i < this.numOfSwarms; i++){
+        for (int i = 0; i < this.numOfSwarms; i++) {
 
             JsonObjectBuilder jsOB = Json.createObjectBuilder();
             jsOB.add(swarmHelp, recentSwarm);
-            jsOB.add("score",points.get(recentSwarm));
-            jsOB.add("ants",numOfAntsInSwarm.get(recentSwarm));
+            jsOB.add("score", points.get(recentSwarm));
+            jsOB.add("ants", numOfAntsInSwarm.get(recentSwarm));
 
-            JsonObject  jsO = jsOB.build();
+            JsonObject jsO = jsOB.build();
 
             jsAB.add(jsO);
 
@@ -385,60 +317,52 @@ public class JSONLogger implements Logger {
 
         return jsAB.build();
 
-        }
+    }
 
 
+    public JsonArray createJsChangedFieldsArray(List<Field> changes) {
 
 
-
-        public JsonArray createJsChangedFieldsArray(List<Field> changes){
-
-
-            JsonArrayBuilder arrBuild = Json.createArrayBuilder();
+        JsonArrayBuilder arrBuild = Json.createArrayBuilder();
 
 
-            int len = changes.size();
+        int len = changes.size();
 
-            Iterator<Field> iter = changes.iterator();
+        Iterator<Field> iter = changes.iterator();
 
-            for(int i = 0 ; i < len; i++){
-
-
-
-                    Field field = iter.next();
-                    JsonObjectBuilder jsO = Json.createObjectBuilder();
-
-                    jsO.add("x",field.getX());
-                    jsO.add("y",field.getY());
-                    jsO.add("markers",createMarkerArray(field));
-                    jsO.add("type", field.getType());
-
-                    if(field.getFood()!= 0){
-
-                        jsO.add("food",field.getFood());
-                    }
-
-                    if(field.getAnt().isPresent()){
-
-                        AntInfo ant = field.getAnt().get();
-                        jsO.add("ant",createAntJsObject(ant));
-
-                    }
+        for (int i = 0; i < len; i++) {
 
 
-                    arrBuild.add(jsO.build());
+            Field field = iter.next();
+            JsonObjectBuilder jsO = Json.createObjectBuilder();
 
-                }
+            jsO.add("x", field.getX());
+            jsO.add("y", field.getY());
+            jsO.add("markers", createMarkerArray(field));
+            jsO.add("type", field.getType());
+
+            if (field.getFood() != 0) {
+
+                jsO.add("food", field.getFood());
+            }
+
+            if (field.getAnt().isPresent()) {
+
+                AntInfo ant = field.getAnt().get();
+                jsO.add("ant", createAntJsObject(ant));
+
+            }
 
 
-
-            return arrBuild.build();
-
-
-
+            arrBuild.add(jsO.build());
 
         }
 
+
+        return arrBuild.build();
+
+
+    }
 
 
 }
