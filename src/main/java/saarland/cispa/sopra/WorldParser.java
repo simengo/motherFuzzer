@@ -48,7 +48,7 @@ public class WorldParser {
             }
 
             HashMap<Integer, Ant> ants = spawnAnts(swarms, fields);
-            return new World(fields, seed, ants, logger, swarms);
+            return new World(fields, seed, ants);
         }
     }
 
