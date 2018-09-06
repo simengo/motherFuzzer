@@ -46,12 +46,13 @@ public class WorldParser {
                 j = 0;
                 i++;
             }
+
             HashMap<Integer, Ant> ants = spawnAnts(swarms, fields);
             return new World(fields, seed, ants, logger, swarms);
         }
     }
 
-    private HashMap<Integer, Ant> spawnAnts(HashMap<Character, Swarm> swarms, Field[][] fields) throws IllegalArgumentException {
+    private static HashMap<Integer, Ant> spawnAnts(HashMap<Character, Swarm> swarms, Field[][] fields) throws IllegalArgumentException {
         HashMap<Integer, Ant> ants = new HashMap<>();
         for (int i = 0; i < fields.length; i++) {
             for (int j = 0; i < fields[0].length; i++) {
