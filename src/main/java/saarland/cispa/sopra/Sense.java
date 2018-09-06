@@ -17,7 +17,6 @@ public abstract class Sense extends Instruction {
     public int getJumpPC() {
         return jumpPC;
     }
-
     public Target getTargetS() {
         return target;
     }
