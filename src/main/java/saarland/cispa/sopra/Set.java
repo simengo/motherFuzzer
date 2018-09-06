@@ -2,9 +2,9 @@ package saarland.cispa.sopra;
 
 public class Set extends Instruction {
 
-    private int reg;
+    private final int reg;
 
-    public Set(int reg){this.reg = reg;}
+    public Set(int reg1){this.reg = reg1;}
 
 
     @Override

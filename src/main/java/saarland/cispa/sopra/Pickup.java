@@ -4,7 +4,7 @@ import saarland.cispa.sopra.systemtests.FieldInfo;
 
 public class Pickup extends Instruction {
 
-    private int jumpPC;
+    private final int jumpPC;
 
     public Pickup(int jumpPC){this.jumpPC = jumpPC;}
     @Override

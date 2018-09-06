@@ -2,8 +2,8 @@ package saarland.cispa.sopra;
 
 public class Test extends Instruction {
 
-    private int register;
-    private int jumpPC;
+    private final int register;
+    private final int jumpPC;
     public Test(int reg,int jumpPC) {
         this.register = reg;
         this.jumpPC=jumpPC;
