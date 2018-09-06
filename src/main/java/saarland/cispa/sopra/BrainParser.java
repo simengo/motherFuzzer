@@ -1,7 +1,5 @@
 package saarland.cispa.sopra;
 
-import saarland.cispa.sopra.gen.AcolaParser;
-
 import java.io.File;
 import java.util.HashMap;
 
