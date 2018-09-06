@@ -23,7 +23,7 @@ public class NOPLogger implements Logger {
 
 
     @Override
-    public void addRoundInfo(List<Field> changes, Map<Character,Integer> points) {
+    public void addRoundInfo(List<Field> changes,Map<Character,Integer> points, Map<Character,Integer> numOfAntsInSwarm) {
 
         return;
     }

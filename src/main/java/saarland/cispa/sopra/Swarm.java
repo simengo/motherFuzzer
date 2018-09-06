@@ -17,4 +17,14 @@ public class Swarm {
     public void setSwarm(char ident) {
         this.ident = ident;
     }
+
+    public String getSwarmName(){
+
+        return this.name;
+    }
+
+    public Instruction[] getInstruction(){
+
+        return brain;
+    }
 }
