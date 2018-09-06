@@ -58,7 +58,14 @@ public class World implements WorldInfo {
 
     public Field[][] getFields() {
 
-        return this.fields;
+        Field[][] copiedFields = new Field[width][height];
+
+        for(int i=0; i<fields.length; i++) {
+            for (int j = 0; j < fields[i].length; j++) {
+                copiedFields[i][j] = fields[i][j];
+            }
+        }
+        return copiedFields;
     }
 
 
