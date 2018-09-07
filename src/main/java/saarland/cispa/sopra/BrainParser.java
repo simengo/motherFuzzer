@@ -5,6 +5,9 @@ import com.ibm.icu.impl.IllegalIcuArgumentException;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import saarland.cispa.sopra.antlr.AcolaLexer;
+import saarland.cispa.sopra.antlr.AcolaParser;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
