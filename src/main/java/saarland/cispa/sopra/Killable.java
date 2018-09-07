@@ -85,7 +85,9 @@ abstract class Killable extends Instruction {
         Field[] neighbours = world.getNeighbours((Field) field);
         int enemies = 0;
 
+
         for (Field neighbour : neighbours) {
+            
             if(neighbour.getAnt().get() == null){
                 continue;
             }

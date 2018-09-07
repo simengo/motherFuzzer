@@ -1,7 +1,9 @@
-package saarland.cispa.sopra
+package saarland.cispa.sopra;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import saarland.cispa.sopra.*;
+
 
 
 public class WorldTests {
@@ -17,7 +19,9 @@ public class WorldTests {
             "........";
 
         String brainDumb = "brain \"sample\" {\njump 0\n}";
-        World world = (World) gameInfo.simulate(1, 42, map, brainDumb, brainDumb);
+        Game world = new Game("");
+
+        world.simulate(1, 42, map, brainDumb, brainDumb);
 
 
         // Do nothing
@@ -35,9 +39,9 @@ public class WorldTests {
 
     @Test
     public void getFieldInDirectionTest(){
-    Field field = (Field) world.getField(0,0);
-    Field test = (Field) world.getField(8,6);
-    Field test2 = (Field) world.getField(1,0);
+    Normal field = (Normal) world.getField(0,0);
+    Normal test = (Normal) world.getField(8,6);
+    Normal test2 = (Normal) world.getField(1,0);
 
         assert (test == world.getFieldInDirection(field,"northwest"));
         assert (test2 == world.getFieldInDirection(field,"east"));
@@ -52,14 +56,14 @@ public class WorldTests {
 
     @Test
     public void getNeighbours(){
-        Field field = (Field) world.getField(0,0);
+        Normal field = (Normal) world.getField(0,0);
         Field[] fields = world.getNeighbours(field);
-        Field fieldNW = (Field) world.getField(8,6);
-        Field fieldNE = (Field) world.getField(0,6);
-        Field fieldE = (Field) world.getField(1,0);
-        Field fieldSE = (Field) world.getField(0,1);
-        Field fieldSW = (Field) world.getField(0,6);
-        Field fieldW = (Field) world.getField(8,0);
+        Normal fieldNW = (Normal) world.getField(8,6);
+        Normal fieldNE = (Normal) world.getField(0,6);
+        Normal fieldE = (Normal) world.getField(1,0);
+        Normal fieldSE = (Normal) world.getField(0,1);
+        Normal fieldSW = (Normal) world.getField(0,6);
+        Normal fieldW = (Normal) world.getField(8,0);
 
         assert(fieldNW == fields[0]);
         assert(fieldNE == fields[1]);
@@ -72,15 +76,8 @@ public class WorldTests {
     @Test
     public void setAntLion(){
 
-        Field field = (Field) world.getField(0,0);
-        field.setAntLion();
-        Field[] fields = world.getNeighbours(field);
-        Field fieldNW = (Field) world.getField(8,6);
-        Field fieldNE = (Field) world.getField(0,6);
-        Field fieldE = (Field) world.getField(1,0);
-        Field fieldSE = (Field) world.getField(0,1);
-        Field fieldSW = (Field) world.getField(0,6);
-        Field fieldW = (Field) world.getField(8,0);
+        Normal field = (Normal) world.getField(0,0);
+        world.setAntLion(field);
 
 
         assert(world.getField(8,6).getIsNextToAntLion);
