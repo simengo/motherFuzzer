@@ -24,18 +24,16 @@ public final class WorldParser {
         try (BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()))) {
             String line;
             int counter = 0;
-            boolean isThereNextLine = true;
-            int width = bReader.readLine().toCharArray()[0];
-            int broadth = bReader.readLine().toCharArray()[0];
 
-            fields = new Field[width][broadth];
-            while (isThereNextLine) {
+            fields = new Field[bReader.readLine().toCharArray()[0]][bReader.readLine().toCharArray()[0]];
+            while (true) {
                 line = bReader.readLine();
 
                 if(line == null){
                     if(counter%2 != 0 || counter == 0){
                         throw new IllegalArgumentException();
                     }
+                    break;
                 }
 
                 char[] row = line.toCharArray();
@@ -56,7 +54,6 @@ public final class WorldParser {
                         default:
                             fields[iPMDleanger][jPMDlaenger] = new Base(chara, iPMDleanger, jPMDlaenger);
                             break;
-
                     }
                     jPMDlaenger++;
                 }
@@ -64,7 +61,6 @@ public final class WorldParser {
                 iPMDleanger++;
                 counter+=1;
             }
-
             Map<Integer, Ant> ants = spawnAnts(swarms, fields);
             return new World(fields, seed, ants);
         }
