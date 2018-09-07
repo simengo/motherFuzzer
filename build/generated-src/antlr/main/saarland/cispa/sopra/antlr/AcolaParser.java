@@ -22,14 +22,13 @@ public class AcolaParser extends Parser {
 		T__17=18, T__18=19, FIELD=20, TARGET=21, DIRECTION=22, TURNDIRECTION=23, 
 		MARKER=24, NUMBER=25, IDENTIFIER=26, COMMENT=27;
 	public static final int
-		RULE_start_rule = 0, RULE_brain = 1, RULE_instruction = 2, RULE_mark = 3, 
-		RULE_unmark = 4, RULE_turn = 5, RULE_move = 6, RULE_sense = 7, RULE_sensemarker = 8, 
-		RULE_set = 9, RULE_unset = 10, RULE_pickup = 11, RULE_drop = 12, RULE_jump = 13, 
-		RULE_flip = 14, RULE_test = 15, RULE_directions = 16;
+		RULE_brain = 0, RULE_instruction = 1, RULE_mark = 2, RULE_unmark = 3, 
+		RULE_turn = 4, RULE_move = 5, RULE_sense = 6, RULE_sensemarker = 7, RULE_set = 8, 
+		RULE_unset = 9, RULE_pickup = 10, RULE_drop = 11, RULE_jump = 12, RULE_flip = 13, 
+		RULE_test = 14, RULE_directions = 15;
 	public static final String[] ruleNames = {
-		"start_rule", "brain", "instruction", "mark", "unmark", "turn", "move", 
-		"sense", "sensemarker", "set", "unset", "pickup", "drop", "jump", "flip", 
-		"test", "directions"
+		"brain", "instruction", "mark", "unmark", "turn", "move", "sense", "sensemarker", 
+		"set", "unset", "pickup", "drop", "jump", "flip", "test", "directions"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -91,50 +90,6 @@ public class AcolaParser extends Parser {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
-	public static class Start_ruleContext extends ParserRuleContext {
-		public BrainContext brain() {
-			return getRuleContext(BrainContext.class,0);
-		}
-		public Start_ruleContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_start_rule; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AcolaListener ) ((AcolaListener)listener).enterStart_rule(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AcolaListener ) ((AcolaListener)listener).exitStart_rule(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AcolaVisitor ) return ((AcolaVisitor<? extends T>)visitor).visitStart_rule(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final Start_ruleContext start_rule() throws RecognitionException {
-		Start_ruleContext _localctx = new Start_ruleContext(_ctx, getState());
-		enterRule(_localctx, 0, RULE_start_rule);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(34);
-			brain();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
 	public static class BrainContext extends ParserRuleContext {
 		public TerminalNode IDENTIFIER() { return getToken(AcolaParser.IDENTIFIER, 0); }
 		public TerminalNode EOF() { return getToken(AcolaParser.EOF, 0); }
@@ -165,38 +120,38 @@ public class AcolaParser extends Parser {
 
 	public final BrainContext brain() throws RecognitionException {
 		BrainContext _localctx = new BrainContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_brain);
+		enterRule(_localctx, 0, RULE_brain);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(36);
+			setState(32);
 			match(T__0);
-			setState(37);
+			setState(33);
 			match(T__1);
-			setState(38);
+			setState(34);
 			match(IDENTIFIER);
-			setState(39);
+			setState(35);
 			match(T__1);
-			setState(40);
+			setState(36);
 			match(T__2);
-			setState(42); 
+			setState(38); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(41);
+				setState(37);
 				instruction();
 				}
 				}
-				setState(44); 
+				setState(40); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==T__4 );
-			setState(46);
+			setState(42);
 			match(T__3);
-			setState(47);
+			setState(43);
 			match(EOF);
 			}
 		}
@@ -276,39 +231,39 @@ public class AcolaParser extends Parser {
 
 	public final InstructionContext instruction() throws RecognitionException {
 		InstructionContext _localctx = new InstructionContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_instruction);
+		enterRule(_localctx, 2, RULE_instruction);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(49);
+			setState(45);
 			mark();
-			setState(50);
+			setState(46);
 			unmark();
-			setState(51);
+			setState(47);
 			turn();
-			setState(52);
+			setState(48);
 			move();
-			setState(53);
+			setState(49);
 			sense();
-			setState(54);
+			setState(50);
 			set();
-			setState(55);
+			setState(51);
 			unset();
-			setState(56);
+			setState(52);
 			pickup();
-			setState(57);
+			setState(53);
 			drop();
-			setState(58);
+			setState(54);
 			jump();
-			setState(59);
+			setState(55);
 			flip();
-			setState(60);
+			setState(56);
 			sensemarker();
-			setState(61);
+			setState(57);
 			directions();
-			setState(62);
+			setState(58);
 			test();
-			setState(63);
+			setState(59);
 			match(COMMENT);
 			}
 		}
@@ -346,13 +301,13 @@ public class AcolaParser extends Parser {
 
 	public final MarkContext mark() throws RecognitionException {
 		MarkContext _localctx = new MarkContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_mark);
+		enterRule(_localctx, 4, RULE_mark);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(65);
+			setState(61);
 			match(T__4);
-			setState(66);
+			setState(62);
 			match(NUMBER);
 			}
 		}
@@ -390,13 +345,13 @@ public class AcolaParser extends Parser {
 
 	public final UnmarkContext unmark() throws RecognitionException {
 		UnmarkContext _localctx = new UnmarkContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_unmark);
+		enterRule(_localctx, 6, RULE_unmark);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(68);
+			setState(64);
 			match(T__5);
-			setState(69);
+			setState(65);
 			match(NUMBER);
 			}
 		}
@@ -434,13 +389,13 @@ public class AcolaParser extends Parser {
 
 	public final TurnContext turn() throws RecognitionException {
 		TurnContext _localctx = new TurnContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_turn);
+		enterRule(_localctx, 8, RULE_turn);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(71);
+			setState(67);
 			match(T__6);
-			setState(72);
+			setState(68);
 			match(TURNDIRECTION);
 			}
 		}
@@ -478,15 +433,15 @@ public class AcolaParser extends Parser {
 
 	public final MoveContext move() throws RecognitionException {
 		MoveContext _localctx = new MoveContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_move);
+		enterRule(_localctx, 10, RULE_move);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(74);
+			setState(70);
 			match(T__7);
-			setState(75);
+			setState(71);
 			match(T__8);
-			setState(76);
+			setState(72);
 			match(NUMBER);
 			}
 		}
@@ -526,19 +481,19 @@ public class AcolaParser extends Parser {
 
 	public final SenseContext sense() throws RecognitionException {
 		SenseContext _localctx = new SenseContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_sense);
+		enterRule(_localctx, 12, RULE_sense);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(78);
+			setState(74);
 			match(T__9);
-			setState(79);
+			setState(75);
 			match(FIELD);
-			setState(80);
+			setState(76);
 			match(TARGET);
-			setState(81);
+			setState(77);
 			match(T__8);
-			setState(82);
+			setState(78);
 			match(NUMBER);
 			}
 		}
@@ -578,21 +533,21 @@ public class AcolaParser extends Parser {
 
 	public final SensemarkerContext sensemarker() throws RecognitionException {
 		SensemarkerContext _localctx = new SensemarkerContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_sensemarker);
+		enterRule(_localctx, 14, RULE_sensemarker);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(84);
+			setState(80);
 			match(T__9);
-			setState(85);
+			setState(81);
 			match(FIELD);
-			setState(86);
+			setState(82);
 			match(T__10);
-			setState(87);
+			setState(83);
 			match(MARKER);
-			setState(88);
+			setState(84);
 			match(T__8);
-			setState(89);
+			setState(85);
 			match(NUMBER);
 			}
 		}
@@ -630,13 +585,13 @@ public class AcolaParser extends Parser {
 
 	public final SetContext set() throws RecognitionException {
 		SetContext _localctx = new SetContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_set);
+		enterRule(_localctx, 16, RULE_set);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(91);
+			setState(87);
 			match(T__11);
-			setState(92);
+			setState(88);
 			match(NUMBER);
 			}
 		}
@@ -674,13 +629,13 @@ public class AcolaParser extends Parser {
 
 	public final UnsetContext unset() throws RecognitionException {
 		UnsetContext _localctx = new UnsetContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_unset);
+		enterRule(_localctx, 18, RULE_unset);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(94);
+			setState(90);
 			match(T__12);
-			setState(95);
+			setState(91);
 			match(NUMBER);
 			}
 		}
@@ -718,15 +673,15 @@ public class AcolaParser extends Parser {
 
 	public final PickupContext pickup() throws RecognitionException {
 		PickupContext _localctx = new PickupContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_pickup);
+		enterRule(_localctx, 20, RULE_pickup);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(97);
+			setState(93);
 			match(T__13);
-			setState(98);
+			setState(94);
 			match(T__8);
-			setState(99);
+			setState(95);
 			match(NUMBER);
 			}
 		}
@@ -764,15 +719,15 @@ public class AcolaParser extends Parser {
 
 	public final DropContext drop() throws RecognitionException {
 		DropContext _localctx = new DropContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_drop);
+		enterRule(_localctx, 22, RULE_drop);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(101);
+			setState(97);
 			match(T__14);
-			setState(102);
+			setState(98);
 			match(T__8);
-			setState(103);
+			setState(99);
 			match(NUMBER);
 			}
 		}
@@ -810,13 +765,13 @@ public class AcolaParser extends Parser {
 
 	public final JumpContext jump() throws RecognitionException {
 		JumpContext _localctx = new JumpContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_jump);
+		enterRule(_localctx, 24, RULE_jump);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(105);
+			setState(101);
 			match(T__15);
-			setState(106);
+			setState(102);
 			match(NUMBER);
 			}
 		}
@@ -854,15 +809,15 @@ public class AcolaParser extends Parser {
 
 	public final FlipContext flip() throws RecognitionException {
 		FlipContext _localctx = new FlipContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_flip);
+		enterRule(_localctx, 26, RULE_flip);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(108);
+			setState(104);
 			match(T__16);
-			setState(109);
+			setState(105);
 			match(T__8);
-			setState(110);
+			setState(106);
 			match(NUMBER);
 			}
 		}
@@ -900,15 +855,15 @@ public class AcolaParser extends Parser {
 
 	public final TestContext test() throws RecognitionException {
 		TestContext _localctx = new TestContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_test);
+		enterRule(_localctx, 28, RULE_test);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(112);
+			setState(108);
 			match(T__17);
-			setState(113);
+			setState(109);
 			match(T__8);
-			setState(114);
+			setState(110);
 			match(NUMBER);
 			}
 		}
@@ -946,13 +901,13 @@ public class AcolaParser extends Parser {
 
 	public final DirectionsContext directions() throws RecognitionException {
 		DirectionsContext _localctx = new DirectionsContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_directions);
+		enterRule(_localctx, 30, RULE_directions);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(116);
+			setState(112);
 			match(T__18);
-			setState(117);
+			setState(113);
 			match(DIRECTION);
 			}
 		}
@@ -968,32 +923,31 @@ public class AcolaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\35z\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\35v\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4"+
-		"\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\3\2\3"+
-		"\2\3\3\3\3\3\3\3\3\3\3\3\3\6\3-\n\3\r\3\16\3.\3\3\3\3\3\3\3\4\3\4\3\4"+
-		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\6\3"+
-		"\6\3\6\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\t\3\n\3\n\3\n"+
-		"\3\n\3\n\3\n\3\n\3\13\3\13\3\13\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3\16\3\16"+
-		"\3\16\3\16\3\17\3\17\3\17\3\20\3\20\3\20\3\20\3\21\3\21\3\21\3\21\3\22"+
-		"\3\22\3\22\3\22\2\2\23\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"\2\2\2"+
-		"i\2$\3\2\2\2\4&\3\2\2\2\6\63\3\2\2\2\bC\3\2\2\2\nF\3\2\2\2\fI\3\2\2\2"+
-		"\16L\3\2\2\2\20P\3\2\2\2\22V\3\2\2\2\24]\3\2\2\2\26`\3\2\2\2\30c\3\2\2"+
-		"\2\32g\3\2\2\2\34k\3\2\2\2\36n\3\2\2\2 r\3\2\2\2\"v\3\2\2\2$%\5\4\3\2"+
-		"%\3\3\2\2\2&\'\7\3\2\2\'(\7\4\2\2()\7\34\2\2)*\7\4\2\2*,\7\5\2\2+-\5\6"+
-		"\4\2,+\3\2\2\2-.\3\2\2\2.,\3\2\2\2./\3\2\2\2/\60\3\2\2\2\60\61\7\6\2\2"+
-		"\61\62\7\2\2\3\62\5\3\2\2\2\63\64\5\b\5\2\64\65\5\n\6\2\65\66\5\f\7\2"+
-		"\66\67\5\16\b\2\678\5\20\t\289\5\24\13\29:\5\26\f\2:;\5\30\r\2;<\5\32"+
-		"\16\2<=\5\34\17\2=>\5\36\20\2>?\5\22\n\2?@\5\"\22\2@A\5 \21\2AB\7\35\2"+
-		"\2B\7\3\2\2\2CD\7\7\2\2DE\7\33\2\2E\t\3\2\2\2FG\7\b\2\2GH\7\33\2\2H\13"+
-		"\3\2\2\2IJ\7\t\2\2JK\7\31\2\2K\r\3\2\2\2LM\7\n\2\2MN\7\13\2\2NO\7\33\2"+
-		"\2O\17\3\2\2\2PQ\7\f\2\2QR\7\26\2\2RS\7\27\2\2ST\7\13\2\2TU\7\33\2\2U"+
-		"\21\3\2\2\2VW\7\f\2\2WX\7\26\2\2XY\7\r\2\2YZ\7\32\2\2Z[\7\13\2\2[\\\7"+
-		"\33\2\2\\\23\3\2\2\2]^\7\16\2\2^_\7\33\2\2_\25\3\2\2\2`a\7\17\2\2ab\7"+
-		"\33\2\2b\27\3\2\2\2cd\7\20\2\2de\7\13\2\2ef\7\33\2\2f\31\3\2\2\2gh\7\21"+
-		"\2\2hi\7\13\2\2ij\7\33\2\2j\33\3\2\2\2kl\7\22\2\2lm\7\33\2\2m\35\3\2\2"+
-		"\2no\7\23\2\2op\7\13\2\2pq\7\33\2\2q\37\3\2\2\2rs\7\24\2\2st\7\13\2\2"+
-		"tu\7\33\2\2u!\3\2\2\2vw\7\25\2\2wx\7\30\2\2x#\3\2\2\2\3.";
+		"\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\3\2\3\2\3\2\3\2"+
+		"\3\2\3\2\6\2)\n\2\r\2\16\2*\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
+		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\4\3\4\3\4\3\5\3\5\3\5\3\6\3\6\3\6"+
+		"\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3"+
+		"\n\3\n\3\n\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3\16\3\16\3"+
+		"\16\3\17\3\17\3\17\3\17\3\20\3\20\3\20\3\20\3\21\3\21\3\21\3\21\2\2\22"+
+		"\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \2\2\2f\2\"\3\2\2\2\4/\3\2\2\2"+
+		"\6?\3\2\2\2\bB\3\2\2\2\nE\3\2\2\2\fH\3\2\2\2\16L\3\2\2\2\20R\3\2\2\2\22"+
+		"Y\3\2\2\2\24\\\3\2\2\2\26_\3\2\2\2\30c\3\2\2\2\32g\3\2\2\2\34j\3\2\2\2"+
+		"\36n\3\2\2\2 r\3\2\2\2\"#\7\3\2\2#$\7\4\2\2$%\7\34\2\2%&\7\4\2\2&(\7\5"+
+		"\2\2\')\5\4\3\2(\'\3\2\2\2)*\3\2\2\2*(\3\2\2\2*+\3\2\2\2+,\3\2\2\2,-\7"+
+		"\6\2\2-.\7\2\2\3.\3\3\2\2\2/\60\5\6\4\2\60\61\5\b\5\2\61\62\5\n\6\2\62"+
+		"\63\5\f\7\2\63\64\5\16\b\2\64\65\5\22\n\2\65\66\5\24\13\2\66\67\5\26\f"+
+		"\2\678\5\30\r\289\5\32\16\29:\5\34\17\2:;\5\20\t\2;<\5 \21\2<=\5\36\20"+
+		"\2=>\7\35\2\2>\5\3\2\2\2?@\7\7\2\2@A\7\33\2\2A\7\3\2\2\2BC\7\b\2\2CD\7"+
+		"\33\2\2D\t\3\2\2\2EF\7\t\2\2FG\7\31\2\2G\13\3\2\2\2HI\7\n\2\2IJ\7\13\2"+
+		"\2JK\7\33\2\2K\r\3\2\2\2LM\7\f\2\2MN\7\26\2\2NO\7\27\2\2OP\7\13\2\2PQ"+
+		"\7\33\2\2Q\17\3\2\2\2RS\7\f\2\2ST\7\26\2\2TU\7\r\2\2UV\7\32\2\2VW\7\13"+
+		"\2\2WX\7\33\2\2X\21\3\2\2\2YZ\7\16\2\2Z[\7\33\2\2[\23\3\2\2\2\\]\7\17"+
+		"\2\2]^\7\33\2\2^\25\3\2\2\2_`\7\20\2\2`a\7\13\2\2ab\7\33\2\2b\27\3\2\2"+
+		"\2cd\7\21\2\2de\7\13\2\2ef\7\33\2\2f\31\3\2\2\2gh\7\22\2\2hi\7\33\2\2"+
+		"i\33\3\2\2\2jk\7\23\2\2kl\7\13\2\2lm\7\33\2\2m\35\3\2\2\2no\7\24\2\2o"+
+		"p\7\13\2\2pq\7\33\2\2q\37\3\2\2\2rs\7\25\2\2st\7\30\2\2t!\3\2\2\2\3*";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
