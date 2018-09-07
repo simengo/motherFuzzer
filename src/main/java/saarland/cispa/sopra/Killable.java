@@ -25,8 +25,11 @@ abstract class Killable extends Instruction {
             if (suspect.isDead()) {
                 continue;
             }
-            if (suspect.equals(ant)) {
-                checkAnt(world, suspect);
+            if (ant.isPresent()) {
+                Ant antHelp = ant.get();
+                if (suspect.equals(antHelp)) {
+                    checkAnt(world, suspect);
+                }
             }
             if (isSurrounded(world, suspect)) {
                 suspect.setDead(true);
@@ -77,7 +80,7 @@ abstract class Killable extends Instruction {
 
     }
 
-    private boolean isSurrounded(World world, Ant ant) {
+    private boolean isSurrounded(World world, AntInfo ant) {
         FieldInfo field = ant.getField();
         Field[] neighbours = world.getNeighbours((Field) field);
         int enemies = 0;

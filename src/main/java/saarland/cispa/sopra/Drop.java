@@ -26,23 +26,28 @@ public class Drop extends Instruction {
                 ant.increasePC();
 
             }
-            if(ant.getField().getType() != '=' && ant.getField().getType() == '#'){
-                char baseType = ant.getField().getType();
+            else {
+                if (ant.getField().getType() != '=' && ant.getField().getType() != '#') {
+                    char baseType = ant.getField().getType();
 
-                Map<Character,Integer> points =  world.getPoints();
-                if(points.containsKey(baseType)){
+                    Map<Character, Integer> points = world.getPoints();
+                    Integer punkte = points.get(baseType);
+                    if (punkte != null) {
 
-                    int altPoints = points.get(baseType);
-                    altPoints = altPoints + 1;
-                    points.replace(baseType,altPoints);
-                    ant.setHasFood(false);
-                    ant.increasePC();
+                        int altPoints;
+                        altPoints = points.get(baseType);
+                        altPoints = altPoints + 1;
+                        points.replace(baseType, altPoints);
+                        ant.setHasFood(false);
+                        ant.increasePC();
 
+
+                    }
 
                 }
 
             }
-            ant.setPc(jumpPC);
+
         }
 
             else{

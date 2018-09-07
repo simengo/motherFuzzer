@@ -9,7 +9,12 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WorldParser {
+public final class WorldParser {
+
+    private WorldParser(){
+
+    }
+
     public static World parseMap(File mapFile, long seed, Map<Character, Swarm> swarms) throws IOException {
 
         int iPMDleanger = 0;

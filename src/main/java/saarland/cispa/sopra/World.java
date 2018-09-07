@@ -97,12 +97,12 @@ public class World implements WorldInfo {
 
             case "northwest":
 
-                return getFieldInNorthwest(uneven, hereField, x,  y);
+                return getFieldInNorthwest(uneven, x,  y);
 
 
             case "northeast":
 
-               return getFieldInNortheast(uneven, hereField, x, y);
+               return getFieldInNortheast(uneven, x, y);
 
 
             case "east":
@@ -114,11 +114,11 @@ public class World implements WorldInfo {
 
             case "southeast":
 
-               return getFieldInSoutheast(uneven,  hereField, x,  y);
+               return getFieldInSoutheast(uneven, x,  y);
 
             case "southwest":
 
-               return getFieldInSouthwest(uneven, hereField,x, y);
+               return getFieldInSouthwest(uneven,x, y);
 
             case "west":
                 x -= 1;
@@ -139,7 +139,7 @@ public class World implements WorldInfo {
 
     //Hilfsmethoden, da sonst zu lange getFieldInDirection Methodes
 
-    private Field getFieldInNorthwest(boolean uneven, Field hereField,int x, int y){
+    private Field getFieldInNorthwest(boolean uneven,int x, int y){
 
         int xCoord = x;
         int yCoord = y;
@@ -169,7 +169,7 @@ public class World implements WorldInfo {
         }
     }
 
-    private Field getFieldInNortheast(boolean uneven, Field hereField,int x, int y){
+    private Field getFieldInNortheast(boolean uneven,int x, int y){
 
         int xCoord = x;
         int yCoord = y;
@@ -198,7 +198,7 @@ public class World implements WorldInfo {
 
     }
 
-    private Field getFieldInSouthwest(boolean uneven, Field hereField,int x, int y){
+    private Field getFieldInSouthwest(boolean uneven,int x, int y){
 
         int xCoord = x;
         int yCoord = y;
@@ -223,7 +223,7 @@ public class World implements WorldInfo {
         }
     }
 
-    private Field getFieldInSoutheast(boolean uneven, Field hereField,int x, int y){
+    private Field getFieldInSoutheast(boolean uneven,int x, int y){
 
         int xCoord = x;
         int yCoord = y;

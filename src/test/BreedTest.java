@@ -1,12 +1,12 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import saarland.cispa.sopra.*;
 
 public class BreedTest {
 
     @BeforeEach
     public void doBefore () {
-        // Do nothing
     }
 
     @BeforeAll
