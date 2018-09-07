@@ -44,7 +44,7 @@ public class JSONLogger implements Logger {
         int height = map.length;
         int width = map[0].length;
 
-        this.numOfSwarms = swarms.keySet().size();
+        this.numOfSwarms = swarms.size();
 
 
         JsonObjectBuilder jsO = Json.createObjectBuilder();
@@ -167,7 +167,7 @@ public class JSONLogger implements Logger {
 
 
         Map<Character, boolean[]> marker = field.getMarkers();
-        int keySize = marker.keySet().size();
+        int keySize = marker.size();
         this.numOfSwarms = keySize;
         int markerSize = 6;
 
@@ -260,7 +260,7 @@ public class JSONLogger implements Logger {
         JsonArrayBuilder jAB = Json.createArrayBuilder();
 
 
-        int keySize = swarms.keySet().size();
+        int keySize = swarms.size();
 
         for (int i = 0; i < keySize; i++) {
 
