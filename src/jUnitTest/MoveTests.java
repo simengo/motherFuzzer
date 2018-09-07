@@ -8,6 +8,12 @@ import java.util.HashMap;
 
 public class MoveTests {
 
+    private void MilanStinkt(){
+        //lol
+        //lul
+        //lel
+    }
+
     private World Szenario1() {
 
         Normal[][] spielfeld = new Normal[2][2];
