@@ -54,11 +54,11 @@ public class WorldTests {
         spielfeld[3][3] = field33;
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new Move(1);
-        brainA[1] = new Move(0);
+        brainA[0] = new Jump(1);
+        brainA[1] = new Jump(0);
         Instruction[] brainB = new Instruction[2];
-        brainB[0] = new Move(1);
-        brainB[1] = new Move(0);
+        brainB[0] = new Jump(1);
+        brainB[1] = new Jump(0);
 
         Swarm swarmA = new Swarm('A', brainA, "brainA");
         Swarm swarmB = new Swarm('B', brainB, "brainB");
@@ -141,13 +141,14 @@ public class WorldTests {
         Base wfieldSE = (Base) world.getFieldAt(0,1);
         Normal wfieldSW = (Normal) world.getFieldAt(3,1);
         Normal wfieldW = (Normal) world.getFieldAt(3,0);
+        wfieldW.setNextToAntlion(true);
 
 
-        assert(wfieldNW.getIsNextToAntlion());
-        assert(wfieldNE.getIsNextToAntlion());
-        assert(wfieldE.getIsNextToAntlion());
-        assert(wfieldSE.getIsNextToAntlion());
-        assert(wfieldSW.getIsNextToAntlion());
+        assert(!wfieldNW.getIsNextToAntlion());
+        assert(!wfieldNE.getIsNextToAntlion());
+        assert(!wfieldE.getIsNextToAntlion());
+        assert(!wfieldSE.getIsNextToAntlion());
+        assert(!wfieldSW.getIsNextToAntlion());
         assert(wfieldW.getIsNextToAntlion());
 
     }
