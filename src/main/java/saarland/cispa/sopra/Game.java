@@ -7,6 +7,7 @@ import saarland.cispa.sopra.systemtests.WorldInfo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class Game implements GameInfo {
     @Override
     public WorldInfo simulate(int rounds, long seed, File world1, File... brains) {
         initialize(seed, world1, brains);
-        for (int count = 0; count< rounds; count++) {
+        for (int count = 0; count < rounds; count++) {
             simulateOnce();
         }
 
@@ -57,16 +58,18 @@ public class Game implements GameInfo {
     }
 
     private void simulateOnce() {
+
         List<AntInfo> ants = world.getAnts();
         for (AntInfo ant : ants) {
             oneAnt((Ant) ant);
         }
-        world.logChanges();
+
+        logger.addRoundInfo(world.logChanges(),world.getPoints(),world.getAnts());
     }
 
     private void oneAnt(Ant ant) {
 
-        if (ant.getRestTime() == 0) {
+        if (ant.getRestTime() == 0 && !ant.isDead()) {
             ant.getNextInstruction().execute(world, ant);
         } else {
             ant.decreaseResttime();
