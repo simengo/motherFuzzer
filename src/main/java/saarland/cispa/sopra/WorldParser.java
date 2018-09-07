@@ -62,7 +62,7 @@ public final class WorldParser {
                 counter+=1;
             }
             Map<Integer, Ant> ants = spawnAnts(swarms, fields);
-            return new World(fields, seed, ants);
+            return new World(fields, seed, ants, swarms);
         }
     }
 

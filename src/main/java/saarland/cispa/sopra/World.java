@@ -23,7 +23,7 @@ public class World implements WorldInfo {
     //private final Map<Character,Swarm> swarms;
 
 
-    public World(Field[][] fields, long seed, Map<Integer, Ant> ants) {
+    public World(Field[][] fields, long seed, Map<Integer, Ant> ants, Map<Character,Swarm> swarms) {
 
 
         this.width = fields.length;
@@ -40,7 +40,9 @@ public class World implements WorldInfo {
         this.ants = ants;
 
         this.numOfAntsInSwarm = new HashMap<>();
-        int swarmCount = points.size();
+
+        int swarmCount = swarms.size();
+
         int[] numOfAnts = new int[swarmCount];
 
         for(Ant recentAnt : ants.values()){

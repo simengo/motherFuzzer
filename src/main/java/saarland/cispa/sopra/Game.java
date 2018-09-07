@@ -1,6 +1,6 @@
 package saarland.cispa.sopra;
 
-import saarland.cispa.sopra.antlr.BrainParser;
+import saarland.cispa.sopra.BrainParser;
 import saarland.cispa.sopra.systemtests.AntInfo;
 import saarland.cispa.sopra.systemtests.GameInfo;
 import saarland.cispa.sopra.systemtests.WorldInfo;
@@ -65,7 +65,7 @@ public class Game implements GameInfo {
             oneAnt((Ant) ant);
         }
 
-        logger.addRoundInfo(world.logChanges(),world.getPoints(),world.getAnts());
+        logger.addRoundInfo(world.logChanges(),world.getPoints(),world.getNumOfAntsInSwarm());
     }
 
     private void oneAnt(Ant ant) {
