@@ -25,7 +25,7 @@ public final class WorldParser {
             String line;
             int counter = 0;
 
-            fields = new Field[bReader.readLine().toCharArray()[0]][bReader.readLine().toCharArray()[0]];
+            fields = new Field[bReader.readLine().charAt(0)][bReader.readLine().charAt(0)];
             while (true) {
                 line = bReader.readLine();
 
@@ -66,7 +66,7 @@ public final class WorldParser {
         }
     }
 
-    private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) throws IllegalArgumentException {
+    private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
         HashMap<Integer, Ant> ants = new HashMap<>();
         for (Field[] fieldh : fields) {
             for (Field field : fieldh) {
