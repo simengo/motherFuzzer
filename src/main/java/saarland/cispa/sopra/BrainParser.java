@@ -1,4 +1,4 @@
-package saarland.cispa.sopra.antlr;
+package saarland.cispa.sopra;
 
 import com.ibm.icu.impl.IllegalIcuArgumentException;
 
@@ -12,8 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import saarland.cispa.sopra.antlr.AcolaLexer;
 import saarland.cispa.sopra.antlr.AcolaParser;
-
-import saarland.cispa.sopra.*;
 
 public class BrainParser {
 

@@ -1,4 +1,4 @@
-package saarland.cispa.sopra.antlr;
+package saarland.cispa.sopra;
 
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
