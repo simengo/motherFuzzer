@@ -3,7 +3,7 @@ package saarland.cispa.sopra;
 public class SenseMarker extends Sense{
     private final int marker;
 
-    public SenseMarker(SenseDir dir,Target target,int marker, int jumpPC) {
+    public SenseMarker(String dir,Target target,int marker, int jumpPC) {
         super(dir,target,jumpPC);
         this.marker = marker;
 

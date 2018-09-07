@@ -2,7 +2,7 @@ package saarland.cispa.sopra;
 
 public class SenseField extends Sense{
 
-    public SenseField(SenseDir dir,Target target, int jumpPC) {
+    public SenseField(String dir,Target target, int jumpPC) {
         super(dir,target,jumpPC);
 
     }

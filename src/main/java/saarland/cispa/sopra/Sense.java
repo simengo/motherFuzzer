@@ -8,10 +8,33 @@ public abstract class Sense extends Instruction {
     private final Target target;
     private final int jumpPC;
 
-    public Sense(SenseDir dir, Target target, int jumpPC) {
-        this.direction = dir;
+    public Sense(String dir, Target target, int jumpPC) {
+
+        this.direction = convertDir(dir);
         this.target = target;
         this.jumpPC = jumpPC;
+    }
+
+    public SenseDir convertDir(String dir){
+        SenseDir wert;
+        switch(dir){
+            case("here"):
+                wert = SenseDir.here;
+                break;
+            case("ahead"):
+                wert = SenseDir.ahead;
+                break;
+            case("left"):
+                wert = SenseDir.left;
+                break;
+            case("right"):
+                wert = SenseDir.right;
+                break;
+            default: throw new IllegalArgumentException();
+
+        }
+        return wert;
+
     }
 
     public int getJumpPC() {

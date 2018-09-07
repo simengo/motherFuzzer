@@ -43,8 +43,8 @@ public class MoveTests {
     public void moveTest1() {
 
         World welt = Szenario1();
-        int x= welt.getWidth();
-        int y=welt.getHeight();
+        int x = welt.getWidth();
+        int y = welt.getHeight();
         Ant antA = welt.getAnt(0);
         Ant antB = welt.getAnt(1);
         Instruction move = antA.getNextInstruction();
@@ -53,4 +53,6 @@ public class MoveTests {
         assert (antA.getField().getX() == 1 && antA.getField().getY() == 1);
 
     }
+
+
 }

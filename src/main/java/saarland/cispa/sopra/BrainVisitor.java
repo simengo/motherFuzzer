@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import saarland.cispa.sopra.BrainParser;
+import saarland.cispa.sopra.antlr.AcolaParser;
 
 import java.util.List;
 
