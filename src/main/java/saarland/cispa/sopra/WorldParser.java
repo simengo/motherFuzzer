@@ -23,12 +23,21 @@ public final class WorldParser {
 
         try (BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()))) {
             String line;
+            int counter = 0;
+            boolean isThereNextLine = true;
             int width = bReader.readLine().toCharArray()[0];
             int broadth = bReader.readLine().toCharArray()[0];
 
             fields = new Field[width][broadth];
-            while (bReader.readLine() != null) {
+            while (isThereNextLine) {
                 line = bReader.readLine();
+
+                if(line == null){
+                    if(counter%2 != 0 || counter == 0){
+                        throw new IllegalArgumentException();
+                    }
+                }
+
                 char[] row = line.toCharArray();
                 for (Character chara : row) {
                     switch (chara) {
@@ -53,6 +62,7 @@ public final class WorldParser {
                 }
                 jPMDlaenger = 0;
                 iPMDleanger++;
+                counter+=1;
             }
 
             Map<Integer, Ant> ants = spawnAnts(swarms, fields);
