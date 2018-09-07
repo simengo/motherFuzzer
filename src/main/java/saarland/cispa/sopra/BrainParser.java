@@ -1,7 +1,5 @@
 package saarland.cispa.sopra;
 
-import com.ibm.icu.impl.IllegalIcuArgumentException;
-
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -17,7 +15,8 @@ import java.util.Map;
 
 public final class BrainParser {
 
-    private BrainParser(){}
+    private BrainParser() {
+    }
 
     public static Map<Character, Swarm> parse(File[] brains) throws IOException {
 
@@ -59,7 +58,7 @@ public final class BrainParser {
         return brainMap;
     }
 
-    private static Instruction switchTarget(String dir, Target target, int jumpPC){
+    private static Instruction switchTarget(String dir, Target target, int jumpPC) throws IOException {
         Instruction instruction = null;
         switch (target) {
             case foe:
@@ -89,92 +88,29 @@ public final class BrainParser {
             case food:
                 instruction = new SenseFood(dir, target, jumpPC);
                 break;
+            default:
+                throw new IOException();
         }
         return instruction;
     }
 
     private static Instruction switchInstruction(String instr, String[] instructionStringArr) throws IOException {
         Instruction instruction = null;
-        Target target = null; //TODO get all the stuff
+        //TODO get all the stuff
         int marker = 0;
-        String direction = "";
-        String dir = "";
         int max = 0;
-        TurnDirection turn = null;
-        int register;
-        int jumpPC;
 
         switch (instr) {
             case "move": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Move(jumpPC);
+                instruction = new Move(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
             }
             case "sense": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-
-                switch (instructionStringArr[1]) {
-                    case "foe": {
-                        target = Target.foe;
-                        break;
-                    }
-                    case "food": {
-                        target = Target.food;
-                        break;
-                    }
-                    case "rock": {
-                        target = Target.rock;
-                        break;
-                    }
-                    case "home": {
-                        target = Target.home;
-                        break;
-                    }
-                    case "foehome": {
-                        target = Target.foehome;
-                        break;
-                    }
-                    case "marker": {
-                        target = Target.marker;
-                        break;
-                    }
-                    case "foemarker": {
-                        target = Target.foemarker;
-                        break;
-                    }
-                    case "antlion": {
-                        target = Target.antlion;
-                        break;
-                    }
-                    case "foefood": {
-                        target = Target.foefood;
-                        break;
-                    }
-                    case "friendfood": {
-                        target = Target.friendfood;
-                        break;
-                    }
-                    case "friend": {
-                        target = Target.friend;
-                        break;
-                    }
-                    default: {
-                        throw new IOException("brain error");
-                    }
-                }
-                if (instructionStringArr[2].equals("marker")) {
-                    dir = instructionStringArr[2];
-                    marker = Integer.parseInt(instructionStringArr[3]);
-                    instruction = new SenseMarker(dir, target, marker, jumpPC);
-                } else {
-                    dir = instructionStringArr[2];
-                    instruction=switchTarget(dir, target, jumpPC);
-                }
+                instruction = createSense(instructionStringArr);
                 break;
             }
             case "flip": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Flip(max, jumpPC);
+                instruction = new Flip(max, Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
             }
             case "mark": {
@@ -185,39 +121,45 @@ public final class BrainParser {
                 instruction = new Unmark(marker);
                 break;
             }
+            default: {
+                instruction = switchInstruction2(instr, instructionStringArr);
+                break;
+            }
+        }
+        return instruction;
+    }
+
+    private static Instruction switchInstruction2(String instr, String[] instructionStringArr) throws IllegalArgumentException {
+        Instruction instruction;
+        String direction = "";
+        TurnDirection turn = null;
+        switch (instr) {
             case "set": {
-                register = Integer.parseInt(instructionStringArr[2]);
-                instruction = new Set(register);
+                instruction = new Set(Integer.parseInt(instructionStringArr[2]));
                 break;
             }
             case "unset": {
-                register = Integer.parseInt(instructionStringArr[2]);
-                instruction = new Unset(register);
+                instruction = new Unset(Integer.parseInt(instructionStringArr[2]));
                 break;
             }
             case "drop": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Drop(jumpPC);
+                instruction = new Drop(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
             }
             case "pickup": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Pickup(jumpPC);
+                instruction = new Pickup(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
             }
             case "direction": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Direction(jumpPC, direction);
+                instruction = new Direction(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]), direction);
                 break;
             }
             case "jump": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Jump(jumpPC);
+                instruction = new Jump(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
             }
             case "breed": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Breed(jumpPC);
+                instruction = new Breed(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
             }
             case "turn": {
@@ -225,15 +167,81 @@ public final class BrainParser {
                 break;
             }
             case "test": {
-                register = Integer.parseInt(instructionStringArr[2]);
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Test(register, jumpPC);
+                instruction = new Test(Integer.parseInt(instructionStringArr[2]), Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
+                break;
+            }
+            default:
+                throw new IllegalArgumentException("brain f*ck");
+        }
+        return instruction;
+    }
+
+    private static Instruction createSense(String[] instructionStringArr) throws IOException {
+        Target target;
+        switch (instructionStringArr[1]) {
+            case "foe": {
+                target = Target.foe;
+                break;
+            }
+            case "food": {
+                target = Target.food;
+                break;
+            }
+            case "rock": {
+                target = Target.rock;
+                break;
+            }
+            case "home": {
+                target = Target.home;
+                break;
+            }
+            case "foehome": {
+                target = Target.foehome;
+                break;
+            }
+            case "marker": {
+                target = Target.marker;
                 break;
             }
             default: {
-                throw new IllegalIcuArgumentException("");
+                target = createSense2(instructionStringArr);
+                break;
             }
         }
-        return instruction;
+        if (instructionStringArr[2].equals("marker")) {
+            return new SenseMarker(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
+        } else {
+            return switchTarget(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])); // jumpPC =  Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])
+        }
+    }
+
+    private static Target createSense2(String[] instructionStringArr) throws IOException {
+        Target target;
+        switch (instructionStringArr[1]) {
+            case "foemarker": {
+                target = Target.foemarker;
+                break;
+            }
+            case "antlion": {
+                target = Target.antlion;
+                break;
+            }
+            case "foefood": {
+                target = Target.foefood;
+                break;
+            }
+            case "friendfood": {
+                target = Target.friendfood;
+                break;
+            }
+            case "friend": {
+                target = Target.friend;
+                break;
+            }
+            default: {
+                throw new IOException("brain error");
+            }
+        }
+        return target;
     }
 }

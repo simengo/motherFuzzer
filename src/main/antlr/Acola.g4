@@ -1,5 +1,4 @@
 grammar Acola;
-start_rule:brain;
 brain : 'brain' '""' IDENTIFIER '""' '{' instruction+ '}' EOF;
 instruction : mark
               unmark
