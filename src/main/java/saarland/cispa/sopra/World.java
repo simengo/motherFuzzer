@@ -18,7 +18,7 @@ public class World implements WorldInfo {
     private final Map<Character, Integer> points;
     private final Map<Integer, Ant> ants;
     private final Random randGen;
-    private Map<Character, Integer> numOfAntsInSwarm;
+    private final Map<Character, Integer> numOfAntsInSwarm;
     //private Logger logger;
     //private final Map<Character,Swarm> swarms;
 
