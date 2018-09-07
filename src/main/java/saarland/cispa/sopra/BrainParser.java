@@ -58,7 +58,7 @@ public final class BrainParser {
         return brainMap;
     }
 
-    private static Instruction switchTarget(String dir, Target target, int jumpPC) {
+    private static Instruction switchTarget(String dir, Target target, int jumpPC) throws IOException {
         Instruction instruction = null;
         switch (target) {
             case foe:
@@ -88,6 +88,8 @@ public final class BrainParser {
             case food:
                 instruction = new SenseFood(dir, target, jumpPC);
                 break;
+            default:
+                throw new IOException();
         }
         return instruction;
     }
@@ -127,7 +129,7 @@ public final class BrainParser {
         return instruction;
     }
 
-    private static Instruction switchInstruction2 (String instr, String[] instructionStringArr) throws IllegalArgumentException {
+    private static Instruction switchInstruction2(String instr, String[] instructionStringArr) throws IOException {
         Instruction instruction;
         String direction = "";
         TurnDirection turn = null;
@@ -201,6 +203,21 @@ public final class BrainParser {
                 target = Target.marker;
                 break;
             }
+            default: {
+                target = createSense2(instructionStringArr);
+                break;
+            }
+        }
+        if (instructionStringArr[2].equals("marker")) {
+            return new SenseMarker(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
+        } else {
+            return switchTarget(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])); // jumpPC =  Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])
+        }
+    }
+
+    private static Target createSense2(String[] instructionStringArr) throws IOException {
+        Target target;
+        switch (instructionStringArr[1]) {
             case "foemarker": {
                 target = Target.foemarker;
                 break;
@@ -225,10 +242,6 @@ public final class BrainParser {
                 throw new IOException("brain error");
             }
         }
-        if (instructionStringArr[2].equals("marker")) {
-            return new SenseMarker(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
-        } else {
-            return switchTarget(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])); // jumpPC =  Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])
-        }
+        return target;
     }
 }
