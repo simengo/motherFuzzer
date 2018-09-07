@@ -3,8 +3,6 @@ package saarland.cispa.sopra;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import saarland.cispa.sopra.antlr.AcolaLexer;
-import saarland.cispa.sopra.antlr.AcolaParser;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import saarland.cispa.sopra.antlr.AcolaLexer;
+import saarland.cispa.sopra.antlr.AcolaParser;
 
 public final class BrainParser {
 

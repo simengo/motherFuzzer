@@ -21,9 +21,16 @@ public final class WorldParser {
         int jPMDlaenger = 0;
 
         try (BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()))) {
+            String x = bReader.readLine();
+            String y = bReader.readLine();
+            if (x == null | y == null) {
+                throw new IllegalArgumentException("x or y was null");
+            }
+            if (x.length() != 1 | y.length() != 1) {
+                throw new IllegalArgumentException("val for x was " + x + " and wal for y was " + y);
+            }
             int counter = 0;
-
-            Field[][] fields = new Field[bReader.readLine().charAt(0)][bReader.readLine().charAt(0)];
+            Field[][] fields = new Field[x.charAt(0)][y.charAt(0)];
 
             while (true) {
                 String line = bReader.readLine();
@@ -58,7 +65,7 @@ public final class WorldParser {
                 }
                 jPMDlaenger = 0;
                 iPMDleanger++;
-                counter += 1;
+                counter++;
             }
             Map<Integer, Ant> ants = spawnAnts(swarms, fields);
             return new World(fields, seed, ants, swarms);
