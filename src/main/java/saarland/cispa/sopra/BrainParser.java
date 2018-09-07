@@ -129,7 +129,7 @@ public final class BrainParser {
         return instruction;
     }
 
-    private static Instruction switchInstruction2(String instr, String[] instructionStringArr) throws IOException {
+    private static Instruction switchInstruction2(String instr, String[] instructionStringArr) throws IllegalArgumentException {
         Instruction instruction;
         String direction = "";
         TurnDirection turn = null;
