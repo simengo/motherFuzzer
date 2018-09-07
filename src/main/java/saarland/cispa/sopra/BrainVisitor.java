@@ -5,10 +5,11 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import saarland.cispa.sopra.antlr.AcolaParser;
+import saarland.cispa.sopra.antlr.AcolaVisitor;
 
 import java.util.List;
 
-public class BrainVisitor implements saarland.cispa.sopra.antlr.AcolaVisitor {
+public class BrainVisitor implements AcolaVisitor {
     @Override
     public Object visitStart_rule(AcolaParser.Start_ruleContext ctx) {
         return null;
