@@ -7,8 +7,8 @@ import saarland.cispa.sopra.systemtests.WorldInfo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Game implements GameInfo {
 
@@ -77,7 +77,7 @@ public class Game implements GameInfo {
 
     private void initialize(long seed, File world1, File[] brains) {
 
-        HashMap<Character, Swarm> swarms = new HashMap<>();
+        Map<Character, Swarm> swarms;
         try {
             swarms = BrainParser.parse(brains);
             world = WorldParser.parseMap(world1, seed, swarms);
