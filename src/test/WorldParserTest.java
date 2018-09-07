@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class WorldPaserTest {
+public class WorldParserTest {
     public class BreedTest {
 
         @BeforeEach
@@ -29,7 +29,7 @@ public class WorldPaserTest {
             } catch (java.io.IOException e){
                 fail = true;
             }
-            assert(fail);
+            assert(!fail);
         }
 
         @BeforeAll

@@ -1,7 +1,5 @@
 package saarland.cispa.sopra;
 
-import com.ibm.icu.impl.IllegalIcuArgumentException;
-
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -172,7 +170,7 @@ public final class BrainParser {
                 break;
             }
             default: {
-                throw new IllegalIcuArgumentException("");
+                throw new IllegalArgumentException("");
             }
         }
         return instruction;
@@ -234,7 +232,7 @@ public final class BrainParser {
         if (instructionStringArr[2].equals("marker")) {
             return new SenseMarker(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
         } else {
-            return switchTarget(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
+            return switchTarget(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])); // jumpPC =  Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])
         }
     }
 }
