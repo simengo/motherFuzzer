@@ -4,12 +4,13 @@ public class Swarm {
 
     private char ident;
     private final Instruction[] brain;
-    private String name;
+    private final String name;
 
-    public Swarm(char ident, Instruction[] brain) {
+    public Swarm(char ident, Instruction[] brain, String name) {
 
         this.ident = ident;
         this.brain = brain.clone();
+        this.name = name;
     }
 
     public char getIdent() {
