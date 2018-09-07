@@ -3,6 +3,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import saarland.cispa.sopra.*;
 
+import java.io.File;
 import java.util.HashMap;
 
 
