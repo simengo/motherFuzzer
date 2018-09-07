@@ -12,9 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import saarland.cispa.sopra.antlr.AcolaLexer;
-import saarland.cispa.sopra.antlr.AcolaParser;
-
 public final class BrainParser {
 
     private BrainParser(){}
@@ -32,7 +29,7 @@ public final class BrainParser {
 
             AcolaParser.BrainContext brainContext = parser.brain();
             BrainVisitor visitor = new BrainVisitor();
-            List<AcolaParser.InstructionContext> instructionContextList = (List<AcolaParser.InstructionContext>) visitor.visitBrain(brainContext);
+            List<AcolaParser.InstructionContext> instructionContextList = visitor.visitBrain(brainContext);
 
             name.add("");
 
@@ -51,10 +48,10 @@ public final class BrainParser {
             currentBrain++;
         }
         HashMap<Character, Swarm> brainMap = new HashMap<>();
-        int j = 0;
-        for (int i = 'A'; i <= 'Z'; i++) {
-            brainMap.put((char) i, new Swarm((char) i, brainArray[j], name.get(i)));
-            j++;
+        int jiterator = 0;
+        for (int iterator = 'A'; iterator <= 'Z'; iterator++) {
+            brainMap.put((char) iterator, new Swarm((char) iterator, brainArray[jiterator], name.get(iterator)));
+            jiterator++;
         }
         return brainMap;
     }
