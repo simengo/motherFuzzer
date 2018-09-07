@@ -4,38 +4,19 @@ import java.util.Map;
 
 public abstract class Sense extends Instruction {
 
-    private final SenseDir direction;
+    private final String direction;
     private final Target target;
     private final int jumpPC;
 
     public Sense(String dir, Target target, int jumpPC) {
 
-        this.direction = convertDir(dir);
+        this.direction = dir;
         this.target = target;
         this.jumpPC = jumpPC;
     }
 
-    public SenseDir convertDir(String dir){
-        SenseDir wert;
-        switch(dir){
-            case("here"):
-                wert = SenseDir.here;
-                break;
-            case("ahead"):
-                wert = SenseDir.ahead;
-                break;
-            case("left"):
-                wert = SenseDir.left;
-                break;
-            case("right"):
-                wert = SenseDir.right;
-                break;
-            default: throw new IllegalArgumentException();
 
-        }
-        return wert;
 
-    }
 
     public int getJumpPC() {
         return jumpPC;
@@ -43,7 +24,7 @@ public abstract class Sense extends Instruction {
     public Target getTargetS() {
         return target;
     }
-    public SenseDir getDirectionS() {
+    public String getDirectionS() {
         return direction;
     }
 
@@ -122,22 +103,22 @@ public abstract class Sense extends Instruction {
         Field field;
 
         switch (direction) {
-            case left:
+            case "left":
                 String antDirLeft = ant.getDirection();
                 String newDirectionLeft;
                 newDirectionLeft = toTheLeft(antDirLeft, directionsSense);
                 field = world.getFieldInDirection((Field) ant.getField(), newDirectionLeft);
                 break;
-            case right:
+            case "right":
                 String antDirRight = ant.getDirection();
                 String newDirectionRight;
                 newDirectionRight = toTheRight(antDirRight, directionsSense);
                 field = world.getFieldInDirection((Field) ant.getField(), newDirectionRight);
                 break;
-            case ahead:
+            case "ahead":
                 field = world.getFieldInDirection((Field) ant.getField(), ant.getDirection());
                 break;
-            case here:
+            case "here":
                 field = (Field) ant.getField();
                 break;
             default:
