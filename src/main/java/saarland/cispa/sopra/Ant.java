@@ -38,6 +38,8 @@ public class Ant implements AntInfo {
     }
 
     public void setDead(boolean isDead) {
+
+        field.setChanged();
         dead = isDead;
     }
 
@@ -131,5 +133,14 @@ public class Ant implements AntInfo {
 
     public Swarm getSwarmInstance() {
         return this.swarm;
+    }
+
+    @Override
+    public String toString() {
+        return "Ant{" +
+            "id=" + id +
+            ", swarm=" + swarm +
+            ", direction='" + direction + '\'' +
+            '}';
     }
 }

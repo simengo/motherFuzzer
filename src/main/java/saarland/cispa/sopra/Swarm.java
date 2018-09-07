@@ -38,4 +38,11 @@ public class Swarm {
     public Instruction[] getBrain() {
         return brain.clone();
     }
+
+    @Override
+    public String toString() {
+        return "Swarm{" +
+            "ident=" + ident +
+            '}';
+    }
 }
