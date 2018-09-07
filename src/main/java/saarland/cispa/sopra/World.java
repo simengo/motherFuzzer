@@ -18,7 +18,7 @@ public class World implements WorldInfo {
     private final Map<Character, Integer> points;
     private final Map<Integer, Ant> ants;
     private final Random randGen;
-    //private Map<Character, Integer> numOfAntsInSwarm;
+    private Map<Character, Integer> numOfAntsInSwarm;
     //private Logger logger;
     //private final Map<Character,Swarm> swarms;
 
@@ -38,8 +38,24 @@ public class World implements WorldInfo {
 
         this.points = new HashMap<>();
         this.ants = ants;
+
+        this.numOfAntsInSwarm = new HashMap<>();
+        int swarmCount = points.size();
+        int[] numOfAnts = new int[swarmCount];
+
+        for(Ant recentAnt : ants.values()){
+            char antSwarm = recentAnt.getSwarm();
+            int help = Character.getNumericValue(antSwarm) - 10; // A hat den Wert 10
+            numOfAnts[help] += 1;
+        }
+        char recentChar = 'A';
+        for(int i = 0; i < swarmCount; i++){
+            this.numOfAntsInSwarm.put(recentChar,numOfAnts[i]);
+            recentChar += 1;
+        }
+
         //this.logger = logger;
-        //this.numOfAntsInSwarm = new HashMap<>();
+
         this.seed = seed;
         randGen = new Random(this.seed);
         //this.swarms = swarms;
@@ -55,6 +71,10 @@ public class World implements WorldInfo {
         return this.height;
     }
 
+    public Map<Character,Integer> getNumOfAntsInSwarm(){
+
+        return this.numOfAntsInSwarm;
+    }
 
     public Field[][] getFields() {
 

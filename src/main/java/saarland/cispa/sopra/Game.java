@@ -61,7 +61,7 @@ public class Game implements GameInfo {
         for (AntInfo ant : ants) {
             oneAnt((Ant) ant);
         }
-        world.logChanges();
+        logger.addRoundInfo(world.logChanges(),world.getPoints(),world.getNumOfAntsInSwarm());
     }
 
     private void oneAnt(Ant ant) {
