@@ -129,7 +129,7 @@ public final class BrainParser {
         return instruction;
     }
 
-    private static Instruction switchInstruction2(String instr, String[] instructionStringArr) throws IllegalArgumentException {
+    private static Instruction switchInstruction2(String instr, String[] instructionStringArr) {
         Instruction instruction;
         String direction = "";
         TurnDirection turn = null;
@@ -208,7 +208,7 @@ public final class BrainParser {
                 break;
             }
         }
-        if (instructionStringArr[2].equals("marker")) {
+        if ("marker".equals(instructionStringArr[2])) {
             return new SenseMarker(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
         } else {
             return switchTarget(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])); // jumpPC =  Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])

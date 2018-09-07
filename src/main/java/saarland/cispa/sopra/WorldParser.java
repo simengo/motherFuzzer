@@ -22,6 +22,7 @@ public final class WorldParser {
 
         try (BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()))) {
             int counter = 0;
+
             Field[][] fields = new Field[bReader.readLine().charAt(0)][bReader.readLine().charAt(0)];
 
             while (true) {
