@@ -7,7 +7,7 @@ import java.util.Optional;
 import saarland.cispa.sopra.systemtests.FieldInfo;
 import saarland.cispa.sopra.systemtests.AntInfo;
 
-abstract class Field implements FieldInfo {
+public abstract class Field implements FieldInfo {
 
     private final int posX;
     private final int posY;
