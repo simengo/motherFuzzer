@@ -11,7 +11,7 @@ import java.util.Map;
 
 public final class WorldParser {
 
-    private WorldParser(){
+    private WorldParser() {
 
     }
 
@@ -19,18 +19,16 @@ public final class WorldParser {
 
         int iPMDleanger = 0;
         int jPMDlaenger = 0;
-        Field[][] fields;
 
         try (BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()))) {
-            String line;
             int counter = 0;
+            Field[][] fields = new Field[bReader.readLine().charAt(0)][bReader.readLine().charAt(0)];
 
-            fields = new Field[bReader.readLine().charAt(0)][bReader.readLine().charAt(0)];
             while (true) {
-                line = bReader.readLine();
+                String line = bReader.readLine();
 
-                if(line == null){
-                    if(counter%2 != 0 || counter == 0){
+                if (line == null) {
+                    if (counter % 2 != 0 || counter == 0) {
                         throw new IllegalArgumentException();
                     }
                     break;
@@ -59,7 +57,7 @@ public final class WorldParser {
                 }
                 jPMDlaenger = 0;
                 iPMDleanger++;
-                counter+=1;
+                counter += 1;
             }
             Map<Integer, Ant> ants = spawnAnts(swarms, fields);
             return new World(fields, seed, ants, swarms);
