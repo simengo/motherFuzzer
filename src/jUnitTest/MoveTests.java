@@ -22,8 +22,8 @@ public class MoveTests {
         Instruction[] brainA = new Instruction[2];
         brainA[0] = new Move(1);
         brainA[1] = new Move(0);
-        Swarm swarmA = new Swarm('A', brainA);
-        Swarm swarmB = new Swarm('B', brainA);
+        Swarm swarmA = new Swarm('A', brainA, "brainA");
+        Swarm swarmB = new Swarm('B', brainA, "brainB");
         Ant antA = new Ant(swarmA, 0, spielfeld[0][0]);
         Ant antB = new Ant(swarmB, 1, spielfeld[1][1]);
         spielfeld[0][0].setAnt(antA);
