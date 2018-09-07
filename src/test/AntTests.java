@@ -34,6 +34,21 @@ public class AntTests {
         ants.put(1, antB);
 
         assert (antA.getSwarm() == 'A');
+        assert (antA.getRegister(0) == false);
+        assert (antA.getRegister(1) == false);
+        assert (antA.getRegister(2) == false);
+        assert (antA.getRegister(3) == false);
+        assert (antA.getRegister(4) == false);
+        assert (antA.getRegister(5) == false);
+
+        assert (antA.hasFood() == false);
+
+        assert(antB.getDirection() == "northwest");
+        assert(antB.isDead() == false);
+        assert(antB.getId() == 2);
+        assert(antB.getPc() == 0);
+
+
 
     }
 }
