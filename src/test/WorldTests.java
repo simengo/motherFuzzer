@@ -48,7 +48,7 @@ public class WorldTests {
             "...AA...\n" +
             "........";
 
-        String dumbBrain = "brain \"sample\" {\njump 0\n}";
+
         Game game = new Game("");
         game.simulate(1, 42, map, dumbBrain, dumbBrain);
         WorldInfo world = (WorldInfo) game;
