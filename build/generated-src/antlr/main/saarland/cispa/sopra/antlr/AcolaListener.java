@@ -8,16 +8,6 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface AcolaListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link AcolaParser#start_rule}.
-	 * @param ctx the parse tree
-	 */
-	void enterStart_rule(AcolaParser.Start_ruleContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AcolaParser#start_rule}.
-	 * @param ctx the parse tree
-	 */
-	void exitStart_rule(AcolaParser.Start_ruleContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link AcolaParser#brain}.
 	 * @param ctx the parse tree
 	 */

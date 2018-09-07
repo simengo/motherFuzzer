@@ -11,7 +11,7 @@ import java.util.Map;
 
 public final class WorldParser {
 
-    private WorldParser(){
+    private WorldParser() {
 
     }
 
@@ -19,18 +19,17 @@ public final class WorldParser {
 
         int iPMDleanger = 0;
         int jPMDlaenger = 0;
-        Field[][] fields;
 
         try (BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()))) {
-            String line;
             int counter = 0;
 
-            fields = new Field[bReader.readLine().toCharArray()[0]][bReader.readLine().toCharArray()[0]];
-            while (true) {
-                line = bReader.readLine();
+            Field[][] fields = new Field[bReader.readLine().charAt(0)][bReader.readLine().charAt(0)];
 
-                if(line == null){
-                    if(counter%2 != 0 || counter == 0){
+            while (true) {
+                String line = bReader.readLine();
+
+                if (line == null) {
+                    if (counter % 2 != 0 || counter == 0) {
                         throw new IllegalArgumentException();
                     }
                     break;
@@ -59,14 +58,14 @@ public final class WorldParser {
                 }
                 jPMDlaenger = 0;
                 iPMDleanger++;
-                counter+=1;
+                counter += 1;
             }
             Map<Integer, Ant> ants = spawnAnts(swarms, fields);
             return new World(fields, seed, ants, swarms);
         }
     }
 
-    private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) throws IllegalArgumentException {
+    private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
         HashMap<Integer, Ant> ants = new HashMap<>();
         for (Field[] fieldh : fields) {
             for (Field field : fieldh) {

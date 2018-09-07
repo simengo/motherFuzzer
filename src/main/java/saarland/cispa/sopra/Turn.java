@@ -83,22 +83,11 @@ public class Turn extends Instruction {
         directions[4] = "southwest";
         directions[5] = "west";
 
-
-
-
-
-
-
-
         if(direction == TurnDirection.left){
             turnToTheLeft(ant,directions);
         }
 else
         {turnToTheRight(ant,directions);}
-
-
-
-
 
 
         ant.increasePC();

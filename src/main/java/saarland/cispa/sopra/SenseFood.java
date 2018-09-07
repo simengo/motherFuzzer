@@ -2,7 +2,7 @@ package saarland.cispa.sopra;
 
 public class SenseFood extends Sense{
 
-    public SenseFood(SenseDir dir,Target target, int jumpPC) {
+    public SenseFood(String dir,Target target, int jumpPC) {
         super(dir,target,jumpPC);
 
     }

@@ -2,7 +2,7 @@ package saarland.cispa.sopra;
 
 public class SenseAnt extends Sense{
 
-    public SenseAnt(SenseDir dir,Target target, int jumpPC) {
+    public SenseAnt(String dir,Target target, int jumpPC) {
         super(dir,target,jumpPC);
 
     }

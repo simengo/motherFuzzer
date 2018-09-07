@@ -16,18 +16,6 @@ public class AcolaBaseListener implements AcolaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStart_rule(AcolaParser.Start_ruleContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStart_rule(AcolaParser.Start_ruleContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterBrain(AcolaParser.BrainContext ctx) { }
 	/**
 	 * {@inheritDoc}
