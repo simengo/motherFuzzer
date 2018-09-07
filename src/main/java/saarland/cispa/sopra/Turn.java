@@ -8,62 +8,64 @@ public class Turn extends Instruction {
 
     private void turnToTheRight(Ant ant,  String[] dirs){
         String antDir = ant.getDirection();
-
+        String end;
 
 
         switch (antDir){
             case "northwest":
-                ant.setDirection(dirs[1]);
+                end = dirs[1];
                 break;
             case "northeast":
-                ant.setDirection(dirs[2]);
+                end = dirs[2];
                 break;
             case "east":
-                ant.setDirection(dirs[3]);
+                end = dirs[3];
                 break;
             case "southeast":
-                ant.setDirection(dirs[4]);
+                end = dirs[4];
                 break;
             case "southwest":
-                ant.setDirection(dirs[5]);
+                end = dirs[5];
                 break;
             case "west":
-                ant.setDirection(dirs[0]);
+                end = dirs[0];
                 break;
             default: throw new IllegalArgumentException();
 
 
         }
+        ant.setDirection(end);
 
 
     }
 
     private void turnToTheLeft(Ant ant,String[] dirs){
         String antDir = ant.getDirection();
+        String end;
 
         switch (antDir){
             case "northwest":
-                ant.setDirection(dirs[5]);
+                end = dirs[5];
                 break;
             case "northeast":
-                ant.setDirection(dirs[0]);
+                end = dirs[0];
                 break;
             case "east":
-                ant.setDirection(dirs[1]);
+                end = dirs[1];
                 break;
             case "southeast":
-                ant.setDirection(dirs[2]);
+                end = dirs[2];
                 break;
             case "southwest":
-                ant.setDirection(dirs[3]);
+                end = dirs[3];
                 break;
             case "west":
-                ant.setDirection(dirs[4]);
+                end = dirs[4];
                 break;
             default: throw new IllegalArgumentException();
 
         }
-
+        ant.setDirection(end);
     }
 
 
