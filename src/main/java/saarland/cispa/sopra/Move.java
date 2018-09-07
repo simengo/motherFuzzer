@@ -17,6 +17,7 @@ public class Move extends Killable {
             field.setChanged();
             fieldInDirection.setAnt(ant);
             fieldInDirection.setChanged();
+            ant.setField(fieldInDirection);
             killcheck(world, Optional.of(ant));
             ant.increasePC();
             ant.setRestTime(13);

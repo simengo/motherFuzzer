@@ -12,8 +12,8 @@ abstract class Field implements FieldInfo {
     private final int posX;
     private final int posY;
     private final char type;
-    private AntInfo ant;
     private final Map<Character, boolean[]> marker = new HashMap<Character, boolean[]>();
+    private AntInfo ant;
     private boolean isNextToAntlion;
     private boolean changed;
 
@@ -28,8 +28,15 @@ abstract class Field implements FieldInfo {
 
     @Override
     public Optional<AntInfo> getAnt() {
-        if(ant==null) return null; else
-        return Optional.of(ant);
+        if (ant == null) {
+            return null;
+        } else {
+            return Optional.of(ant);
+        }
+    }
+
+    public void setAnt(Ant ant) {
+        this.ant = ant;
     }
 
     @Override
@@ -69,13 +76,8 @@ abstract class Field implements FieldInfo {
         return this.ant == null && this.type != '#';
     }
 
-
     public void setMarker(char ident, int num, boolean bool) {
         this.marker.get(ident)[num] = bool;
-    }
-
-    public void setAnt(Ant ant) {
-        this.ant = ant;
     }
 
     public void setNextToAntlion(boolean nextToAntlion) {
