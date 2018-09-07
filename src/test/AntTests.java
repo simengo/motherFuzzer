@@ -45,8 +45,9 @@ public class AntTests {
 
         assert(antB.getDirection() == "northwest");
         assert(antB.isDead() == false);
-        assert(antB.getId() == 2);
+        assert(antB.getId() == 1);
         assert(antB.getPc() == 0);
+        assert(antB.getRestTime() == 0);
 
 
 
