@@ -35,7 +35,7 @@ public class Game implements GameInfo {
     @Override
     public WorldInfo simulate(int rounds, long seed, File world1, File... brains) {
         initialize(seed, world1, brains);
-        for (int count = 0; count < rounds; count++) {
+        for (int count = 0; count< rounds; count++) {
             simulateOnce();
         }
 
@@ -65,7 +65,7 @@ public class Game implements GameInfo {
             oneAnt((Ant) ant);
         }
 
-        logger.addRoundInfo(world.logChanges(),world.getPoints(),null);
+        logger.addRoundInfo(world.logChanges(),world.getPoints(),world.getAnts());
     }
 
     private void oneAnt(Ant ant) {

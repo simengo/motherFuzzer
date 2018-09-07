@@ -1,9 +1,10 @@
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import saarland.cispa.sopra.*;
-
+import saarland.cispa.sopra.systemtests.GameInfo;
+import saarland.cispa.sopra.systemtests.WorldInfo;
+import saarland.cispa.sopra.systemtests.FieldInfo;
 
 
 public class WorldTests {
@@ -19,7 +20,8 @@ public class WorldTests {
             "........";
 
         String dumbBrain = "brain \"sample\" {\njump 0\n}";
-        WorldInfo world = gameInfo.simulate(1, 42, map, dumbBrain, dumbBrain);
+        Game game = new Game("");
+        game.simulate(1, 42, map, dumbBrain, dumbBrain);
 
 
         // Do nothing
@@ -37,7 +39,22 @@ public class WorldTests {
 
     @Test
     public void getFieldInDirectionTest(){
-    Normal field = (Normal) world.getField(0,0);
+
+        String map = "8\n6\n" +
+            "........\n" +
+            "...BB...\n" +
+            "........\n" +
+            "........\n" +
+            "...AA...\n" +
+            "........";
+
+        String dumbBrain = "brain \"sample\" {\njump 0\n}";
+        Game game = new Game("");
+        game.simulate(1, 42, map, dumbBrain, dumbBrain);
+        WorldInfo world = (WorldInfo) game;
+
+
+        Normal field = (Normal) world.;
     Normal test = (Normal) world.getField(8,6);
     Normal test2 = (Normal) world.getField(1,0);
 
@@ -55,7 +72,7 @@ public class WorldTests {
     @Test
     public void getNeighbours(){
         Normal field = (Normal) world.getField(0,0);
-        Field[] fields = world.getNeighbours(field);
+        Normal[] fields = world.getNeighbours(field);
         Normal fieldNW = (Normal) world.getField(8,6);
         Normal fieldNE = (Normal) world.getField(0,6);
         Normal fieldE = (Normal) world.getField(1,0);
