@@ -10,7 +10,7 @@ public class SenseTests {
     @Test
     public void AntLionTest(){
 
-        Field[][] spielfeld = new Normal[2][2];
+        Field[][] spielfeld = new Field[2][2];
         Antlion field00 = new Antlion(0, 0);
         Normal field01 = new Normal(0, 1, 0);
         Normal field10 = new Normal(1, 0, 0);
@@ -50,7 +50,7 @@ public class SenseTests {
     @Test
     public void friendFoodTest(){
 
-        Field[][] spielfeld = new Normal[2][2];
+        Field[][] spielfeld = new Field[2][2];
         Normal field00 = new Normal(0, 0,0);
         Normal field01 = new Normal(0, 1, 0);
         Normal field10 = new Normal(1, 0, 0);
@@ -95,7 +95,7 @@ public class SenseTests {
     @Test
     public void foeFoodTest(){
 
-        Field[][] spielfeld = new Normal[2][2];
+        Field[][] spielfeld = new Field[2][2];
         Normal field00 = new Normal(0, 0,0);
         Normal field01 = new Normal(0, 1, 0);
         Normal field10 = new Normal(1, 0, 0);
@@ -144,7 +144,7 @@ public class SenseTests {
     @Test
     public void foeMarkerTest(){
 
-        Field[][] spielfeld = new Normal[2][2];
+        Field[][] spielfeld = new Field[2][2];
         Normal field00 = new Normal(0, 0,0);
         Normal field01 = new Normal(0, 1, 0);
         Normal field10 = new Normal(1, 0, 0);
