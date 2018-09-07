@@ -36,6 +36,7 @@ public final class WorldParser {
                     if(counter%2 != 0 || counter == 0){
                         throw new IllegalArgumentException();
                     }
+                    break;
                 }
 
                 char[] row = line.toCharArray();
