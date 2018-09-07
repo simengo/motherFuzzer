@@ -17,7 +17,7 @@ import java.util.Map;
 
 public final class BrainParser {
 
-    private BrainParser(){}
+    private BrainParser() {}
 
     public static Map<Character, Swarm> parse(File[] brains) throws IOException {
 
@@ -59,7 +59,7 @@ public final class BrainParser {
         return brainMap;
     }
 
-    private static Instruction switchTarget(String dir, Target target, int jumpPC){
+    private static Instruction switchTarget(String dir, Target target, int jumpPC) {
         Instruction instruction = null;
         switch (target) {
             case foe:
@@ -95,10 +95,9 @@ public final class BrainParser {
 
     private static Instruction switchInstruction(String instr, String[] instructionStringArr) throws IOException {
         Instruction instruction = null;
-        Target target = null; //TODO get all the stuff
+        //TODO get all the stuff
         int marker = 0;
         String direction = "";
-        String dir = "";
         int max = 0;
         TurnDirection turn = null;
         int register;
@@ -111,65 +110,7 @@ public final class BrainParser {
                 break;
             }
             case "sense": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-
-                switch (instructionStringArr[1]) {
-                    case "foe": {
-                        target = Target.foe;
-                        break;
-                    }
-                    case "food": {
-                        target = Target.food;
-                        break;
-                    }
-                    case "rock": {
-                        target = Target.rock;
-                        break;
-                    }
-                    case "home": {
-                        target = Target.home;
-                        break;
-                    }
-                    case "foehome": {
-                        target = Target.foehome;
-                        break;
-                    }
-                    case "marker": {
-                        target = Target.marker;
-                        break;
-                    }
-                    case "foemarker": {
-                        target = Target.foemarker;
-                        break;
-                    }
-                    case "antlion": {
-                        target = Target.antlion;
-                        break;
-                    }
-                    case "foefood": {
-                        target = Target.foefood;
-                        break;
-                    }
-                    case "friendfood": {
-                        target = Target.friendfood;
-                        break;
-                    }
-                    case "friend": {
-                        target = Target.friend;
-                        break;
-                    }
-                    default: {
-                        throw new IOException("brain error");
-                    }
-                }
-                if (instructionStringArr[2].equals("marker")) {
-                    dir = instructionStringArr[2];
-                    marker = Integer.parseInt(instructionStringArr[3]);
-                    instruction = new SenseMarker(dir, target, marker, jumpPC);
-                } else {
-                    dir = instructionStringArr[2];
-                    instruction=switchTarget(dir, target, jumpPC);
-                }
+                instruction = createSense(instructionStringArr);
                 break;
             }
             case "flip": {
@@ -235,5 +176,65 @@ public final class BrainParser {
             }
         }
         return instruction;
+    }
+
+
+
+    private static Instruction createSense(String[] instructionStringArr) throws IOException {
+        Target target;
+        switch (instructionStringArr[1]) {
+            case "foe": {
+                target = Target.foe;
+                break;
+            }
+            case "food": {
+                target = Target.food;
+                break;
+            }
+            case "rock": {
+                target = Target.rock;
+                break;
+            }
+            case "home": {
+                target = Target.home;
+                break;
+            }
+            case "foehome": {
+                target = Target.foehome;
+                break;
+            }
+            case "marker": {
+                target = Target.marker;
+                break;
+            }
+            case "foemarker": {
+                target = Target.foemarker;
+                break;
+            }
+            case "antlion": {
+                target = Target.antlion;
+                break;
+            }
+            case "foefood": {
+                target = Target.foefood;
+                break;
+            }
+            case "friendfood": {
+                target = Target.friendfood;
+                break;
+            }
+            case "friend": {
+                target = Target.friend;
+                break;
+            }
+            default: {
+                throw new IOException("brain error");
+            }
+        }
+        if (instructionStringArr[2].equals("marker")) {
+            return new SenseMarker(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
+        } else {
+            return switchTarget(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
+        }
     }
 }
