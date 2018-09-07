@@ -80,12 +80,14 @@ abstract class Killable extends Instruction {
 
     }
 
-    private boolean isSurrounded(World world, Ant ant) {
+    private boolean isSurrounded(World world, AntInfo ant) {
         FieldInfo field = ant.getField();
         Field[] neighbours = world.getNeighbours((Field) field);
         int enemies = 0;
 
+
         for (Field neighbour : neighbours) {
+            
             if(neighbour.getAnt().get() == null){
                 continue;
             }
