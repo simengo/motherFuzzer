@@ -10,12 +10,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import saarland.cispa.sopra.antlr.AcolaLexer;
-import saarland.cispa.sopra.antlr.AcolaParser;
+import java.util.Map;
 
-public class BrainParser {
+public final class BrainParser {
 
-    public static HashMap<Character, Swarm> parse(File[] brains) throws IOException {
+    private BrainParser(){}
+
+    public static Map<Character, Swarm> parse(File[] brains) throws IOException {
 
         int currentBrain = 0;
         List<String> name = new ArrayList<>();
@@ -28,7 +29,7 @@ public class BrainParser {
 
             AcolaParser.BrainContext brainContext = parser.brain();
             BrainVisitor visitor = new BrainVisitor();
-            List<AcolaParser.InstructionContext> instructionContextList = (List<AcolaParser.InstructionContext>) visitor.visitBrain(brainContext);
+            List<AcolaParser.InstructionContext> instructionContextList = visitor.visitBrain(brainContext);
 
             name.add("");
 
@@ -37,173 +38,7 @@ public class BrainParser {
             for (AcolaParser.InstructionContext context : instructionContextList) {
 
                 String[] instructionStringArr = context.getText().split(" ");
-
-                String instr = instructionStringArr[0];
-                int jumpPC;
-                int max = 0;
-                int marker = 0;
-                Target target;
-                String direction = "";
-                SenseDir dir = SenseDir.here;
-                Instruction instruction = null;
-                TurnDirection turn = TurnDirection.left;
-                int register;
-                switch (instr) {
-                    case "move": {
-                        jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                        instruction = new Move(jumpPC);
-                        break;
-                    }
-                    case "sense": {
-                        jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-
-                        switch (instructionStringArr[1]) {
-                            case ("foe"): {
-                                target = Target.foe;
-                                break;
-                            }
-                            case ("food"): {
-                                target = Target.food;
-                                break;
-                            }
-                            case ("rock"): {
-                                target = Target.rock;
-                                break;
-                            }
-                            case ("home"): {
-                                target = Target.home;
-                                break;
-                            }
-                            case ("foehome"): {
-                                target = Target.foehome;
-                                break;
-                            }
-                            case ("marker"): {
-                                target = Target.marker;
-                                break;
-                            }
-                            case ("foemarker"): {
-                                target = Target.foemarker;
-                                break;
-                            }
-                            case ("antlion"): {
-                                target = Target.antlion;
-                                break;
-                            }
-                            case ("foefood"): {
-                                target = Target.foefood;
-                                break;
-                            }
-                            case ("friendfood"): {
-                                target = Target.friendfood;
-                                break;
-                            }
-                            case ("friend"): {
-                                target = Target.friend;
-                                break;
-                            }
-                            default: {
-                                throw new IOException("brain error");
-                            }
-                        }
-                        if (instructionStringArr[2].equals("marker")) {
-                            marker = Integer.parseInt(instructionStringArr[3]);
-                            instruction = new SenseMarker(dir, target, marker, jumpPC);
-                        } else {
-                            switch (target) {
-                                case foe:
-                                    instruction = new SenseAnt(dir, target, jumpPC);
-                                    break;
-                                case friend:
-                                    instruction = new SenseAnt(dir, target, jumpPC);
-                                    break;
-                                case home:
-                                    instruction = new SenseField(dir, target, jumpPC);
-                                    break;
-                                case foehome:
-                                    instruction = new SenseField(dir, target, jumpPC);
-                                    break;
-                                case rock:
-                                    instruction = new SenseField(dir, target, jumpPC);
-                                    break;
-                                case antlion:
-                                    instruction = new SenseField(dir, target, jumpPC);
-                                    break;
-                                case friendfood:
-                                    instruction = new SenseFood(dir, target, jumpPC);
-                                    break;
-                                case foefood:
-                                    instruction = new SenseFood(dir, target, jumpPC);
-                                    break;
-                                case food:
-                                    instruction = new SenseFood(dir, target, jumpPC);
-                                    break;
-                            }
-                        }
-                        break;
-                    }
-                    case ("flip"): {
-                        jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                        instruction = new Flip(max, jumpPC);
-                        break;
-                    }
-                    case ("mark"): {
-                        instruction = new Mark(marker);
-                        break;
-                    }
-                    case ("unmark"): {
-                        instruction = new Unmark(marker);
-                        break;
-                    }
-                    case ("set"): {
-                        register = Integer.parseInt(instructionStringArr[2]);
-                        instruction = new Set(register);
-                        break;
-                    }
-                    case ("unset"): {
-                        register = Integer.parseInt(instructionStringArr[2]);
-                        instruction = new Unset(register);
-                        break;
-                    }
-                    case ("drop"): {
-                        jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                        instruction = new Drop(jumpPC);
-                        break;
-                    }
-                    case ("pickup"): {
-                        jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                        instruction = new Pickup(jumpPC);
-                        break;
-                    }
-                    case ("direction"): {
-                        jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                        instruction = new Direction(jumpPC, direction);
-                        break;
-                    }
-                    case ("jump"): {
-                        jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                        instruction = new Jump(jumpPC);
-                        break;
-                    }
-                    case ("breed"): {
-                        jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                        instruction = new Breed(jumpPC);
-                        break;
-                    }
-                    case ("turn"): {
-                        instruction = new Turn(turn);
-                        break;
-                    }
-                    case ("test"): {
-                        register = Integer.parseInt(instructionStringArr[2]);
-                        jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                        instruction = new Test(register, jumpPC);
-                        break;
-                    }
-                    default: {
-                        throw new IllegalIcuArgumentException("");
-                    }
-                }
+                Instruction instruction = switchInstruction(instructionStringArr[0], instructionStringArr);
                 if (instruction == null) {
                     throw new IllegalArgumentException("instruction is null");
                 }
@@ -213,11 +48,189 @@ public class BrainParser {
             currentBrain++;
         }
         HashMap<Character, Swarm> brainMap = new HashMap<>();
-        int j = 0;
-        for (int i = 'A'; i <= 'Z'; i++) {
-            brainMap.put((char) i, new Swarm((char) i, brainArray[j], name.get(i)));
-            j++;
+        int jiterator = 0;
+        for (int iterator = 'A'; iterator <= 'Z'; iterator++) {
+            brainMap.put((char) iterator, new Swarm((char) iterator, brainArray[jiterator], name.get(iterator)));
+            jiterator++;
         }
         return brainMap;
+    }
+
+    private static Instruction switchTarget(String dir, Target target, int jumpPC){
+        Instruction instruction = null;
+        switch (target) {
+            case foe:
+                instruction = new SenseAnt(dir, target, jumpPC);
+                break;
+            case friend:
+                instruction = new SenseAnt(dir, target, jumpPC);
+                break;
+            case home:
+                instruction = new SenseField(dir, target, jumpPC);
+                break;
+            case foehome:
+                instruction = new SenseField(dir, target, jumpPC);
+                break;
+            case rock:
+                instruction = new SenseField(dir, target, jumpPC);
+                break;
+            case antlion:
+                instruction = new SenseField(dir, target, jumpPC);
+                break;
+            case friendfood:
+                instruction = new SenseFood(dir, target, jumpPC);
+                break;
+            case foefood:
+                instruction = new SenseFood(dir, target, jumpPC);
+                break;
+            case food:
+                instruction = new SenseFood(dir, target, jumpPC);
+                break;
+        }
+        return instruction;
+    }
+
+    private static Instruction switchInstruction(String instr, String[] instructionStringArr) throws IOException {
+        Instruction instruction = null;
+        Target target = null; //TODO get all the stuff
+        int marker = 0;
+        String direction = "";
+        String dir = "";
+        int max = 0;
+        TurnDirection turn = null;
+        int register;
+        int jumpPC;
+
+        switch (instr) {
+            case "move": {
+                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
+                instruction = new Move(jumpPC);
+                break;
+            }
+            case "sense": {
+                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
+
+                switch (instructionStringArr[1]) {
+                    case "foe": {
+                        target = Target.foe;
+                        break;
+                    }
+                    case "food": {
+                        target = Target.food;
+                        break;
+                    }
+                    case "rock": {
+                        target = Target.rock;
+                        break;
+                    }
+                    case "home": {
+                        target = Target.home;
+                        break;
+                    }
+                    case "foehome": {
+                        target = Target.foehome;
+                        break;
+                    }
+                    case "marker": {
+                        target = Target.marker;
+                        break;
+                    }
+                    case "foemarker": {
+                        target = Target.foemarker;
+                        break;
+                    }
+                    case "antlion": {
+                        target = Target.antlion;
+                        break;
+                    }
+                    case "foefood": {
+                        target = Target.foefood;
+                        break;
+                    }
+                    case "friendfood": {
+                        target = Target.friendfood;
+                        break;
+                    }
+                    case "friend": {
+                        target = Target.friend;
+                        break;
+                    }
+                    default: {
+                        throw new IOException("brain error");
+                    }
+                }
+                if (instructionStringArr[2].equals("marker")) {
+                    dir = instructionStringArr[2];
+                    marker = Integer.parseInt(instructionStringArr[3]);
+                    instruction = new SenseMarker(dir, target, marker, jumpPC);
+                } else {
+                    dir = instructionStringArr[2];
+                    instruction=switchTarget(dir, target, jumpPC);
+                }
+                break;
+            }
+            case "flip": {
+                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
+                instruction = new Flip(max, jumpPC);
+                break;
+            }
+            case "mark": {
+                instruction = new Mark(marker);
+                break;
+            }
+            case "unmark": {
+                instruction = new Unmark(marker);
+                break;
+            }
+            case "set": {
+                register = Integer.parseInt(instructionStringArr[2]);
+                instruction = new Set(register);
+                break;
+            }
+            case "unset": {
+                register = Integer.parseInt(instructionStringArr[2]);
+                instruction = new Unset(register);
+                break;
+            }
+            case "drop": {
+                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
+                instruction = new Drop(jumpPC);
+                break;
+            }
+            case "pickup": {
+                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
+                instruction = new Pickup(jumpPC);
+                break;
+            }
+            case "direction": {
+                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
+                instruction = new Direction(jumpPC, direction);
+                break;
+            }
+            case "jump": {
+                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
+                instruction = new Jump(jumpPC);
+                break;
+            }
+            case "breed": {
+                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
+                instruction = new Breed(jumpPC);
+                break;
+            }
+            case "turn": {
+                instruction = new Turn(turn);
+                break;
+            }
+            case "test": {
+                register = Integer.parseInt(instructionStringArr[2]);
+                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
+                instruction = new Test(register, jumpPC);
+                break;
+            }
+            default: {
+                throw new IllegalIcuArgumentException("");
+            }
+        }
+        return instruction;
     }
 }
