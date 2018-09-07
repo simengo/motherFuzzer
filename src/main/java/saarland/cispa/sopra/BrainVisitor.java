@@ -10,10 +10,6 @@ import saarland.cispa.sopra.antlr.AcolaVisitor;
 import java.util.List;
 
 public class BrainVisitor implements AcolaVisitor {
-    @Override
-    public Object visitStart_rule(AcolaParser.Start_ruleContext ctx) {
-        return null;
-    }
 
     @Override
     public List<AcolaParser.InstructionContext> visitBrain(AcolaParser.BrainContext ctx) {
