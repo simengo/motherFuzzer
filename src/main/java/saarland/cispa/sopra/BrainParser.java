@@ -21,7 +21,7 @@ public final class BrainParser {
     public static Map<Character, Swarm> parse(File[] brains) throws IOException {
 
         int currentBrain = 0;
-        List<String> name = new ArrayList<>();
+        List<String> name = new ArrayList<>(2);
         Instruction[][] brainArray = new Instruction[0][];
         for (File brain : brains) {
             CharStream input = CharStreams.fromPath(brain.toPath());
