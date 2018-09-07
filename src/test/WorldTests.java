@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class WorldTests {
 
     private World Szenario1() {
-        Field[][] spielfeld = new Normal[4][4];
+        Field[][] spielfeld = new Field[4][4];
         Antlion field00 = new Antlion(0, 0);
         Normal field10 = new Normal(1, 0, 0);
         Normal field20 = new Normal(2, 0, 0);
@@ -90,7 +90,7 @@ public class WorldTests {
         World world = Szenario1();
 
 
-        Normal field = (Normal) world.getFieldAt(0,0);
+        Antlion field = (Antlion) world.getFieldAt(0,0);
         Normal test = (Normal) world.getFieldAt(3,3);
         Normal test2 = (Normal) world.getFieldAt(1,0);
 
@@ -112,7 +112,7 @@ public class WorldTests {
     public void getNeighbours(){
 
         World world = Szenario1();
-        Normal field = (Normal) world.getFieldAt(0,0);
+        Antlion field = (Antlion) world.getFieldAt(0,0);
         Field[] fields = world.getNeighbours(field);
         Normal fieldNW = (Normal) world.getFieldAt(3,3);
         Normal fieldNE = (Normal) world.getFieldAt(0,3);
