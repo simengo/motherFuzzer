@@ -29,7 +29,7 @@ public abstract class Field implements FieldInfo {
     @Override
     public Optional<AntInfo> getAnt() {
 
-        return Optional.of(ant);
+        return Optional.ofNullable(ant);
 
     }
 

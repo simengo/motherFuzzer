@@ -57,16 +57,18 @@ public class Game implements GameInfo {
     }
 
     private void simulateOnce() {
+
         List<AntInfo> ants = world.getAnts();
         for (AntInfo ant : ants) {
             oneAnt((Ant) ant);
         }
+
         logger.addRoundInfo(world.logChanges(),world.getPoints(),world.getNumOfAntsInSwarm());
     }
 
     private void oneAnt(Ant ant) {
 
-        if (ant.getRestTime() == 0) {
+        if (ant.getRestTime() == 0 && !ant.isDead()) {
             ant.getNextInstruction().execute(world, ant);
         } else {
             ant.decreaseResttime();
@@ -77,7 +79,7 @@ public class Game implements GameInfo {
 
         HashMap<Character, Swarm> swarms = new HashMap<>();
         try {
-            //  swarms = BrainParser.parse(brains);
+            swarms = BrainParser.parse(brains);
             world = WorldParser.parseMap(world1, seed, swarms);
         } catch (IOException e) {
             e.notifyAll();
