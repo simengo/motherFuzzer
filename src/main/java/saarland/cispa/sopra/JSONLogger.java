@@ -24,14 +24,14 @@ import java.util.Map;
 public class JSONLogger implements Logger {
 
     private static String swarmHelp = "swarm_id";
-    private final String output;
+    private final File output;
     private final JsonArrayBuilder stepsArraybuilder = Json.createArrayBuilder();
     private JsonObject initialObject;
     private int numOfSwarms;
 
     public JSONLogger(File protocol) {
 
-        this.output = protocol.toString();
+        this.output = protocol;
 
 
     }
@@ -98,7 +98,7 @@ public class JSONLogger implements Logger {
 
         try {
 
-            BufferedWriter fWriter = Files.newBufferedWriter(Paths.get(this.output));
+            BufferedWriter fWriter = Files.newBufferedWriter(Paths.get(this.output.getPath()));
             JsonWriter jsonWriter = Json.createWriter(fWriter);
             jsonWriter.writeObject(endObject);
             jsonWriter.close();
