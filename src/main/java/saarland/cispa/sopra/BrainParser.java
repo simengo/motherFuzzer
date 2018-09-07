@@ -15,7 +15,8 @@ import java.util.Map;
 
 public final class BrainParser {
 
-    private BrainParser() {}
+    private BrainParser() {
+    }
 
     public static Map<Character, Swarm> parse(File[] brains) throws IOException {
 
@@ -95,16 +96,11 @@ public final class BrainParser {
         Instruction instruction = null;
         //TODO get all the stuff
         int marker = 0;
-        String direction = "";
         int max = 0;
-        TurnDirection turn = null;
-        int register;
-        int jumpPC;
 
         switch (instr) {
             case "move": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Move(jumpPC);
+                instruction = new Move(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
             }
             case "sense": {
@@ -112,8 +108,7 @@ public final class BrainParser {
                 break;
             }
             case "flip": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Flip(max, jumpPC);
+                instruction = new Flip(max, Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
             }
             case "mark": {
@@ -124,39 +119,45 @@ public final class BrainParser {
                 instruction = new Unmark(marker);
                 break;
             }
+            default: {
+                instruction = switchInstruction2(instr, instructionStringArr);
+                break;
+            }
+        }
+        return instruction;
+    }
+
+    private static Instruction switchInstruction2 (String instr, String[] instructionStringArr) throws IOException {
+        Instruction instruction;
+        String direction = "";
+        TurnDirection turn = null;
+        switch (instr) {
             case "set": {
-                register = Integer.parseInt(instructionStringArr[2]);
-                instruction = new Set(register);
+                instruction = new Set(Integer.parseInt(instructionStringArr[2]));
                 break;
             }
             case "unset": {
-                register = Integer.parseInt(instructionStringArr[2]);
-                instruction = new Unset(register);
+                instruction = new Unset(Integer.parseInt(instructionStringArr[2]));
                 break;
             }
             case "drop": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Drop(jumpPC);
+                instruction = new Drop(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
             }
             case "pickup": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Pickup(jumpPC);
+                instruction = new Pickup(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
             }
             case "direction": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Direction(jumpPC, direction);
+                instruction = new Direction(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]), direction);
                 break;
             }
             case "jump": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Jump(jumpPC);
+                instruction = new Jump(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
             }
             case "breed": {
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Breed(jumpPC);
+                instruction = new Breed(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
             }
             case "turn": {
@@ -164,19 +165,14 @@ public final class BrainParser {
                 break;
             }
             case "test": {
-                register = Integer.parseInt(instructionStringArr[2]);
-                jumpPC = Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]);
-                instruction = new Test(register, jumpPC);
+                instruction = new Test(Integer.parseInt(instructionStringArr[2]), Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
             }
-            default: {
-                throw new IllegalArgumentException("");
-            }
+            default:
+                throw new IllegalArgumentException("brain f*ck");
         }
         return instruction;
     }
-
-
 
     private static Instruction createSense(String[] instructionStringArr) throws IOException {
         Target target;

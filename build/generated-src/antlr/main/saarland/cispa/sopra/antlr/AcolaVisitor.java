@@ -11,12 +11,6 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface AcolaVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link AcolaParser#start_rule}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStart_rule(AcolaParser.Start_ruleContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link AcolaParser#brain}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
