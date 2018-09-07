@@ -65,7 +65,7 @@ public class Game implements GameInfo {
             oneAnt((Ant) ant);
         }
 
-        logger.addRoundInfo(world.logChanges(),world.getPoints(),world.getAnts());
+        logger.addRoundInfo(world.logChanges(),world.getPoints(),null);
     }
 
     private void oneAnt(Ant ant) {
