@@ -1,4 +1,4 @@
-package saarland.cispa.sopra;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,10 +18,8 @@ public class WorldTests {
             "...AA...\n" +
             "........";
 
-        String brainDumb = "brain \"sample\" {\njump 0\n}";
-        Game world = new Game("");
-
-        world.simulate(1, 42, map, brainDumb, brainDumb);
+        String dumbBrain = "brain \"sample\" {\njump 0\n}";
+        WorldInfo world = gameInfo.simulate(1, 42, map, dumbBrain, dumbBrain);
 
 
         // Do nothing

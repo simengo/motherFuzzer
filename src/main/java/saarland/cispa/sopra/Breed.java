@@ -12,29 +12,32 @@ public class Breed extends Killable {
         Field field = (Field) ant.getField();
         String direction = ant.getDirection();
         Field fieldInDirection = world.getFieldInDirection(field, direction);
-        Ant partner = (Ant) fieldInDirection.getAnt().get();
-        boolean antSpawned = false;
+        if (fieldInDirection.getAnt().isPresent()) {
+            Ant partner = (Ant) fieldInDirection.getAnt().get();
+            boolean antSpawned = false;
 
-        if (ant.hasFood() && partner.hasFood() && ant.getSwarm() == partner.getSwarm()) {
-            Field[] fields = world.getNeighbours(field);
-            for (Field neighbour : fields) {
-                if (neighbour.isAccessible() && !antSpawned) {
-                    spawnAnt(ant.getSwarmInstance(), neighbour, world);
-                    antSpawned = true;
-                    break;
-                }
-            }
-            if (!antSpawned) {
-                fields = world.getNeighbours(fieldInDirection);
+            if (ant.hasFood() && partner.hasFood() && ant.getSwarm() == partner.getSwarm()) {
+                Field[] fields = world.getNeighbours(field);
                 for (Field neighbour : fields) {
-                    if (neighbour.isAccessible()) {
+                    if (neighbour.isAccessible()) {  //Warum? //antPc increases.
                         spawnAnt(ant.getSwarmInstance(), neighbour, world);
+                        antSpawned = true;
                         break;
                     }
                 }
+                if (!antSpawned) {
+                    fields = world.getNeighbours(fieldInDirection);
+                    for (Field neighbour : fields) {
+                        if (neighbour.isAccessible()) {
+                            spawnAnt(ant.getSwarmInstance(), neighbour, world);
+                            break;
+                        }
+                    }
+                }
             }
+        ant.increasePC();
         }
-
+        else{ant.setPc(getJumpPc());}
     }
 
 
