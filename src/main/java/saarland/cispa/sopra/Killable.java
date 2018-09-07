@@ -88,7 +88,7 @@ abstract class Killable extends Instruction {
 
         for (Field neighbour : neighbours) {
             
-            if(neighbour.getAnt() == null){
+            if(!neighbour.getAnt().isPresent()){
                 continue;
             }
             if (neighbour.getAnt().get().getSwarm() != ant.getSwarm()) {

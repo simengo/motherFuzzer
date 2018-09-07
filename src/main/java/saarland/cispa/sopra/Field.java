@@ -28,11 +28,9 @@ abstract class Field implements FieldInfo {
 
     @Override
     public Optional<AntInfo> getAnt() {
-        if (ant == null) {
-            return null;
-        } else {
-            return Optional.of(ant);
-        }
+
+        return Optional.of(ant);
+
     }
 
     public void setAnt(Ant ant) {
