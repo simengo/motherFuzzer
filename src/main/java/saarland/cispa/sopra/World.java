@@ -40,7 +40,7 @@ public class World implements WorldInfo {
         this.ants = ants;
 
         this.numOfAntsInSwarm = new HashMap<>();
-        int swarmCount = points.size();
+        int swarmCount = ants.size();
         int[] numOfAnts = new int[swarmCount];
 
         for(Ant recentAnt : ants.values()){

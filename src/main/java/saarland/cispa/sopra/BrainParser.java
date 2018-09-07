@@ -28,7 +28,7 @@ public class BrainParser {
 
             AcolaParser.BrainContext brainContext = parser.brain();
             BrainVisitor visitor = new BrainVisitor();
-            List<AcolaParser.InstructionContext> instructionContextList = visitor.visitBrain(brainContext);
+            List<AcolaParser.InstructionContext> instructionContextList = (List<AcolaParser.InstructionContext>) visitor.visitBrain(brainContext);
 
             name.add("");
 

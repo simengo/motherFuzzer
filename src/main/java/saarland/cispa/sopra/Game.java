@@ -1,6 +1,5 @@
 package saarland.cispa.sopra;
 
-import saarland.cispa.sopra.antlr.BrainParser;
 import saarland.cispa.sopra.systemtests.AntInfo;
 import saarland.cispa.sopra.systemtests.GameInfo;
 import saarland.cispa.sopra.systemtests.WorldInfo;
@@ -8,7 +7,6 @@ import saarland.cispa.sopra.systemtests.WorldInfo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -65,7 +63,7 @@ public class Game implements GameInfo {
             oneAnt((Ant) ant);
         }
 
-        logger.addRoundInfo(world.logChanges(),world.getPoints(),world.getAnts());
+        logger.addRoundInfo(world.logChanges(),world.getPoints(),world.getNumOfAntsInSwarm());
     }
 
     private void oneAnt(Ant ant) {
