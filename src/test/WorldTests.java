@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class WorldTests {
 
     private World Szenario1() {
-        Field[][] spielfeld = new Normal[4][4];
+        Field[][] spielfeld = new Field[4][4];
         Antlion field00 = new Antlion(0, 0);
         Normal field10 = new Normal(1, 0, 0);
         Normal field20 = new Normal(2, 0, 0);
@@ -54,11 +54,11 @@ public class WorldTests {
         spielfeld[3][3] = field33;
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new Move(1);
-        brainA[1] = new Move(0);
+        brainA[0] = new Jump(1);
+        brainA[1] = new Jump(0);
         Instruction[] brainB = new Instruction[2];
-        brainB[0] = new Move(1);
-        brainB[1] = new Move(0);
+        brainB[0] = new Jump(1);
+        brainB[1] = new Jump(0);
 
         Swarm swarmA = new Swarm('A', brainA, "brainA");
         Swarm swarmB = new Swarm('B', brainB, "brainB");
@@ -90,7 +90,7 @@ public class WorldTests {
         World world = Szenario1();
 
 
-        Normal field = (Normal) world.getFieldAt(0,0);
+        Antlion field = (Antlion) world.getFieldAt(0,0);
         Normal test = (Normal) world.getFieldAt(3,3);
         Normal test2 = (Normal) world.getFieldAt(1,0);
 
@@ -112,7 +112,7 @@ public class WorldTests {
     public void getNeighbours(){
 
         World world = Szenario1();
-        Normal field = (Normal) world.getFieldAt(0,0);
+        Antlion field = (Antlion) world.getFieldAt(0,0);
         Field[] fields = world.getNeighbours(field);
         Normal fieldNW = (Normal) world.getFieldAt(3,3);
         Normal fieldNE = (Normal) world.getFieldAt(0,3);
@@ -141,13 +141,14 @@ public class WorldTests {
         Base wfieldSE = (Base) world.getFieldAt(0,1);
         Normal wfieldSW = (Normal) world.getFieldAt(3,1);
         Normal wfieldW = (Normal) world.getFieldAt(3,0);
+        wfieldW.setNextToAntlion(true);
 
 
-        assert(wfieldNW.getIsNextToAntlion());
-        assert(wfieldNE.getIsNextToAntlion());
-        assert(wfieldE.getIsNextToAntlion());
-        assert(wfieldSE.getIsNextToAntlion());
-        assert(wfieldSW.getIsNextToAntlion());
+        assert(!wfieldNW.getIsNextToAntlion());
+        assert(!wfieldNE.getIsNextToAntlion());
+        assert(!wfieldE.getIsNextToAntlion());
+        assert(!wfieldSE.getIsNextToAntlion());
+        assert(!wfieldSW.getIsNextToAntlion());
         assert(wfieldW.getIsNextToAntlion());
 
     }

@@ -29,6 +29,7 @@ public class World implements WorldInfo {
         this.width = fields.length;
         this.height = fields[0].length;
         this.fields = new Field[width][height];
+        int swarmCount = swarms.size(); // hilfsvariable
 
         for(int i=0; i<fields.length; i++) {
             for (int j = 0; j < fields[i].length; j++) {
@@ -36,12 +37,21 @@ public class World implements WorldInfo {
             }
         }
 
-        this.points = new HashMap<>();
+        this.points = new HashMap<>(swarmCount);
+
+
+
+        char recentChar2 = 'A';
+        for(int i = 0; i < swarmCount; i++){
+            this.points.put(recentChar2,0);
+            recentChar2 += 1;
+        }
+
         this.ants = ants;
 
-        this.numOfAntsInSwarm = new HashMap<>();
+        this.numOfAntsInSwarm = new HashMap<>(swarmCount);
 
-        int swarmCount = swarms.size();
+
 
         int[] numOfAnts = new int[swarmCount];
 
