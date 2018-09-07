@@ -23,6 +23,8 @@ public final class BrainParser {
         int currentBrain = 0;
         List<String> name = new ArrayList<>(2);
         Instruction[][] brainArray = new Instruction[0][];
+
+        BrainVisitor visitor = new BrainVisitor();
         for (File brain : brains) {
             CharStream input = CharStreams.fromPath(brain.toPath());
             AcolaLexer lexer = new AcolaLexer(input);
@@ -30,7 +32,7 @@ public final class BrainParser {
             AcolaParser parser = new AcolaParser(tokens);
 
             AcolaParser.BrainContext brainContext = parser.brain();
-            BrainVisitor visitor = new BrainVisitor();
+
             List<AcolaParser.InstructionContext> instructionContextList = visitor.visitBrain(brainContext);
 
             name.add("");
@@ -134,44 +136,44 @@ public final class BrainParser {
         String direction = "";
         TurnDirection turn = null;
         switch (instr) {
-            case "set": {
+            case "set":
                 instruction = new Set(Integer.parseInt(instructionStringArr[2]));
                 break;
-            }
-            case "unset": {
+
+            case "unset":
                 instruction = new Unset(Integer.parseInt(instructionStringArr[2]));
                 break;
-            }
-            case "drop": {
+
+            case "drop":
                 instruction = new Drop(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
-            }
-            case "pickup": {
+
+            case "pickup":
                 instruction = new Pickup(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
-            }
-            case "direction": {
+
+            case "direction":
                 instruction = new Direction(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]), direction);
                 break;
-            }
-            case "jump": {
+
+            case "jump":
                 instruction = new Jump(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
-            }
-            case "breed": {
+
+            case "breed":
                 instruction = new Breed(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
-            }
-            case "turn": {
+
+            case "turn":
                 instruction = new Turn(turn);
                 break;
-            }
-            case "test": {
+
+            case "test":
                 instruction = new Test(Integer.parseInt(instructionStringArr[2]), Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
                 break;
-            }
+
             default:
-                throw new IllegalArgumentException("brain f*ck");
+                throw new IllegalArgumentException();
         }
         return instruction;
     }
@@ -179,34 +181,34 @@ public final class BrainParser {
     private static Instruction createSense(String[] instructionStringArr) throws IOException {
         Target target;
         switch (instructionStringArr[1]) {
-            case "foe": {
+            case "foe":
                 target = Target.foe;
                 break;
-            }
-            case "food": {
+
+            case "food":
                 target = Target.food;
                 break;
-            }
-            case "rock": {
+
+            case "rock":
                 target = Target.rock;
                 break;
-            }
-            case "home": {
+
+            case "home":
                 target = Target.home;
                 break;
-            }
-            case "foehome": {
+
+            case "foehome":
                 target = Target.foehome;
                 break;
-            }
-            case "marker": {
+
+            case "marker":
                 target = Target.marker;
                 break;
-            }
-            default: {
+
+            default:
                 target = createSense2(instructionStringArr);
                 break;
-            }
+
         }
         if ("marker".equals(instructionStringArr[2])) {
             return new SenseMarker(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
@@ -218,29 +220,29 @@ public final class BrainParser {
     private static Target createSense2(String[] instructionStringArr) throws IOException {
         Target target;
         switch (instructionStringArr[1]) {
-            case "foemarker": {
+            case "foemarker":
                 target = Target.foemarker;
                 break;
-            }
-            case "antlion": {
+
+            case "antlion":
                 target = Target.antlion;
                 break;
-            }
-            case "foefood": {
+
+            case "foefood":
                 target = Target.foefood;
                 break;
-            }
-            case "friendfood": {
+
+            case "friendfood":
                 target = Target.friendfood;
                 break;
-            }
-            case "friend": {
+
+            case "friend":
                 target = Target.friend;
                 break;
-            }
-            default: {
+
+            default:
                 throw new IOException("brain error");
-            }
+
         }
         return target;
     }
