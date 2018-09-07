@@ -81,10 +81,11 @@ public class Game implements GameInfo {
         try {
             swarms = BrainParser.parse(brains);
             world = WorldParser.parseMap(world1, seed, swarms);
+            logger.addInitialRound(world.getFields(), swarms);
         } catch (IOException e) {
             e.notifyAll();
         }
-        logger.addInitialRound(world.getFields(), swarms);
+
 
     }
 }
