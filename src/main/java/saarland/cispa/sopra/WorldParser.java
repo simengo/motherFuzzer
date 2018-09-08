@@ -17,7 +17,7 @@ public final class WorldParser {
 
     public static World parseMap(File mapFile, long seed, Map<Character, Swarm> swarms) throws IOException {
 
-        int iPMDleanger = 0;
+        int iPMDlaenger = 0;
         int jPMDlaenger = 0;
 
         try (BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()))) {
@@ -30,7 +30,7 @@ public final class WorldParser {
                 throw new IllegalArgumentException("val for x was " + x + " and wal for y was " + y);
             }
             int counter = 0;
-            Field[][] fields = new Field[x.charAt(0)][y.charAt(0)];
+            Field[][] fields = new Field[Integer.parseInt( String.valueOf(x) )][Integer.parseInt( String.valueOf(y) )];
 
             while (true) {
                 String line = bReader.readLine();
@@ -46,25 +46,25 @@ public final class WorldParser {
                 for (Character chara : row) {
                     switch (chara) {
                         case '.':
-                            fields[iPMDleanger][jPMDlaenger] = new Normal(iPMDleanger, jPMDlaenger, 0);
+                            fields[iPMDlaenger][jPMDlaenger] = new Normal(iPMDlaenger, jPMDlaenger, 0);
                             break;
 
                         case '=':
-                            fields[iPMDleanger][jPMDlaenger] = new Antlion(iPMDleanger, jPMDlaenger);
+                            fields[iPMDlaenger][jPMDlaenger] = new Antlion(iPMDlaenger, jPMDlaenger);
                             break;
 
                         case '#':
-                            fields[iPMDleanger][jPMDlaenger] = new Rock(iPMDleanger, jPMDlaenger);
+                            fields[iPMDlaenger][jPMDlaenger] = new Rock(iPMDlaenger, jPMDlaenger);
                             break;
 
                         default:
-                            fields[iPMDleanger][jPMDlaenger] = new Base(chara, iPMDleanger, jPMDlaenger);
+                            fields[iPMDlaenger][jPMDlaenger] = new Base(chara, iPMDlaenger, jPMDlaenger);
                             break;
                     }
-                    jPMDlaenger++;
+                    iPMDlaenger++;
                 }
-                jPMDlaenger = 0;
-                iPMDleanger++;
+                iPMDlaenger = 0;
+                jPMDlaenger++;
                 counter++;
             }
             Map<Integer, Ant> ants = spawnAnts(swarms, fields);
