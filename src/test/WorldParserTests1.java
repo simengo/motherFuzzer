@@ -25,7 +25,7 @@ public class WorldParserTests1 {
             swarms.put('B',swarmB);
             try {
                 World world = WorldParser.parseMap(new File("C:\\Users\\MBreit\\Desktop\\map.txt"), 12, swarms);
-                
+
             }
             catch(IOException e){
 
