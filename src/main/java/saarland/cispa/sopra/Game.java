@@ -43,7 +43,7 @@ public class Game implements GameInfo {
         }
 
         logger.writeToFile();
-        return (WorldInfo) world;
+        return world;
     }
 
     @Override

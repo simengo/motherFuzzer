@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class WorldParserTest {
+public class WorldParserTestMilan {
 
     @Test
     public void worldParserTest() throws IOException {

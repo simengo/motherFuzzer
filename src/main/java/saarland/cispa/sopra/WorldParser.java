@@ -75,7 +75,9 @@ public final class WorldParser {
                 counter += 1;
             }
             Map<Integer, Ant> ants = spawnAnts(swarms, fields);
-            return new World(fields, seed, ants, swarms);
+            World welt = new World(fields, seed, ants, swarms);
+            welt.setAntlion();
+            return welt;
         }
     }
 
