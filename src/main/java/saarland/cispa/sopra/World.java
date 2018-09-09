@@ -373,7 +373,7 @@ public class World implements WorldInfo {
 
 // initially sets the isNextToAntlion Flag in the fields
 
-    private void setAntlion(){
+    public void setAntlion(){
 
         char antLion = '=';
 

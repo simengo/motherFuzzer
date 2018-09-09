@@ -65,7 +65,8 @@ public final class WorldParser {
                             if (chara >= 49 && chara <= 57) {
                                 fields[iPMDleanger][jPMDlaenger] = new Normal(iPMDleanger, jPMDlaenger, chara - 48);
                                 break;
-                            } else throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character");
+                            } else
+                                throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character");
                     }
                     jPMDlaenger++;
                 }
