@@ -12,21 +12,23 @@ public class SenseField extends Sense{
 
         Field field =  getMyField(world,ant);
 
-        if(getTargetS() == Target.home && field.getType() == ant.getSwarm()){
-
-                ant.increasePC();
-
+        if(getTargetS() == Target.home){
+            if(field.getType() == ant.getSwarm()){
+                ant.increasePC();return;}
+                ant.setPc(getJumpPC());
         }
         else{
-        if(getTargetS() == Target.foehome && field.getType() != ant.getSwarm() && field.getType() != '#' && field.getType() != '=' && field.getType() != '.') {
+        if(getTargetS() == Target.foehome) {
 
-                ant.increasePC();
+            if(field.getType() != ant.getSwarm() && field.getType() != '#' && field.getType() != '=' && field.getType() != '.'){ant.increasePC();return;}
+                ant.setPc(getJumpPC());return;
 
         }
         else{
         if(getTargetS() == Target.rock){
             char rock = '#';
-            if(field.getType() == rock){ant.increasePC();}
+            if(field.getType() == rock){ant.increasePC();return;}
+            ant.setPc(getJumpPC());
 
 
 
@@ -34,14 +36,16 @@ public class SenseField extends Sense{
         else{
         if(getTargetS() == Target.antlion){
             if(field.getType() == '=' || field.getIsNextToAntlion()){
-                ant.increasePC();
+                ant.increasePC();return;
             }
+            ant.setPc(getJumpPC());return;
 
 
-        }}}}
+        }
+        }}}
         Field field1 = (Field) ant.getField();
         field1.setChanged();
-        ant.setPc(getJumpPC());
+
     }
     @Override
     public String toString(){

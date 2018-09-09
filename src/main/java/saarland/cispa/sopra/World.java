@@ -398,12 +398,23 @@ public class World implements WorldInfo {
 
 
 
-
-
-
     }
 
 
+
+//    public void printMap(){
+//
+//        for(int i = 0; i < height; i++){
+//            for(int x = 0; x < width; x++){
+//
+//                Field field = fields[x][i];
+//
+//                System.out.print(field.getType());
+//
+//            }
+//            System.out.print("\n");
+//        }
+//    }
 
 
 

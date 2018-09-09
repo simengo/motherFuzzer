@@ -20,7 +20,7 @@ public class SenseTests {
         spielfeld[1][0] = field10;
         spielfeld[1][1] = field11;
         Instruction[] brainA = new Instruction[5];
-        brainA[0] = new SenseField("here",Target.antlion,3);
+        brainA[0] = new SenseField("ahead",Target.antlion,3);
         brainA[1] = new Jump(0);
         Swarm swarmA = new Swarm('A', brainA, "brainA");
         Swarm swarmB = new Swarm('B', brainA, "brainB");
@@ -42,8 +42,8 @@ public class SenseTests {
         world.getAnt(0).getNextInstruction().execute(world,antA);
         world.getAnt(1).getNextInstruction().execute(world,antB);
 
-        assert (antA.getPc() == 3);
-        assert (antB.getPc() == 3);
+        assert (antA.getPc() == 1);
+        assert (antB.getPc() != 1);
 
     }
 
@@ -84,11 +84,11 @@ public class SenseTests {
 
         World world = new World(spielfeld, 1, ants,swarms);
 
-        world.getAnt(1).getNextInstruction().execute(world,antA1);
+        world.getAnt(1).getNextInstruction().execute(world,antA2);
         world.getAnt(2).getNextInstruction().execute(world,antB);
 
-        assert (antA2.getPc() == 3);
-        assert (antB.getPc() != 3);
+        assert (antA2.getPc() == 1);
+        assert (antB.getPc() != 1);
 
     }
 
@@ -135,8 +135,8 @@ public class SenseTests {
         world.getAnt(1).getNextInstruction().execute(world,antA2);
         world.getAnt(2).getNextInstruction().execute(world,antB);
 
-        assert (antA2.getPc() == 3);
-        assert (antB.getPc() != 3);
+        assert (antA2.getPc() == 1);
+        assert (antB.getPc() != 1);
 
     }
 
@@ -183,8 +183,8 @@ public class SenseTests {
         world.getAnt(0).getNextInstruction().execute(world,antA2);
         world.getAnt(1).getNextInstruction().execute(world,antB);
 
-        assert (antA2.getPc() == 3);
-        assert (antB.getPc() != 3);
+        assert (antA2.getPc() == 1);
+        assert (antB.getPc() != 1);
 
     }
 
