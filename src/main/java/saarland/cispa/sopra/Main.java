@@ -20,12 +20,12 @@ public final class Main {
         options.addOption("world", "world", true, "Worldpfad");
         options.addOption(Option.builder("brains").valueSeparator(',').hasArgs().longOpt("brains").build());
 
-
         CommandLineParser parser = new DefaultParser();
 
         try {
 
             CommandLine cmd = parser.parse(options, args);
+
             Game game = new Game(cmd.getOptionValue("protocol"));
             game.simulate(Integer.parseInt(cmd.getOptionValue("rounds")), Integer.parseInt(cmd.getOptionValue("seed")), cmd.getOptionValue("world"), cmd.getOptionValues("brains"));
 
