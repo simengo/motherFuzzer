@@ -7,7 +7,7 @@ import java.util.List;
 
 import java.util.Optional;
 
-abstract class Killable extends Instruction {
+abstract class Killable extends saarland.cispa.sopra.Instruction {
     private final int jumpPc;
 
     public Killable(int jumpPc) {

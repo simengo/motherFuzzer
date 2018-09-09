@@ -40,10 +40,10 @@ public final class WorldParser {
                 char[] row = line.toCharArray();
 
                 if (row.length != width) {
-                    throw new IllegalArgumentException("Width doesnt match head");
+                    throw new IllegalArgumentException("Width doesnt match header");
                 }
-                for (Character chara : row) {
-                    switch (chara) {
+                for (Character fieldType : row) {
+                    switch (fieldType) {
                         case '.':
                             fields[iPMDleanger][jPMDlaenger] = new Normal(iPMDleanger, jPMDlaenger, 0);
                             break;
@@ -57,13 +57,13 @@ public final class WorldParser {
                             break;
 
                         default:
-                            if (chara >= 65 && chara <= 90 || chara >= 97 && chara <= 122) {
-                                fields[iPMDleanger][jPMDlaenger] = new Base(chara, iPMDleanger, jPMDlaenger);
+                            if (fieldType >= 65 && fieldType <= 90 || fieldType >= 97 && fieldType <= 122) {
+                                fields[iPMDleanger][jPMDlaenger] = new Base(fieldType, iPMDleanger, jPMDlaenger);
                                 break;
                             }
 
-                            if (chara >= 49 && chara <= 57) {
-                                fields[iPMDleanger][jPMDlaenger] = new Normal(iPMDleanger, jPMDlaenger, chara - 48);
+                            if (fieldType >= 49 && fieldType <= 57) {
+                                fields[iPMDleanger][jPMDlaenger] = new Normal(iPMDleanger, jPMDlaenger, fieldType - 48);
                                 break;
                             } else {
                                 throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character)");
