@@ -7,13 +7,8 @@ import saarland.cispa.sopra.systemtests.WorldInfo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class Game implements GameInfo {
 

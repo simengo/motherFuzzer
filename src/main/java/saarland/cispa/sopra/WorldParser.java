@@ -22,16 +22,16 @@ public final class WorldParser {
 
         try (BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()))) {
             int counter = 0;
-            int breite = Integer.parseInt(bReader.readLine());
-            int hoehe = Integer.parseInt(bReader.readLine());
+            int width = Integer.parseInt(bReader.readLine());
+            int height = Integer.parseInt(bReader.readLine());
 
-            Field[][] fields = new Field[breite][hoehe];
+            Field[][] fields = new Field[width][height];
 
             while (true) {
                 String line = bReader.readLine();
 
                 if (line == null) {
-                    if (counter % 2 != 0 || counter == 0 || counter != hoehe) {
+                    if (counter % 2 != 0 || counter == 0 || counter != height) {
                         throw new IllegalArgumentException();
                     }
                     break;
@@ -39,7 +39,7 @@ public final class WorldParser {
 
                 char[] row = line.toCharArray();
 
-                if (row.length != breite) {
+                if (row.length != width) {
                     throw new IllegalArgumentException("Width doesnt match head");
                 }
                 for (Character chara : row) {
@@ -65,8 +65,9 @@ public final class WorldParser {
                             if (chara >= 49 && chara <= 57) {
                                 fields[iPMDleanger][jPMDlaenger] = new Normal(iPMDleanger, jPMDlaenger, chara - 48);
                                 break;
-                            } else
-                                throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character");
+                            } else {
+                                throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character)");
+                            }
                     }
                     jPMDlaenger++;
                 }
