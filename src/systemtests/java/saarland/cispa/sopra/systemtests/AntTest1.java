@@ -1,9 +1,9 @@
 package saarland.cispa.sopra.systemtests;
 
-import static com.ibm.icu.impl.Assert.fail;
+
 
 // test AntID
-public class AntTest1{
+public class AntTest1 extends BaseTest{
 
 
     public void test(GameInfo gameInfo) {
