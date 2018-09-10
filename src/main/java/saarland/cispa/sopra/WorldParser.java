@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public final class WorldParser {
@@ -34,16 +35,17 @@ public final class WorldParser {
             width = checkNumber(splittedlines[0].toCharArray());
             height = checkNumber(splittedlines[1].toCharArray());
 
-            if (splittedlines.length > height + 2 || splittedlines.length - 2 % 2 != 0 || splittedlines.length - 2 > 128) {
+            if ((splittedlines.length > (height + 2)) || (((splittedlines.length - 2) % 2) != 0) || ((splittedlines.length - 2) > 128) || ((width % 2) != 0) || ((height % 2) != 0)) {
                 throw new IllegalArgumentException("Map could not be parsed correctly");
             }
+
             fields = new Field[width][height];
 
             for (int i = 2; i < splittedlines.length; i++) {
 
                 char[] actualLine = splittedlines[i].toCharArray();
 
-                if (actualLine.length % 2 != 0 || actualLine.length > 128) {
+                if (actualLine.length % 2 != 0 || actualLine.length > 128 || actualLine.length != width) {
                     throw new IllegalArgumentException("Invalid width of line");
                 }
 
@@ -59,6 +61,7 @@ public final class WorldParser {
 
         Map<Integer, Ant> ants = spawnAnts(swarms, fields);
         World welt = new World(fields, seed, ants, swarms);
+        checkSwarmConsistency(welt, swarms);
         welt.setAntlion();
         return welt;
     }
@@ -69,7 +72,7 @@ public final class WorldParser {
         char antLion = '=';
         char normal = '.';
 
-        if (fieldType >= 65 && fieldType <= 90 || fieldType >= 97 && fieldType <= 122) {
+        if (fieldType >= 65 && fieldType <= 90) {
             fields[x][y] = new Base(fieldType, x, y);
             return;
         } else {
@@ -96,19 +99,41 @@ public final class WorldParser {
 
     private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
         HashMap<Integer, Ant> ants = new HashMap<>();
-        for (Field[] fieldh : fields) {
-            for (Field field : fieldh) {
-                Character type = field.getType();
-                if (type != '.' && type != '=' && type != '#') {
-                    if (swarms.get(type).getIdent() != type) {
-                        throw new IllegalArgumentException("wrong swarm");
-                    }
-                    Ant ant = new Ant(swarms.get(type), ants.size(), field);
+
+        for (Field[] line : fields) {
+            for (Field field : line) {
+                if (field instanceof Base) {
+                    Ant ant = new Ant(swarms.get(field.getType()), ants.size(), field);
+                    field.setAnt(ant);
                     ants.put(ants.size(), ant);
                 }
             }
         }
         return ants;
+    }
+
+    private static void checkSwarmConsistency(World world, Map<Character, Swarm> swarms) {
+
+        Iterator<Swarm> swarmIterator = swarms.values().iterator();
+
+        char Start = 'A';
+        char Ende = 'Z';
+        while (swarmIterator.hasNext()) {
+
+            if (Start > Ende) {
+                throw new IllegalArgumentException("Too many swarms");
+            }
+            Swarm actualSwarm = swarmIterator.next();
+            if (actualSwarm.getIdent() != Start) {
+                throw new IllegalArgumentException("Swarm-Ident Inconsitency");
+            } else {
+                Start++;
+            }
+        }
+
+        if (Start < 'B') {
+            throw new IllegalArgumentException("Too many swarms");
+        }
     }
 
     private static int checkNumber(char[] number) {

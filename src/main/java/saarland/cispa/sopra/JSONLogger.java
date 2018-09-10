@@ -19,9 +19,9 @@ import java.util.Map;
 
 
 //TODO
-// brauche toString() Methoden der Instruktionen // wenn alle runden gespielt wurden muss nochmal der Logger aufgerufen werden zum schreiben
+// brauche toString() Methoden der Instruktionen // wenn alle runden gespielt wurden muss nochmal der LoggerInfo aufgerufen werden zum schreiben
 
-public class JSONLogger implements Logger {
+public class JSONLogger implements LoggerInfo {
 
     private static String swarmHelp = "swarm_id";
     private final File output;
