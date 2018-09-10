@@ -5,30 +5,27 @@ import saarland.cispa.sopra.systemtests.GameInfo;
 import saarland.cispa.sopra.systemtests.WorldInfo;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 public class Game implements GameInfo {
 
-    private final JSONLogger logger;
+    private LoggerInfo logger;
     private World world;
 
-    public Game(String path) {
 
-        File loggerpath = new File(path);
-        if (!loggerpath.exists()) {
-            try {
-                throw new FileNotFoundException("Invalid Loggerpath");
-            } catch (FileNotFoundException e) {
-                e.notifyAll();
-            }
+
+    public void setLogger(String path){
+        if(path == null){
+            logger = new NOPLogger();
+        }
+        else{
+            File loggerFile = new File(path);
+            logger = new JSONLogger(loggerFile);
         }
 
-        logger = new JSONLogger(loggerpath);
     }
-
 
     @Override
     public WorldInfo simulate(int rounds, long seed, File world1, File... brains) {
