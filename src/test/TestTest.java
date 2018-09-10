@@ -18,9 +18,9 @@ public class TestTest {
         fields[1][0] = field10;
         fields[1][1] = field11;
 
-        Instruction[] brainA = new Instruction[3];
-        brainA[0] = new Set(0);
-        brainA[1] = new saarland.cispa.sopra.Test(0,5);
+        Instruction[] brainA = new Instruction[6];
+        brainA[0] = new saarland.cispa.sopra.Test(0,5);
+        brainA[1] = new Jump(0);
         brainA[2] = new Jump(0);
         brainA[3] = new Jump(0);
         brainA[4] = new Jump(0);
@@ -30,10 +30,11 @@ public class TestTest {
         Swarm swarmB = new Swarm('B', brainA, "brainB");
         Ant antA = new Ant(swarmA, 0, fields[0][0]);
         Ant antB = new Ant(swarmB, 1, fields[1][1]);
+        antA.setRegister(0,true);
         fields[0][0].setAnt(antA);
         fields[0][1].setAnt(antB);
         antA.setField(fields[0][0]);
-        antB.setField(fields[0][1]);
+        antB.setField(fields[1][1]);
         HashMap<Integer, Ant> ants = new HashMap<>();
         ants.put(0, antA);
         ants.put(1, antB);
@@ -43,9 +44,10 @@ public class TestTest {
         World world = new World(fields, 1, ants, swarms);
 
         world.getAnt(0).getNextInstruction().execute(world, antA);
-        world.getAnt(0).getNextInstruction().execute(world, antA);
+        world.getAnt(1).getNextInstruction().execute(world, antB);
 
-        assert (antA.getPc() == 5);
+        assert (antA.getPc() == 1);
+        assert(antB.getPc() == 5);
         assert(antA.getRegister(0));
     }
 }
