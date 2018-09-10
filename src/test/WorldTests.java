@@ -1,10 +1,7 @@
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 import saarland.cispa.sopra.*;
-import saarland.cispa.sopra.systemtests.GameInfo;
-import saarland.cispa.sopra.systemtests.WorldInfo;
-import saarland.cispa.sopra.systemtests.FieldInfo;
+
 
 import java.util.HashMap;
 
@@ -127,6 +124,8 @@ public class WorldTests {
         assert(fieldSE == fields[3]);
         assert(fieldSW == fields[4]);
         assert(fieldW == fields[5]);
+
+
     }
 
     @Test

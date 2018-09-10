@@ -3,33 +3,29 @@ import saarland.cispa.sopra.*;
 
 import java.util.HashMap;
 
-
-public class DropTests {
-
+public class MarkTests {
 
     @Test
-    public void DropTest1() {
+    public void MarkTest1() {
 
         Field[][] spielfeld = new Field[2][2];
-        Base field00 = new Base('A', 0,0);
-        Normal field01 = new Normal(0, 1, 2);
+        Normal field00 = new Normal(0, 0,0);
+        Normal field01 = new Normal(0, 1, 0);
         Normal field10 = new Normal(1, 0, 0);
-        Base field11 = new Base('C', 1, 1);
+        Normal field11 = new Normal(1, 1, 0);
+        field00.setMarker('A',3,true);
         spielfeld[0][0] = field00;
         spielfeld[0][1] = field01;
         spielfeld[1][0] = field10;
         spielfeld[1][1] = field11;
         Instruction[] brainA = new Instruction[5];
-        brainA[0] = new Drop(3);
+        brainA[0] = new Mark(3);
         brainA[1] = new Jump(0);
         Swarm swarmA = new Swarm('A', brainA, "brainA");
-        Swarm swarmB = new Swarm('B', brainA, "brainB");
-        Swarm swarmC = new Swarm('C', brainA, "brainC");
+        Swarm swarmB = new Swarm('B', brainA, "brainA");
         Ant antA = new Ant(swarmA, 0, spielfeld[0][0]);
-        Ant antB = new Ant(swarmB, 1, spielfeld[0][1]);
-        Ant antC = new Ant(swarmB, 2, spielfeld[1][1]);
-        antA.setHasFood(true);
-        antB.setHasFood(true);
+        Ant antB = new Ant(swarmA, 1, spielfeld[0][1]);
+        Ant antC = new Ant(swarmA, 2, spielfeld[1][1]);
         spielfeld[0][0].setAnt(antA);
         spielfeld[0][1].setAnt(antB);
         spielfeld[1][1].setAnt(antC);
@@ -43,7 +39,7 @@ public class DropTests {
         HashMap<Character, Swarm> swarms = new HashMap<>();
         swarms.put('A', swarmA);
         swarms.put('B', swarmB);
-        swarms.put('C', swarmC);
+        swarms.put('C', swarmB);
 
         World world = new World(spielfeld, 1, ants, swarms);
 
@@ -51,20 +47,13 @@ public class DropTests {
         world.getAnt(1).getNextInstruction().execute(world, antB);
         world.getAnt(2).getNextInstruction().execute(world, antC);
 
-        assert (antA.getPc() == 1);
-        assert (!antA.hasFood());
-        assert (world.getScore('A') == 1);
-        assert (antB.getPc() == 1);
-        assert (!antB.hasFood());
-        assert (world.getScore('B') == 0);
-        assert (field01.getFood() == 3);
-        assert (antC.getPc() == 3);
-        assert (!antC.hasFood());
-        assert (world.getScore('C') == 0);
-
+        assert (field00.getMarker('A',3));
+        assert (field01.getMarker('B',3));
+        assert (field11.getMarker('C',3));
         assert (field00.getChanged());
-        assert (field01.getChanged());
-        assert (field11.getChanged());
+
+
+
 
     }
 }

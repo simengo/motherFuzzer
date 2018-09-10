@@ -1,8 +1,5 @@
 package saarland.cispa.sopra;
 
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,39 +7,40 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.TokenStream;
+import org.antlr.v4.runtime.CharStreams;
 import saarland.cispa.sopra.antlr.AcolaLexer;
 import saarland.cispa.sopra.antlr.AcolaParser;
 
 public final class BrainParser {
 
-    private BrainParser() {
-    }
+    private BrainParser(){}
+
 
     public static Map<Character, Swarm> parse(File[] brains) throws IOException {
-
         int currentBrain = 0;
         List<String> name = new ArrayList<>(2);
         Instruction[][] brainArray = new Instruction[0][];
-
         BrainVisitor visitor = new BrainVisitor();
         for (File brain : brains) {
-            CharStream input = CharStreams.fromPath(brain.toPath());
+            CharStream input = CharStreams.fromFileName(brain.getName());
             AcolaLexer lexer = new AcolaLexer(input);
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            TokenStream tokens = new CommonTokenStream(lexer);
             AcolaParser parser = new AcolaParser(tokens);
 
             AcolaParser.BrainContext brainContext = parser.brain();
-
-            List<AcolaParser.InstructionContext> instructionContextList = visitor.visitBrain(brainContext);
 
             name.add("");
 
             brainArray = new Instruction[brains.length - 1][];
             int currentInstruction = 0;
-            for (AcolaParser.InstructionContext context : instructionContextList) {
+            String[] instructionStringArr = visitor.visitBrain(brainContext).split("\\n");
+            for (String instr : instructionStringArr) {
 
-                String[] instructionStringArr = context.getText().split(" ");
-                Instruction instruction = switchInstruction(instructionStringArr[0], instructionStringArr);
+                Instruction instruction = switchInstruction(instr, instructionStringArr);
                 if (instruction == null) {
                     throw new IllegalArgumentException("instruction is null");
                 }
