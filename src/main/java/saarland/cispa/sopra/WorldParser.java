@@ -72,7 +72,7 @@ public final class WorldParser {
         Map<Integer, Ant> ants = spawnAnts(swarms, fields);
         World welt = new World(fields, seed, ants, swarms);
         checkSwarmConsistency(welt, swarms);
-        checkBaseConsistency(welt);
+        checkBaseConsistency(welt, swarms);
         welt.setAntlion();
         return welt;
     }
@@ -108,10 +108,13 @@ public final class WorldParser {
 
     }
 
-    private static void checkBaseConsistency(World world) {
+    private static void checkBaseConsistency(World world, Map<Character, Swarm> swarms) {
 
         Field[][] fields = world.getFields();
         HashMap<Character, ArrayList<Field>> consistentFields = new HashMap<>();
+        for (Swarm swarm : swarms.values()) {
+            consistentFields.put(swarm.getIdent(), new ArrayList<>());
+        }
 
         for (Field[] line : fields) {
 
@@ -170,7 +173,7 @@ public final class WorldParser {
             }
         }
 
-        char minimum = 'B';
+        char minimum = 'C';
         if (start < minimum) {
             throw new IllegalArgumentException("Too many swarms");
         }
@@ -197,7 +200,9 @@ public final class WorldParser {
 
         while (foundNeighbours.size() != 0) {
             Field neighbour = foundNeighbours.get(0);
-            neighboursOfSwarm.add(neighbour);
+            if (!neighboursOfSwarm.contains(neighbour)) {
+                neighboursOfSwarm.add(neighbour);
+            }
             foundNeighbours.remove(neighbour);
             for (Field suspect : world.getNeighbours(neighbour)) {
                 if (suspect.getType() == neighbour.getType() && !neighboursOfSwarm.contains(suspect)) {
