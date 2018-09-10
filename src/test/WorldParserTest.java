@@ -9,10 +9,8 @@ import java.util.Map;
 
 
 public class WorldParserTest {
-    public class BreedTest {
-
-        @BeforeEach
-        public void doBefore () {
+        @Test
+        public void emptyTest() {
             Map<Character, Swarm> swarms = new HashMap<Character,Swarm>();
             Instruction[] brainA = new Instruction[1];
             Instruction[] brainB = new Instruction[1];
@@ -32,16 +30,5 @@ public class WorldParserTest {
             assert(!fail);
         }
 
-        @BeforeAll
-        public void doBeforeAll () {
-            //Do nothing
-        }
-
-        @Test
-        public void emptyTest() {
-            // Do nothing
-        }
-
     }
 
-}

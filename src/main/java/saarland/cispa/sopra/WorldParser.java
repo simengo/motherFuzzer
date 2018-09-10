@@ -74,13 +74,18 @@ public final class WorldParser {
     }
 
     private static void checkLetter(char fieldType,Field[][] fields,int x, int y){
+        boolean bool = true;
         if (fieldType >= 65 && fieldType <= 90 || fieldType >= 97 && fieldType <= 122) {
             fields[x][y] = new Base(fieldType, x, y);
+            bool = false;
+
         }
         if (fieldType >= 49 && fieldType <= 57) {
             fields[x][y] = new Normal(x, y, fieldType - 48);
-        } else {
-            throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character)");
+            bool = false;
+        }
+        if(bool){
+                throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character)");
         }
     }
 
