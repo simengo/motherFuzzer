@@ -16,7 +16,7 @@ public class SenseFood extends Sense{
             if(field.getFood() >= 0 ){ant.increasePC();}
             else{ant.setPc(getJumpPC());}
             Field field1 = (Field) ant.getField();
-            field1.setChanged();
+            field1.setChanged(true);
         }
         if(getTargetS() == Target.friendfood) {
             if (field.getAnt().isPresent() && field.getAnt().get().hasFood() && field.getAnt().get().getSwarm() == ant.getSwarm()) {
@@ -25,14 +25,14 @@ public class SenseFood extends Sense{
                 ant.setPc(getJumpPC());
             }
             Field field1 = (Field) ant.getField();
-            field1.setChanged();
+            field1.setChanged(true);
         }
         if(getTargetS() == Target.foefood){
             if(field.getAnt().isPresent() && field.getAnt().get().hasFood() && field.getAnt().get().getSwarm() != ant.getSwarm()){ant.increasePC();}
             else{ant.setPc(getJumpPC());}
 
             Field field1 = (Field) ant.getField();
-            field1.setChanged();
+            field1.setChanged(true);
     }
 }
     @Override

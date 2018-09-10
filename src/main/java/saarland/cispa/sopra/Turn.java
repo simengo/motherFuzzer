@@ -93,7 +93,7 @@ else
         ant.increasePC();
 
         Field field = (Field) ant.getField();
-        field.setChanged();
+        field.setChanged(true);
 
     }
     @Override

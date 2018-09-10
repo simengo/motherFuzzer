@@ -22,14 +22,14 @@ public class SenseMarker extends Sense{
          else{ant.setPc(getJumpPC());}
 
             Field field1 = (Field) ant.getField();
-            field1.setChanged();
+            field1.setChanged(true);
         }
         if(getTargetS() == Target.foemarker){
 
             senseFoeMarkers(world,field,ant,marker);
 
             Field field1 = (Field) ant.getField();
-            field1.setChanged();}
+            field1.setChanged(true);}
 
     }
 

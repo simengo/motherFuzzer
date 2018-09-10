@@ -39,7 +39,7 @@ public class Ant implements AntInfo {
 
     public void setDead(boolean isDead) {
 
-        field.setChanged();
+        field.setChanged(true);
         dead = isDead;
     }
 

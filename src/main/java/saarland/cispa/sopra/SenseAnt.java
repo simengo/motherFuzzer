@@ -14,11 +14,11 @@ public class SenseAnt extends Sense{
 
         if(getTargetS() == Target.friend){
             senseFriendOrFoe(ant,field,true);Field field1 = (Field) ant.getField();
-            field1.setChanged();
+            field1.setChanged(true);
         }
         if(getTargetS() == Target.foe){
             senseFriendOrFoe(ant,field,false);Field field1 = (Field) ant.getField();
-            field1.setChanged();}
+            field1.setChanged(true);}
 
     }
 

@@ -8,8 +8,8 @@ public class Normal extends Field {
         this.food = food;
     }
 
-    public void addFood(int food) {
-        this.food = +food;
+    public void addFood(int foodDazu) {
+        this.food = food+foodDazu;
     }
 
     public void removeFood() {

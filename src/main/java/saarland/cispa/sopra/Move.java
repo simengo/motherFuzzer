@@ -14,15 +14,15 @@ public class Move extends Killable {
         Field fieldInDirection = world.getFieldInDirection(field, direction);
         if (ant.getRestTime() == 0 && fieldInDirection.isAccessible()) {
             field.removeAnt();
-            field.setChanged();
+            field.setChanged(true);
             fieldInDirection.setAnt(ant);
-            fieldInDirection.setChanged();
+            fieldInDirection.setChanged(true);
             ant.setField(fieldInDirection);
             killcheck(world, Optional.of(ant));
             ant.increasePC();
             ant.setRestTime(13);
         } else {
-            field.setChanged();
+            field.setChanged(true);
             ant.setPc(getJumpPc());
 
         }

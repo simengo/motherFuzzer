@@ -1,4 +1,9 @@
-package saarland.cispa.sopra.systemtests;
+package saarland.cispa.sopra.systemtests.mischatests;
+
+import saarland.cispa.sopra.systemtests.AntInfo;
+import saarland.cispa.sopra.systemtests.FieldInfo;
+import saarland.cispa.sopra.systemtests.SystemTest;
+import saarland.cispa.sopra.systemtests.WorldInfo;
 
 import java.util.Optional;
 

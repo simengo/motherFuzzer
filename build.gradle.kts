@@ -67,7 +67,7 @@ tasks.withType<JavaCompile> {
 }
 
 tasks.withType<Jar> {
-    manifest.attributes["main-Class"] = "saarland.cispa.sopra.main"
+    manifest.attributes["main-Class"] = "saarland.cispa.sopra.Main"
     from(configurations.runtimeClasspath.map { if (it.isDirectory) it else zipTree(it) })
     from(java.sourceSets["main"].output)
     from(java.sourceSets["systemtests"].output)
