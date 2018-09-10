@@ -48,7 +48,7 @@ public class BreedTests2 {
         spielfeld[2][3] = field23;
         spielfeld[3][3] = field33;
 
-        field32.setNextToAntlion(true);
+        field21.setNextToAntlion(true);
 
         Instruction[] brainA = new Instruction[2];
         brainA[0] = new Turn(TurnDirection.left);
