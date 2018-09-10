@@ -35,7 +35,7 @@ public final class WorldParser {
             width = checkNumber(splittedlines[0].toCharArray());
             height = checkNumber(splittedlines[1].toCharArray());
 
-            if (splittedlines.length > height + 2 || (splittedlines.length - 2)%2 != 0 || splittedlines.length - 2 > 128) {
+            if ((splittedlines.length > (height + 2)) || (((splittedlines.length - 2) % 2) != 0) || ((splittedlines.length - 2) > 128) || ((width % 2) != 0) || ((height % 2) != 0)) {
                 throw new IllegalArgumentException("Map could not be parsed correctly");
             }
 
@@ -45,7 +45,7 @@ public final class WorldParser {
 
                 char[] actualLine = splittedlines[i].toCharArray();
 
-                if (actualLine.length % 2 != 0 || actualLine.length > 128) {
+                if (actualLine.length % 2 != 0 || actualLine.length > 128 || actualLine.length != width) {
                     throw new IllegalArgumentException("Invalid width of line");
                 }
 
@@ -132,7 +132,7 @@ public final class WorldParser {
             }
         }
 
-        if(Start<'B'){
+        if (Start < 'B') {
             throw new IllegalArgumentException("Too many swarms");
         }
     }

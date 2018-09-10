@@ -27,6 +27,7 @@
         <exclude name="UnusedPrivateMethod"/>
         <!-- Four is still okay for system tests -->
         <exclude name="JUnitTestContainsTooManyAsserts"/>
+        <exclude name="JUnitAssertionsShouldIncludeMessage" />
     </rule>
 
     <rule ref="category/java/bestpractices.xml/JUnitTestContainsTooManyAsserts">
