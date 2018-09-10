@@ -24,7 +24,7 @@ public class BrainParserTest {
                 System.out.println(a.getInstruction(i).toString());
             }
         } catch(IOException e){
-
+            throw new IllegalArgumentException();
         }
 
     }
