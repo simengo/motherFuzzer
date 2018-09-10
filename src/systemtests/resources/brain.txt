@@ -1,0 +1,1 @@
+"brain \"sample\" {\nturn left\njump 0\n}"
