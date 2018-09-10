@@ -23,17 +23,14 @@ public final class WorldParser {
 
             String line = bReader.readLine();
 
-            boolean heighttoken = false;
-            boolean widthtoken = false;
-
             String[] splittedlines = line.split("\\\\n");
 
             int width = checkNumber(splittedlines[0].toCharArray());
             int height = checkNumber(splittedlines[1].toCharArray());
 
-            if (splittedlines.length > height + 2)
+            if (splittedlines.length > height + 2) {
                 throw new IllegalArgumentException("Map could not be parsed correctly");
-
+            }
             fields = new Field[width][height];
 
             for (int i = 2; i < splittedlines.length; i++) {
@@ -62,6 +59,8 @@ public final class WorldParser {
 
     private static void checkLetter(char fieldType, Field[][] fields, int x, int y) {
 
+        char antLion = '=';
+        char normal = '.';
 
         if (fieldType >= 65 && fieldType <= 90 || fieldType >= 97 && fieldType <= 122) {
             fields[x][y] = new Base(fieldType, x, y);
@@ -72,11 +71,11 @@ public final class WorldParser {
             return;
         }
 
-        if (fieldType == '.') {
+        if (fieldType == normal) {
             fields[x][y] = new Normal(x, y, 0);
             return;
         }
-        if (fieldType == '=') {
+        if (fieldType == antLion) {
             fields[x][y] = new Antlion(x, y);
             return;
         } else {
