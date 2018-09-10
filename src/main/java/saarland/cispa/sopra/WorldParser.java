@@ -35,7 +35,7 @@ public final class WorldParser {
             width = checkNumber(splittedlines[0].toCharArray());
             height = checkNumber(splittedlines[1].toCharArray());
 
-            if (splittedlines.length > height + 2 || (splittedlines.length - 2) != 0 || splittedlines.length - 2 > 128) {
+            if (splittedlines.length > height + 2 || (splittedlines.length - 2)%2 != 0 || splittedlines.length - 2 > 128) {
                 throw new IllegalArgumentException("Map could not be parsed correctly");
             }
 
@@ -113,16 +113,30 @@ public final class WorldParser {
         return ants;
     }
 
-    private static boolean checkSwarmConsistency(World world, Map<Character,Swarm> swarms){
+    private static void checkSwarmConsistency(World world, Map<Character, Swarm> swarms) {
 
         Iterator<Swarm> swarmIterator = swarms.values().iterator();
 
-        while(swarmIterator.hasNext()){
+        char Start = 'A';
+        char Ende = 'Z';
+        while (swarmIterator.hasNext()) {
 
+            if (Start > Ende) {
+                throw new IllegalArgumentException("Too many swarms");
+            }
+            Swarm actualSwarm = swarmIterator.next();
+            if (actualSwarm.getIdent() != Start) {
+                throw new IllegalArgumentException("Swarm-Ident Inconsitency");
+            } else {
+                Start++;
+            }
         }
 
-        return true;
+        if(Start<'B'){
+            throw new IllegalArgumentException("Too many swarms");
+        }
     }
+
     private static int checkNumber(char[] number) {
 
         int result = 0;
