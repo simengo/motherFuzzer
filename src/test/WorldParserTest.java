@@ -253,6 +253,75 @@ public class WorldParserTest {
         assert (fail);
     }
 
+    @Test
+    public void pointMapTest() {
+        Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
+        Instruction[] brainA = new Instruction[1];
+        Instruction[] brainB = new Instruction[1];
+        brainA[0] = new Jump(0);
+        brainB[0] = new Jump(0);
+        Swarm swarmA = new Swarm('A', brainA, "A");
+        Swarm swarmB = new Swarm('B', brainB, "B");
+        swarms.put('A', swarmA);
+        swarms.put('B', swarmB);
+        boolean fail = false;
+
+        try {
+            World world = WorldParser.parseMap(new File("C:\\Users\\simen\\Desktop\\maps\\pointMap.txt"), 42, swarms);
+        } catch (java.io.IOException e) {
+            fail = false;
+        } catch (IllegalArgumentException e) {
+            fail = true;
+        }
+        assert (fail);
+    }
+
+    @Test
+    public void toSmallMapTest() {
+        Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
+        Instruction[] brainA = new Instruction[1];
+        Instruction[] brainB = new Instruction[1];
+        brainA[0] = new Jump(0);
+        brainB[0] = new Jump(0);
+        Swarm swarmA = new Swarm('A', brainA, "A");
+        Swarm swarmB = new Swarm('B', brainB, "B");
+        swarms.put('A', swarmA);
+        swarms.put('B', swarmB);
+        boolean fail = false;
+
+        try {
+            World world = WorldParser.parseMap(new File("C:\\Users\\simen\\Desktop\\maps\\tooSmallMap.txt"), 42, swarms);
+        } catch (java.io.IOException e) {
+            fail = false;
+        } catch (IllegalArgumentException e) {
+            fail = true;
+        }
+        assert (fail);
+    }
+
+    @Test
+    public void weirdMapTest() {
+        Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
+        Instruction[] brainA = new Instruction[1];
+        Instruction[] brainB = new Instruction[1];
+        brainA[0] = new Jump(0);
+        brainB[0] = new Jump(0);
+        Swarm swarmA = new Swarm('A', brainA, "A");
+        Swarm swarmB = new Swarm('B', brainB, "B");
+        swarms.put('A', swarmA);
+        swarms.put('B', swarmB);
+        boolean fail = false;
+
+        try {
+            World world = WorldParser.parseMap(new File("C:\\Users\\simen\\Desktop\\maps\\weirdMap.txt"), 42, swarms);
+        } catch (java.io.IOException e) {
+            fail = false;
+        } catch (IllegalArgumentException e) {
+            fail = true;
+        }
+        assert (fail);
+    }
+
 
 }
 
