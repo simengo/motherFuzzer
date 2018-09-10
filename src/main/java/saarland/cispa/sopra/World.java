@@ -23,7 +23,7 @@ public class World implements WorldInfo {
     //private final Map<Character,Swarm> swarms;
 
 
-    public World(Field[][] fields, long seed, Map<Integer, Ant> ants, Map<Character,Swarm> swarms) {
+    public World(Field[][] fields, long seed, Map<Integer, Ant> ants, Map<Character, Swarm> swarms) {
 
 
         this.width = fields.length;
@@ -31,7 +31,7 @@ public class World implements WorldInfo {
         this.fields = new Field[width][height];
         int swarmCount = swarms.size(); // hilfsvariable
 
-        for(int i=0; i<fields.length; i++) {
+        for (int i = 0; i < fields.length; i++) {
             for (int j = 0; j < fields[i].length; j++) {
                 this.fields[i][j] = fields[i][j];
             }
@@ -40,10 +40,9 @@ public class World implements WorldInfo {
         this.points = new HashMap<>(swarmCount);
 
 
-
         char recentChar2 = 'A';
-        for(int i = 0; i < swarmCount; i++){
-            this.points.put(recentChar2,0);
+        for (int i = 0; i < swarmCount; i++) {
+            this.points.put(recentChar2, 0);
             recentChar2 += 1;
         }
 
@@ -52,17 +51,16 @@ public class World implements WorldInfo {
         this.numOfAntsInSwarm = new HashMap<>(swarmCount);
 
 
-
         int[] numOfAnts = new int[swarmCount];
 
-        for(Ant recentAnt : ants.values()){
+        for (Ant recentAnt : ants.values()) {
             char antSwarm = recentAnt.getSwarm();
             int help = Character.getNumericValue(antSwarm) - 10; // A hat den Wert 10
             numOfAnts[help] += 1;
         }
         char recentChar = 'A';
-        for(int i = 0; i < swarmCount; i++){
-            this.numOfAntsInSwarm.put(recentChar,numOfAnts[i]);
+        for (int i = 0; i < swarmCount; i++) {
+            this.numOfAntsInSwarm.put(recentChar, numOfAnts[i]);
             recentChar += 1;
         }
 
@@ -83,7 +81,7 @@ public class World implements WorldInfo {
         return this.height;
     }
 
-    public Map<Character,Integer> getNumOfAntsInSwarm(){
+    public Map<Character, Integer> getNumOfAntsInSwarm() {
 
         return this.numOfAntsInSwarm;
     }
@@ -92,7 +90,7 @@ public class World implements WorldInfo {
 
         Field[][] copiedFields = new Field[width][height];
 
-        for(int i=0; i<fields.length; i++) {
+        for (int i = 0; i < fields.length; i++) {
             for (int j = 0; j < fields[i].length; j++) {
                 copiedFields[i][j] = fields[i][j];
             }
@@ -129,12 +127,12 @@ public class World implements WorldInfo {
 
             case "northwest":
 
-                return getFieldInNorthwest(uneven, x,  y);
+                return getFieldInNorthwest(uneven, x, y);
 
 
             case "northeast":
 
-               return getFieldInNortheast(uneven, x, y);
+                return getFieldInNortheast(uneven, x, y);
 
 
             case "east":
@@ -146,11 +144,11 @@ public class World implements WorldInfo {
 
             case "southeast":
 
-               return getFieldInSoutheast(uneven, x,  y);
+                return getFieldInSoutheast(uneven, x, y);
 
             case "southwest":
 
-               return getFieldInSouthwest(uneven,x, y);
+                return getFieldInSouthwest(uneven, x, y);
 
             case "west":
                 x -= 1;
@@ -168,10 +166,9 @@ public class World implements WorldInfo {
     }
 
 
-
     //Hilfsmethoden, da sonst zu lange getFieldInDirection Methodes
 
-    private Field getFieldInNorthwest(boolean uneven,int x, int y){
+    private Field getFieldInNorthwest(boolean uneven, int x, int y) {
 
         int xCoord = x;
         int yCoord = y;
@@ -201,7 +198,7 @@ public class World implements WorldInfo {
         }
     }
 
-    private Field getFieldInNortheast(boolean uneven,int x, int y){
+    private Field getFieldInNortheast(boolean uneven, int x, int y) {
 
         int xCoord = x;
         int yCoord = y;
@@ -230,7 +227,7 @@ public class World implements WorldInfo {
 
     }
 
-    private Field getFieldInSouthwest(boolean uneven,int x, int y){
+    private Field getFieldInSouthwest(boolean uneven, int x, int y) {
 
         int xCoord = x;
         int yCoord = y;
@@ -255,7 +252,7 @@ public class World implements WorldInfo {
         }
     }
 
-    private Field getFieldInSoutheast(boolean uneven,int x, int y){
+    private Field getFieldInSoutheast(boolean uneven, int x, int y) {
 
         int xCoord = x;
         int yCoord = y;
@@ -286,79 +283,76 @@ public class World implements WorldInfo {
     }
 
     @Override
-     public Ant getAnt(int id){
+    public Ant getAnt(int id) {
 
+        if (id >= ants.size()) {
+            throw new IllegalArgumentException("Map could not be parsed correctly");
+        }
         return ants.get(id);
     }
 
     @Override
-    public List<AntInfo> getAnts(){
+    public List<AntInfo> getAnts() {
 
         return new ArrayList<>(ants.values());
     }
 
     @Override
-    public int getScore(char swarm){
+    public int getScore(char swarm) {
 
         return points.get(swarm);
     }
 
-    public Map<Character,Integer> getPoints(){
+    public Map<Character, Integer> getPoints() {
 
         return points;
     }
 
 
-    public void increasePoints(char swarm,int plus){
+    public void increasePoints(char swarm, int plus) {
 
         int pointsSwarm = points.get(swarm);
         pointsSwarm += plus;
-        points.put(swarm,pointsSwarm);
+        points.put(swarm, pointsSwarm);
     }
 
 
-
-
-
-    public Field[] getNeighbours(Field field){
+    public Field[] getNeighbours(Field field) {
 
         Field[] surrFields = new Field[6];
 
-        surrFields[0] = getFieldInDirection(field,"northwest");
-        surrFields[1] = getFieldInDirection(field,"northeast");
-        surrFields[2] = getFieldInDirection(field,"east");
-        surrFields[3] = getFieldInDirection(field,"southeast");
-        surrFields[4] = getFieldInDirection(field,"southwest");
-        surrFields[5] = getFieldInDirection(field,"west");
+        surrFields[0] = getFieldInDirection(field, "northwest");
+        surrFields[1] = getFieldInDirection(field, "northeast");
+        surrFields[2] = getFieldInDirection(field, "east");
+        surrFields[3] = getFieldInDirection(field, "southeast");
+        surrFields[4] = getFieldInDirection(field, "southwest");
+        surrFields[5] = getFieldInDirection(field, "west");
 
         return surrFields;
     }
 
 
-
-
     // creates a random number between 0 and max-1  ?? richtig so ??
 
-    public int getRand(int max){
+    public int getRand(int max) {
 
         return randGen.nextInt(max);
     }
 
 
-
     //iterates over the fields and reads the changed field -> when changed -> add to Array
 
-    public List<Field> logChanges(){
+    public List<Field> logChanges() {
 
         List<Field> changedFields = new ArrayList<Field>();
 
-        for(int y = 0; y<height; y++){
+        for (int y = 0; y < height; y++) {
 
-            for(int x = 0; x < width; x++){
+            for (int x = 0; x < width; x++) {
 
                 Field field = fields[x][y];
 
-                if (field.getChanged()){
+                if (field.getChanged()) {
                     changedFields.add(field);
                 }
 
@@ -370,24 +364,23 @@ public class World implements WorldInfo {
     }
 
 
-
 // initially sets the isNextToAntlion Flag in the fields
 
-    public void setAntlion(){
+    public void setAntlion() {
 
         char antLion = '=';
 
-        for(int y = 0; y<height; y++) {
+        for (int y = 0; y < height; y++) {
 
             for (int x = 0; x < width; x++) {
 
 
                 Field field = fields[x][y];
-                if(field.getType() == antLion){
+                if (field.getType() == antLion) {
 
                     Field[] neighbours = getNeighbours(field);
 
-                    for(int i = 0; i < 6; i++ ){
+                    for (int i = 0; i < 6; i++) {
                         neighbours[i].setNextToAntlion(true);
                     }
 
@@ -397,9 +390,7 @@ public class World implements WorldInfo {
         }
 
 
-
     }
-
 
 
 //    public void printMap(){
@@ -415,7 +406,6 @@ public class World implements WorldInfo {
 //            System.out.print("\n");
 //        }
 //    }
-
 
 
 }

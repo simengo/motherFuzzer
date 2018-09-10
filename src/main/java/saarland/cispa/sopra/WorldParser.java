@@ -21,13 +21,71 @@ public final class WorldParser {
         int y = 0;
 
         try (BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()))) {
+
             int counter = 0;
             int width = Integer.parseInt(bReader.readLine());
             int height = Integer.parseInt(bReader.readLine());
+            boolean newLine1 = false;
+            boolean ntoken = false;
+            boolean nexttoken = false;
+            boolean outbreak = false;
+            String breite1 = bReader.readLine();
+            char[] width1 = breite1.toCharArray();
+            int breite = 0;
+            int hoehe = 0;
+
+            for (char character : width1) {
+                if (outbreak) break;
+                switch (character) {
+
+                    case 92:
+                        newLine1 = true;
+                        break;
+
+                    case 'n':
+                        if (newLine1) {
+                            ntoken = true;
+                            break;
+                        } else {
+                            throw new IllegalArgumentException("Map could not be parsed correctly");
+                        }
+
+                    default:
+                        if (newLine1 && ntoken) {
+                            newLine1 = false;
+                            ntoken = false;
+                            if (nexttoken) {
+                                outbreak = true;
+                                break;
+                            }
+                            nexttoken = true;
+                            hoehe = hoehe * 10 + (character - 48);
+                            break;
+
+                        } else {
+                            if (newLine1 || ntoken) {
+                                throw new IllegalArgumentException("Map could not be parsed correctly");
+                            } else {
+                                if (nexttoken) {
+                                    hoehe = hoehe * 10 + (character - 48);
+                                    break;
+                                } else {
+                                    breite = breite * 10 + (character - 48);
+                                    break;
+                                }
+                            }
+
+                        }
+
+
+                }
+            }
+            //      int hoehe = Integer.parseInt(bReader.readLine());
 
             Field[][] fields = new Field[width][height];
 
             while (true) {
+
                 String line = bReader.readLine();
 
                 if (line == null) {
@@ -39,11 +97,29 @@ public final class WorldParser {
 
                 char[] row = line.toCharArray();
 
-                if (row.length != width) {
-                    throw new IllegalArgumentException("Width doesnt match header");
-                }
-                for (Character fieldType : row) {
-                    switch (fieldType) {
+                boolean newLine = false;
+
+                for (Character chara : row) {
+
+                    switch (chara) {
+
+                        case 92:
+                            newLine = true;
+                            break;
+
+                        case 'n':
+                            if (newLine) {
+                                newLine = false;
+                                if (x != breite + 1) {
+                                    throw new IllegalArgumentException("Map could not be parsed correctly");
+                                }
+                                x = -1;
+                                y++;
+                                counter++;
+                                break;
+                            } else {
+                                throw new IllegalArgumentException("Map could not be parsed correctly (Invalid character)");
+                            }
                         case '.':
                             fields[x][y] = new Normal(x, y, 0);
                             break;
@@ -57,7 +133,7 @@ public final class WorldParser {
                             break;
 
                         default:
-                            checkLetter(fieldType,fields,x,y);
+                            checkLetter(chara, fields, x, y);
                             break;
                     }
                     y++;
@@ -65,6 +141,12 @@ public final class WorldParser {
                 y = 0;
                 x++;
                 counter += 1;
+                if (x != breite || y >= hoehe) {
+                    throw new IllegalArgumentException("Map could not be parsed correctly");
+                }
+                x = 0;
+                y++;
+                counter++;
             }
             Map<Integer, Ant> ants = spawnAnts(swarms, fields);
             World welt = new World(fields, seed, ants, swarms);
@@ -73,7 +155,7 @@ public final class WorldParser {
         }
     }
 
-    private static void checkLetter(char fieldType,Field[][] fields,int x, int y){
+    private static void checkLetter(char fieldType, Field[][] fields, int x, int y) {
         if (fieldType >= 65 && fieldType <= 90 || fieldType >= 97 && fieldType <= 122) {
             fields[x][y] = new Base(fieldType, x, y);
         }
@@ -82,7 +164,7 @@ public final class WorldParser {
         } else {
             throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character)");
         }
-        // hier noch catchen?
+
     }
 
     private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
