@@ -5,30 +5,27 @@ import saarland.cispa.sopra.systemtests.GameInfo;
 import saarland.cispa.sopra.systemtests.WorldInfo;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 public class Game implements GameInfo {
 
-    private final JSONLogger logger;
+    private LoggerInfo loggerInfo;
     private World world;
 
-    public Game(String path) {
 
-        File loggerpath = new File(path);
-        if (!loggerpath.exists()) {
-            try {
-                throw new FileNotFoundException("Invalid Loggerpath");
-            } catch (FileNotFoundException e) {
-                e.notifyAll();
-            }
+
+    public void setLoggerInfo(String path){
+        if(path == null){
+            loggerInfo = new NOPLogger();
+        }
+        else{
+            File loggerFile = new File(path);
+            loggerInfo = new JSONLogger(loggerFile);
         }
 
-        logger = new JSONLogger(loggerpath);
     }
-
 
     @Override
     public WorldInfo simulate(int rounds, long seed, File world1, File... brains) {
@@ -37,7 +34,7 @@ public class Game implements GameInfo {
             simulateOnce();
         }
 
-        logger.writeToFile();
+        loggerInfo.writeToFile();
         return world;
     }
 
@@ -65,7 +62,7 @@ public class Game implements GameInfo {
             oneAnt((Ant) ant);
         }
 
-        logger.addRoundInfo(world.logChanges(), world.getPoints(), world.getNumOfAntsInSwarm());
+        loggerInfo.addRoundInfo(world.logChanges(), world.getPoints(), world.getNumOfAntsInSwarm());
     }
 
     private void oneAnt(Ant ant) {
@@ -91,7 +88,7 @@ public class Game implements GameInfo {
             swarms.put('A', swarmA);
             swarms.put('B', swarmB);
             world = WorldParser.parseMap(world1, seed, swarms);
-            logger.addInitialRound(world.getFields(), swarms);
+            loggerInfo.addInitialRound(world.getFields(), swarms);
         } catch (IOException e) {
             e.notifyAll();
         }

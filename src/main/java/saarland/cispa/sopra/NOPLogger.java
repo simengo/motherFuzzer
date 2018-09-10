@@ -3,7 +3,7 @@ package saarland.cispa.sopra;
 import java.util.List;
 import java.util.Map;
 
-public class NOPLogger implements Logger {
+public class NOPLogger implements LoggerInfo {
 
 
 
