@@ -25,7 +25,7 @@ public final class WorldParser {
 
             String line = bReader.readLine();
 
-            if(line==null){
+            if (line == null) {
                 throw new IllegalArgumentException("Map could not be parsed correctly : Propably empty file");
             }
 
@@ -34,7 +34,7 @@ public final class WorldParser {
             width = checkNumber(splittedlines[0].toCharArray());
             height = checkNumber(splittedlines[1].toCharArray());
 
-            if (splittedlines.length > height + 2) {
+            if (splittedlines.length > height + 2 || splittedlines.length - 2 % 2 != 0 || splittedlines.length - 2 > 128) {
                 throw new IllegalArgumentException("Map could not be parsed correctly");
             }
             fields = new Field[width][height];
@@ -43,12 +43,13 @@ public final class WorldParser {
 
                 char[] actualLine = splittedlines[i].toCharArray();
 
+                if (actualLine.length % 2 != 0 || actualLine.length > 128) {
+                    throw new IllegalArgumentException("Invalid width of line");
+                }
+
                 int x = 0;
 
                 for (char actualChar : actualLine) {
-                    if (x >= width) {
-                        throw new IllegalArgumentException("Map could not be parsed correctly");
-                    }
                     checkLetter(actualChar, fields, x, i - 2);
                     x++;
                 }
