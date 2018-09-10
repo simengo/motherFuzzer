@@ -68,6 +68,8 @@ public class WorldParserTest {
         try {
             World world = WorldParser.parseMap(new File("C:\\Users\\simen\\Desktop\\maps\\unevenMap.txt"), 42, swarms);
         } catch (java.io.IOException e) {
+            fail = false;
+        } catch (IllegalArgumentException e){
             fail = true;
         }
         assert (fail);
@@ -89,6 +91,8 @@ public class WorldParserTest {
         try {
             World world = WorldParser.parseMap(new File("C:\\Users\\simen\\Desktop\\maps\\emptyMap.txt"), 42, swarms);
         } catch (java.io.IOException e) {
+            fail = false;
+        } catch(IllegalArgumentException e){
             fail = true;
         }
         assert (fail);
@@ -110,6 +114,8 @@ public class WorldParserTest {
         try {
             World world = WorldParser.parseMap(new File("C:\\Users\\simen\\Desktop\\maps\\tooBigMap.txt"), 42, swarms);
         } catch (java.io.IOException e) {
+            fail = false;
+        } catch(IllegalArgumentException e){
             fail = true;
         }
         assert (fail);
@@ -156,7 +162,7 @@ public class WorldParserTest {
         } catch (java.io.IOException e) {
             fail = true;
         }
-        assert (!fail);
+        assert (fail);
     }
 
     @Test
