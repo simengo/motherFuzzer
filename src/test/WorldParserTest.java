@@ -160,6 +160,8 @@ public class WorldParserTest {
         try {
             World world = WorldParser.parseMap(new File("C:\\Users\\simen\\Desktop\\maps\\wrongHeaderMap.txt"), 42, swarms);
         } catch (java.io.IOException e) {
+            fail = false;
+        } catch(IllegalArgumentException e){
             fail = true;
         }
         assert (fail);
