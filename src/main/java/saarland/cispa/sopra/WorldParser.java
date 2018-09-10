@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public final class WorldParser {
@@ -34,9 +35,10 @@ public final class WorldParser {
             width = checkNumber(splittedlines[0].toCharArray());
             height = checkNumber(splittedlines[1].toCharArray());
 
-            if (splittedlines.length > height + 2 || splittedlines.length - 2 % 2 != 0 || splittedlines.length - 2 > 128) {
+            if (splittedlines.length > height + 2 || (splittedlines.length - 2) != 0 || splittedlines.length - 2 > 128) {
                 throw new IllegalArgumentException("Map could not be parsed correctly");
             }
+
             fields = new Field[width][height];
 
             for (int i = 2; i < splittedlines.length; i++) {
@@ -111,6 +113,16 @@ public final class WorldParser {
         return ants;
     }
 
+    private static boolean checkSwarmConsistency(World world, Map<Character,Swarm> swarms){
+
+        Iterator<Swarm> swarmIterator = swarms.values().iterator();
+
+        while(swarmIterator.hasNext()){
+
+        }
+
+        return true;
+    }
     private static int checkNumber(char[] number) {
 
         int result = 0;
