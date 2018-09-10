@@ -77,6 +77,7 @@ public final class WorldParser {
             Map<Integer, Ant> ants = spawnAnts(swarms, fields);
             return new World(fields, seed, ants, swarms);
         }
+        // hier noch catchen?
     }
 
     private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
