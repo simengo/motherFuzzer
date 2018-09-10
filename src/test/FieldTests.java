@@ -17,8 +17,8 @@ public class FieldTests {
         Field field10 = new Normal(1, 0, 9);
         Field field11 = new Base('B', 1, 1);
         spielfeld[0][0] = field00;
-        spielfeld[1][0] = field01;
-        spielfeld[0][1] = field10;
+        spielfeld[0][1] = field01;
+        spielfeld[1][0] = field10;
         spielfeld[1][1] = field11;
         Instruction[] brainA = new Instruction[3];
         brainA[0] = new Set(3);
@@ -59,19 +59,19 @@ public class FieldTests {
         assert(spielfeld[1][1].isAccessible() == false);
 
         assert(spielfeld[0][0].getType() == 'A');
-        assert(spielfeld[0][0].getType() == '.');
-        assert(spielfeld[0][0].getType() == '.');
-        assert(spielfeld[0][0].getType() == 'B');
+        assert(spielfeld[1][0].getType() == '.');
+        assert(spielfeld[0][1].getType() == '.');
+        assert(spielfeld[1][1].getType() == 'B');
 
         assert(spielfeld[0][0].getX() == 0 && spielfeld[0][0].getY() == 0);
-        assert(spielfeld[0][1].getX() == 0 && spielfeld[0][0].getY() == 1);
-        assert(spielfeld[1][0].getX() == 1 && spielfeld[0][0].getY() == 0);
-        assert(spielfeld[1][1].getX() == 1 && spielfeld[0][0].getY() == 1);
+        assert(spielfeld[0][1].getX() == 0 && spielfeld[0][1].getY() == 1);
+        assert(spielfeld[1][0].getX() == 1 && spielfeld[1][0].getY() == 0);
+        assert(spielfeld[1][1].getX() == 1 && spielfeld[1][1].getY() == 1);
 
         assert(spielfeld[0][0].getFood() == 0);
-        assert(spielfeld[1][0].getFood() == 0);
-        assert(spielfeld[0][1].getFood() == 0);
         assert(spielfeld[1][0].getFood() == 9);
+        assert(spielfeld[0][1].getFood() == 0);
+        assert(spielfeld[1][1].getFood() == 0);
 
         spielfeld[0][1].setChanged(true);
         assert(spielfeld[0][1].getChanged() == true);
@@ -82,6 +82,7 @@ public class FieldTests {
         Optional<AntInfo> aO = spielfeld[0][0].getAnt();
         assert(aO.isPresent() == false);
         spielfeld[0][0].setAnt(antA);
+        aO = spielfeld[0][0].getAnt();
         assert(aO.isPresent() == true);
 
 

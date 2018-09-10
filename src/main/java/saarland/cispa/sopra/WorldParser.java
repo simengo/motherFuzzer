@@ -155,12 +155,10 @@ public final class WorldParser {
         }
     }
 
-<<<<<<< HEAD
-    private static void checkLetter(char fieldType,Field[][] fields,int x, int y){
-        boolean bool = true;
-=======
+
     private static void checkLetter(char fieldType, Field[][] fields, int x, int y) {
->>>>>>> origin/master
+
+        boolean bool = true;
         if (fieldType >= 65 && fieldType <= 90 || fieldType >= 97 && fieldType <= 122) {
             fields[x][y] = new Base(fieldType, x, y);
             bool = false;
