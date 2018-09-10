@@ -46,5 +46,6 @@ public class TestTest {
         world.getAnt(0).getNextInstruction().execute(world, antA);
 
         assert (antA.getPc() == 5);
+        assert(antA.getRegister(0));
     }
 }
