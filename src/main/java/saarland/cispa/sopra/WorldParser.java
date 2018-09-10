@@ -51,21 +51,8 @@ public final class WorldParser {
 
             fields = new Field[width][height];
 
-            for (int i = 2; i < splittedlines.length; i++) {
+            test(splittedlines, fields,width);
 
-                char[] actualLine = splittedlines[i].toCharArray();
-
-                if (actualLine.length % 2 != 0 || actualLine.length > 128 || actualLine.length != width) {
-                    throw new IllegalArgumentException("Invalid width of line");
-                }
-
-                int x = 0;
-
-                for (char actualChar : actualLine) {
-                    checkLetter(actualChar, fields, x, i - 2);
-                    x++;
-                }
-            }
 
         }
 
@@ -75,6 +62,24 @@ public final class WorldParser {
         checkBaseConsistency(welt, swarms);
         welt.setAntlion();
         return welt;
+    }
+
+    public static void test(String[] splittedlines,Field[][] fields, int width){
+        for (int i = 2; i < splittedlines.length; i++) {
+
+            char[] actualLine = splittedlines[i].toCharArray();
+
+            if (actualLine.length % 2 != 0 || actualLine.length > 128 || actualLine.length != width) {
+                throw new IllegalArgumentException("Invalid width of line");
+            }
+
+            int x = 0;
+
+            for (char actualChar : actualLine) {
+                checkLetter(actualChar, fields, x, i - 2);
+                x++;
+            }
+        }
     }
 
 

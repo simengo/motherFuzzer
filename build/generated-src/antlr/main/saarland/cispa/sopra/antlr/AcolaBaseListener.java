@@ -203,6 +203,18 @@ public class AcolaBaseListener implements AcolaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDirections(AcolaParser.DirectionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBreed(AcolaParser.BreedContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBreed(AcolaParser.BreedContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

@@ -58,16 +58,16 @@ public class BreedTests2 {
         brainB[1] = new Jump(0);
 
         Swarm swarmA = new Swarm('A', brainA, "brainA");
-        Swarm swarmB = new Swarm('B', brainB, "brainB");
         HashMap<Character, Swarm> swarms = new HashMap<>();
+        Swarm swarmB = new Swarm('B', brainB, "brainB");
         swarms.put('A',swarmA);
         swarms.put('B',swarmB);
 
         Ant antA0 = new Ant(swarmA, 0, spielfeld[2][2]);
         Ant antA1 = new Ant(swarmA, 1, spielfeld[3][2]);
+        Ant antB = new Ant(swarmB, 2, spielfeld[3][3]);
         antA0.setHasFood(true);
         antA1.setHasFood(true);
-        Ant antB = new Ant(swarmB, 2, spielfeld[3][3]);
         spielfeld[2][2].setAnt(antA0);
         spielfeld[3][2].setAnt(antA1);
         spielfeld[3][3].setAnt(antB);
