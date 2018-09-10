@@ -14,7 +14,7 @@ public class Set extends Instruction {
         ant.increasePC();
 
         Field field = (Field) ant.getField();
-        field.setChanged();
+        field.setChanged(true);
     }
     @Override
     public String toString(){

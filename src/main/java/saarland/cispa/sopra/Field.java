@@ -82,8 +82,8 @@ public abstract class Field implements FieldInfo {
         isNextToAntlion = nextToAntlion;
     }
 
-    public void setChanged() {
-        this.changed = true;
+    public void setChanged(boolean bool) {
+        this.changed = bool;
     }
 
     public void removeAnt() {

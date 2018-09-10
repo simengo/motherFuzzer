@@ -56,7 +56,7 @@ public class Drop extends Instruction {
             }
 
             Field field = (Field) ant.getField();
-            field.setChanged();
+            field.setChanged(true);
         }
 
     @Override

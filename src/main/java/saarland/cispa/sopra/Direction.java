@@ -17,7 +17,7 @@ public class Direction extends Instruction {
             ant.setPc(jumpPC);
         }
         Field field = (Field) ant.getField();
-        field.setChanged();
+        field.setChanged(true);
     }
     @Override
     public String toString(){

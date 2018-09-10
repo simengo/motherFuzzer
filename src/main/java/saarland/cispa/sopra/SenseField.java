@@ -44,7 +44,7 @@ public class SenseField extends Sense{
         }
         }}}
         Field field1 = (Field) ant.getField();
-        field1.setChanged();
+        field1.setChanged(true);
 
     }
     @Override
