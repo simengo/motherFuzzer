@@ -185,6 +185,8 @@ public class SenseTests {
 
         assert (antA2.getPc() == 1);
         assert (antB.getPc() != 1);
+        assert (field01.getChanged());
+        assert (field11.getChanged());
 
     }
 
