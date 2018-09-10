@@ -27,7 +27,7 @@ public final class Main {
             CommandLine cmd = parser.parse(options, args);
 
             Game game = new Game();
-            game.setLoggerInfo(cmd.getOptionValue("protocol"));
+            game.setLogger(cmd.getOptionValue("protocol"));
             game.simulate(Integer.parseInt(cmd.getOptionValue("rounds")), Integer.parseInt(cmd.getOptionValue("seed")), cmd.getOptionValue("world"), cmd.getOptionValues("brains"));
 
         } catch (ParseException e) {

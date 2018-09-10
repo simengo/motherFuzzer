@@ -11,18 +11,18 @@ import java.util.List;
 
 public class Game implements GameInfo {
 
-    private LoggerInfo loggerInfo;
+    private LoggerInfo logger;
     private World world;
 
 
 
-    public void setLoggerInfo(String path){
+    public void setLogger(String path){
         if(path == null){
-            loggerInfo = new NOPLogger();
+            logger = new NOPLogger();
         }
         else{
             File loggerFile = new File(path);
-            loggerInfo = new JSONLogger(loggerFile);
+            logger = new JSONLogger(loggerFile);
         }
 
     }
@@ -34,7 +34,7 @@ public class Game implements GameInfo {
             simulateOnce();
         }
 
-        loggerInfo.writeToFile();
+        logger.writeToFile();
         return world;
     }
 
@@ -62,7 +62,7 @@ public class Game implements GameInfo {
             oneAnt((Ant) ant);
         }
 
-        loggerInfo.addRoundInfo(world.logChanges(), world.getPoints(), world.getNumOfAntsInSwarm());
+        logger.addRoundInfo(world.logChanges(), world.getPoints(), world.getNumOfAntsInSwarm());
     }
 
     private void oneAnt(Ant ant) {
@@ -88,7 +88,7 @@ public class Game implements GameInfo {
             swarms.put('A', swarmA);
             swarms.put('B', swarmB);
             world = WorldParser.parseMap(world1, seed, swarms);
-            loggerInfo.addInitialRound(world.getFields(), swarms);
+            logger.addInitialRound(world.getFields(), swarms);
         } catch (IOException e) {
             e.notifyAll();
         }
