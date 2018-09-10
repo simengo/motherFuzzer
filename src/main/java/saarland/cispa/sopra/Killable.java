@@ -33,6 +33,7 @@ abstract class Killable extends saarland.cispa.sopra.Instruction {
             }
             if (isSurrounded(world, suspect)) {
                 suspect.setDead(true);
+                ((Field) suspect.getField()).removeAnt();
                 switch (fieldType) {
                     case '.':
                         if (ant.get().hasFood()) {
@@ -64,6 +65,7 @@ abstract class Killable extends saarland.cispa.sopra.Instruction {
         char fieldType = field.getType();
         if (field.getIsNextToAntlion() || fieldType == antLionField) {
             ant.setDead(true);
+            field.removeAnt();
             switch (fieldType) {
                 case '.':
                     ((Normal) field).addFood(1);
