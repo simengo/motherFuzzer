@@ -205,7 +205,7 @@ public final class WorldParser {
             }
             foundNeighbours.remove(neighbour);
             for (Field suspect : world.getNeighbours(neighbour)) {
-                if (suspect.getType() == neighbour.getType() && !neighboursOfSwarm.contains(suspect)) {
+                if (suspect.getType() == neighbour.getType() && !neighboursOfSwarm.contains(suspect) && !foundNeighbours.contains(suspect)) {
                     foundNeighbours.add(suspect);
                 }
             }
