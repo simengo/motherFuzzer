@@ -132,6 +132,8 @@ public class WorldParserTest {
             World world = WorldParser.parseMap(new File("C:\\Users\\simen\\Desktop\\maps\\invalidCharsMap.txt"), 42, swarms);
         } catch (java.io.IOException e) {
             fail = true;
+        }catch (IllegalArgumentException e){
+            fail = true;
         }
         assert (fail);
     }
