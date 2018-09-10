@@ -5,7 +5,7 @@ package saarland.cispa.sopra.systemtests;
 // test AntID
 public class AntTest1 extends BaseTest{
 
-
+@Override
     public void test(GameInfo gameInfo) {
 
 

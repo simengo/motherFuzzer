@@ -17,21 +17,21 @@ public final class WorldParser {
 
     public static World parseMap(File mapFile, long seed, Map<Character, Swarm> swarms) throws IOException {
 
-        int iPMDleanger = 0;
-        int jPMDlaenger = 0;
+        int x = 0;
+        int y = 0;
 
         try (BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()))) {
             int counter = 0;
-            int breite = Integer.parseInt(bReader.readLine());
-            int hoehe = Integer.parseInt(bReader.readLine());
+            int width = Integer.parseInt(bReader.readLine());
+            int height = Integer.parseInt(bReader.readLine());
 
-            Field[][] fields = new Field[breite][hoehe];
+            Field[][] fields = new Field[width][height];
 
             while (true) {
                 String line = bReader.readLine();
 
                 if (line == null) {
-                    if (counter % 2 != 0 || counter == 0 || counter != hoehe) {
+                    if (counter % 2 != 0 || counter == 0 || counter != height) {
                         throw new IllegalArgumentException();
                     }
                     break;
@@ -39,43 +39,48 @@ public final class WorldParser {
 
                 char[] row = line.toCharArray();
 
-                if (row.length != breite) {
-                    throw new IllegalArgumentException("Width doesnt match head");
+                if (row.length != width) {
+                    throw new IllegalArgumentException("Width doesnt match header");
                 }
-                for (Character chara : row) {
-                    switch (chara) {
+                for (Character fieldType : row) {
+                    switch (fieldType) {
                         case '.':
-                            fields[iPMDleanger][jPMDlaenger] = new Normal(iPMDleanger, jPMDlaenger, 0);
+                            fields[x][y] = new Normal(x, y, 0);
                             break;
 
                         case '=':
-                            fields[iPMDleanger][jPMDlaenger] = new Antlion(iPMDleanger, jPMDlaenger);
+                            fields[x][y] = new Antlion(x, y);
                             break;
 
                         case '#':
-                            fields[iPMDleanger][jPMDlaenger] = new Rock(iPMDleanger, jPMDlaenger);
+                            fields[x][y] = new Rock(x, y);
                             break;
 
                         default:
-                            if (chara >= 65 && chara <= 90 || chara >= 97 && chara <= 122) {
-                                fields[iPMDleanger][jPMDlaenger] = new Base(chara, iPMDleanger, jPMDlaenger);
-                                break;
-                            }
-
-                            if (chara >= 49 && chara <= 57) {
-                                fields[iPMDleanger][jPMDlaenger] = new Normal(iPMDleanger, jPMDlaenger, chara - 48);
-                                break;
-                            } else
-                                throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character");
+                            checkLetter(fieldType,fields,x,y);
+                            break;
                     }
-                    jPMDlaenger++;
+                    y++;
                 }
-                jPMDlaenger = 0;
-                iPMDleanger++;
+                y = 0;
+                x++;
                 counter += 1;
             }
             Map<Integer, Ant> ants = spawnAnts(swarms, fields);
-            return new World(fields, seed, ants, swarms);
+            World welt = new World(fields, seed, ants, swarms);
+            welt.setAntlion();
+            return welt;
+        }
+    }
+
+    private static void checkLetter(char fieldType,Field[][] fields,int x, int y){
+        if (fieldType >= 65 && fieldType <= 90 || fieldType >= 97 && fieldType <= 122) {
+            fields[x][y] = new Base(fieldType, x, y);
+        }
+        if (fieldType >= 49 && fieldType <= 57) {
+            fields[x][y] = new Normal(x, y, fieldType - 48);
+        } else {
+            throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character)");
         }
         // hier noch catchen?
     }

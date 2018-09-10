@@ -20,7 +20,8 @@ public class Breed extends Killable {
                 Field[] fields = world.getNeighbours(field);
                 for (Field neighbour : fields) {
                     if (neighbour.isAccessible()) {  //Warum? //antPc increases.
-                        spawnAnt(ant.getSwarmInstance(), neighbour, world);
+                        Ant spawnedAnt = spawnAnt(ant.getSwarmInstance(), neighbour, world);
+                        killcheck(world, java.util.Optional.ofNullable(spawnedAnt));
                         antSpawned = true;
                         break;
                     }
@@ -29,19 +30,25 @@ public class Breed extends Killable {
                     fields = world.getNeighbours(fieldInDirection);
                     for (Field neighbour : fields) {
                         if (neighbour.isAccessible()) {
-                            spawnAnt(ant.getSwarmInstance(), neighbour, world);
+                            Ant spawnedAnt = spawnAnt(ant.getSwarmInstance(), neighbour, world);
+                            killcheck(world, java.util.Optional.ofNullable(spawnedAnt));
                             break;
                         }
                     }
                 }
             }
-        ant.increasePC();
+            ant.increasePC();
+
+
+        } else {
+            ant.setPc(getJumpPc());
         }
-        else{ant.setPc(getJumpPc());}
     }
 
 
-    public void spawnAnt(Swarm swarm, Field field, WorldInfo world) {
-        field.setAnt(new Ant(swarm, world.getAnts().size(), field));
+    public Ant spawnAnt(Swarm swarm, Field field, WorldInfo world) {
+        Ant spawnedAnt = new Ant(swarm, world.getAnts().size(), field);
+        field.setAnt(spawnedAnt);
+        return spawnedAnt;
     }
 }
