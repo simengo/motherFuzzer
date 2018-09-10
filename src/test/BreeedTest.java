@@ -53,7 +53,10 @@ public class BreeedTest {
         Optional<AntInfo> ant = world.getFieldAt(1,0).getAnt();
 
         assert(ant.isPresent() == true);
-        //assert(ant.get().getSwarm() == )
+        assert(ant.get().getSwarm() == 'A' );
+        assert(ant.get().getField().getX() == 1 && ant.get().getField().getY() == 1);
+        assert(ant.get().getId() == 3);
+        assert(ant.get().getDirection() == "northwest");
 
 
 
