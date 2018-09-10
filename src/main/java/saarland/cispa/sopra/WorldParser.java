@@ -34,9 +34,9 @@ public final class WorldParser {
             int breite = 0;
             int hoehe = 0;
 
-            for (char x : width1) {
+            for (char character : width1) {
                 if (outbreak) break;
-                switch (x) {
+                switch (character) {
 
                     case 92:
                         newLine1 = true;
@@ -59,7 +59,7 @@ public final class WorldParser {
                                 break;
                             }
                             nexttoken = true;
-                            hoehe = hoehe * 10 + (x - 48);
+                            hoehe = hoehe * 10 + (character - 48);
                             break;
 
                         } else {
@@ -67,10 +67,10 @@ public final class WorldParser {
                                 throw new IllegalArgumentException("Map could not be parsed correctly");
                             } else {
                                 if (nexttoken) {
-                                    hoehe = hoehe * 10 + (x - 48);
+                                    hoehe = hoehe * 10 + (character - 48);
                                     break;
                                 } else {
-                                    breite = breite * 10 + (x - 48);
+                                    breite = breite * 10 + (character - 48);
                                     break;
                                 }
                             }
@@ -110,11 +110,11 @@ public final class WorldParser {
                         case 'n':
                             if (newLine) {
                                 newLine = false;
-                                if (jPMDlaenger != breite + 1) {
+                                if (x != breite + 1) {
                                     throw new IllegalArgumentException("Map could not be parsed correctly");
                                 }
-                                jPMDlaenger = -1;
-                                iPMDleanger++;
+                                x = -1;
+                                y++;
                                 counter++;
                                 break;
                             } else {
@@ -133,7 +133,7 @@ public final class WorldParser {
                             break;
 
                         default:
-                            checkLetter(fieldType, fields, x, y);
+                            checkLetter(chara, fields, x, y);
                             break;
                     }
                     y++;
@@ -164,7 +164,7 @@ public final class WorldParser {
         } else {
             throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character)");
         }
-        // hier noch catchen?
+
     }
 
     private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
