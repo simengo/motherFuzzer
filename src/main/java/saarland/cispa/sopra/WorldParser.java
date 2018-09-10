@@ -123,8 +123,9 @@ public final class WorldParser {
                         ArrayList<Field> swarmmember = getNeighboursOfSwarm(field, world);
                         consistentFields.put(field.getType(), swarmmember);
                     } else {
-                        if (!consistentFields.get(field.getType()).contains(field))
+                        if (!consistentFields.get(field.getType()).contains(field)) {
                             throw new IllegalArgumentException("Bases aren't consistent");
+                        }
                     }
 
                 }
@@ -194,7 +195,7 @@ public final class WorldParser {
         ArrayList<Field> foundNeighbours = new ArrayList<>();
         foundNeighbours.add(field);
 
-        while (foundNeighbours != null) {
+        while (foundNeighbours.size() != 0) {
             Field neighbour = foundNeighbours.get(0);
             neighboursOfSwarm.add(neighbour);
             foundNeighbours.remove(neighbour);
