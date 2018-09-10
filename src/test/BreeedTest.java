@@ -50,13 +50,20 @@ public class BreeedTest {
         antA.setDirection("east");
         antA.getNextInstruction().execute(world,antA);
 
-        Optional<AntInfo> ant = world.getFieldAt(1,0).getAnt();
+        Optional<AntInfo> ant = world.getFieldAt(1,1).getAnt();
+        Optional<AntInfo> ant1 = world.getFieldAt(0,1).getAnt();
+
 
         assert(ant.isPresent() == true);
         assert(ant.get().getSwarm() == 'A' );
-        assert(ant.get().getField().getX() == 1 && ant.get().getField().getY() == 1);
         assert(ant.get().getId() == 3);
         assert(ant.get().getDirection() == "northwest");
+        assert(ant.get().getField().getX() == 1 && ant.get().getField().getY() == 1);
+        assert(antB.isDead() == true);
+        assert(ant1.isPresent( )== false);
+        assert(field01.getFood() == 0);
+        assert(world.getScore('B')== 3);
+
 
 
 
