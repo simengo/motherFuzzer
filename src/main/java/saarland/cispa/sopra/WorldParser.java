@@ -4,13 +4,9 @@ package saarland.cispa.sopra;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public final class WorldParser {
 
@@ -111,7 +107,7 @@ public final class WorldParser {
     private static void checkBaseConsistency(World world, Map<Character, Swarm> swarms) {
 
         Field[][] fields = world.getFields();
-        HashMap<Character, ArrayList<Field>> consistentFields = new HashMap<>();
+        Map<Character, List<Field>> consistentFields = new HashMap<>();
         for (Swarm swarm : swarms.values()) {
             consistentFields.put(swarm.getIdent(), new ArrayList<>());
         }
@@ -123,7 +119,7 @@ public final class WorldParser {
                 if (field instanceof Base) {
 
                     if (consistentFields.get(field.getType()).size() == 0) {
-                        ArrayList<Field> swarmmember = getNeighboursOfSwarm(field, world);
+                        List<Field> swarmmember = getNeighboursOfSwarm(field, world);
                         consistentFields.put(field.getType(), swarmmember);
                     } else {
                         if (!consistentFields.get(field.getType()).contains(field)) {
@@ -192,13 +188,13 @@ public final class WorldParser {
         return result;
     }
 
-    private static ArrayList<Field> getNeighboursOfSwarm(Field field, World world) {
+    private static List<Field> getNeighboursOfSwarm(Field field, World world) {
 
         ArrayList<Field> neighboursOfSwarm = new ArrayList<>();
         ArrayList<Field> foundNeighbours = new ArrayList<>();
         foundNeighbours.add(field);
 
-        while (foundNeighbours.size() != 0) {
+        while (!foundNeighbours.isEmpty()) {
             Field neighbour = foundNeighbours.get(0);
             if (!neighboursOfSwarm.contains(neighbour)) {
                 neighboursOfSwarm.add(neighbour);
