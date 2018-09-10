@@ -7,13 +7,8 @@ import saarland.cispa.sopra.systemtests.WorldInfo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class Game implements GameInfo {
 
@@ -37,7 +32,7 @@ public class Game implements GameInfo {
 
     @Override
     public WorldInfo simulate(int rounds, long seed, File world1, File... brains) {
-        initialize(seed, world1, brains);
+        initialize(seed, world1/*, brains*/);
         for (int count = 0; count < rounds; count++) {
             simulateOnce();
         }
@@ -82,7 +77,7 @@ public class Game implements GameInfo {
         }
     }
 
-    private void initialize(long seed, File world1, File[] brains) {
+    private void initialize(long seed, File world1 /*File[] brains*/) {
 
         //  Map<Character, Swarm> swarms;
         try {
