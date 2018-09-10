@@ -1,4 +1,8 @@
-package saarland.cispa.sopra.systemtests;
+package saarland.cispa.sopra.systemtests.mischatests;
+
+import saarland.cispa.sopra.systemtests.AntInfo;
+import saarland.cispa.sopra.systemtests.GameInfo;
+import saarland.cispa.sopra.systemtests.WorldInfo;
 
 public class AntTest2 extends BaseTest{
 

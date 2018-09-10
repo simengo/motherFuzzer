@@ -1,11 +1,13 @@
-package saarland.cispa.sopra.systemtests;
+package saarland.cispa.sopra.systemtests.mischatests;
 
-
+import saarland.cispa.sopra.systemtests.AntInfo;
+import saarland.cispa.sopra.systemtests.GameInfo;
+import saarland.cispa.sopra.systemtests.WorldInfo;
 
 // test AntID
-public class AntTest1 extends BaseTest{
+public class AntTest1 extends BaseTest {
 
-@Override
+    @Override
     public void test(GameInfo gameInfo) {
 
 
