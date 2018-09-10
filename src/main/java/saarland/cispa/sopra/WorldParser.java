@@ -159,37 +159,37 @@ public final class WorldParser {
     private static void checkLetter(char fieldType,Field[][] fields,int x, int y){
         boolean bool = true;
 =======
-        private static void checkLetter(char fieldType, Field[][] fields, int x, int y) {
+    private static void checkLetter(char fieldType, Field[][] fields, int x, int y) {
 >>>>>>> origin/master
-            if (fieldType >= 65 && fieldType <= 90 || fieldType >= 97 && fieldType <= 122) {
-                fields[x][y] = new Base(fieldType, x, y);
-                bool = false;
-
-            }
-            if (fieldType >= 49 && fieldType <= 57) {
-                fields[x][y] = new Normal(x, y, fieldType - 48);
-                bool = false;
-            }
-            if(bool){
-                throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character)");
-            }
+        if (fieldType >= 65 && fieldType <= 90 || fieldType >= 97 && fieldType <= 122) {
+            fields[x][y] = new Base(fieldType, x, y);
+            bool = false;
 
         }
+        if (fieldType >= 49 && fieldType <= 57) {
+            fields[x][y] = new Normal(x, y, fieldType - 48);
+            bool = false;
+        }
+        if(bool){
+                throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character)");
+        }
 
-        private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
-            HashMap<Integer, Ant> ants = new HashMap<>();
-            for (Field[] fieldh : fields) {
-                for (Field field : fieldh) {
-                    Character type = field.getType();
-                    if (type != '.' && type != '=' && type != '#') {
-                        if (swarms.get(type).getIdent() != type) {
-                            throw new IllegalArgumentException("wrong swarm");
-                        }
-                        Ant ant = new Ant(swarms.get(type), ants.size(), field);
-                        ants.put(ants.size(), ant);
+    }
+
+    private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
+        HashMap<Integer, Ant> ants = new HashMap<>();
+        for (Field[] fieldh : fields) {
+            for (Field field : fieldh) {
+                Character type = field.getType();
+                if (type != '.' && type != '=' && type != '#') {
+                    if (swarms.get(type).getIdent() != type) {
+                        throw new IllegalArgumentException("wrong swarm");
                     }
+                    Ant ant = new Ant(swarms.get(type), ants.size(), field);
+                    ants.put(ants.size(), ant);
                 }
             }
-            return ants;
         }
+        return ants;
     }
+}
