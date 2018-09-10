@@ -4,8 +4,10 @@ package saarland.cispa.sopra;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -35,7 +37,15 @@ public final class WorldParser {
             width = checkNumber(splittedlines[0].toCharArray());
             height = checkNumber(splittedlines[1].toCharArray());
 
-            if ((splittedlines.length > (height + 2)) || (((splittedlines.length - 2) % 2) != 0) || ((splittedlines.length - 2) > 128) || ((width % 2) != 0) || ((height % 2) != 0)) {
+            if (width < 2 || width > 128 || width % 2 != 0) {
+                throw new IllegalArgumentException("Illegal width");
+            }
+
+            if (height < 2 || height > 128 || height % 2 != 0) {
+                throw new IllegalArgumentException("Illegal height");
+            }
+
+            if (splittedlines.length > (height + 2) || ((splittedlines.length - 2) % 2) != 0 || splittedlines.length - 2 > 128) {
                 throw new IllegalArgumentException("Map could not be parsed correctly");
             }
 
@@ -62,6 +72,7 @@ public final class WorldParser {
         Map<Integer, Ant> ants = spawnAnts(swarms, fields);
         World welt = new World(fields, seed, ants, swarms);
         checkSwarmConsistency(welt, swarms);
+        checkBaseConsistency(welt);
         welt.setAntlion();
         return welt;
     }
@@ -97,6 +108,32 @@ public final class WorldParser {
 
     }
 
+    private static void checkBaseConsistency(World world) {
+
+        Field[][] fields = world.getFields();
+        HashMap<Character, ArrayList<Field>> consistentFields = new HashMap<>();
+
+        for (Field[] line : fields) {
+
+            for (Field field : line) {
+
+                if (field instanceof Base) {
+
+                    if (consistentFields.get(field.getType()).size() == 0) {
+                        ArrayList<Field> swarmmember = getNeighboursOfSwarm(field, world);
+                        consistentFields.put(field.getType(), swarmmember);
+                    } else {
+                        if (!consistentFields.get(field.getType()).contains(field))
+                            throw new IllegalArgumentException("Bases aren't consistent");
+                    }
+
+                }
+
+            }
+
+        }
+    }
+
     private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
         HashMap<Integer, Ant> ants = new HashMap<>();
 
@@ -116,22 +153,24 @@ public final class WorldParser {
 
         Iterator<Swarm> swarmIterator = swarms.values().iterator();
 
-        char Start = 'A';
-        char Ende = 'Z';
+        char start = 'A';
+
+        char ende = 'Z';
         while (swarmIterator.hasNext()) {
 
-            if (Start > Ende) {
+            if (start > ende) {
                 throw new IllegalArgumentException("Too many swarms");
             }
             Swarm actualSwarm = swarmIterator.next();
-            if (actualSwarm.getIdent() != Start) {
-                throw new IllegalArgumentException("Swarm-Ident Inconsitency");
+            if (actualSwarm.getIdent() == start) {
+                start++;
             } else {
-                Start++;
+                throw new IllegalArgumentException("Swarm-Ident Inconsitency");
             }
         }
 
-        if (Start < 'B') {
+        char minimum = 'B';
+        if (start < minimum) {
             throw new IllegalArgumentException("Too many swarms");
         }
     }
@@ -148,4 +187,26 @@ public final class WorldParser {
         }
         return result;
     }
+
+    private static ArrayList<Field> getNeighboursOfSwarm(Field field, World world) {
+
+        ArrayList<Field> neighboursOfSwarm = new ArrayList<>();
+        ArrayList<Field> foundNeighbours = new ArrayList<>();
+        foundNeighbours.add(field);
+
+        while (foundNeighbours != null) {
+            Field neighbour = foundNeighbours.get(0);
+            neighboursOfSwarm.add(neighbour);
+            foundNeighbours.remove(neighbour);
+            for (Field suspect : world.getNeighbours(neighbour)) {
+                if (suspect.getType() == neighbour.getType() && !neighboursOfSwarm.contains(suspect)) {
+                    foundNeighbours.add(suspect);
+                }
+            }
+        }
+
+        return neighboursOfSwarm;
+    }
+
 }
+
