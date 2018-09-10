@@ -35,7 +35,7 @@ public final class WorldParser {
             width = checkNumber(splittedlines[0].toCharArray());
             height = checkNumber(splittedlines[1].toCharArray());
 
-            if (splittedlines.length > height + 2 || (splittedlines.length - 2)%2 != 0 || splittedlines.length - 2 > 128) {
+            if ((splittedlines.length > (height + 2)) || (((splittedlines.length - 2) % 2) != 0) || ((splittedlines.length - 2) > 128) || ((width % 2) != 0) || ((height % 2) != 0)) {
                 throw new IllegalArgumentException("Map could not be parsed correctly");
             }
 
@@ -45,7 +45,7 @@ public final class WorldParser {
 
                 char[] actualLine = splittedlines[i].toCharArray();
 
-                if (actualLine.length % 2 != 0 || actualLine.length > 128) {
+                if (actualLine.length % 2 != 0 || actualLine.length > 128 || actualLine.length != width) {
                     throw new IllegalArgumentException("Invalid width of line");
                 }
 
@@ -61,6 +61,7 @@ public final class WorldParser {
 
         Map<Integer, Ant> ants = spawnAnts(swarms, fields);
         World welt = new World(fields, seed, ants, swarms);
+        checkSwarmConsistency(welt, swarms);
         welt.setAntlion();
         return welt;
     }
@@ -71,7 +72,7 @@ public final class WorldParser {
         char antLion = '=';
         char normal = '.';
 
-        if (fieldType >= 65 && fieldType <= 90 || fieldType >= 97 && fieldType <= 122) {
+        if (fieldType >= 65 && fieldType <= 90) {
             fields[x][y] = new Base(fieldType, x, y);
             return;
         } else {
@@ -98,14 +99,12 @@ public final class WorldParser {
 
     private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
         HashMap<Integer, Ant> ants = new HashMap<>();
-        for (Field[] fieldh : fields) {
-            for (Field field : fieldh) {
-                Character type = field.getType();
-                if (type != '.' && type != '=' && type != '#') {
-                    if (swarms.get(type).getIdent() != type) {
-                        throw new IllegalArgumentException("wrong swarm");
-                    }
-                    Ant ant = new Ant(swarms.get(type), ants.size(), field);
+
+        for (Field[] line : fields) {
+            for (Field field : line) {
+                if (field instanceof Base) {
+                    Ant ant = new Ant(swarms.get(field.getType()), ants.size(), field);
+                    field.setAnt(ant);
                     ants.put(ants.size(), ant);
                 }
             }
@@ -132,7 +131,7 @@ public final class WorldParser {
             }
         }
 
-        if(Start<'B'){
+        if (Start < 'B') {
             throw new IllegalArgumentException("Too many swarms");
         }
     }
