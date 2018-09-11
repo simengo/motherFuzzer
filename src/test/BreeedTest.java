@@ -62,7 +62,7 @@ public class BreeedTest {
         assert(antB.isDead() == true);
         assert(ant1.isPresent( )== false);
         assert(field01.getFood() == 0);
-        assert(world.getScore('B')== 3);
+        assert(world.getScore('B')== 4);
 
 
 
