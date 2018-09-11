@@ -234,13 +234,13 @@ public class WorldParserTest {
     public void inconsistentMapTest() {
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
-        Instruction[] brainB = new Instruction[1];
+        Instruction[] brainC = new Instruction[1];
         brainA[0] = new Jump(0);
-        brainB[0] = new Jump(0);
+        brainC[0] = new Jump(0);
         Swarm swarmA = new Swarm('A', brainA, "A");
-        Swarm swarmB = new Swarm('B', brainB, "B");
+        Swarm swarmB = new Swarm('C', brainC, "C");
         swarms.put('A', swarmA);
-        swarms.put('B', swarmB);
+        swarms.put('C', swarmB);
         boolean fail = false;
 
         try {
@@ -325,3 +325,4 @@ public class WorldParserTest {
 
 }
 
+//inconsistenMap = 2\n2\nAC\n..
