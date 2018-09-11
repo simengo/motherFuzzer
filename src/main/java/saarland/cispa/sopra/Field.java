@@ -12,7 +12,7 @@ public abstract class Field implements FieldInfo {
     private final int posX;
     private final int posY;
     private final char type;
-    private final Map<Character, boolean[]> marker = new HashMap<Character, boolean[]>();
+    private Map<Character, boolean[]> marker = new HashMap<Character, boolean[]>();
     private AntInfo ant;
     private boolean isNextToAntlion;
     private boolean changed;
@@ -58,6 +58,10 @@ public abstract class Field implements FieldInfo {
         return marker;
     }
 
+    public void setMarker(Map<Character, boolean[]> marker) {
+        this.marker = marker;
+    }
+
     public boolean getMarker(char ident, int num) {
         return marker.get(ident)[num];
     }
@@ -70,6 +74,10 @@ public abstract class Field implements FieldInfo {
         return changed;
     }
 
+    public void setChanged(boolean bool) {
+        this.changed = bool;
+    }
+
     public boolean isAccessible() {
         return this.ant == null && this.type != '#';
     }
@@ -80,10 +88,6 @@ public abstract class Field implements FieldInfo {
 
     public void setNextToAntlion(boolean nextToAntlion) {
         isNextToAntlion = nextToAntlion;
-    }
-
-    public void setChanged(boolean bool) {
-        this.changed = bool;
     }
 
     public void removeAnt() {

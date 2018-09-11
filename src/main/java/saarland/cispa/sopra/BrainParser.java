@@ -17,231 +17,312 @@ import saarland.cispa.sopra.antlr.AcolaParser;
 
 public final class BrainParser {
 
-    private BrainParser(){}
-
+    private BrainParser() {
+    }
 
     public static Map<Character, Swarm> parse(File[] brains) throws IOException {
         int currentBrain = 0;
         List<String> name = new ArrayList<>(2);
-        Instruction[][] brainArray = new Instruction[0][];
+        Instruction[][] brainArray ;
         BrainVisitor visitor = new BrainVisitor();
+        brainArray = new Instruction[brains.length][];  //create the brains array
         for (File brain : brains) {
-            CharStream input = CharStreams.fromFileName(brain.getName());
+            CharStream input = CharStreams.fromPath(brain.toPath()); //parse each brain file into a usable form
             AcolaLexer lexer = new AcolaLexer(input);
             TokenStream tokens = new CommonTokenStream(lexer);
             AcolaParser parser = new AcolaParser(tokens);
-
             AcolaParser.BrainContext brainContext = parser.brain();
 
-            name.add("");
+            name.add(brainContext.IDENTIFIER().getText());      // add the name of the brain to the name array
 
-            brainArray = new Instruction[brains.length - 1][];
-            int currentInstruction = 0;
-            String[] instructionStringArr = visitor.visitBrain(brainContext).split("\\n");
-            for (String instr : instructionStringArr) {
-
-                Instruction instruction = switchInstruction(instr, instructionStringArr);
+            int currentInstruction = 0;                         //iteration variable for initialising the brains array
+            String[] instructionStringArr = visitor.visitBrain(brainContext).split("\\n"); //
+            brainArray[currentBrain] = new Instruction[instructionStringArr.length - 1];
+            for (String instr : instructionStringArr) {         //create all instructions and add them to the brain array
+                if (" ".equals(instr)) {
+                    break;
+                }
+                String[] instrArray = addSpaces(instr);
+                Instruction instruction = switchInstruction(instrArray[0], instrArray);
                 if (instruction == null) {
                     throw new IllegalArgumentException("instruction is null");
                 }
                 brainArray[currentBrain][currentInstruction] = instruction;
                 currentInstruction++;
             }
+            if (brainArray[currentBrain][brainArray[currentBrain].length - 1].getClass() != Jump.class) {
+                throw new IllegalArgumentException("last instruction wasn't a jump");
+            }
             currentBrain++;
         }
         HashMap<Character, Swarm> brainMap = new HashMap<>();
         int jiterator = 0;
         for (int iterator = 'A'; iterator <= 'Z'; iterator++) {
-            brainMap.put((char) iterator, new Swarm((char) iterator, brainArray[jiterator], name.get(iterator)));
+            brainMap.put((char) iterator, new Swarm((char) iterator, brainArray[jiterator], name.get(jiterator)));
             jiterator++;
+            if (jiterator == brainArray.length) {
+                break;
+            }
         }
         return brainMap;
     }
 
     private static Instruction switchTarget(String dir, Target target, int jumpPC) throws IOException {
-        Instruction instruction = null;
         switch (target) {
             case foe:
-                instruction = new SenseAnt(dir, target, jumpPC);
-                break;
+                return new SenseAnt(dir, target, jumpPC);
             case friend:
-                instruction = new SenseAnt(dir, target, jumpPC);
-                break;
+                return new SenseAnt(dir, target, jumpPC);
             case home:
-                instruction = new SenseField(dir, target, jumpPC);
-                break;
+                return new SenseField(dir, target, jumpPC);
             case foehome:
-                instruction = new SenseField(dir, target, jumpPC);
-                break;
+                return new SenseField(dir, target, jumpPC);
             case rock:
-                instruction = new SenseField(dir, target, jumpPC);
-                break;
+                return new SenseField(dir, target, jumpPC);
             case antlion:
-                instruction = new SenseField(dir, target, jumpPC);
-                break;
+                return new SenseField(dir, target, jumpPC);
             case friendfood:
-                instruction = new SenseFood(dir, target, jumpPC);
-                break;
+                return new SenseFood(dir, target, jumpPC);
             case foefood:
-                instruction = new SenseFood(dir, target, jumpPC);
-                break;
+                return new SenseFood(dir, target, jumpPC);
             case food:
-                instruction = new SenseFood(dir, target, jumpPC);
-                break;
+                return new SenseFood(dir, target, jumpPC);
             default:
                 throw new IOException();
         }
-        return instruction;
     }
 
     private static Instruction switchInstruction(String instr, String[] instructionStringArr) throws IOException {
-        Instruction instruction = null;
-        //TODO get all the stuff
-        int marker = 0;
-        int max = 0;
-
         switch (instr) {
-            case "move": {
-                instruction = new Move(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
-                break;
-            }
-            case "sense": {
-                instruction = createSense(instructionStringArr);
-                break;
-            }
-            case "flip": {
-                instruction = new Flip(max, Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
-                break;
-            }
-            case "mark": {
-                instruction = new Mark(marker);
-                break;
-            }
-            case "unmark": {
-                instruction = new Unmark(marker);
-                break;
-            }
-            default: {
-                instruction = switchInstruction2(instr, instructionStringArr);
-                break;
-            }
+            case "move":
+                return new Move(Integer.parseInt(instructionStringArr[1]));
+            case "sense":
+                return createSense(instructionStringArr);
+            case "flip":
+                return new Flip(Integer.parseInt(instructionStringArr[1]), Integer.parseInt(instructionStringArr[2]));
+            case "mark":
+                return new Mark(Integer.parseInt(instructionStringArr[1]));
+            case "unmark":
+                return new Unmark(Integer.parseInt(instructionStringArr[1]));
+            default:
+                return switchInstruction2(instr, instructionStringArr);
         }
-        return instruction;
     }
 
     private static Instruction switchInstruction2(String instr, String[] instructionStringArr) {
-        Instruction instruction;
-        String direction = "";
-        TurnDirection turn = null;
         switch (instr) {
             case "set":
-                instruction = new Set(Integer.parseInt(instructionStringArr[2]));
-                break;
-
+                return new Set(Integer.parseInt(instructionStringArr[1]));
             case "unset":
-                instruction = new Unset(Integer.parseInt(instructionStringArr[2]));
-                break;
-
+                return new Unset(Integer.parseInt(instructionStringArr[1]));
             case "drop":
-                instruction = new Drop(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
-                break;
-
+                return new Drop(Integer.parseInt(instructionStringArr[1]));
             case "pickup":
-                instruction = new Pickup(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
-                break;
-
+                return new Pickup(Integer.parseInt(instructionStringArr[1]));
             case "direction":
-                instruction = new Direction(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]), direction);
-                break;
-
+                return new Direction(Integer.parseInt(instructionStringArr[2]), instructionStringArr[1]);
             case "jump":
-                instruction = new Jump(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
-                break;
-
+                return new Jump(Integer.parseInt(instructionStringArr[1]));
             case "breed":
-                instruction = new Breed(Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
-                break;
-
+                return new Breed(Integer.parseInt(instructionStringArr[1]));
             case "turn":
-                instruction = new Turn(turn);
-                break;
-
+                if ("left".equals(instructionStringArr[1])) {
+                    return new Turn(TurnDirection.left);
+                } else {
+                    return new Turn(TurnDirection.right);
+                }
             case "test":
-                instruction = new Test(Integer.parseInt(instructionStringArr[2]), Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
-                break;
-
+                return new Test(Integer.parseInt(instructionStringArr[1]), Integer.parseInt(instructionStringArr[2]));
             default:
                 throw new IllegalArgumentException();
         }
-        return instruction;
     }
 
     private static Instruction createSense(String[] instructionStringArr) throws IOException {
         Target target;
-        switch (instructionStringArr[1]) {
+        switch (instructionStringArr[2]) {
             case "foe":
                 target = Target.foe;
                 break;
-
             case "food":
                 target = Target.food;
                 break;
-
             case "rock":
                 target = Target.rock;
                 break;
-
             case "home":
                 target = Target.home;
                 break;
-
             case "foehome":
                 target = Target.foehome;
                 break;
-
             case "marker":
                 target = Target.marker;
                 break;
-
             default:
-                target = createSense2(instructionStringArr);
-                break;
-
+                throw new IllegalArgumentException("illigal target");
         }
         if ("marker".equals(instructionStringArr[2])) {
-            return new SenseMarker(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[instructionStringArr.length - 1]));
+            return new SenseMarker(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[4]));
         } else {
-            return switchTarget(instructionStringArr[2], target, Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])); // jumpPC =  Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])
+            return switchTarget(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[4])); // jumpPC =  Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])
         }
     }
 
     private static Target createSense2(String[] instructionStringArr) throws IOException {
-        Target target;
         switch (instructionStringArr[1]) {
             case "foemarker":
-                target = Target.foemarker;
-                break;
-
+                return Target.foemarker;
             case "antlion":
-                target = Target.antlion;
-                break;
-
+                return Target.antlion;
             case "foefood":
-                target = Target.foefood;
-                break;
-
+                return Target.foefood;
             case "friendfood":
-                target = Target.friendfood;
-                break;
-
+                return Target.friendfood;
             case "friend":
-                target = Target.friend;
-                break;
-
+                return Target.friend;
             default:
                 throw new IOException("brain error");
-
         }
-        return target;
+    }
+
+    private static String[] addSpaces(String instructioninput) {
+        String[] instrArray;
+        String instruction = instructioninput.replace(" ", "");
+
+        instrArray = instruction.split("sense");
+        if (instrArray.length == 2) {
+            return addSenseSpaces(instrArray);
+        }
+        instrArray = instruction.split("jump");
+        if (instrArray.length == 2) {
+            return splitjump(instruction, "jump");
+        }
+        instrArray = instruction.split("unset");
+        if (instrArray.length == 2) {
+            return splitjump(instruction, "unset");
+        }
+        instrArray = instruction.split("set");
+        if (instrArray.length == 2) {
+            return splitjump(instruction, "set");
+        }
+        instrArray = instruction.split("turn");
+        if (instrArray.length == 2) {
+            return splitjump(instruction, "turn");
+        }
+        instrArray = instruction.split("move");
+        if (instrArray.length == 2) {
+            return splitmove(instruction, "move");
+        }
+        instrArray = instruction.split("pickup");
+        if (instrArray.length == 2) {
+            return splitmove(instruction, "pickup");
+        }
+        return addSpaces2(instruction);
+    }
+
+
+    private static String[] addSpaces2(String instruction) {
+        String[] instrArray;
+
+        instrArray = instruction.split("drop");
+        if (instrArray.length == 2) {
+            return splitmove(instruction, "drop");
+        }
+        instrArray = instruction.split("breed");
+        if (instrArray.length == 2) {
+            return splitmove(instruction, "breed");
+        }
+
+        instrArray = instruction.split("flip");
+        if (instrArray.length == 2) {
+            return splitflip(instruction, "flip");
+        }
+        instrArray = instruction.split("test");
+        if (instrArray.length == 2) {
+            return splitflip(instruction, "test");
+        }
+        instrArray = instruction.split("direction");
+        if (instrArray.length == 2) {
+            return splitflip(instruction, "direction");
+        }
+
+        instrArray = instruction.split("unmark");
+        if (instrArray.length == 2) {
+            return splitjump(instruction, "unmark");
+        }
+        instrArray = instruction.split("mark");
+        if (instrArray.length == 2) {
+            return splitjump(instruction, "mark");
+        }
+        throw new IllegalArgumentException("no such instruction");
+    }
+
+
+    private static String[] addSenseSpaces(String[] instrArrayinput) {
+        String sense = "sense";
+        instrArrayinput[0] = sense;
+        String instrBody = instrArrayinput[1];
+
+        String[] instrArray = new String[5];
+        instrArray[0] = sense;
+        instrArray[1] = instrBody;
+
+        splitTarDir("ahead", instrArray,1);
+        splitTarDir("here", instrArray,1);
+        splitTarDir("left", instrArray,1);
+        splitTarDir("right", instrArray,1);
+
+        splitTarDir("foehome", instrArray,2);
+        splitTarDir("foemarker", instrArray,2);
+        splitTarDir("foefood", instrArray,2);
+        splitTarDir("foe", instrArray,2);
+        splitTarDir("home", instrArray,2);
+        splitTarDir("food", instrArray,2);
+        splitTarDir("friendfood", instrArray,2);
+        splitTarDir("friend", instrArray,2);
+        splitTarDir("antlion", instrArray,2);
+        splitTarDir("rock", instrArray,2);
+        splitTarDir("marker", instrArray,2);
+
+        String els = "else";
+        instrArray[4] = instrArray[3].split(els)[1];
+        instrArray[3] = instrArray[3].split(els)[0];
+        return instrArray;
+    }
+
+
+    private static String[] splitjump(String instruction, String regex) {
+        String[] instrArray = new String[2];
+        instrArray[0] = regex;
+        instrArray[1] = instruction.split(regex)[0];
+        instrArray[1] = instruction.split(regex)[1];
+        return instrArray;
+    }
+
+    private static String[] splitmove(String instruction, String regex) {
+        String[] instrArray = new String[3];
+        instrArray[0] = regex;
+        instrArray[1] = instruction.split(regex)[1];
+        instrArray[1] = instrArray[1].split("else")[1];
+        return instrArray;
+    }
+
+    private static String[] splitflip(String instruction, String regex) {
+        String[] instrArray = new String[3];
+        instrArray[0] = regex;
+        instrArray[1] = instruction.split(regex)[1];
+        String els = "else";
+        instrArray[2] = instrArray[1].split(els)[1];
+        instrArray[1] = instrArray[1].split(els)[0];
+        return instrArray;
+    }
+
+    private static void splitTarDir(String target, String[] instrArray, int index) {
+        String[] tester = instrArray[index].split(target);
+        if (tester.length > 1) {
+            instrArray[index+1] = tester[1];
+            instrArray[index] = target;
+        }
     }
 }

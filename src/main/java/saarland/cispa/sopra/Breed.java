@@ -61,4 +61,11 @@ public class Breed extends Killable {
         field.setChanged(true);
         return spawnedAnt;
     }
+
+
+    @Override
+    public String toString(){
+
+        return "breed else " + this.getJumpPc();
+    }
 }

@@ -1,5 +1,5 @@
 grammar Acola;
-brain : 'brain' '"' IDENTIFIER '"' '{' '\\n' (instruction '\\n')+ '}' EOF;
+brain : SPACE* 'brain' SPACE* '"' SPACE* IDENTIFIER SPACE* '"' SPACE* '{' SPACE* '\n' SPACE* (SPACE* instruction SPACE* '\n')+ SPACE* '}' EOF;
 instruction : mark
               |unmark
               |turn
@@ -12,30 +12,33 @@ instruction : mark
               |jump
               |flip
               |sensemarker
-              |directions
+              |direction
               |test
+              |breed
               |COMMENT;
 
-mark: 'mark' NUMBER;
-unmark: 'unmark' NUMBER;
-turn: 'turn' ('left' | 'right');
-move: 'move' 'else' NUMBER;
-sense: 'sense' FIELD TARGET 'else' NUMBER;
-sensemarker: 'sense' FIELD 'marker' MARKER 'else' NUMBER;
-set: 'set' NUMBER;
-unset: 'unset' NUMBER;
-pickup: 'pickup''else' NUMBER;
-drop: 'drop''else' NUMBER;
-jump: 'jump' (NUMBER|MARKER)+;
-flip: 'flip' 'else' NUMBER;
-test: 'test' 'else' NUMBER;
-directions: 'directions' DIRECTION;
-breed: 'breed' NUMBER;
+mark: 'mark' SPACE* (MARKER|REGISTER);
+unmark: 'unmark' SPACE* (MARKER|REGISTER);
+turn: 'turn' SPACE* ('left' | 'right');
+move: 'move' SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
+sense: 'sense' SPACE* FIELD SPACE* TARGET SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
+sensemarker: 'sense' SPACE* FIELD SPACE* 'marker' SPACE* (MARKER|REGISTER) SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
+set: 'set' SPACE* REGISTER;
+unset: 'unset' SPACE* REGISTER;
+pickup: 'pickup' SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
+drop: 'drop' SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
+jump: 'jump' SPACE* (NUMBER|MARKER|REGISTER);
+flip: 'flip' SPACE* (NUMBER|MARKER|REGISTER) SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
+test: 'test' SPACE* (NUMBER|MARKER|REGISTER) SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
+direction: 'direction' SPACE* DIRECTION SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
+breed: 'breed' SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
 
 FIELD : 'here' | 'ahead' | 'left' | 'right';
-TARGET : 'foe' | 'foehome' | 'friend' | 'food' | 'antlion' | 'rock' | 'foefood' | 'foemarker';
+TARGET : 'foe' | 'foehome' | 'friend' | 'food' | 'antlion' | 'rock' | 'foefood' | 'foemarker' | 'home' | 'friendfood';
 DIRECTION :  'northwest' | 'west' | 'southwest' | 'southeast' | 'east' | 'northeast';
-MARKER : [0-5];
+REGISTER : [0-5];
+MARKER : [0-6];
 NUMBER : [0-9]+;
 IDENTIFIER : [a-zA-Z_.-][a-zA-Z0-9_.-]*;
-COMMENT : ('/*' .*? '*/' | '//' .*? '\\n') -> skip;
+COMMENT : ('/*' .*? '*/' | '//' .*? '\n') -> skip;
+SPACE : ([ ]+) -> skip;

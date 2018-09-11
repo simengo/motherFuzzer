@@ -1,5 +1,7 @@
 package saarland.cispa.sopra;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import saarland.cispa.sopra.systemtests.AntInfo;
 import saarland.cispa.sopra.systemtests.FieldInfo;
 import saarland.cispa.sopra.systemtests.WorldInfo;
@@ -392,23 +394,39 @@ public class World implements WorldInfo {
 
     }
 
+
+
     public void addAnt(Ant ant) {
+
         ants.put(ants.size(), ant);
     }
 
-    //    public void printMap(){
-//
-//        for(int i = 0; i < height; i++){
-//            for(int x = 0; x < width; x++){
-//
-//                Field field = fields[x][i];
-//
-//                System.out.print(field.getType());
-//
-//            }
-//            System.out.print("\n");
-//        }
-//    }
+
+
+
+
+    public void printMap(){
+
+        StringBuilder strB = new StringBuilder();
+        strB.append('\n');
+        Logger printSth = LoggerFactory.getLogger("World.class");
+        for(int i = 0; i < height; i++){
+            for(int x = 0; x < width; x++){
+
+                Field field = fields[x][i];
+
+                strB.append(field.getType());
+
+            }
+            strB.append('\n');
+        }
+
+        printSth.info(strB.toString());
+
+    }
+
+
+
 
 
 }
