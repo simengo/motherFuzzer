@@ -18,6 +18,6 @@ public class Set extends Instruction {
     }
     @Override
     public String toString(){
-        return "set" + reg;
+        return "set" + " " + reg;
     }
 }

@@ -14,6 +14,6 @@ public class Jump extends Instruction {
     }
     @Override
     public String toString(){
-        return "jump" + jumpPC;
+        return "jump" + " " + jumpPC;
     }
 }

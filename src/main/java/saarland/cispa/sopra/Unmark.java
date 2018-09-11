@@ -24,6 +24,6 @@ public class Unmark extends Instruction {
     }
     @Override
     public String toString(){
-        return "unmark" + markerFalse;
+        return "unmark" + " " + markerFalse;
     }
 }

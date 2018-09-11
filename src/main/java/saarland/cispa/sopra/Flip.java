@@ -19,7 +19,7 @@ public class Flip extends Instruction {
     }
     @Override
     public String toString(){
-        return "flip" + maxNum + "else" + jumpPC;
+        return "flip" + " " + maxNum + " " + "else" + " " + jumpPC;
     }
 
 }

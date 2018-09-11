@@ -24,6 +24,6 @@ public class Mark extends Instruction {
     }
     @Override
     public String toString(){
-        return "mark" + marker;
+        return "mark" + " " + marker;
     }
 }

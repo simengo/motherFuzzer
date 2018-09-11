@@ -69,7 +69,7 @@ public class SenseTest {
         swarms.put('B',swarmB);
 
         Ant antA0 = new Ant(swarmA,0,field00);
-        Ant antA1 = new Ant(swarmA,0,field10);
+        Ant antA1 = new Ant(swarmA,1,field10);
         field00.setAnt(antA0);
         field10.setAnt(antA1);
         HashMap<Integer, Ant> ants = new HashMap<>();
@@ -147,7 +147,7 @@ public class SenseTest {
         swarms.put('B',swarmB);
 
         Ant antA0 = new Ant(swarmA,0,field00);
-        Ant antB0 = new Ant(swarmB,0,field10);
+        Ant antB0 = new Ant(swarmB,1,field10);
         field00.setAnt(antA0);
         field10.setAnt(antB0);
 
