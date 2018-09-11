@@ -11,8 +11,8 @@ public class SenseTest {
         Field[][] fields = new Field[4][4];
         Base field00 = new Base('A',0,0);
         Normal field10 = new Normal(1, 0, 0);
-        Normal field01 = new Normal(2, 0, 0);
-        Normal field11 = new Normal(3, 0, 0);
+        Normal field01 = new Normal(0, 1, 0);
+        Normal field11 = new Normal(1, 1, 0);
 
         fields[0][0] = field00;
         fields[1][0] = field10;
@@ -33,7 +33,7 @@ public class SenseTest {
         swarms.put('B',swarmB);
 
         Ant antA0 = new Ant(swarmA,0,field00);
-
+        field00.setAnt(antA0);
         HashMap<Integer, Ant> ants = new HashMap<>();
         ants.put(0, antA0);
 
@@ -48,8 +48,8 @@ public class SenseTest {
         Field[][] fields = new Field[4][4];
         Base field00 = new Base('A',0,0);
         Normal field10 = new Normal(1, 0, 0);
-        Normal field01 = new Normal(2, 0, 0);
-        Normal field11 = new Normal(3, 0, 0);
+        Normal field01 = new Normal(0, 1, 0);
+        Normal field11 = new Normal(1, 1, 0);
 
         fields[0][0] = field00;
         fields[1][0] = field10;
@@ -74,7 +74,7 @@ public class SenseTest {
 
         HashMap<Integer, Ant> ants = new HashMap<>();
         ants.put(0, antA0);
-        ants.put(0, antA1);
+        ants.put(1, antA1);
 
         World world = new World(fields,42,ants,swarms);
         antA0.getNextInstruction().execute(world,antA0);
@@ -87,8 +87,8 @@ public class SenseTest {
         Field[][] fields = new Field[4][4];
         Base field00 = new Base('A',0,0);
         Normal field10 = new Normal(1, 0, 0);
-        Normal field01 = new Normal(2, 0, 0);
-        Normal field11 = new Normal(3, 0, 0);
+        Normal field01 = new Normal(0, 1, 0);
+        Normal field11 = new Normal(1, 1, 0);
 
         fields[0][0] = field00;
         fields[1][0] = field10;
@@ -124,8 +124,8 @@ public class SenseTest {
         Field[][] fields = new Field[4][4];
         Base field00 = new Base('A',0,0);
         Normal field10 = new Normal(1, 0, 0);
-        Normal field01 = new Normal(2, 0, 0);
-        Normal field11 = new Normal(3, 0, 0);
+        Normal field01 = new Normal(0, 1, 0);
+        Normal field11 = new Normal(1, 1, 0);
 
         fields[0][0] = field00;
         fields[1][0] = field10;
@@ -150,7 +150,7 @@ public class SenseTest {
 
         HashMap<Integer, Ant> ants = new HashMap<>();
         ants.put(0, antA0);
-        ants.put(0, antB0);
+        ants.put(1, antB0);
 
         World world = new World(fields,42,ants,swarms);
         antA0.getNextInstruction().execute(world,antA0);
