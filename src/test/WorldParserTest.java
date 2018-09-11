@@ -234,13 +234,13 @@ public class WorldParserTest {
     public void inconsistentMapTest() {
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
-        Instruction[] brainB = new Instruction[1];
+        Instruction[] brainC = new Instruction[1];
         brainA[0] = new Jump(0);
-        brainB[0] = new Jump(0);
+        brainC[0] = new Jump(0);
         Swarm swarmA = new Swarm('A', brainA, "A");
-        Swarm swarmB = new Swarm('B', brainB, "B");
+        Swarm swarmB = new Swarm('C', brainC, "C");
         swarms.put('A', swarmA);
-        swarms.put('B', swarmB);
+        swarms.put('C', swarmB);
         boolean fail = false;
 
         try {
@@ -322,6 +322,55 @@ public class WorldParserTest {
         assert (fail);
     }
 
+    @Test
+    public void bomberMapTest() {
+        Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
+        Instruction[] brainA = new Instruction[1];
+        Instruction[] brainC = new Instruction[1];
+        brainA[0] = new Jump(0);
+        brainC[0] = new Jump(0);
+        Swarm swarmA = new Swarm('A', brainA, "A");
+        Swarm swarmB = new Swarm('B', brainA, "B");
+        Swarm swarmC = new Swarm('C', brainC, "C");
+        swarms.put('A', swarmA);
+        swarms.put('B',swarmB);
+        swarms.put('C', swarmC);
+        boolean fail = false;
+
+        try {
+            World world = WorldParser.parseMap(new File("C:\\Users\\simen\\Desktop\\maps\\bomberMap.txt"), 42, swarms);
+        } catch (java.io.IOException e) {
+            fail = false;
+        } catch (IllegalArgumentException e) {
+            fail = true;
+        }
+        assert (fail);
+    }
+
+    @Test
+    public void smallWrongSwarmMapTest() {
+        Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
+        Instruction[] brainG = new Instruction[1];
+        Instruction[] brainB = new Instruction[1];
+        brainG[0] = new Jump(0);
+        brainB[0] = new Jump(0);
+        Swarm swarmA = new Swarm('G', brainG, "G");
+        Swarm swarmB = new Swarm('B', brainB, "B");
+        swarms.put('A', swarmA);
+        swarms.put('B', swarmB);
+        boolean fail = false;
+
+        try {
+            World world = WorldParser.parseMap(new File("C:\\Users\\simen\\Desktop\\maps\\smallMap.txt"), 42, swarms);
+        } catch (java.io.IOException e) {
+            fail = false;
+        } catch (IllegalArgumentException e ){
+            fail = true;
+        }
+        assert (fail);
+    }
+
 
 }
 
+//inconsistenMap = 2\n2\nAC\n..

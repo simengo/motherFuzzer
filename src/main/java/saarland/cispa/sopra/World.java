@@ -392,8 +392,11 @@ public class World implements WorldInfo {
 
     }
 
+    public void addAnt(Ant ant) {
+        ants.put(ants.size(), ant);
+    }
 
-//    public void printMap(){
+    //    public void printMap(){
 //
 //        for(int i = 0; i < height; i++){
 //            for(int x = 0; x < width; x++){

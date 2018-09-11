@@ -33,7 +33,7 @@ public final class WorldParser {
             width = checkNumber(splittedlines[0].toCharArray());
             height = checkNumber(splittedlines[1].toCharArray());
 
-            checkSize(width,height);
+            checkSize(width, height);
 
             if (splittedlines.length > (height + 2) || ((splittedlines.length - 2) % 2) != 0 || splittedlines.length - 2 > 128) {
                 throw new IllegalArgumentException("Map could not be parsed correctly");
@@ -41,20 +41,20 @@ public final class WorldParser {
 
             fields = new Field[width][height];
 
-            test(splittedlines, fields,width);
+            test(splittedlines, fields, width);
 
 
         }
 
         Map<Integer, Ant> ants = spawnAnts(swarms, fields);
-        World welt = new World(fields, seed, ants, swarms);
         checkSwarmConsistency(swarms);
+        World welt = new World(fields, seed, ants, swarms);
         checkBaseConsistency(welt, swarms);
         welt.setAntlion();
         return welt;
     }
 
-    private static void checkSize(int width, int height){
+    private static void checkSize(int width, int height) {
 
         if (width < 2 || width > 128 || width % 2 != 0) {
             throw new IllegalArgumentException("Illegal width");
@@ -65,8 +65,7 @@ public final class WorldParser {
         }
     }
 
-
-    public static void test(String[] splittedlines,Field[][] fields, int width){
+    public static void test(String[] splittedlines, Field[][] fields, int width) {
         for (int i = 2; i < splittedlines.length; i++) {
 
             char[] actualLine = splittedlines[i].toCharArray();
@@ -119,6 +118,7 @@ public final class WorldParser {
 
         Field[][] fields = world.getFields();
         Map<Character, List<Field>> consistentFields = new HashMap<>(26);
+        ArrayList<Character> visitedSwarms = new ArrayList<>();
         for (Swarm swarm : swarms.values()) {
             consistentFields.put(swarm.getIdent(), new ArrayList<>(26));
         }
@@ -128,6 +128,10 @@ public final class WorldParser {
             for (Field field : line) {
 
                 if (field instanceof Base) {
+
+                    if (!visitedSwarms.contains(field.getType())) {
+                        visitedSwarms.add(field.getType());
+                    }
 
                     if (consistentFields.get(field.getType()).isEmpty()) {
                         List<Field> swarmmember = getNeighboursOfSwarm(field, world);
@@ -142,6 +146,10 @@ public final class WorldParser {
 
             }
 
+        }
+
+        if (visitedSwarms.size() != swarms.size()) {
+            throw new IllegalArgumentException("Number of different Base Fields doesn't match the number of different Swarms ");
         }
     }
 
