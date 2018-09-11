@@ -101,11 +101,11 @@ public interface AcolaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTest(AcolaParser.TestContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AcolaParser#directions}.
+	 * Visit a parse tree produced by {@link AcolaParser#direction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDirections(AcolaParser.DirectionsContext ctx);
+	T visitDirection(AcolaParser.DirectionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AcolaParser#breed}.
 	 * @param ctx the parse tree
