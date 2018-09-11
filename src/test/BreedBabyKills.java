@@ -101,9 +101,10 @@ public class BreedBabyKills {
         antA1.getNextInstruction().execute(world,antA1);
         antA1.getNextInstruction().execute(world,antA1);
 
-        assert(field21.getChanged());
+        assert(field13.getChanged());
+        assert(field23.getChanged());
         assert(field22.getChanged());
-        assert(field32.getChanged());
+        assert(field11.getChanged());
         assert(field11.getFood() == 4);
         assert(world.getAnt(2).isDead());
         assert(!antA0.hasFood());

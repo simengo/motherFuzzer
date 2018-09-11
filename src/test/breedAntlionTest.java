@@ -70,13 +70,13 @@ public class breedAntlionTest {
         Ant antA3 = new Ant(swarmA, 3, spielfeld[0][2]);
         Ant antA4 = new Ant(swarmA, 4, spielfeld[0][2]);
 
-        spielfeld[0][0].setAnt(antA);
-        spielfeld[1][1].setAnt(antB);
-        antA.setField(spielfeld[0][0]);
-        antB.setField(spielfeld[1][1]);
+        spielfeld[0][0].setAnt(antA0);
+        spielfeld[1][1].setAnt(antA1);
+        antA0.setField(spielfeld[0][0]);
+        antA1.setField(spielfeld[1][1]);
         HashMap<Integer, Ant> ants = new HashMap<>();
-        ants.put(0, antA);
-        ants.put(1, antB);
+        ants.put(0, antA1);
+        ants.put(1, antA1);
 
         World world = new World(spielfeld, 12, ants, swarms);
 
