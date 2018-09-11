@@ -16,6 +16,7 @@ public class SenseField extends Sense{
             if(field.getType() == ant.getSwarm()){
                 ant.increasePC();return;}
                 ant.setPc(getJumpPC());
+            assert(ant.getPc() == getJumpPC());
         }
         else{
         if(getTargetS() == Target.foehome) {
