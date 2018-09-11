@@ -1,21 +1,20 @@
 package saarland.cispa.sopra;
 
-import org.slf4j.LoggerFactory;
+
 import saarland.cispa.sopra.systemtests.AntInfo;
 
-import java.io.BufferedWriter;
-import java.io.File;
+import java.io.*;
 
 
 import javax.json.*;
 
-import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
+import java.util.zip.GZIPOutputStream;
 
 
 //TODO
@@ -32,7 +31,6 @@ public class JSONLogger implements LoggerInfo {
     public JSONLogger(File protocol) {
 
         this.output = protocol;
-
 
     }
 
@@ -94,22 +92,36 @@ public class JSONLogger implements LoggerInfo {
 
 
         //  write JsonObbject to File
+        if (this.output.getPath().endsWith(".gz")){
 
+            try {
+                OutputStream outputStream = Files.newOutputStream(Paths.get(this.output.getPath()));
+                Writer writer = new OutputStreamWriter(new GZIPOutputStream(outputStream), StandardCharsets.UTF_8);
+                writer.write(endObject.toString());
+                writer.close();
+                outputStream.close();
 
-        try {
-
-            BufferedWriter fWriter = Files.newBufferedWriter(Paths.get(this.output.getPath()));
-            JsonWriter jsonWriter = Json.createWriter(fWriter);
-            jsonWriter.writeObject(endObject);
-            jsonWriter.close();
-            fWriter.close();
-
-        } catch (IOException e) {
-            org.slf4j.Logger printSth = LoggerFactory.getLogger("noSuchFile");
-            printSth.debug("Wrong File Name!");
+            } catch( IOException e){
+                throw (IllegalArgumentException)new IllegalArgumentException().initCause(e);
+            }
         }
 
+        else{
 
+
+            try {
+
+                BufferedWriter fWriter = Files.newBufferedWriter(Paths.get(this.output.getPath()));
+                JsonWriter jsonWriter = Json.createWriter(fWriter);
+                jsonWriter.writeObject(endObject);
+                jsonWriter.close();
+                fWriter.close();
+
+            } catch (IOException e) {
+                throw (IllegalArgumentException)new IllegalArgumentException().initCause(e);
+            }
+
+        }
     }
 
 
