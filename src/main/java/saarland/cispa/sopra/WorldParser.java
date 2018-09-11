@@ -200,17 +200,28 @@ public final class WorldParser {
 
     private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
         HashMap<Integer, Ant> ants = new HashMap<>();
-
+        Map<Character, boolean[]> marker = spawnMarker(swarms);
         for (Field[] line : fields) {
             for (Field field : line) {
                 if (field instanceof Base) {
                     Ant ant = new Ant(swarms.get(field.getType()), ants.size(), field);
                     field.setAnt(ant);
+                    field.setMarker(marker);
                     ants.put(ants.size(), ant);
                 }
             }
         }
         return ants;
+    }
+
+    private static Map<Character, boolean[]> spawnMarker(Map<Character, Swarm> swarms) {
+
+        boolean[] marker = new boolean[7];
+        HashMap<Character, boolean[]> result = new HashMap<>();
+        for (Character identifier : swarms.keySet()) {
+            result.put(identifier, marker);
+        }
+        return result;
     }
 
     private static void checkSwarmConsistency(Map<Character, Swarm> swarms) {
