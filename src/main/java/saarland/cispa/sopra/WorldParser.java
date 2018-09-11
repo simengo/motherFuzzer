@@ -67,17 +67,16 @@ public final class WorldParser {
 
     public static World parseMap(File mapFile, long seed, Map<Character, Swarm> swarms) {
 
-        int width = 0;
-        int height = 0;
+        int minsize = 4;
 
         String[] splittedlines = convertMap(mapFile);
 
-        if(splittedlines.length<4){
+        if (splittedlines.length < minsize) {
             throw new IllegalArgumentException("Map could not be parsed correctly: too small");
         }
 
-        width = checkNumber(splittedlines[0].toCharArray());
-        height = checkNumber(splittedlines[1].toCharArray());
+        int width = checkNumber(splittedlines[0].toCharArray());
+        int height = checkNumber(splittedlines[1].toCharArray());
 
         checkSize(width, height);
 
