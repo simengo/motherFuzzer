@@ -1,6 +1,5 @@
 package saarland.cispa.sopra;
 
-import saarland.cispa.sopra.systemtests.WorldInfo;
 
 public class Breed extends Killable {
     public Breed(int jumpPc) {
@@ -39,6 +38,10 @@ public class Breed extends Killable {
                     }
                 }
             }
+            if(antSpawned){
+                ant.setHasFood(false);
+                partner.setHasFood(false);
+            }
             ant.increasePC();
 
 
@@ -48,9 +51,9 @@ public class Breed extends Killable {
     }
 
 
-    public Ant spawnAnt(Swarm swarm, Field field, WorldInfo world) {
+    public Ant spawnAnt(Swarm swarm, Field field, World world) {
         Ant spawnedAnt = new Ant(swarm, world.getAnts().size(), field);
-        world.getAnts().add(world.getAnts().size(),spawnedAnt);
+        world.addAnt(spawnedAnt);
         field.setAnt(spawnedAnt);
         field.setChanged(true);
         return spawnedAnt;
