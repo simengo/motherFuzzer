@@ -6,8 +6,7 @@ import saarland.cispa.sopra.systemtests.GameInfo;
 import saarland.cispa.sopra.systemtests.WorldInfo;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Map;
+import java.util.HashMap;
 
 
 public class Game implements GameInfo {
@@ -74,23 +73,19 @@ public class Game implements GameInfo {
 
     private void initialize(long seed, File world1, File[] brains) {
 
-         Map<Character, Swarm> swarms;
-        try {
-            swarms = BrainParser.parse(brains);
-     /*       Instruction[] brainB = new Instruction[2];
-            brainB[0] = new Turn(TurnDirection.left);
-            brainB[1] = new Move(0);
-            Swarm swarmA = new Swarm('A', brainB, "brainA");
-            Swarm swarmB = new Swarm('B', brainB, "brainB");
-            HashMap<Character, Swarm> swarms = new HashMap<>();
-            swarms.put('A', swarmA);
-            swarms.put('B', swarmB);
-     */
-            world = WorldParser.parseMap(world1, seed, swarms);
-            logger.addInitialRound(world.getFields(), swarms);
-        } catch (IOException e) {
-            LoggerFactory.getLogger("Invalid file");
-        }
+        //   Map<Character, Swarm> swarms;
+        //      swarms = BrainParser.parse(brains);
+        Instruction[] brainB = new Instruction[2];
+        brainB[0] = new Turn(TurnDirection.left);
+        brainB[1] = new Move(0);
+        Swarm swarmA = new Swarm('A', brainB, "brainA");
+        Swarm swarmB = new Swarm('B', brainB, "brainB");
+        HashMap<Character, Swarm> swarms = new HashMap<>();
+        swarms.put('A', swarmA);
+        swarms.put('B', swarmB);
+
+        world = WorldParser.parseMap(world1, seed, swarms);
+        logger.addInitialRound(world.getFields(), swarms);
 
 
     }

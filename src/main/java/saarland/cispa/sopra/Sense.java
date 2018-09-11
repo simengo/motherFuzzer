@@ -129,9 +129,13 @@ public abstract class Sense extends Instruction {
 
     public void senseFriendOrFoe(Ant ant, Field field, boolean friendFoe) {
         //wenn true dann wird nach freund geschaut, bei false nach feind
-        if (friendFoe && field.getAnt().isPresent() && field.getAnt().get().getSwarm() == ant.getSwarm()) {
-            ant.increasePC();
-            return;
+        if (friendFoe) {
+            if(field.getAnt().isPresent()) {
+                if (field.getAnt().get().getSwarm() == ant.getSwarm()) {
+                    ant.increasePC();
+                    return;
+                }
+            }
         }
         if (!(friendFoe) && field.getAnt().isPresent() && field.getAnt().get().getSwarm() != ant.getSwarm()) {
             ant.increasePC();
