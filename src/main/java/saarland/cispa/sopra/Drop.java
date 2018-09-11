@@ -39,6 +39,7 @@ public class Drop extends Instruction {
                         altPoints = altPoints + 1;
                         points.replace(baseType, altPoints);
                         ant.setHasFood(false);
+                        assert(!ant.hasFood());
                         ant.increasePC();
 
 
