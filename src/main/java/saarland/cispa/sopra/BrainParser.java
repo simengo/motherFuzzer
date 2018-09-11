@@ -50,7 +50,7 @@ public final class BrainParser {
                 brainArray[currentBrain][currentInstruction] = instruction;
                 currentInstruction++;
             }
-            if (brainArray[currentBrain][brainArray[currentBrain].length - 1].getClass() != Jump.class) {
+            if (brainArray[currentBrain][brainArray[currentBrain].length - 1].getClass() != Jump.class || brainArray[currentBrain].length>2500) {
                 throw new IllegalArgumentException("last instruction wasn't a jump");
             }
             currentBrain++;
@@ -160,7 +160,8 @@ public final class BrainParser {
                 target = Target.marker;
                 break;
             default:
-                throw new IllegalArgumentException("illigal target");
+                target = createSense2(instructionStringArr);
+                break;
         }
         if ("marker".equals(instructionStringArr[2])) {
             return new SenseMarker(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[4]));
@@ -169,7 +170,7 @@ public final class BrainParser {
         }
     }
 
-    private static Target createSense2(String[] instructionStringArr) throws IOException {
+    private static Target createSense2(String[] instructionStringArr) {
         switch (instructionStringArr[1]) {
             case "foemarker":
                 return Target.foemarker;
@@ -182,7 +183,7 @@ public final class BrainParser {
             case "friend":
                 return Target.friend;
             default:
-                throw new IOException("brain error");
+                throw new IllegalArgumentException("illigal target");
         }
     }
 

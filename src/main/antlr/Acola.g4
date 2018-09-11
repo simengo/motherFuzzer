@@ -1,5 +1,5 @@
 grammar Acola;
-brain : SPACE* 'brain' SPACE* '"' SPACE* IDENTIFIER SPACE* '"' SPACE* '{' SPACE* '\n' SPACE* (SPACE* instruction SPACE* '\n')+ SPACE* '}' EOF;
+brain : SPACE* 'brain' SPACE* '"' SPACE* IDENTIFIER SPACE* '"' SPACE* '{' SPACE* '\n' SPACE* (SPACE* instruction '\n')+ SPACE* '}' EOF;
 instruction : mark
               |unmark
               |turn
@@ -41,4 +41,4 @@ MARKER : [0-6];
 NUMBER : [0-9]+;
 IDENTIFIER : [a-zA-Z_.-][a-zA-Z0-9_.-]*;
 COMMENT : ('/*' .*? '*/' | '//' .*? '\n') -> skip;
-SPACE : ([ ]+) -> skip;
+SPACE : ([ ]+);

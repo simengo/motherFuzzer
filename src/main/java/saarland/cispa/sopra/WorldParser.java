@@ -50,7 +50,7 @@ public final class WorldParser {
 
         } else {
 
-            String[] splittedLines = mapFile.toString().split("[\\\\r\\\\n]+");
+            String[] splittedLines = mapFile.toString().split("[\\\\r\\\\n\n]+");
             result.addAll(Arrays.asList(splittedLines));
         }
 
@@ -67,19 +67,24 @@ public final class WorldParser {
 
     public static World parseMap(File mapFile, long seed, Map<Character, Swarm> swarms) {
 
-        int width = 0;
-        int height = 0;
+        int minsize = 4;
 
         String[] splittedlines = convertMap(mapFile);
 
-        width = checkNumber(splittedlines[0].toCharArray());
-        height = checkNumber(splittedlines[1].toCharArray());
+        if (splittedlines.length < minsize) {
+            throw new IllegalArgumentException("Map could not be parsed correctly: too small");
+        }
+
+        int width = checkNumber(splittedlines[0].toCharArray());
+        int height = checkNumber(splittedlines[1].toCharArray());
 
         checkSize(width, height);
+
 
         if (splittedlines.length > (height + 2) || ((splittedlines.length - 2) % 2) != 0 || splittedlines.length - 2 > 128) {
             throw new IllegalArgumentException("Map could not be parsed correctly");
         }
+
 
         Field[][] fields = new Field[width][height];
 
