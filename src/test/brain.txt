@@ -1,3 +1,5 @@
 brain "licht" {
+//jnknjkn
+/* huhih */  sense here foe else 1
 jump 0
 }
