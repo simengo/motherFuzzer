@@ -36,7 +36,7 @@ abstract class Killable extends saarland.cispa.sopra.Instruction {
                 ((Field) suspect.getField()).removeAnt();
                 switch (fieldType) {
                     case '.':
-                        if (ant.get().hasFood()) {
+                        if (suspect.hasFood()) {
                             ((Normal) field).addFood(4);
                         } else {
                             ((Normal) field).addFood(3);
@@ -47,7 +47,7 @@ abstract class Killable extends saarland.cispa.sopra.Instruction {
                     case '=':
                         break;
                     default:
-                        if (ant.get().hasFood()) {
+                        if (suspect.hasFood()) {
                             world.increasePoints(fieldType, 4);
                         } else {
                             world.increasePoints(fieldType, 3);
