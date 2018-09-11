@@ -13,7 +13,7 @@ public class BrainVisitor extends AcolaBaseVisitor<String> {
         List<AcolaParser.InstructionContext> list = ctx.instruction();
         StringBuilder builder = new StringBuilder();
         for (AcolaParser.InstructionContext context : list) {
-            builder.append(visitInstruction(context));
+            builder.append(visitInstruction(context)).append("\n ");
         }
         return builder.toString();
     }
@@ -26,10 +26,8 @@ public class BrainVisitor extends AcolaBaseVisitor<String> {
         for (int iterator = 0; iterator < num; iterator++) {
             ParseTree tree = ctx.getChild(iterator);
             String childResult = tree.getText();
-            result.append(childResult);
+            result.append(childResult).append(' ');
         }
         return result.toString();
     }
-
-
 }

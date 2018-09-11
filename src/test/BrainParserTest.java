@@ -13,7 +13,7 @@ public class BrainParserTest {
 
         File[] brains = new File[2];
 
-        File brainA = new File("C:\\Users\\MBreit\\Desktop\\brain.txt");
+        File brainA = new File("/home/wep/IdeaProjects/group22/src/test/brain.txt");
         brains[0] = brainA;
         brains[1] = brainA;
 
