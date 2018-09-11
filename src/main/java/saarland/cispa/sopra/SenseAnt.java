@@ -13,7 +13,8 @@ public class SenseAnt extends Sense{
         Field field =  getMyField(world,ant);
 
         if(getTargetS() == Target.friend){
-            senseFriendOrFoe(ant,field,true);Field field1 = (Field) ant.getField();
+            senseFriendOrFoe(ant,field,true);
+            Field field1 = (Field) ant.getField();
             field1.setChanged(true);
         }
         if(getTargetS() == Target.foe){

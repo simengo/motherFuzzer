@@ -1,5 +1,8 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import saarland.cispa.sopra.BrainParser;
+import saarland.cispa.sopra.Field;
+import saarland.cispa.sopra.Normal;
 import saarland.cispa.sopra.Swarm;
 
 import java.io.File;
@@ -20,10 +23,10 @@ public class BrainParserTest {
         try {
             Map<Character, Swarm> swarms = BrainParser.parse(brains);
             Swarm a = swarms.get('A');
-            for(int i = 0; i< a.getBrain().length; i++) {
+            for (int i = 0; i < a.getBrain().length; i++) {
                 System.out.println(a.getInstruction(i).toString());
             }
-        } catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

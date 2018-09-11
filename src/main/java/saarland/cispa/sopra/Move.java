@@ -27,4 +27,11 @@ public class Move extends Killable {
 
         }
     }
+
+    @Override
+    public String toString(){
+
+        return "move else " + this.getJumpPc();
+    }
+
 }

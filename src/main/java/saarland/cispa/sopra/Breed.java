@@ -32,17 +32,20 @@ public class Breed extends Killable {
                     for (Field neighbour : fields) {
                         if (neighbour.isAccessible()) {
                             Ant spawnedAnt = spawnAnt(ant.getSwarmInstance(), neighbour, world);
+                            antSpawned = true;
                             killcheck(world, java.util.Optional.ofNullable(spawnedAnt));
                             break;
                         }
                     }
                 }
             }
-            if(antSpawned){
+            if (antSpawned) {
                 ant.setHasFood(false);
                 partner.setHasFood(false);
+                ant.increasePC();
+            } else {
+                ant.setPc(getJumpPc());
             }
-            ant.increasePC();
 
 
         } else {
@@ -57,5 +60,12 @@ public class Breed extends Killable {
         field.setAnt(spawnedAnt);
         field.setChanged(true);
         return spawnedAnt;
+    }
+
+
+    @Override
+    public String toString(){
+
+        return "breed else " + this.getJumpPc();
     }
 }
