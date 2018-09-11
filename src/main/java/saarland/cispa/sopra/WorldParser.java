@@ -19,7 +19,7 @@ public final class WorldParser {
     private static String[] convertMap(File mapFile) {
 
         ArrayList<String> result = new ArrayList<>();
-        if (mapFile.isDirectory()) {
+        if (mapFile.isFile()) {
 
             try {
                 BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()));
@@ -27,7 +27,17 @@ public final class WorldParser {
                 if (line == null) {
                     throw new IllegalArgumentException("Map could not be parsed correctly : Propably empty file");
                 }
-                String[] splittedlines = line.split("[\\\\r\\\\n]+");
+                StringBuilder builder = new StringBuilder(line);
+                while (true) {
+                    line = bReader.readLine();
+                    if (line == null) {
+                        break;
+                    } else {
+                        builder.append('\n');
+                        builder.append(line);
+                    }
+                }
+                String[] splittedlines = builder.toString().split("[\\\\r\\\\n\n]+");
                 for (String substring : splittedlines) {
                     result.add(substring);
                 }
@@ -74,7 +84,6 @@ public final class WorldParser {
         Field[][] fields = new Field[width][height];
 
         spawnMap(splittedlines, fields, width);
-
 
         Map<Integer, Ant> ants = spawnAnts(swarms, fields);
         checkSwarmConsistency(swarms);
