@@ -5,7 +5,7 @@
     </Match>
 
     <Match>
-        <Bug code="FCCD,CLI,PRMC,EXS"/>
+        <Bug code="FCCD,CLI,PRMC,EXS,NAB,FS"/>
     </Match>
 
 </FindBugsFilter>
