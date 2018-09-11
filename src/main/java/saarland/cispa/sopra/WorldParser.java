@@ -47,7 +47,7 @@ public final class WorldParser {
 
             fields = new Field[width][height];
 
-            test(splittedlines, fields,width);
+            test(splittedlines, fields, width);
 
 
         }
@@ -60,7 +60,7 @@ public final class WorldParser {
         return welt;
     }
 
-    public static void test(String[] splittedlines,Field[][] fields, int width){
+    public static void test(String[] splittedlines, Field[][] fields, int width) {
         for (int i = 2; i < splittedlines.length; i++) {
 
             char[] actualLine = splittedlines[i].toCharArray();
