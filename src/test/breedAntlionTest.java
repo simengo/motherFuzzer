@@ -69,7 +69,7 @@ public class breedAntlionTest {
         Ant antA1 = new Ant(swarmA, 1, spielfeld[1][1]);
         Ant antA2 = new Ant(swarmA, 2, spielfeld[0][2]);
         Ant antA3 = new Ant(swarmA, 4, spielfeld[2][2]);
-        Ant antA4 = new Ant(swarmA, 5, spielfeld[2][3]);
+        Ant antA4 = new Ant(swarmA, 5, spielfeld[3][2]);
 
         Ant antB0 = new Ant(swarmB,3,spielfeld[1][2]);
         antB0.setHasFood(true); // -> wenn Ameise auf Basis B stirbt -> score +4
@@ -78,7 +78,8 @@ public class breedAntlionTest {
         spielfeld[1][1].setAnt(antA1);
         spielfeld[0][2].setAnt(antA2);
         spielfeld[2][2].setAnt(antA3);
-        spielfeld[2][3].setAnt(antA4);
+        spielfeld[3][2].setAnt(antA4);
+        spielfeld[1][3].setNextToAntlion(true);
 
         spielfeld[1][2].setAnt(antB0);
 
@@ -115,11 +116,15 @@ public class breedAntlionTest {
 
         assert(world.getAnts().size() == 7);
         Ant helpAnt = (Ant) world.getAnts().get(6);
-        System.out.println(String.format("id: %d", helpAnt.getId()));
-        System.out.println(String.format("x: %d", helpAnt.getField().getX()));
-        System.out.println(String.format("y: %d", helpAnt.getField().getY()));
-        System.out.println(String.format("swarm: %c", helpAnt.getSwarm()));
-        assert(helpAnt.isDead() == true);
+//        System.out.println(String.format("id: %d", helpAnt.getId()));
+//        System.out.println(String.format("x: %d", helpAnt.getField().getX()));
+//        System.out.println(String.format("y: %d", helpAnt.getField().getY()));
+//        System.out.println(String.format("swarm: %c", helpAnt.getSwarm()));
+//
+//        System.out.println(String.format("x: %d", antA4.getField().getX()));
+//        System.out.println(String.format("y: %d", antA4.getField().getY()));
+
+        assert(helpAnt.isDead());
         assert(helpAnt.getField().getX() == 1 && helpAnt.getField().getY() == 3);
         assert(field13.getFood() == 3); // Ameise von Antlion getötet -> 1 + 2 food initial -> 3
         assert(field12.getFood() == 0);
