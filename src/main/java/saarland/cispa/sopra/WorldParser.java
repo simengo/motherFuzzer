@@ -148,8 +148,8 @@ public final class WorldParser {
 
         }
 
-        if (visitedSwarms.size() < 2) {
-            throw new IllegalArgumentException("Number of Swarms < 2 ");
+        if (visitedSwarms.size() != swarms.size()) {
+            throw new IllegalArgumentException("Number of different Base Fields doesn't match the number of different Swarms ");
         }
     }
 
