@@ -11,7 +11,7 @@ public class breedAntlionTest {
     public void breedAntlionTest() {
 
         Field[][] spielfeld = new Field[4][4];
-        Field field00 = new Normal('0', 0, 1);
+        Field field00 = new Normal(0, 0, 1);
         Field field10 = new Normal(1, 0, 0);
         Field field20 = new Antlion(2, 0);
         Field field30 = new Normal(3,0,0);
@@ -19,7 +19,7 @@ public class breedAntlionTest {
         Field field01 = new Base('A', 0, 1);
         Field field11 = new Base('A', 1, 1);
         Field field21 = new Rock(2, 1);
-        Field field31 = new Rock(2, 1);
+        Field field31 = new Rock(3, 1);
 
         Field field02 = new Base('A', 0, 2);
         Field field12 = new Base('B', 1, 2);
@@ -64,21 +64,66 @@ public class breedAntlionTest {
         HashMap<Character, Swarm> swarms = new HashMap<>();
         swarms.put('A', swarmA);
         swarms.put('B', swarmB);
+
         Ant antA0 = new Ant(swarmA, 0, spielfeld[0][1]);
-        Ant antA1 = new Ant(swarmA, 1, spielfeld[0][2]);
+        Ant antA1 = new Ant(swarmA, 1, spielfeld[1][1]);
         Ant antA2 = new Ant(swarmA, 2, spielfeld[0][2]);
-        Ant antA3 = new Ant(swarmA, 3, spielfeld[0][2]);
-        Ant antA4 = new Ant(swarmA, 4, spielfeld[0][2]);
+        Ant antA3 = new Ant(swarmA, 4, spielfeld[2][2]);
+        Ant antA4 = new Ant(swarmA, 5, spielfeld[2][3]);
 
-        spielfeld[0][0].setAnt(antA);
-        spielfeld[1][1].setAnt(antB);
-        antA.setField(spielfeld[0][0]);
-        antB.setField(spielfeld[1][1]);
+        Ant antB0 = new Ant(swarmB,3,spielfeld[1][2]);
+        antB0.setHasFood(true); // -> wenn Ameise auf Basis B stirbt -> score +4
+
+        spielfeld[0][1].setAnt(antA0);
+        spielfeld[1][1].setAnt(antA1);
+        spielfeld[0][2].setAnt(antA2);
+        spielfeld[2][2].setAnt(antA3);
+        spielfeld[2][3].setAnt(antA4);
+
+        spielfeld[1][2].setAnt(antB0);
+
+        antA0.setField(spielfeld[0][1]);
+        antA1.setField(spielfeld[1][1]);
+        antA2.setField(spielfeld[0][2]);
+        antA3.setField(spielfeld[2][2]);
+        antA4.setField(spielfeld[3][2]);
+
+        antB0.setField(spielfeld[1][2]);
+
+
+
+
         HashMap<Integer, Ant> ants = new HashMap<>();
-        ants.put(0, antA);
-        ants.put(1, antB);
+        ants.put(0, antA0);
+        ants.put(1, antA1);
+        ants.put(2, antA2);
+        ants.put(3, antB0);
+        ants.put(4, antA3);
+        ants.put(5, antA4);
 
-        World world = new World(spielfeld, 12, ants, swarms);
+        World world = new World(spielfeld, 873, ants, swarms);
+
+
+        antA3.setHasFood(true);
+        antA4.setHasFood(true);
+
+        antA3.setDirection("northeast");
+        antA4.setDirection("west");
+
+        assert(world.getAnts().size() == 6);
+        antA4.getNextInstruction().execute(world,antA4);
+
+        assert(world.getAnts().size() == 7);
+        Ant helpAnt = (Ant) world.getAnts().get(6);
+        System.out.println(String.format("id: %d", helpAnt.getId()));
+        System.out.println(String.format("x: %d", helpAnt.getField().getX()));
+        System.out.println(String.format("y: %d", helpAnt.getField().getY()));
+        System.out.println(String.format("swarm: %c", helpAnt.getSwarm()));
+        assert(helpAnt.isDead() == true);
+        assert(helpAnt.getField().getX() == 1 && helpAnt.getField().getY() == 3);
+        assert(field13.getFood() == 3); // Ameise von Antlion getötet -> 1 + 2 food initial -> 3
+        assert(field12.getFood() == 0);
+        assert(world.getScore('B') == 4);
 
 
     }
