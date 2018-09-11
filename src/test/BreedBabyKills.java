@@ -8,7 +8,7 @@ public class BreedBabyKills {
     @Test
     public void BreedAntlionTest4() {
         Field[][] spielfeld = new Field[4][4];
-        Normal field00 = new Normal(0, 0, 0);
+        Normal field00 = new Normal(0, 0, 1);
         Normal field10 = new Normal(1, 0, 0);
         Normal field20 = new Normal(2, 0, 0);
         Normal field30 = new Normal(3, 0, 0);
