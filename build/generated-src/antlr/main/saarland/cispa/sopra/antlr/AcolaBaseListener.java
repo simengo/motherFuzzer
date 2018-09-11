@@ -196,13 +196,13 @@ public class AcolaBaseListener implements AcolaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDirections(AcolaParser.DirectionsContext ctx) { }
+	@Override public void enterDirection(AcolaParser.DirectionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDirections(AcolaParser.DirectionsContext ctx) { }
+	@Override public void exitDirection(AcolaParser.DirectionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
