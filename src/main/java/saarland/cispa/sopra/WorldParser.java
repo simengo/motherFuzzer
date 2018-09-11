@@ -33,13 +33,7 @@ public final class WorldParser {
             width = checkNumber(splittedlines[0].toCharArray());
             height = checkNumber(splittedlines[1].toCharArray());
 
-            if (width < 2 || width > 128 || width % 2 != 0) {
-                throw new IllegalArgumentException("Illegal width");
-            }
-
-            if (height < 2 || height > 128 || height % 2 != 0) {
-                throw new IllegalArgumentException("Illegal height");
-            }
+            checkSize(width,height);
 
             if (splittedlines.length > (height + 2) || ((splittedlines.length - 2) % 2) != 0 || splittedlines.length - 2 > 128) {
                 throw new IllegalArgumentException("Map could not be parsed correctly");
@@ -60,7 +54,18 @@ public final class WorldParser {
         return welt;
     }
 
-    public static void test(String[] splittedlines, Field[][] fields, int width) {
+    private static void checkSize(int width, int height){
+
+        if (width < 2 || width > 128 || width % 2 != 0) {
+            throw new IllegalArgumentException("Illegal width");
+        }
+
+        if (height < 2 || height > 128 || height % 2 != 0) {
+            throw new IllegalArgumentException("Illegal height");
+        }
+    }
+
+    public static void test(String[] splittedlines,Field[][] fields, int width){
         for (int i = 2; i < splittedlines.length; i++) {
 
             char[] actualLine = splittedlines[i].toCharArray();
@@ -112,9 +117,9 @@ public final class WorldParser {
     private static void checkBaseConsistency(World world, Map<Character, Swarm> swarms) {
 
         Field[][] fields = world.getFields();
-        Map<Character, List<Field>> consistentFields = new HashMap<>();
+        Map<Character, List<Field>> consistentFields = new HashMap<>(26);
         for (Swarm swarm : swarms.values()) {
-            consistentFields.put(swarm.getIdent(), new ArrayList<>());
+            consistentFields.put(swarm.getIdent(), new ArrayList<>(26));
         }
 
         for (Field[] line : fields) {
@@ -123,7 +128,7 @@ public final class WorldParser {
 
                 if (field instanceof Base) {
 
-                    if (consistentFields.get(field.getType()).size() == 0) {
+                    if (consistentFields.get(field.getType()).isEmpty()) {
                         List<Field> swarmmember = getNeighboursOfSwarm(field, world);
                         consistentFields.put(field.getType(), swarmmember);
                     } else {
