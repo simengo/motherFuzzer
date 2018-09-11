@@ -15,7 +15,7 @@ public class BreedBabyKills {
 
         Normal field01 = new Normal(0, 1, 0);
         Normal field11 = new Normal(1, 1, 0);
-        Normal field21 = new Normal(2, 0, 0);
+        Normal field21 = new Normal(2, 1, 0);
         Normal field31 = new Normal(3, 1, 0);
 
         Normal field02 = new Normal(0, 2, 0);
@@ -62,8 +62,8 @@ public class BreedBabyKills {
         swarms.put('A',swarmA);
         swarms.put('B',swarmB);
 
-        Ant antA0 = new Ant(swarmA, 0, spielfeld[2][2]);
-        Ant antA1 = new Ant(swarmA, 1, spielfeld[3][2]);
+        Ant antA0 = new Ant(swarmA, 0, spielfeld[1][3]);
+        Ant antA1 = new Ant(swarmA, 1, spielfeld[2][3]);
         Ant antB = new Ant(swarmB, 2, spielfeld[1][1]);
         Ant antA2 = new Ant(swarmA, 3, spielfeld[1][0]);
         Ant antA3 = new Ant(swarmA, 4, spielfeld[2][0]);
@@ -73,16 +73,17 @@ public class BreedBabyKills {
         antB.setHasFood(true);
         antA0.setHasFood(true);
         antA1.setHasFood(true);
-        spielfeld[2][2].setAnt(antA0);
-        spielfeld[3][2].setAnt(antA1);
+        spielfeld[1][3].setAnt(antA0);
+        spielfeld[2][3].setAnt(antA1);
         spielfeld[1][1].setAnt(antB);
         spielfeld[1][0].setAnt(antA2);
         spielfeld[2][0].setAnt(antA3);
         spielfeld[0][1].setAnt(antA4);
         spielfeld[1][2].setAnt(antA5);
-        antA0.setField(spielfeld[2][2]);
-        antA1.setField(spielfeld[3][2]);
+        antA0.setField(spielfeld[1][3]);
+        antA1.setField(spielfeld[2][3]);
         antB.setField(spielfeld[1][1]);
+
         antA2.setField(spielfeld[1][0]);
         antA3.setField(spielfeld[2][0]);
         antA4.setField(spielfeld[0][1]);
@@ -100,14 +101,13 @@ public class BreedBabyKills {
         antA1.getNextInstruction().execute(world,antA1);
         antA1.getNextInstruction().execute(world,antA1);
 
-        assert(field21.getChanged());
+        assert(field13.getChanged());
+        assert(field23.getChanged());
         assert(field22.getChanged());
-        assert(field32.getChanged());
+        assert(field11.getChanged());
         assert(field11.getFood() == 4);
         assert(world.getAnt(2).isDead());
         assert(!antA0.hasFood());
         assert(!antA1.hasFood());
-        // Do nothing
-
     }
 }
