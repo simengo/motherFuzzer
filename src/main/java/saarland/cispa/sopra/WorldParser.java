@@ -53,8 +53,8 @@ public final class WorldParser {
         }
 
         Map<Integer, Ant> ants = spawnAnts(swarms, fields);
+        checkSwarmConsistency(swarms);
         World welt = new World(fields, seed, ants, swarms);
-        checkSwarmConsistency(welt, swarms);
         checkBaseConsistency(welt, swarms);
         welt.setAntlion();
         return welt;
@@ -154,7 +154,7 @@ public final class WorldParser {
         return ants;
     }
 
-    private static void checkSwarmConsistency(World world, Map<Character, Swarm> swarms) {
+    private static void checkSwarmConsistency(Map<Character, Swarm> swarms) {
 
         Iterator<Swarm> swarmIterator = swarms.values().iterator();
 
