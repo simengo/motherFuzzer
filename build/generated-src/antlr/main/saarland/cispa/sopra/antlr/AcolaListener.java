@@ -158,15 +158,15 @@ public interface AcolaListener extends ParseTreeListener {
 	 */
 	void exitTest(AcolaParser.TestContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AcolaParser#directions}.
+	 * Enter a parse tree produced by {@link AcolaParser#direction}.
 	 * @param ctx the parse tree
 	 */
-	void enterDirections(AcolaParser.DirectionsContext ctx);
+	void enterDirection(AcolaParser.DirectionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AcolaParser#directions}.
+	 * Exit a parse tree produced by {@link AcolaParser#direction}.
 	 * @param ctx the parse tree
 	 */
-	void exitDirections(AcolaParser.DirectionsContext ctx);
+	void exitDirection(AcolaParser.DirectionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AcolaParser#breed}.
 	 * @param ctx the parse tree

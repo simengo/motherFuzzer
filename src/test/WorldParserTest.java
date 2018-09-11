@@ -1,13 +1,17 @@
+import org.junit.jupiter.api.Test;
+import saarland.cispa.sopra.*;
+import saarland.cispa.sopra.systemtests.FieldInfo;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import saarland.cispa.sopra.*;
 import saarland.cispa.sopra.systemtests.FieldInfo;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-
 
 public class WorldParserTest {
     @Test
@@ -499,3 +503,9 @@ public class WorldParserTest {
 }
 
 //inconsistenMap = 2\n2\nAC\n..
+
+
+
+
+
+
