@@ -12,7 +12,7 @@ import java.util.Map;
 public class WorldParserTest {
     @Test
     public void smallMapTest() {
-        String map = "2\\n2\\n.A\\nB.";
+        String map = "2\n2\n.A\nB.";
         File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
