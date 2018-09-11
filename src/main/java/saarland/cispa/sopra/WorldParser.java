@@ -64,6 +64,8 @@ public final class WorldParser {
             throw new IllegalArgumentException("Illegal height");
         }
     }
+
+
     public static void test(String[] splittedlines,Field[][] fields, int width){
         for (int i = 2; i < splittedlines.length; i++) {
 
