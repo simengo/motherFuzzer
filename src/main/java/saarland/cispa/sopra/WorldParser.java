@@ -1,6 +1,8 @@
 package saarland.cispa.sopra;
 
 
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -14,37 +16,65 @@ public final class WorldParser {
 
     }
 
-    public static World parseMap(File mapFile, long seed, Map<Character, Swarm> swarms) throws IOException {
+    private static String[] convertMap(File mapFile) {
 
-        Field[][] fields = null;
+        ArrayList<String> result = new ArrayList<>();
+        if (mapFile.isDirectory()) {
+
+            try {
+                BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()));
+                String line = bReader.readLine();
+                if (line == null) {
+                    throw new IllegalArgumentException("Map could not be parsed correctly : Propably empty file");
+                }
+                String[] splittedlines = line.split("[\\\\r\\\\n]+");
+                for (String substring : splittedlines) {
+                    result.add(substring);
+                }
+
+                bReader.close();
+
+            } catch (IOException e) {
+                LoggerFactory.getLogger("Invalid File");
+            }
+
+        } else {
+
+            String[] splittedLines = mapFile.toString().split("[\\\\r\\\\n]+");
+            result.addAll(Arrays.asList(splittedLines));
+        }
+
+        String[] builder = new String[result.size()];
+
+        for (int i = 0; i < result.size(); i++) {
+
+            builder[i] = result.get(i);
+
+        }
+
+        return builder;
+    }
+
+    public static World parseMap(File mapFile, long seed, Map<Character, Swarm> swarms) {
+
         int width = 0;
         int height = 0;
 
-        try (BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()))) {
+        String[] splittedlines = convertMap(mapFile);
 
-            String line = bReader.readLine();
+        width = checkNumber(splittedlines[0].toCharArray());
+        height = checkNumber(splittedlines[1].toCharArray());
 
-            if (line == null) {
-                throw new IllegalArgumentException("Map could not be parsed correctly : Propably empty file");
-            }
+        checkSize(width, height);
 
-            String[] splittedlines = line.split("\\\\n");
-
-            width = checkNumber(splittedlines[0].toCharArray());
-            height = checkNumber(splittedlines[1].toCharArray());
-
-            checkSize(width, height);
-
-            if (splittedlines.length > (height + 2) || ((splittedlines.length - 2) % 2) != 0 || splittedlines.length - 2 > 128) {
-                throw new IllegalArgumentException("Map could not be parsed correctly");
-            }
-
-            fields = new Field[width][height];
-
-            test(splittedlines, fields, width);
-
-
+        if (splittedlines.length > (height + 2) || ((splittedlines.length - 2) % 2) != 0 || splittedlines.length - 2 > 128) {
+            throw new IllegalArgumentException("Map could not be parsed correctly");
         }
+
+        Field[][] fields = new Field[width][height];
+
+        spawnMap(splittedlines, fields, width);
+
 
         Map<Integer, Ant> ants = spawnAnts(swarms, fields);
         checkSwarmConsistency(swarms);
@@ -65,7 +95,7 @@ public final class WorldParser {
         }
     }
 
-    public static void test(String[] splittedlines, Field[][] fields, int width) {
+    public static void spawnMap(String[] splittedlines, Field[][] fields, int width) {
         for (int i = 2; i < splittedlines.length; i++) {
 
             char[] actualLine = splittedlines[i].toCharArray();
