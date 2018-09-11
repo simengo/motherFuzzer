@@ -127,6 +127,7 @@ public final class WorldParser {
 
         char antLion = '=';
         char normal = '.';
+        char rock = '#';
 
         if (fieldType >= 65 && fieldType <= 90) {
             fields[x][y] = new Base(fieldType, x, y);
@@ -145,7 +146,12 @@ public final class WorldParser {
                         fields[x][y] = new Antlion(x, y);
                         return;
                     } else {
-                        throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character)");
+                        if (fieldType == rock) {
+                            fields[x][y] = new Rock(x, y);
+                            return;
+                        } else {
+                            throw new IllegalArgumentException("Map could not be parsed correctly (Invalid Character)");
+                        }
                     }
                 }
             }
