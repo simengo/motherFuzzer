@@ -124,7 +124,7 @@ public class breedAntlionTest {
 //        System.out.println(String.format("x: %d", antA4.getField().getX()));
 //        System.out.println(String.format("y: %d", antA4.getField().getY()));
 
-        assert(helpAnt.isDead() == true);
+        assert(helpAnt.isDead());
         assert(helpAnt.getField().getX() == 1 && helpAnt.getField().getY() == 3);
         assert(field13.getFood() == 3); // Ameise von Antlion getötet -> 1 + 2 food initial -> 3
         assert(field12.getFood() == 0);
