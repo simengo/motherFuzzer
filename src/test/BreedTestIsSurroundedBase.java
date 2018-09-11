@@ -15,8 +15,8 @@ public class BreedTestIsSurroundedBase {
 
         Normal field01 = new Normal(0, 1, 0);
         Normal field11 = new Normal(1, 1, 0);
-        Base field21 = new Base('B',2, 1);
-        Normal field31 = new Normal(3, 1, 0);
+        Normal field21 = new Normal(2, 1, 0);
+        Base field31 = new Base('B', 3, 1);
 
         Normal field02 = new Normal(0, 2, 0);
         Normal field12 = new Normal(1, 2, 0);
@@ -64,26 +64,27 @@ public class BreedTestIsSurroundedBase {
 
         Ant antA0 = new Ant(swarmA, 0, spielfeld[2][2]);
         Ant antA1 = new Ant(swarmA, 1, spielfeld[3][2]);
-        Ant antB1 = new Ant(swarmB, 2, spielfeld[1][1]);
-        Ant antB2 = new Ant(swarmB, 3, spielfeld[2][0]);
-        Ant antB3 = new Ant(swarmB, 4, spielfeld[3][0]);
-        Ant antB4 = new Ant(swarmB, 5, spielfeld[3][1]);
+        Ant antB1 = new Ant(swarmB, 2, spielfeld[3][0]);
+        Ant antB2 = new Ant(swarmB, 3, spielfeld[2][1]);
+        Ant antB3 = new Ant(swarmB, 4, spielfeld[0][0]);
+        Ant antB4 = new Ant(swarmB, 5, spielfeld[0][1]);
         Ant antB5 = new Ant(swarmB, 6, spielfeld[0][2]);
         antA0.setHasFood(true);
         antA1.setHasFood(true);
         spielfeld[2][2].setAnt(antA0);
         spielfeld[3][2].setAnt(antA1);
-        spielfeld[1][1].setAnt(antB1);
-        spielfeld[2][0].setAnt(antB2);
-        spielfeld[3][0].setAnt(antB3);
-        spielfeld[3][1].setAnt(antB4);
+        spielfeld[3][0].setAnt(antB1);
+        spielfeld[2][1].setAnt(antB2);
+        spielfeld[0][0].setAnt(antB3);
+        spielfeld[0][1].setAnt(antB4);
         spielfeld[0][2].setAnt(antB5);
         antA0.setField(spielfeld[2][2]);
         antA1.setField(spielfeld[3][2]);
-        antB1.setField(spielfeld[1][1]);
-        antB2.setField(spielfeld[2][0]);
-        antB3.setField(spielfeld[3][0]);
-        antB4.setField(spielfeld[3][1]);
+
+        antB1.setField(spielfeld[3][0]);
+        antB2.setField(spielfeld[2][1]);
+        antB3.setField(spielfeld[0][0]);
+        antB4.setField(spielfeld[0][1]);
         antB5.setField(spielfeld[0][2]);
         HashMap<Integer, Ant> ants = new HashMap<>();
         ants.put(0, antA0);
@@ -98,10 +99,10 @@ public class BreedTestIsSurroundedBase {
         antA1.getNextInstruction().execute(world,antA1);
         antA1.getNextInstruction().execute(world,antA1);
 
-        assert(field21.getChanged());
+        assert(field31.getChanged());
         assert(field22.getChanged());
         assert(field32.getChanged());
-        assert(field21.getFood() == 0);
+        assert(field31.getFood() == 0);
         assert(world.getScore('B') == 3);
         assert(world.getAnt(7).isDead());
         assert(!antA0.hasFood());
