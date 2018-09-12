@@ -83,6 +83,13 @@ public class AcolaLexer extends Lexer {
 	}
 
 
+	  @Override
+	  public void recover(RecognitionException ex)
+	  {
+	    throw new IllegalArgumentException(ex.getMessage());
+	  }
+
+
 	public AcolaLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);

@@ -1,56 +1,41 @@
 import org.junit.jupiter.api.Test;
 import saarland.cispa.sopra.*;
 
+import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 public class MarkTests {
 
     @Test
     public void MarkTest1() {
 
-        Field[][] spielfeld = new Field[2][2];
-        Normal field00 = new Normal(0, 0,0);
-        Normal field01 = new Normal(0, 1, 0);
-        Normal field10 = new Normal(1, 0, 0);
-        Normal field11 = new Normal(1, 1, 0);
-        field00.setMarker('A',3,true);
-        spielfeld[0][0] = field00;
-        spielfeld[0][1] = field01;
-        spielfeld[1][0] = field10;
-        spielfeld[1][1] = field11;
-        Instruction[] brainA = new Instruction[5];
+
+
+        String map = "2\n2\n" + "A.\n" + "BC";
+        File mapFile = new File(map);
+        Instruction[] brainA = new Instruction[2];
         brainA[0] = new Mark(3);
         brainA[1] = new Jump(0);
         Swarm swarmA = new Swarm('A', brainA, "brainA");
-        Swarm swarmB = new Swarm('B', brainA, "brainA");
-        Ant antA = new Ant(swarmA, 0, spielfeld[0][0]);
-        Ant antB = new Ant(swarmA, 1, spielfeld[0][1]);
-        Ant antC = new Ant(swarmA, 2, spielfeld[1][1]);
-        spielfeld[0][0].setAnt(antA);
-        spielfeld[0][1].setAnt(antB);
-        spielfeld[1][1].setAnt(antC);
-        antA.setField(spielfeld[0][0]);
-        antB.setField(spielfeld[0][1]);
-        antC.setField(spielfeld[1][1]);
-        HashMap<Integer, Ant> ants = new HashMap<>();
-        ants.put(0, antA);
-        ants.put(1, antB);
-        ants.put(2, antC);
-        HashMap<Character, Swarm> swarms = new HashMap<>();
+        Swarm swarmB = new Swarm('B', brainA, "brainB");
+        Swarm swarmC = new Swarm('C', brainA, "brainC");
+        Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         swarms.put('A', swarmA);
         swarms.put('B', swarmB);
-        swarms.put('C', swarmB);
+        swarms.put('C', swarmC);
+        World world = WorldParser.parseMap(mapFile, 12, swarms);
 
-        World world = new World(spielfeld, 1, ants, swarms);
+        world.getAnt(0).getNextInstruction().execute(world,world.getAnt(0));
+        world.getAnt(1).getNextInstruction().execute(world,world.getAnt(1));
+        world.getAnt(2).getNextInstruction().execute(world,world.getAnt(2));
 
-        world.getAnt(0).getNextInstruction().execute(world, antA);
-        world.getAnt(1).getNextInstruction().execute(world, antB);
-        world.getAnt(2).getNextInstruction().execute(world, antC);
+        ((Field) world.getFieldAt(0,0)).setMarker('A',2,true);
 
-        assert (field00.getMarker('A',3));
-        assert (field01.getMarker('B',3));
-        assert (field11.getMarker('C',3));
-        assert (field00.getChanged());
+        assert (((Field) world.getFieldAt(0,0)).getMarker('A',3));
+        assert (((Field) world.getFieldAt(0,1)).getMarker('B',3));
+        assert (((Field) world.getFieldAt(1,1)).getMarker('C',3));
+        assert (((Field) world.getFieldAt(0,0)).getChanged());
 
 
 

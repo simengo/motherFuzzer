@@ -40,8 +40,8 @@ mark: 'mark' SPACE* (MARKER|REGISTER);
 unmark: 'unmark' SPACE* (MARKER|REGISTER);
 turn: 'turn' SPACE* ('left' | 'right');
 move: 'move' SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
-sense: 'sense' SPACE* FIELD SPACE* TARGET SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
-sensemarker: 'sense' SPACE* FIELD SPACE* 'marker' SPACE* (MARKER|REGISTER) SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
+sense: 'sense' SPACE* ('here' | 'ahead' | 'left' | 'right') SPACE* TARGET SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
+sensemarker: 'sense' SPACE* ('here' | 'ahead' | 'left' | 'right') SPACE* 'marker' SPACE* (MARKER|REGISTER) SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
 set: 'set' SPACE* REGISTER;
 unset: 'unset' SPACE* REGISTER;
 pickup: 'pickup' SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
@@ -52,7 +52,6 @@ test: 'test' SPACE* (NUMBER|MARKER|REGISTER) SPACE* 'else' SPACE* (NUMBER|MARKER
 direction: 'direction' SPACE* DIRECTION SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
 breed: 'breed' SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
 
-FIELD : 'here' | 'ahead' | 'left' | 'right';
 TARGET : 'foe' | 'foehome' | 'friend' | 'food' | 'antlion' | 'rock' | 'foefood' | 'foemarker' | 'home' | 'friendfood';
 DIRECTION :  'northwest' | 'west' | 'southwest' | 'southeast' | 'east' | 'northeast';
 REGISTER : [0-5];
