@@ -147,7 +147,6 @@ saarland.cispa.sopra.systemtests.FieldCoordTest
 saarland.cispa.sopra.systemtests.RegisterTest
 saarland.cispa.sopra.systemtests.RestTimerTest
 saarland.cispa.sopra.systemtests.RestTimerTest
-saarland.cispa.sopra.systemtests.sensetests.UnmarkTest
 saarland.cispa.sopra.systemtests.FlipTest1
 saarland.cispa.sopra.systemtests.PcTest
 saarland.cispa.sopra.systemtests.IDTest
