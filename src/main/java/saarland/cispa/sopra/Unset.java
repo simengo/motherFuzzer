@@ -19,6 +19,6 @@ public class Unset extends Instruction {
     }
     @Override
     public String toString(){
-        return "unset" + reg;
+        return "unset " + reg;
     }
 }

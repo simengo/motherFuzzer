@@ -33,6 +33,6 @@ public class Pickup extends Instruction {
     }
     @Override
     public String toString(){
-        return "direction" + "else" + jumpPC;
+        return "direction " + "else " + jumpPC;
     }
 }
