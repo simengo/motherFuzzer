@@ -1,7 +1,6 @@
 package saarland.cispa.sopra;
 
 
-import java.io.File;
 import java.util.*;
 
 public final class WorldParser {
@@ -11,7 +10,7 @@ public final class WorldParser {
     }
 
 
-    public static World parseMap(File mapFile, long seed, Map<Character, Swarm> swarms) {
+    public static World parseMap(String mapFile, long seed, Map<Character, Swarm> swarms) {
 
         int minsize = 4;
 

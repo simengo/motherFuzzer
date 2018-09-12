@@ -1,7 +1,6 @@
 package saarland.cispa.sopra;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +19,7 @@ public final class BrainParser {
     private BrainParser() {
     }
 
-    public static Map<Character, Swarm> parse(File[] brains) throws IOException {
+    public static Map<Character, Swarm> parse(String[] brains) throws IOException {
         int maxBrains = 26;
         if (brains.length > maxBrains) {
             throw new IllegalArgumentException("to many brains");
@@ -31,12 +30,10 @@ public final class BrainParser {
         BrainVisitor visitor = new BrainVisitor();
         brainArray = new Instruction[brains.length][];  //create the brains array
         CharStream input;
-        for (File brain : brains) {
-            if (brain.isFile()) {
-                input = CharStreams.fromPath(brain.toPath()); //parse each brain file into a usable form
-            } else {
-                input = CharStreams.fromString(brain.toString());
-            }
+        for (String brain : brains) {
+
+            input = CharStreams.fromString(brain);
+
             AcolaLexer lexer = new AcolaLexer(input);
             TokenStream tokens = new CommonTokenStream(lexer);
             AcolaParser parser = new AcolaParser(tokens);
