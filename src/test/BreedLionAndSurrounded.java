@@ -103,7 +103,8 @@ public class BreedLionAndSurrounded {
         assert(field22.getChanged());
         assert(field32.getChanged());
         assert(world.getScore('B') == 1);
-        assert(world.getAnt(7).isDead());
+        Ant ant =(Ant) world.getAllAnts().get(7);
+        assert(ant.isDead());
         assert(!antA0.hasFood());
         assert(!antA1.hasFood());
         // Do nothing
