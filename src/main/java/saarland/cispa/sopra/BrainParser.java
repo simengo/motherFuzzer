@@ -185,7 +185,7 @@ public final class BrainParser {
     }
 
     private static Target createSense2(String[] instructionStringArr) {
-        switch (instructionStringArr[1]) {
+        switch (instructionStringArr[2]) {
             case "foemarker":
                 return Target.foemarker;
             case "antlion":
