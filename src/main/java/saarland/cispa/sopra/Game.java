@@ -28,6 +28,9 @@ public class Game implements GameInfo {
 
     @Override
     public WorldInfo simulate(int rounds, long seed, File world1, File... brains) {
+        if (rounds < 0){
+            throw new IllegalArgumentException();
+        }
         initialize(seed, world1, brains);
         for (int count = 0; count < rounds; count++) {
             simulateOnce();

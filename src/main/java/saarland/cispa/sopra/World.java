@@ -290,6 +290,10 @@ public class World implements WorldInfo {
     @Override
     public Ant getAnt(int id) {
 
+        if(id >= ants.size()){
+            throw new NoSuchElementException();
+        }
+
         Ant antH = ants.get(id);
         if (antH.isDead()){
             throw new NoSuchElementException("No living ant with this id");
