@@ -2,6 +2,8 @@ package saarland.cispa.sopra;
 
 import org.apache.commons.cli.*;
 
+import java.io.File;
+
 import static java.lang.System.exit;
 
 public final class Main {
@@ -28,12 +30,16 @@ public final class Main {
 
             Game game = new Game();
             game.setLogger(cmd.getOptionValue("protocol"));
-            game.simulate(Integer.parseInt(cmd.getOptionValue("rounds")), Integer.parseInt(cmd.getOptionValue("seed")), cmd.getOptionValue("world"), cmd.getOptionValues("brains"));
+            String[] brains = cmd.getOptionValues("brains");
+            File[] brainfiles = new File[brains.length];
+            for (int i = 0; i < brains.length; i++) {
+                brainfiles[i] = new File(brains[i]);
+            }
+            game.simulate(Integer.parseInt(cmd.getOptionValue("rounds")), Integer.parseInt(cmd.getOptionValue("seed")), new File(cmd.getOptionValue("world")), brainfiles);
 
         } catch (ParseException e) {
             exit(1);
         }
-
 
 
     }

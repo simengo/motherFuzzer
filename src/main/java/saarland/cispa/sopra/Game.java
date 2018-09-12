@@ -5,8 +5,11 @@ import saarland.cispa.sopra.systemtests.AntInfo;
 import saarland.cispa.sopra.systemtests.GameInfo;
 import saarland.cispa.sopra.systemtests.WorldInfo;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Map;
 
 
@@ -26,33 +29,68 @@ public class Game implements GameInfo {
 
     }
 
-    @Override
-    public WorldInfo simulate(int rounds, long seed, File world1, File... brains) {
-        if (rounds < 0 ) {
-            throw new IllegalArgumentException("Illegal Number of Rounds");
+    public String convertFile(File file) {
+
+        StringBuilder builder = new StringBuilder();
+        if (file.isFile()) {
+            try {
+                BufferedReader bReader = Files.newBufferedReader(Paths.get(file.getPath()));
+                String line = bReader.readLine();
+                if (line == null) {
+                    throw new IllegalArgumentException("Given path is empty");
+                } else {
+                    builder.append(line);
+                    builder.append('\n');
+                }
+                while (true) {
+
+                    line = bReader.readLine();
+                    if (line == null) {
+                        throw new IllegalArgumentException("Given path is empty");
+                    } else {
+                        builder.append(line);
+                        builder.append('\n');
+                    }
+
+                }
+            } catch (IOException e) {
+                LoggerFactory.getLogger("Invalid File");
+            }
+        } else {
+
+            return file.toString();
         }
-        initialize(seed, world1, brains);
-        for (int count = 0; count < rounds; count++) {
-            simulateOnce();
-        }
-        LoggerFactory.getLogger(world.getPoints().toString());
-        logger.writeToFile();
-        return world;
+
+        return builder.toString();
     }
 
     @Override
-    public WorldInfo simulate(int rounds, long seed, String world, String... brains) {
+    public WorldInfo simulate(int rounds, long seed, File world1, File... brains) {
 
-        File[] filearray = new File[brains.length];
-
-        int count = 0;
-        for (String brain : brains) {
-            filearray[count] = new File(brain);
-            count++;
+        String world = world1.toString();
+        String[] brainstrings = new String[brains.length];
+        for (int i = 0; i < brains.length; i++) {
+            brainstrings[i] = convertFile(brains[i]);
         }
-        File worldfile = new File(world);
 
-        return simulate(rounds, seed, worldfile, filearray);
+
+        return simulate(rounds, seed, world, brainstrings);
+    }
+
+    @Override
+    public WorldInfo simulate(int rounds, long seed, String worldstring, String... brains) {
+
+        if (rounds < 0) {
+            throw new IllegalArgumentException("Illegal Number of Rounds");
+        }
+
+        initialize(seed, worldstring, brains);
+
+        for (int i = 0; i < rounds; i++) {
+            simulateOnce();
+        }
+
+        return world;
 
     }
 
@@ -74,7 +112,7 @@ public class Game implements GameInfo {
         }
     }
 
-    private void initialize(long seed, File world1, File[] brains) {
+    private void initialize(long seed, String world1, String[] brains) {
 
         Map<Character, Swarm> swarms;
         try {
@@ -84,15 +122,6 @@ public class Game implements GameInfo {
         } catch (IOException e) {
             LoggerFactory.getLogger("Brain could not be parsed correctly");
         }
-     /*   Instruction[] brainB = new Instruction[2];
-        brainB[0] = new Turn(TurnDirection.left);
-        brainB[1] = new Move(0);
-        Swarm swarmA = new Swarm('A', brainB, "brainA");
-        Swarm swarmB = new Swarm('B', brainB, "brainB");
-        HashMap<Character, Swarm> swarms = new HashMap<>();
-        swarms.put('A', swarmA);
-       swarms.put('B', swarmB);
-       */
 
 
     }

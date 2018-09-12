@@ -1,12 +1,6 @@
 package saarland.cispa.sopra;
 
-import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 public final class WorldParserAssistant {
@@ -67,52 +61,8 @@ public final class WorldParserAssistant {
 
     }
 
-    public static String[] convertMap(File mapFile) {
+    public static String[] convertMap(String map) {
 
-        ArrayList<String> result = new ArrayList<>();
-        if (mapFile.isFile()) {
-
-            try {
-                BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()));
-                String line = bReader.readLine();
-                if (line == null) {
-                    throw new IllegalArgumentException("Map could not be parsed correctly : Propably empty file");
-                }
-                StringBuilder builder = new StringBuilder(line);
-                while (true) {
-                    line = bReader.readLine();
-                    if (line == null) {
-                        break;
-                    } else {
-                        builder.append('\n');
-                        builder.append(line);
-                    }
-                }
-                String[] splittedlines = builder.toString().split("[\\\\r\\\\n\n]+");
-                for (String substring : splittedlines) {
-                    result.add(substring);
-                }
-
-                bReader.close();
-
-            } catch (IOException e) {
-                LoggerFactory.getLogger("Invalid File");
-            }
-
-        } else {
-
-            String[] splittedLines = mapFile.toString().split("[\\\\r\\\\n\n]+");
-            result.addAll(Arrays.asList(splittedLines));
-        }
-
-        String[] builder = new String[result.size()];
-
-        for (int i = 0; i < result.size(); i++) {
-
-            builder[i] = result.get(i);
-
-        }
-
-        return builder;
+        return map.split("[\\\\r\\\\n\n]+");
     }
 }
