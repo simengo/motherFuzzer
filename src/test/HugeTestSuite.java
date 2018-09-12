@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.logging.LoggerFactory;
 import saarland.cispa.sopra.*;
 import saarland.cispa.sopra.systemtests.WorldInfo;
 
@@ -46,7 +45,7 @@ public class HugeTestSuite {
         swarms.put('A', swarmA);
         swarms.put('B', swarmB);
 
-        WorldParser.parseMap(map,2,swarms);
+        WorldParser.parseMap(map, 2, swarms);
 
     }
 
@@ -60,15 +59,11 @@ public class HugeTestSuite {
             "\"collision\" {\nturn left\njump 0\n}";
 
         Game game = new Game();
-        try {
-            game.simulate(1, -1, map1, brain, brain);
-        } catch (IllegalArgumentException x) {
-            fail("Larrrrrrrrray");
-        }
+        game.simulate(1, -1, map1, brain, brain);
         try {
             game.simulate(-1, 1, map1, brain, brain);
         } catch (IllegalArgumentException x) {
-            x.notifyAll();
+
         }
     }
 
@@ -82,7 +77,7 @@ public class HugeTestSuite {
             "...B";
 
         String brainA = "brain \"sample\" {\n jump 0\n}";
-        String brainB = "brain \"sample\" {\n pickup  else 1 \n drop else 2 \n jump 2\n}";
+        String brainB = "brain \"sample\" {\n pickup else 1 \n drop else 2 \n jump 2\n}";
 
         Game game = new Game();
         WorldInfo winfo = game.simulate(1, 4, map, brainA, brainB);
