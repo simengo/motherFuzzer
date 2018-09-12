@@ -114,9 +114,8 @@ public class Game implements GameInfo {
 
     private void initialize(long seed, String world1, String[] brains) {
 
-        Map<Character, Swarm> swarms;
         try {
-            swarms = BrainParser.parse(brains);
+            Map<Character, Swarm> swarms = BrainParser.parse(brains);
             world = WorldParser.parseMap(world1, seed, swarms);
             logger.addInitialRound(world.getFields(), swarms);
         } catch (IOException e) {
