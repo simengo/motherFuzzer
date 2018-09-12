@@ -9,7 +9,7 @@ grammar Acola;
   }
 }
 
-brain : SPACE* 'brain' SPACE* '"' SPACE* IDENTIFIER SPACE* '"' SPACE* '{' SPACE* ('\n'|'\r') SPACE* (SPACE* instruction SPACE* ('\n'|'\r'))+  '}' EOF;
+brain : SPACE* 'brain' SPACE* '"' SPACE* IDENTIFIER SPACE* '"' SPACE* '{' SPACE* ('\n'|'\r'|'\\n'|'\\r') SPACE* (SPACE* instruction SPACE* ('\n'|'\r'|'\\n'|'\\r'))+  '}' EOF;
 instruction : mark
               |unmark
               |turn
@@ -49,5 +49,5 @@ REGISTER : [0-5];
 MARKER : [0-6];
 NUMBER : [0-9]+;
 IDENTIFIER : [a-zA-Z_.-][a-zA-Z0-9_.-]*;
-COMMENT : ('/*' .*? '*/' | '//' .*? ('\n'|'\r')) -> skip;
+COMMENT : ('/*' .*? '*/' | '//' .*? ('\n'|'\r'|'\\n'|'\\r')) -> skip;
 SPACE : ([ ]+);
