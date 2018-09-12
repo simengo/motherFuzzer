@@ -1,13 +1,7 @@
 package saarland.cispa.sopra;
 
 
-import org.slf4j.LoggerFactory;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 public final class WorldParser {
@@ -16,60 +10,12 @@ public final class WorldParser {
 
     }
 
-    private static String[] convertMap(File mapFile) {
-
-        ArrayList<String> result = new ArrayList<>();
-        if (mapFile.isFile()) {
-
-            try {
-                BufferedReader bReader = Files.newBufferedReader(Paths.get(mapFile.getPath()));
-                String line = bReader.readLine();
-                if (line == null) {
-                    throw new IllegalArgumentException("Map could not be parsed correctly : Propably empty file");
-                }
-                StringBuilder builder = new StringBuilder(line);
-                while (true) {
-                    line = bReader.readLine();
-                    if (line == null) {
-                        break;
-                    } else {
-                        builder.append('\n');
-                        builder.append(line);
-                    }
-                }
-                String[] splittedlines = builder.toString().split("[\\\\r\\\\n\n]+");
-                for (String substring : splittedlines) {
-                    result.add(substring);
-                }
-
-                bReader.close();
-
-            } catch (IOException e) {
-                LoggerFactory.getLogger("Invalid File");
-            }
-
-        } else {
-
-            String[] splittedLines = mapFile.toString().split("[\\\\r\\\\n\n]+");
-            result.addAll(Arrays.asList(splittedLines));
-        }
-
-        String[] builder = new String[result.size()];
-
-        for (int i = 0; i < result.size(); i++) {
-
-            builder[i] = result.get(i);
-
-        }
-
-        return builder;
-    }
 
     public static World parseMap(File mapFile, long seed, Map<Character, Swarm> swarms) {
 
         int minsize = 4;
 
-        String[] splittedlines = convertMap(mapFile);
+        String[] splittedlines = WorldParserAssistant.convertMap(mapFile);
 
         if (splittedlines.length < minsize) {
             throw new IllegalArgumentException("Map could not be parsed correctly: too small");
@@ -84,18 +30,11 @@ public final class WorldParser {
             throw new IllegalArgumentException("Map could not be parsed correctly");
         }
 
-
         Field[][] fields = new Field[width][height];
 
-        spawnMap(splittedlines, fields, width);
-
-        Map<Integer, Ant> ants = spawnAnts(swarms, fields);
-        checkSwarmConsistency(swarms);
-        World welt = new World(fields, seed, ants, swarms);
-        checkBaseConsistency(welt, swarms);
-        welt.setAntlion();
-        return welt;
+        return WorldParserAssistant.finishing(splittedlines, fields, width, seed, swarms);
     }
+
 
     private static void checkSize(int width, int height) {
 
@@ -108,10 +47,10 @@ public final class WorldParser {
         }
     }
 
-    private static void spawnMap(String[] splittedlines, Field[][] fields, int width) {
+    public static void spawnMap(String[] splittedlines, Field[][] fields, int width, Map<Character, Swarm> swarms) {
         for (int i = 2; i < splittedlines.length; i++) {
 
-            char[] actualLine = splittedlines[i] .toCharArray();
+            char[] actualLine = splittedlines[i].toCharArray();
 
             if (actualLine.length % 2 != 0 || actualLine.length > 128 || actualLine.length != width) {
                 throw new IllegalArgumentException("Invalid width of line");
@@ -120,21 +59,31 @@ public final class WorldParser {
             int x = 0;
 
             for (char actualChar : actualLine) {
-                checkLetter(actualChar, fields, x, i - 2);
+                checkLetter(actualChar, fields, x, i - 2, swarms);
                 x++;
             }
         }
     }
 
+    private static Base spawnBase(char fieldType, Map<Character, Swarm> swarms, int x, int y) {
 
-    private static void checkLetter(char fieldType, Field[][] fields, int x, int y) {
+        if (swarms.containsKey(fieldType)) {
+            return new Base(fieldType, x, y);
+
+        } else {
+            throw new IllegalArgumentException(String.format("Map could not be parsed correctly: Swarm of Field x:%d y:%d doesnt exist", x, y));
+        }
+
+    }
+
+    private static void checkLetter(char fieldType, Field[][] fields, int x, int y, Map<Character, Swarm> swarms) {
 
         char antLion = '=';
         char normal = '.';
         char rock = '#';
 
         if (fieldType >= 65 && fieldType <= 90) {
-            fields[x][y] = new Base(fieldType, x, y);
+            fields[x][y] = spawnBase(fieldType, swarms, x, y);
             return;
         } else {
             if (fieldType >= 49 && fieldType <= 57) {
@@ -163,46 +112,8 @@ public final class WorldParser {
 
     }
 
-    private static void checkBaseConsistency(World world, Map<Character, Swarm> swarms) {
 
-        Field[][] fields = world.getFields();
-        Map<Character, List<Field>> consistentFields = new HashMap<>(26);
-        ArrayList<Character> visitedSwarms = new ArrayList<>();
-        for (Swarm swarm : swarms.values()) {
-            consistentFields.put(swarm.getIdent(), new ArrayList<>(26));
-        }
-
-        for (Field[] line : fields) {
-
-            for (Field field : line) {
-
-                if (field instanceof Base) {
-
-                    if (!visitedSwarms.contains(field.getType())) {
-                        visitedSwarms.add(field.getType());
-                    }
-
-                    if (consistentFields.get(field.getType()).isEmpty()) {
-                        List<Field> swarmmember = getNeighboursOfSwarm(field, world);
-                        consistentFields.put(field.getType(), swarmmember);
-                    } else {
-                        if (!consistentFields.get(field.getType()).contains(field)) {
-                            throw new IllegalArgumentException("Bases aren't consistent");
-                        }
-                    }
-
-                }
-
-            }
-
-        }
-
-        if (visitedSwarms.size() != swarms.size()) {
-            throw new IllegalArgumentException("Number of different Base Fields doesn't match the number of different Swarms ");
-        }
-    }
-
-    private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
+    public static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
         int height = fields[0].length;
         int width = fields.length;
         HashMap<Integer, Ant> ants = new HashMap<>();
@@ -231,7 +142,7 @@ public final class WorldParser {
         return result;
     }
 
-    private static void checkSwarmConsistency(Map<Character, Swarm> swarms) {
+    public static void checkSwarmConsistency(Map<Character, Swarm> swarms) {
 
         Iterator<Swarm> swarmIterator = swarms.values().iterator();
 
@@ -270,7 +181,7 @@ public final class WorldParser {
         return result;
     }
 
-    private static List<Field> getNeighboursOfSwarm(Field field, World world) {
+    public static List<Field> getNeighboursOfSwarm(Field field, World world) {
 
         ArrayList<Field> neighboursOfSwarm = new ArrayList<>();
         ArrayList<Field> foundNeighbours = new ArrayList<>();
