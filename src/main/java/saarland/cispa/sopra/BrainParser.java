@@ -99,10 +99,12 @@ public final class BrainParser {
     private static Instruction switchInstruction(String instr, String[] instructionStringArr) throws IOException {
         switch (instr) {
             case "move":
+                checkOutOfBounds(2,instructionStringArr);
                 return new Move(Integer.parseInt(instructionStringArr[2]));
             case "sense":
                 return createSense(instructionStringArr);
             case "flip":
+                checkOutOfBounds(3,instructionStringArr);
                 return new Flip(Integer.parseInt(instructionStringArr[1]), Integer.parseInt(instructionStringArr[3]));
             case "mark":
                 return new Mark(Integer.parseInt(instructionStringArr[1]));
@@ -120,14 +122,19 @@ public final class BrainParser {
             case "unset":
                 return new Unset(Integer.parseInt(instructionStringArr[1]));
             case "drop":
+                checkOutOfBounds(2,instructionStringArr);
                 return new Drop(Integer.parseInt(instructionStringArr[2]));
             case "pickup":
+                checkOutOfBounds(2,instructionStringArr);
                 return new Pickup(Integer.parseInt(instructionStringArr[2]));
             case "direction":
+                checkOutOfBounds(3,instructionStringArr);
                 return new Direction(Integer.parseInt(instructionStringArr[3]), instructionStringArr[1]);
             case "jump":
+                checkOutOfBounds(1,instructionStringArr);
                 return new Jump(Integer.parseInt(instructionStringArr[1]));
             case "breed":
+                checkOutOfBounds(2,instructionStringArr);
                 return new Breed(Integer.parseInt(instructionStringArr[2]));
             case "turn":
                 if ("left".equals(instructionStringArr[1])) {
@@ -168,8 +175,10 @@ public final class BrainParser {
                 break;
         }
         if ("marker".equals(instructionStringArr[2])) {
+            checkOutOfBounds(5,instructionStringArr);
             return new SenseMarker(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[5]));
         } else {
+            checkOutOfBounds(4,instructionStringArr);
             return switchTarget(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[4])); // jumpPC =  Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])
         }
     }
@@ -188,6 +197,12 @@ public final class BrainParser {
                 return Target.friend;
             default:
                 throw new IllegalArgumentException("illigal target");
+        }
+    }
+
+    private static void checkOutOfBounds(int x, String[] instructionStringArr) {
+        if(x>=instructionStringArr.length){
+            throw new IllegalArgumentException("index out of bounds");
         }
     }
 
