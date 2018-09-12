@@ -10,7 +10,7 @@ public class Direction extends Instruction {
 
     @Override
     public void execute(World world, Ant ant) {
-        if(ant.getDirection() == directionToLookAt){
+        if(ant.getDirection().equals(directionToLookAt)){
             ant.increasePC();
         }
         else{

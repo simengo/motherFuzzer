@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.Test;
 import saarland.cispa.sopra.*;
-import saarland.cispa.sopra.systemtests.WorldInfo;
 
 import java.io.File;
 import java.util.HashMap;
@@ -14,6 +13,7 @@ public class MarkTests {
 
 
         String map = "2\n2\n" + "A.\n" + "BC";
+        File mapFile = new File(map);
         Instruction[] brainA = new Instruction[2];
         brainA[0] = new Mark(3);
         brainA[1] = new Jump(0);
@@ -24,13 +24,18 @@ public class MarkTests {
         swarms.put('A', swarmA);
         swarms.put('B', swarmB);
         swarms.put('C', swarmC);
-        World world = WorldParser.parseMap(map, 12, swarms);
-        world.printMap();
+        World world = WorldParser.parseMap(mapFile, 12, swarms);
 
-        assert (field00.getMarker('A',3));
-        assert (field01.getMarker('B',3));
-        assert (field11.getMarker('C',3));
-        assert (field00.getChanged());
+        world.getAnt(0).getNextInstruction().execute(world,world.getAnt(0));
+        world.getAnt(1).getNextInstruction().execute(world,world.getAnt(1));
+        world.getAnt(2).getNextInstruction().execute(world,world.getAnt(2));
+
+        ((Field) world.getFieldAt(0,0)).setMarker('A',2,true);
+
+        assert (((Field) world.getFieldAt(0,0)).getMarker('A',3));
+        assert (((Field) world.getFieldAt(0,1)).getMarker('B',3));
+        assert (((Field) world.getFieldAt(1,1)).getMarker('C',3));
+        assert (((Field) world.getFieldAt(0,0)).getChanged());
 
 
 
