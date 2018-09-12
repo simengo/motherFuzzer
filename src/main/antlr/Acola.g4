@@ -1,5 +1,24 @@
 grammar Acola;
-brain : SPACE* 'brain' SPACE* '"' SPACE* IDENTIFIER SPACE* '"' SPACE* '{' SPACE* NEWLINE SPACE* (SPACE* instruction NEWLINE)+ SPACE* '}' EOF;
+
+@parser::members
+{
+  @Override
+  public void notifyErrorListeners(Token offendingToken, String msg, RecognitionException ex)
+  {
+    throw new IllegalArgumentException(msg);
+  }
+}
+
+@lexer::members
+{
+  @Override
+  public void recover(RecognitionException ex)
+  {
+    throw new IllegalArgumentException(ex.getMessage());
+  }
+}
+
+brain : SPACE* 'brain' SPACE* '"' SPACE* IDENTIFIER SPACE* '"' SPACE* '{' SPACE* NEWLINE SPACE* (SPACE* instruction NEWLINE)+ '}' EOF;
 instruction : mark
               |unmark
               |turn
