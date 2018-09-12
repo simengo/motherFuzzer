@@ -326,7 +326,12 @@ public class World implements WorldInfo {
     @Override
     public int getScore(char swarm) {
 
-        return points.get(swarm);
+        if(points.get(swarm) == null) {
+            return points.get(swarm);
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
     }
 
     public Map<Character, Integer> getPoints() {
