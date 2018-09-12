@@ -465,6 +465,7 @@ public class WorldParserTest {
         assert (fail);
     }
 
+
     @Test
     public void smallWrongSwarmMapTest() {
         String map = "2\n2\n.A\nB.";

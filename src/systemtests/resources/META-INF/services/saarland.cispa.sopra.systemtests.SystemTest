@@ -1,3 +1,6 @@
+saarland.cispa.sopra.systemtests.MarkEasyTest
+saarland.cispa.sopra.systemtests.SetEasyTest
+
 saarland.cispa.sopra.systemtests.SampleTest
 saarland.cispa.sopra.systemtests.mischatests.SimpleMoves0
 saarland.cispa.sopra.systemtests.mischatests.SimpleMoves1
@@ -232,7 +235,6 @@ saarland.cispa.sopra.systemtests.simontests.MapTest
 saarland.cispa.sopra.systemtests.simontests.TooBigMapTest
 saarland.cispa.sopra.systemtests.simontests.TooSmallMapTest
 saarland.cispa.sopra.systemtests.simontests.UnevenMapTest
-
 saarland.cispa.sopra.systemtests.simontests.DirectionTest
 saarland.cispa.sopra.systemtests.simontests.DirectionTest1
 saarland.cispa.sopra.systemtests.simontests.DirectionTest2

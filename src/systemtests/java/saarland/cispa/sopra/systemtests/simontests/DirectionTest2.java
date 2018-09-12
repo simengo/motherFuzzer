@@ -28,7 +28,7 @@ public class DirectionTest2 extends SystemTest {
         WorldInfo world2 = gameInfo.simulate(4,42,map,brain2,brain2);
         String dir2 = world2.getAnt(0).getDirection();
         if (!"southeast".equals(dir2)) {
-            fail(String.format("Ant 0 faces %s instead of southeast!", dir2));
+            fail(String.format("Ant 0 faces %s instead of southeast !", dir2));
         }
 
 
