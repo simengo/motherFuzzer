@@ -1,6 +1,5 @@
 package saarland.cispa.sopra;
 
-
 public class Breed extends Killable {
     public Breed(int jumpPc) {
         super(jumpPc);
@@ -45,11 +44,13 @@ public class Breed extends Killable {
                 ant.increasePC();
             } else {
                 ant.setPc(getJumpPc());
+                killcheck(world,null);
             }
 
 
         } else {
             ant.setPc(getJumpPc());
+            killcheck(world,null);
         }
     }
 
@@ -64,7 +65,7 @@ public class Breed extends Killable {
 
 
     @Override
-    public String toString(){
+    public String toString() {
 
         return "breed else " + this.getJumpPc();
     }
