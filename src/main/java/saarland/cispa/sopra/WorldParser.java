@@ -80,7 +80,6 @@ public final class WorldParser {
 
         checkSize(width, height);
 
-
         if (splittedlines.length > (height + 2) || ((splittedlines.length - 2) % 2) != 0 || splittedlines.length - 2 > 128) {
             throw new IllegalArgumentException("Map could not be parsed correctly");
         }
@@ -109,7 +108,7 @@ public final class WorldParser {
         }
     }
 
-    public static void spawnMap(String[] splittedlines, Field[][] fields, int width) {
+    private static void spawnMap(String[] splittedlines, Field[][] fields, int width) {
         for (int i = 2; i < splittedlines.length; i++) {
 
             char[] actualLine = splittedlines[i].toCharArray();
