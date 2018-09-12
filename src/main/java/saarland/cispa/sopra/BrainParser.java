@@ -40,10 +40,12 @@ public final class BrainParser {
             AcolaLexer lexer = new AcolaLexer(input);
             TokenStream tokens = new CommonTokenStream(lexer);
             AcolaParser parser = new AcolaParser(tokens);
+            if(parser.getNumberOfSyntaxErrors()!=0){
+                throw new IllegalArgumentException("brain has syntax errors");
+            }
             AcolaParser.BrainContext brainContext = parser.brain();
 
             name.add(brainContext.IDENTIFIER().getText());      // add the name of the brain to the name array
-
             int currentInstruction = 0;                         //iteration variable for initialising the brains array
             String[] instructionStringArr = visitor.visitBrain(brainContext).split("[\\n][ ]"); //
             brainArray[currentBrain] = new Instruction[instructionStringArr.length];
