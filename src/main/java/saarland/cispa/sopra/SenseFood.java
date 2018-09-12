@@ -13,7 +13,7 @@ public class SenseFood extends Sense{
         Field field =  getMyField(world,ant);
 
         if(getTargetS() == Target.food){
-            if(field.getFood() >= 0 ){ant.increasePC();}
+            if(field.getFood() > 0 ){ant.increasePC();}
             else{ant.setPc(getJumpPC());}
             Field field1 = (Field) ant.getField();
             field1.setChanged(true);
@@ -38,6 +38,6 @@ public class SenseFood extends Sense{
     @Override
     public String toString(){
 
-        return "sense" + getDirectionS() + getTargetS() + "else" + getJumpPC();
+        return "sense " + getDirectionS() + getTargetS() + "else " + getJumpPC();
     }
 }

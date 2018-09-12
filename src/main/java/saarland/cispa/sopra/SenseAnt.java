@@ -26,6 +26,6 @@ public class SenseAnt extends Sense{
     @Override
     public String toString(){
 
-        return "sense" + getDirectionS()+ getTargetS() + "else" + getJumpPC();
+        return "sense " + getDirectionS()+ getTargetS() + "else " + getJumpPC();
     }
 }
