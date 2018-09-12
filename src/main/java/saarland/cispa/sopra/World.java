@@ -309,9 +309,9 @@ public class World implements WorldInfo {
     public List<AntInfo> getAnts() {
 
         List<AntInfo> antIL = new ArrayList<>();
-        for(Ant ant: ants.values()){
-            if (!ant.isDead()){
-                antIL.add((AntInfo) ant);
+        for (Ant ant : ants.values()) {
+            if (!ant.isDead()) {
+                antIL.add(ant);
             }
         }
         return antIL;
