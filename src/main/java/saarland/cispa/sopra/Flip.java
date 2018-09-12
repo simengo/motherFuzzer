@@ -10,7 +10,13 @@ public class Flip extends Instruction {
 
     @Override
     public void execute(World world, Ant ant) {
-        int randomInt = world.getRand(maxNum);
+
+        int randomInt;
+        if(maxNum == 0){
+            randomInt = 0;
+        } else {
+            randomInt = world.getRand(maxNum);
+        }
         if(randomInt == 0){ant.increasePC();}
         else{ant.setPc(jumpPC);}
 
