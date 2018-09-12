@@ -39,15 +39,13 @@ public class BrainParserTest {
             "*/}");
     }
 
-    private void test(String brainA){
+    private void test(String brainA) {
         String[] brains = new String[2];
         brains[0] = brainA;
         brains[1] = brainA;
 
-        try {
-            BrainParser.parse(brains);
-            } catch (IOException e) {
-            throw new IllegalArgumentException(e);
-        }
+
+        BrainParser.parse(brains);
+
     }
 }

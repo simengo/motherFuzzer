@@ -19,7 +19,7 @@ public final class BrainParser {
     private BrainParser() {
     }
 
-    public static Map<Character, Swarm> parse(String[] brains) throws IOException {
+    public static Map<Character, Swarm> parse(String[] brains) {
         int maxBrains = 26;
         if (brains.length > maxBrains) {
             throw new IllegalArgumentException("to many brains");
@@ -51,7 +51,12 @@ public final class BrainParser {
             for (String instr : instructionStringArr) {         //create all instructions and add them to the brain array
                 //String[] instrArray = addSpaces(instr);
                 String[] instrArray = instr.split(" ");
-                Instruction instruction = switchInstruction(instrArray[0], instrArray, length);
+                Instruction instruction;
+                try {
+                    instruction = switchInstruction(instrArray[0], instrArray, length);
+                } catch (IOException ioex) {
+                    throw new IllegalArgumentException(ioex);
+                }
                 if (instruction == null) {
                     throw new IllegalArgumentException("instruction is null");
                 }
@@ -200,7 +205,7 @@ public final class BrainParser {
     }
 
     private static void checkOutOfBounds(int x, int instructionStringArrLength) {
-        if (x >= instructionStringArrLength) {
+        if (x >= instructionStringArrLength || x < 0) {
             throw new IllegalArgumentException("index out of bounds");
         }
     }

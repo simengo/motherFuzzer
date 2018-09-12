@@ -116,13 +116,9 @@ public class Game implements GameInfo {
 
     private void initialize(long seed, String world1, String[] brains) {
 
-        try {
-            Map<Character, Swarm> swarms = BrainParser.parse(brains);
-            world = WorldParser.parseMap(world1, seed, swarms);
-            logger.addInitialRound(world.getFields(), swarms);
-        } catch (IOException e) {
-            LoggerFactory.getLogger("Brain could not be parsed correctly");
-        }
+        Map<Character, Swarm> swarms = BrainParser.parse(brains);
+        world = WorldParser.parseMap(world1, seed, swarms);
+        logger.addInitialRound(world.getFields(), swarms);
 
 
     }
