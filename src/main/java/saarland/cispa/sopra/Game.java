@@ -46,7 +46,8 @@ public class Game implements GameInfo {
 
                     line = bReader.readLine();
                     if (line == null) {
-                        throw new IllegalArgumentException("Given path is empty");
+                        bReader.close();
+                        break;
                     } else {
                         builder.append(line);
                         builder.append('\n');

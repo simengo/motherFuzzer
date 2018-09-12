@@ -10,7 +10,7 @@ public class SenseMarkerHereTest {
         String mapFile = "2\n2\nA.\nB.";
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseMarker("ahead", Target.marker, 0, 2);
+        brainA[0] = new SenseMarker("here", Target.marker, 0, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -33,7 +33,7 @@ public class SenseMarkerHereTest {
         String mapFile = "2\n2\nA.\nB.";
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseMarker("ahead", Target.marker, 0, 2);
+        brainA[0] = new SenseMarker("here", Target.marker, 0, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -55,7 +55,7 @@ public class SenseMarkerHereTest {
         String mapFile = "2\n2\nA.\nB.";
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseMarker("ahead", Target.marker, 1, 2);
+        brainA[0] = new SenseMarker("here", Target.marker, 1, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -78,7 +78,7 @@ public class SenseMarkerHereTest {
         String mapFile = "2\n2\nA.\nB.";
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseMarker("ahead", Target.marker, 1, 2);
+        brainA[0] = new SenseMarker("here", Target.marker, 1, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -101,7 +101,7 @@ public class SenseMarkerHereTest {
         String mapFile = "2\n2\nA.\nB.";
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseMarker("ahead", Target.marker, 2, 2);
+        brainA[0] = new SenseMarker("here", Target.marker, 2, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -124,7 +124,7 @@ public class SenseMarkerHereTest {
         String mapFile = "2\n2\nA.\nB.";
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseMarker("ahead", Target.marker, 2, 2);
+        brainA[0] = new SenseMarker("here", Target.marker, 2, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -146,7 +146,7 @@ public class SenseMarkerHereTest {
         String mapFile = "2\n2\nA.\nB.";
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseMarker("ahead", Target.marker, 3, 2);
+        brainA[0] = new SenseMarker("here", Target.marker, 3, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -169,7 +169,7 @@ public class SenseMarkerHereTest {
         String mapFile = "2\n2\nA.\nB.";
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseMarker("ahead", Target.marker, 3, 2);
+        brainA[0] = new SenseMarker("here", Target.marker, 3, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -191,7 +191,7 @@ public class SenseMarkerHereTest {
         String mapFile = "2\n2\nA.\nB.";
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseMarker("ahead", Target.marker, 4, 2);
+        brainA[0] = new SenseMarker("here", Target.marker, 4, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -214,7 +214,7 @@ public class SenseMarkerHereTest {
         String mapFile = "2\n2\nA.\nB.";
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseMarker("ahead", Target.marker, 4, 2);
+        brainA[0] = new SenseMarker("here", Target.marker, 4, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -236,7 +236,7 @@ public class SenseMarkerHereTest {
         String mapFile = "2\n2\nA.\nB.";
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseMarker("ahead", Target.marker, 5, 2);
+        brainA[0] = new SenseMarker("here", Target.marker, 5, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -259,7 +259,7 @@ public class SenseMarkerHereTest {
         String mapFile = "2\n2\nA.\nB.";
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseMarker("ahead", Target.marker, 5, 2);
+        brainA[0] = new SenseMarker("here", Target.marker, 5, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -281,7 +281,7 @@ public class SenseMarkerHereTest {
         String mapFile = "2\n2\nA.\nB.";
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseMarker("ahead", Target.marker, 6, 2);
+        brainA[0] = new SenseMarker("here", Target.marker, 6, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
