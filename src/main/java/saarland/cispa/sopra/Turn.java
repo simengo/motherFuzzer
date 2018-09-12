@@ -98,6 +98,6 @@ else
     }
     @Override
     public String toString(){
-        return "turn" + direction;
+        return "turn " + direction;
     }
 }
