@@ -293,7 +293,7 @@ public class World implements WorldInfo {
     @Override
     public Ant getAnt(int id) {
 
-        if(id >= ants.size()){
+        if(id >= ants.size()|| id < 0){
             throw new NoSuchElementException();
         }
 

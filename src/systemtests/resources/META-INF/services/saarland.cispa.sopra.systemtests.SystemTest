@@ -232,10 +232,7 @@ saarland.cispa.sopra.systemtests.simontests.MapTest
 saarland.cispa.sopra.systemtests.simontests.TooBigMapTest
 saarland.cispa.sopra.systemtests.simontests.TooSmallMapTest
 saarland.cispa.sopra.systemtests.simontests.UnevenMapTest
-saarland.cispa.sopra.systemtests.simontests.SuccessfulMoveTest
-saarland.cispa.sopra.systemtests.simontests.AntMove
-saarland.cispa.sopra.systemtests.simontests.RockMove
-saarland.cispa.sopra.systemtests.simontests.MoveResttime
+
 saarland.cispa.sopra.systemtests.simontests.DirectionTest
 saarland.cispa.sopra.systemtests.simontests.DirectionTest1
 saarland.cispa.sopra.systemtests.simontests.DirectionTest2
