@@ -24,6 +24,6 @@ public class Test extends Instruction {
     }
     @Override
     public String toString(){
-        return "test" + " " + register + " " + "else" + " " + jumpPC;
+        return "test " + register + "else " + jumpPC;
     }
 }

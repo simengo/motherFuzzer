@@ -51,6 +51,6 @@ public class SenseField extends Sense{
     @Override
     public String toString(){
 
-        return "sense" + " " + getDirectionS() + " " + getTargetS() + " " + "else" + " " + getJumpPC();
+        return "sense " + getDirectionS() + getTargetS()+ "else " + getJumpPC();
     }
 }

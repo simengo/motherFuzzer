@@ -83,7 +83,6 @@ public class BreedBabyKills {
         antA0.setField(spielfeld[1][3]);
         antA1.setField(spielfeld[2][3]);
         antB.setField(spielfeld[1][1]);
-
         antA2.setField(spielfeld[1][0]);
         antA3.setField(spielfeld[2][0]);
         antA4.setField(spielfeld[0][1]);
