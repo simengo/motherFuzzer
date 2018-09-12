@@ -7,18 +7,18 @@ import saarland.cispa.sopra.systemtests.SystemTest;
 
 public abstract class OberklasseTests extends SystemTest {
     public String initMapSt(char var1, char var2) {
-        return String.format("12%n12%n" +
-            "############%n" +
-            "#......%c...#%n" +
-            "#.......A..#%n" +
-            "#..........#%n" +
-            "#..........#%n" +
-            "#..........#%n" +
-            "#..........#%n" +
-            "#..........#%n" +
-            "#......%c...#%n" +
-            "#.......B..#%n" +
-            "#..........#%n" +
+        return String.format("12\n12\n" +
+            "############\n" +
+            "#......%c...#\n" +
+            "#.......A..#\n" +
+            "#..........#\n" +
+            "#..........#\n" +
+            "#..........#\n" +
+            "#..........#\n" +
+            "#..........#\n" +
+            "#......%c...#\n" +
+            "#.......B..#\n" +
+            "#..........#\n" +
             "############", var1, var2);
     }
 

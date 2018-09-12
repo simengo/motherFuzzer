@@ -1,4 +1,3 @@
-brain "sample13" {
-direction east else -1
-jump 0
+brain "sample" {
+jump 3
 }

@@ -1,7 +1,9 @@
 import org.junit.jupiter.api.Test;
 import saarland.cispa.sopra.*;
 
+import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 public class MoveStressTest {
 
@@ -117,5 +119,32 @@ public class MoveStressTest {
         assert(field13.getFood() == 3);
         assert(world.getAnt(6).isDead());
         assert(world.getAnt(7).isDead());
+    }
+
+
+    @Test
+    public void ScoreTest() {
+        String map = "4\n4\n" +
+            "BBB.\n" +
+            "BAB.\n" +
+            "BBB.\n" +
+            "....";
+
+        File mapFile = new File(map);
+        Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
+        Instruction[] brainA1 = new Instruction[2];
+        Instruction[] brainB1 = new Instruction[1];
+        brainA1[0] = new Move(1);
+        brainA1[1] = new Jump(1);
+        brainB1[0] = new Jump(0);
+        Swarm swarmA = new Swarm('A', brainA1, "A");
+        Swarm swarmB = new Swarm('B', brainB1, "B");
+        swarms.put('A', swarmA);
+        swarms.put('B', swarmB);
+
+        World world = WorldParser.parseMap(mapFile, 42, swarms);
+
+        world.getAnt(4).getNextInstruction().execute(world,world.getAnt(4));
+        assert (world.getScore('A') == 3);
     }
 }

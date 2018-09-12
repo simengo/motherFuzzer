@@ -40,7 +40,7 @@ public final class BrainParser {
             AcolaLexer lexer = new AcolaLexer(input);
             TokenStream tokens = new CommonTokenStream(lexer);
             AcolaParser parser = new AcolaParser(tokens);
-            if(parser.getNumberOfSyntaxErrors()!=0){
+            if (parser.getNumberOfSyntaxErrors() != 0) {
                 throw new IllegalArgumentException("brain has syntax errors");
             }
             AcolaParser.BrainContext brainContext = parser.brain();
@@ -48,11 +48,12 @@ public final class BrainParser {
             name.add(brainContext.IDENTIFIER().getText());      // add the name of the brain to the name array
             int currentInstruction = 0;                         //iteration variable for initialising the brains array
             String[] instructionStringArr = visitor.visitBrain(brainContext).split("[\\n][ ]"); //
-            brainArray[currentBrain] = new Instruction[instructionStringArr.length];
+            int length = instructionStringArr.length;
+            brainArray[currentBrain] = new Instruction[length];
             for (String instr : instructionStringArr) {         //create all instructions and add them to the brain array
                 //String[] instrArray = addSpaces(instr);
                 String[] instrArray = instr.split(" ");
-                Instruction instruction = switchInstruction(instrArray[0], instrArray);
+                Instruction instruction = switchInstruction(instrArray[0], instrArray, length);
                 if (instruction == null) {
                     throw new IllegalArgumentException("instruction is null");
                 }
@@ -96,38 +97,45 @@ public final class BrainParser {
         }
     }
 
-    private static Instruction switchInstruction(String instr, String[] instructionStringArr) throws IOException {
+    private static Instruction switchInstruction(String instr, String[] instructionStringArr, int length) throws IOException {
         switch (instr) {
             case "move":
+                checkOutOfBounds(Integer.parseInt(instructionStringArr[2]), length);
                 return new Move(Integer.parseInt(instructionStringArr[2]));
             case "sense":
-                return createSense(instructionStringArr);
+                return createSense(instructionStringArr, length);
             case "flip":
+                checkOutOfBounds(Integer.parseInt(instructionStringArr[3]), length);
                 return new Flip(Integer.parseInt(instructionStringArr[1]), Integer.parseInt(instructionStringArr[3]));
             case "mark":
                 return new Mark(Integer.parseInt(instructionStringArr[1]));
             case "unmark":
                 return new Unmark(Integer.parseInt(instructionStringArr[1]));
             default:
-                return switchInstruction2(instr, instructionStringArr);
+                return switchInstruction2(instr, instructionStringArr, length);
         }
     }
 
-    private static Instruction switchInstruction2(String instr, String[] instructionStringArr) {
+    private static Instruction switchInstruction2(String instr, String[] instructionStringArr, int length) {
         switch (instr) {
             case "set":
                 return new Set(Integer.parseInt(instructionStringArr[1]));
             case "unset":
                 return new Unset(Integer.parseInt(instructionStringArr[1]));
             case "drop":
+                checkOutOfBounds(Integer.parseInt(instructionStringArr[2]), length);
                 return new Drop(Integer.parseInt(instructionStringArr[2]));
             case "pickup":
+                checkOutOfBounds(Integer.parseInt(instructionStringArr[2]), length);
                 return new Pickup(Integer.parseInt(instructionStringArr[2]));
             case "direction":
+                checkOutOfBounds(Integer.parseInt(instructionStringArr[3]), length);
                 return new Direction(Integer.parseInt(instructionStringArr[3]), instructionStringArr[1]);
             case "jump":
+                checkOutOfBounds(Integer.parseInt(instructionStringArr[1]), length);
                 return new Jump(Integer.parseInt(instructionStringArr[1]));
             case "breed":
+                checkOutOfBounds(Integer.parseInt(instructionStringArr[2]), length);
                 return new Breed(Integer.parseInt(instructionStringArr[2]));
             case "turn":
                 if ("left".equals(instructionStringArr[1])) {
@@ -142,7 +150,7 @@ public final class BrainParser {
         }
     }
 
-    private static Instruction createSense(String[] instructionStringArr) throws IOException {
+    private static Instruction createSense(String[] instructionStringArr, int length) throws IOException {
         Target target;
         switch (instructionStringArr[2]) {
             case "foe":
@@ -168,9 +176,11 @@ public final class BrainParser {
                 break;
         }
         if ("marker".equals(instructionStringArr[2])) {
+            checkOutOfBounds(Integer.parseInt(instructionStringArr[5]), length);
             return new SenseMarker(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[5]));
         } else {
-            return switchTarget(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[4])); // jumpPC =  Integer.parseInt(instructionStringArr[instructionStringArr.length - 1])
+            checkOutOfBounds(Integer.parseInt(instructionStringArr[4]), length);
+            return switchTarget(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[4]));
         }
     }
 
@@ -188,6 +198,12 @@ public final class BrainParser {
                 return Target.friend;
             default:
                 throw new IllegalArgumentException("illigal target");
+        }
+    }
+
+    private static void checkOutOfBounds(int x, int instructionStringArrLength) {
+        if (x >= instructionStringArrLength) {
+            throw new IllegalArgumentException("index out of bounds");
         }
     }
 

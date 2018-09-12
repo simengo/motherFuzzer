@@ -1,14 +1,5 @@
 grammar Acola;
 
-@parser::members
-{
-  @Override
-  public void notifyErrorListeners(Token offendingToken, String msg, RecognitionException ex)
-  {
-    throw new IllegalArgumentException(msg);
-  }
-}
-
 @lexer::members
 {
   @Override
@@ -18,7 +9,7 @@ grammar Acola;
   }
 }
 
-brain : SPACE* 'brain' SPACE* '"' SPACE* IDENTIFIER SPACE* '"' SPACE* '{' SPACE* NEWLINE SPACE* (SPACE* instruction NEWLINE)+ '}' EOF;
+brain : SPACE* 'brain' SPACE* '"' SPACE* IDENTIFIER SPACE* '"' SPACE* '{' SPACE* ('\n'|'\r'|'\\n'|'\\r') SPACE* (SPACE* instruction SPACE* ('\n'|'\r'|'\\n'|'\\r'))+  '}' EOF;
 instruction : mark
               |unmark
               |turn
@@ -58,6 +49,5 @@ REGISTER : [0-5];
 MARKER : [0-6];
 NUMBER : [0-9]+;
 IDENTIFIER : [a-zA-Z_.-][a-zA-Z0-9_.-]*;
-COMMENT : ('/*' .*? '*/' | '//' .*? NEWLINE) -> skip;
+COMMENT : ('/*' .*? '*/' | '//' .*? ('\n'|'\r'|'\\n'|'\\r')) -> skip;
 SPACE : ([ ]+);
-NEWLINE : ('\n'|'\r');
