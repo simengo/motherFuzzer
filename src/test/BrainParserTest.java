@@ -1,36 +1,53 @@
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import saarland.cispa.sopra.BrainParser;
-import saarland.cispa.sopra.Field;
-import saarland.cispa.sopra.Normal;
-import saarland.cispa.sopra.Swarm;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 
 public class BrainParserTest {
 
     @Test
     public void emptyTest() {
+        test("brain \"beso\" {\\nsense here marker 0 else 2\\nset 0\\nsense ahead friend else 4\\nset 1\\nsense right friend else 6\\nset 2\\nturn left\\njump 6\\n}\n");
+        test("brain/**/\"ant\"/**/{jump/**/0\n" +
+            "}");
+        test("brain \"ant\" {jump 0\n" +
+            "}");
+        test("brain \"ant\" {jump/*\\u2345\\u2124\\u4531\\u1345*/0\n" +
+            "}");
+        test("brain \n" +
+            "\"ant\" \n" +
+            "{\t\n" +
+            "jump 0\n" +
+            "}\n" +
+            "\n" +
+            "\n" +
+            "//\\u2345\\u1344\n");
+        test("brain\n" +
+            "\"ant\"\n" +
+            "{\n" +
+            "jump 0//\\u5413\n" +
+            "}");
+        test("brain\n" +
+            "\"ant\"\n" +
+            "{\n" +
+            "jump 0/*\n" +
+            "*/}");
+        test("brain\n" +
+            "\"ant\"\n" +
+            "{\n" +
+            "jump 0/*\n" +
+            "*/}");
+    }
 
-        File[] brains = new File[2];
-
-        File brainA = new File("C:\\Users\\MBreit\\IdeaProjects\\group22\\src\\test\\brain.txt");
+    private void test(String brainA){
+        String[] brains = new String[2];
         brains[0] = brainA;
         brains[1] = brainA;
 
         try {
-            Map<Character, Swarm> swarms = BrainParser.parse(brains);
-            Swarm a = swarms.get('A');
-            for (int i = 0; i < a.getBrain().length; i++) {
-                System.out.println(a.getInstruction(i).toString());
-            }
-        } catch (IOException e) {
-            throw (IllegalArgumentException)new IllegalArgumentException().initCause(e);
-
+            BrainParser.parse(brains);
+            } catch (IOException e) {
+            throw new IllegalArgumentException(e);
         }
-
     }
-
 }
