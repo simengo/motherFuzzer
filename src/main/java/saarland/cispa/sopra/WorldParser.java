@@ -111,7 +111,7 @@ public final class WorldParser {
     private static void spawnMap(String[] splittedlines, Field[][] fields, int width) {
         for (int i = 2; i < splittedlines.length; i++) {
 
-            char[] actualLine = splittedlines[i].toCharArray();
+            char[] actualLine = splittedlines[i] .toCharArray();
 
             if (actualLine.length % 2 != 0 || actualLine.length > 128 || actualLine.length != width) {
                 throw new IllegalArgumentException("Invalid width of line");
@@ -210,10 +210,10 @@ public final class WorldParser {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Field field = fields[x][y];
+                field.setMarker(marker);
                 if (field instanceof Base) {
                     Ant ant = new Ant(swarms.get(field.getType()), ants.size(), field);
                     field.setAnt(ant);
-                    field.setMarker(marker);
                     ants.put(ants.size(), ant);
                 }
             }
