@@ -5,7 +5,9 @@ import saarland.cispa.sopra.systemtests.WorldInfo;
 
 import java.util.NoSuchElementException;
 
-public class ComplexMoves8 extends BaseTest {
+public class
+
+ComplexMoves8 extends BaseTest {
 
     @Override
     public void test(GameInfo gameInfo) {

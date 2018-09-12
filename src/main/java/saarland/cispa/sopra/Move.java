@@ -24,6 +24,7 @@ public class Move extends Killable {
         } else {
             field.setChanged(true);
             ant.setPc(getJumpPc());
+            killcheck(world, Optional.of(ant));
 
         }
     }
