@@ -63,9 +63,7 @@ public final class BrainParser {
                 brainArray[currentBrain][currentInstruction] = instruction;
                 currentInstruction++;
             }
-            if (brainArray[currentBrain][brainArray[currentBrain].length - 1].getClass() != Jump.class || brainArray[currentBrain].length > 2500) {
-                throw new IllegalArgumentException("last instruction wasn't a jump or brain was longer than 2500");
-            }
+            helpPMD(currentBrain,brainArray);
             currentBrain++;
         }
         HashMap<Character, Swarm> brainMap = new HashMap<>();
@@ -73,6 +71,14 @@ public final class BrainParser {
             brainMap.put((char) ('A' + iterator), new Swarm((char) ('A' + iterator), brainArray[iterator], name.get(iterator)));
         }
         return brainMap;
+    }
+
+//TODO nur auf die schnelle hinzugefuegt
+    private static void helpPMD(int currentBrain, Instruction[][] brainArray ){
+        if (brainArray[currentBrain][brainArray[currentBrain].length - 1].getClass() != Jump.class || brainArray[currentBrain].length > 2500) {
+            throw new IllegalArgumentException("last instruction wasn't a jump or brain was longer than 2500");
+        }
+
     }
 
     private static Instruction switchTarget(String dir, Target target, int jumpPC) throws IOException {

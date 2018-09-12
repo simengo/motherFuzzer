@@ -87,7 +87,7 @@ public class AcolaLexer extends Lexer {
 	  @Override
 	  public void recover(RecognitionException ex)
 	  {
-	    throw new RuntimeException(ex.getMessage());
+	    throw new IllegalArgumentException(ex.getMessage());
 	  }
 
 
