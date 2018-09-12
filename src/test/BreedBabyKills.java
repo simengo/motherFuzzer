@@ -105,7 +105,6 @@ public class BreedBabyKills {
         assert(field22.getChanged());
         assert(field11.getChanged());
         assert(field11.getFood() == 4);
-        assert(world.getAnt(2).isDead());
         assert(!antA0.hasFood());
         assert(!antA1.hasFood());
     }
