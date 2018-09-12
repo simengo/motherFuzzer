@@ -16,7 +16,7 @@ public class BrainParserTest {
 
         File[] brains = new File[2];
 
-        File brainA = new File("/home/wep/IdeaProjects/group22/src/test/brain.txt");
+        File brainA = new File("C:\\Users\\MBreit\\Desktop\\brain.txt");
         brains[0] = brainA;
         brains[1] = brainA;
 
@@ -27,7 +27,8 @@ public class BrainParserTest {
                 System.out.println(a.getInstruction(i).toString());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw (IllegalArgumentException)new IllegalArgumentException().initCause(e);
+
         }
 
     }
