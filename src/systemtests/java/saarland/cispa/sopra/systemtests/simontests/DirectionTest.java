@@ -21,7 +21,7 @@ public class DirectionTest extends SystemTest {
         WorldInfo world1 = gameInfo.simulate(3, 42, map, brain1, brain1);
         String dir1 = world1.getAnt(0).getDirection();
         if (!"southwest".equals(dir1)) {
-            fail(String.format("Ant 0 faces %s instead of southwest!", dir1));
+            fail(String.format("Ant 0 faces %s instead of southwest !", dir1));
         }
         String brain2 = "brain \"sample\" {\nturn left\nturn left\nturn left\njump 0\n}";
         WorldInfo world2 = gameInfo.simulate(4, 42, map, brain2, brain2);

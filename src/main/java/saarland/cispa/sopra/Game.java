@@ -46,7 +46,8 @@ public class Game implements GameInfo {
 
                     line = bReader.readLine();
                     if (line == null) {
-                        throw new IllegalArgumentException("Given path is empty");
+                        bReader.close();
+                        break;
                     } else {
                         builder.append(line);
                         builder.append('\n');
@@ -67,7 +68,7 @@ public class Game implements GameInfo {
     @Override
     public WorldInfo simulate(int rounds, long seed, File world1, File... brains) {
 
-        String world = world1.toString();
+        String world = convertFile(world1);
         String[] brainstrings = new String[brains.length];
         for (int i = 0; i < brains.length; i++) {
             brainstrings[i] = convertFile(brains[i]);
@@ -90,6 +91,7 @@ public class Game implements GameInfo {
             simulateOnce();
         }
 
+        logger.writeToFile();
         return world;
 
     }
@@ -114,9 +116,8 @@ public class Game implements GameInfo {
 
     private void initialize(long seed, String world1, String[] brains) {
 
-        Map<Character, Swarm> swarms;
         try {
-            swarms = BrainParser.parse(brains);
+            Map<Character, Swarm> swarms = BrainParser.parse(brains);
             world = WorldParser.parseMap(world1, seed, swarms);
             logger.addInitialRound(world.getFields(), swarms);
         } catch (IOException e) {

@@ -21,7 +21,7 @@ public class AcolaTest extends SystemTest {
         try {
             gameInfo.simulate(1, 42, map0, brain0, brain0);
         } catch (IllegalArgumentException e) {
-            fail("Expected brain to be accepted!");
+            fail("Expected brain to sbe accepted!");
         }
         //brain with keyword
         String brain1 = "brain \"food\" {\nturn left\n jump 0 \n}";
