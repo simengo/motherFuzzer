@@ -68,7 +68,7 @@ public class Game implements GameInfo {
     @Override
     public WorldInfo simulate(int rounds, long seed, File world1, File... brains) {
 
-        String world = world1.toString();
+        String world = convertFile(world1);
         String[] brainstrings = new String[brains.length];
         for (int i = 0; i < brains.length; i++) {
             brainstrings[i] = convertFile(brains[i]);
@@ -91,6 +91,7 @@ public class Game implements GameInfo {
             simulateOnce();
         }
 
+        logger.writeToFile();
         return world;
 
     }

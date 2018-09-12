@@ -87,7 +87,8 @@ public class BreedTests2 {
         assert(field22.getChanged());
         assert(field32.getChanged());
         assert(field21.getFood() == 1);
-        assert(world.getAnt(3).isDead());
+        Ant ant = (Ant)world.getAllAnts().get(3);
+        assert(ant.isDead());
         assert(!antA0.hasFood());
         assert(!antA1.hasFood());
         // Do nothing

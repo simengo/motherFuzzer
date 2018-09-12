@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class SenseMarkerRightTest {
     @Test
     public void SenseMarkerTest() {
-        String mapFile = "2\n2\n.A\n.B";
+        String mapFile = "2\n2\nA.\n.B";
         Instruction[] brainA = new Instruction[2];
         brainA[0] = new SenseMarker("right", Target.marker, 0, 2);
         brainA[1] = new Jump(1);
@@ -29,7 +29,7 @@ public class SenseMarkerRightTest {
     }
     @Test
     public void SenseMarkerTest1() {
-        String mapFile = "2\n2\n.A\n.B";
+        String mapFile = "2\n2\nA.\n.B";
 
         Instruction[] brainA = new Instruction[2];
         brainA[0] = new SenseMarker("left", Target.marker, 0, 2);

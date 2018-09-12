@@ -40,6 +40,7 @@ public final class BrainParser {
             if (parser.getNumberOfSyntaxErrors() != 0) {
                 throw new IllegalArgumentException("brain has syntax errors");
             }
+
             AcolaParser.BrainContext brainContext = parser.brain();
 
             name.add(brainContext.IDENTIFIER().getText());      // add the name of the brain to the name array
