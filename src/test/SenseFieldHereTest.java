@@ -18,7 +18,7 @@ public class SenseFieldHereTest {
         fields[1][1] = field11;
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseField("left", Target.home, 2);
+        brainA[0] = new SenseField("here", Target.home, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -44,7 +44,7 @@ public class SenseFieldHereTest {
     @Test
     public void SenseFieldTest1() {
         Field[][] fields = new Field[2][2];
-        Base field00 = new Base('A', 0, 0);
+        Normal field00 = new Normal(0, 0,0);
         Normal field10 = new Normal(1, 0, 0);
         Normal field01 = new Normal(0, 1, 0);
         Normal field11 = new Normal(1, 1, 0);
@@ -81,7 +81,7 @@ public class SenseFieldHereTest {
     @Test
     public void SenseFieldTest2() {
         Field[][] fields = new Field[2][2];
-        Base field00 = new Base('A', 0, 0);
+        Base field00 = new Base('B', 0, 0);
         Normal field10 = new Normal( 1, 0,0);
         Normal field01 = new Normal(0, 1, 0);
         Normal field11 = new Normal(1, 1, 0);
@@ -92,7 +92,7 @@ public class SenseFieldHereTest {
         fields[1][1] = field11;
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseField("left", Target.foehome, 2);
+        brainA[0] = new SenseField("here", Target.foehome, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -129,7 +129,7 @@ public class SenseFieldHereTest {
         fields[1][1] = field11;
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseField("left", Target.foehome, 2);
+        brainA[0] = new SenseField("here", Target.foehome, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -166,7 +166,7 @@ public class SenseFieldHereTest {
         fields[1][1] = field11;
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseField("left", Target.rock, 2);
+        brainA[0] = new SenseField("here", Target.rock, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -186,13 +186,13 @@ public class SenseFieldHereTest {
         World world = new World(fields, 42, ants, swarms);
         antA0.getNextInstruction().execute(world, antA0);
 
-        assert (antA0.getPc() == 1);
+        assert (antA0.getPc() == 2);
     }
 
     @Test
     public void SenseFieldTest5() {
         Field[][] fields = new Field[2][2];
-        Base field00 = new Base('A', 0, 0);
+        Normal field00 = new Normal(0, 0,0);
         Normal field10 = new Normal(1, 0, 0);
         Normal field01 = new Normal(0, 1, 0);
         Normal field11 = new Normal(1, 1, 0);
@@ -203,7 +203,7 @@ public class SenseFieldHereTest {
         fields[1][1] = field11;
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseField("left", Target.rock, 2);
+        brainA[0] = new SenseField("here", Target.rock, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -240,44 +240,7 @@ public class SenseFieldHereTest {
         fields[1][1] = field11;
 
         Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseField("left", Target.antlion, 2);
-        brainA[1] = new Jump(1);
-        brainA[1] = new Jump(1);
-        Instruction[] brainB = new Instruction[2];
-        brainB[0] = new Jump(0);
-
-        Swarm swarmA = new Swarm('A', brainA, "brainA");
-        Swarm swarmB = new Swarm('B', brainB, "brainB");
-        HashMap<Character, Swarm> swarms = new HashMap<>();
-        swarms.put('A', swarmA);
-        swarms.put('B', swarmB);
-
-        Ant antA0 = new Ant(swarmA, 0, field00);
-        field00.setAnt(antA0);
-        HashMap<Integer, Ant> ants = new HashMap<>();
-        ants.put(0, antA0);
-
-        World world = new World(fields, 42, ants, swarms);
-        antA0.getNextInstruction().execute(world, antA0);
-
-        assert (antA0.getPc() == 1);
-    }
-
-    @Test
-    public void SenseFieldTest7() {
-        Field[][] fields = new Field[2][2];
-        Base field00 = new Base('A', 0, 0);
-        Normal field10 = new Normal(1, 0, 0);
-        Normal field01 = new Normal(0, 1, 0);
-        Normal field11 = new Normal(1, 1, 0);
-
-        fields[0][0] = field00;
-        fields[1][0] = field10;
-        fields[0][1] = field01;
-        fields[1][1] = field11;
-
-        Instruction[] brainA = new Instruction[2];
-        brainA[0] = new SenseField("left", Target.antlion, 2);
+        brainA[0] = new SenseField("here", Target.antlion, 2);
         brainA[1] = new Jump(1);
         brainA[1] = new Jump(1);
         Instruction[] brainB = new Instruction[2];
@@ -298,6 +261,43 @@ public class SenseFieldHereTest {
         antA0.getNextInstruction().execute(world, antA0);
 
         assert (antA0.getPc() == 2);
+    }
+
+    @Test
+    public void SenseFieldTest7() {
+        Field[][] fields = new Field[2][2];
+        Antlion field00 = new Antlion(0, 0);
+        Normal field10 = new Normal(1, 0, 0);
+        Normal field01 = new Normal(0, 1, 0);
+        Normal field11 = new Normal(1, 1, 0);
+
+        fields[0][0] = field00;
+        fields[1][0] = field10;
+        fields[0][1] = field01;
+        fields[1][1] = field11;
+
+        Instruction[] brainA = new Instruction[2];
+        brainA[0] = new SenseField("here", Target.antlion, 2);
+        brainA[1] = new Jump(1);
+        brainA[1] = new Jump(1);
+        Instruction[] brainB = new Instruction[2];
+        brainB[0] = new Jump(0);
+
+        Swarm swarmA = new Swarm('A', brainA, "brainA");
+        Swarm swarmB = new Swarm('B', brainB, "brainB");
+        HashMap<Character, Swarm> swarms = new HashMap<>();
+        swarms.put('A', swarmA);
+        swarms.put('B', swarmB);
+
+        Ant antA0 = new Ant(swarmA, 0, field00);
+        field00.setAnt(antA0);
+        HashMap<Integer, Ant> ants = new HashMap<>();
+        ants.put(0, antA0);
+
+        World world = new World(fields, 42, ants, swarms);
+        antA0.getNextInstruction().execute(world, antA0);
+
+        assert (antA0.getPc() == 1);
     }
 
 
