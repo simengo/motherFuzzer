@@ -80,7 +80,6 @@ public final class WorldParser {
 
         checkSize(width, height);
 
-
         if (splittedlines.length > (height + 2) || ((splittedlines.length - 2) % 2) != 0 || splittedlines.length - 2 > 128) {
             throw new IllegalArgumentException("Map could not be parsed correctly");
         }
@@ -109,7 +108,7 @@ public final class WorldParser {
         }
     }
 
-    public static void spawnMap(String[] splittedlines, Field[][] fields, int width) {
+    private static void spawnMap(String[] splittedlines, Field[][] fields, int width) {
         for (int i = 2; i < splittedlines.length; i++) {
 
             char[] actualLine = splittedlines[i].toCharArray();
@@ -204,10 +203,13 @@ public final class WorldParser {
     }
 
     private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
+        int height = fields[0].length;
+        int width = fields.length;
         HashMap<Integer, Ant> ants = new HashMap<>();
         Map<Character, boolean[]> marker = spawnMarker(swarms);
-        for (Field[] line : fields) {
-            for (Field field : line) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Field field = fields[x][y];
                 if (field instanceof Base) {
                     Ant ant = new Ant(swarms.get(field.getType()), ants.size(), field);
                     field.setAnt(ant);
