@@ -3,6 +3,7 @@ package saarland.cispa.sopra.systemtests;
 import java.util.NoSuchElementException;
 
 public class SampleTest extends SystemTest {
+
     @Override
     public void test(GameInfo gameInfo) {
         String map = "2\n2\n" +
