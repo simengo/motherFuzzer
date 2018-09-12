@@ -117,11 +117,10 @@ public final class WorldParser {
         int height = fields[0].length;
         int width = fields.length;
         HashMap<Integer, Ant> ants = new HashMap<>();
-        Map<Character, boolean[]> marker = spawnMarker(swarms);
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Field field = fields[x][y];
-                field.setMarker(marker);
+                field.setMarker(spawnMarker(swarms));
                 if (field instanceof Base) {
                     Ant ant = new Ant(swarms.get(field.getType()), ants.size(), field);
                     field.setAnt(ant);
@@ -134,10 +133,9 @@ public final class WorldParser {
 
     private static Map<Character, boolean[]> spawnMarker(Map<Character, Swarm> swarms) {
 
-        boolean[] marker = new boolean[7];
         HashMap<Character, boolean[]> result = new HashMap<>();
         for (Character identifier : swarms.keySet()) {
-            result.put(identifier, marker);
+            result.put(identifier, new boolean[7]);
         }
         return result;
     }
