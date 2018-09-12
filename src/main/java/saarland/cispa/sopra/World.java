@@ -290,14 +290,28 @@ public class World implements WorldInfo {
     @Override
     public Ant getAnt(int id) {
 
-        if (id >= ants.size()) {
-            throw new IllegalArgumentException("Map could not be parsed correctly");
+        Ant antH = ants.get(id);
+        if (antH.isDead()){
+            throw new NoSuchElementException("No living ant with this id");
         }
-        return ants.get(id);
+
+        return antH;
     }
 
     @Override
     public List<AntInfo> getAnts() {
+
+        List<AntInfo> antIL = new ArrayList<>();
+        for(Ant ant: ants.values()){
+            if (!ant.isDead()){
+                antIL.add((AntInfo) ant);
+            }
+        }
+        return antIL;
+
+    }
+
+    public List<AntInfo> getAllAnts(){
 
         return new ArrayList<>(ants.values());
     }
