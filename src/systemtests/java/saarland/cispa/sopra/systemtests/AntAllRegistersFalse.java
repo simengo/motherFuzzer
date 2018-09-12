@@ -1,5 +1,6 @@
 package saarland.cispa.sopra.systemtests;
 
+
 public class AntAllRegistersFalse extends SystemTest {
 
     @Override
@@ -17,7 +18,6 @@ public class AntAllRegistersFalse extends SystemTest {
         testRegs(0, world);
         testRegs(1, world);
     }
-
 
     private void testRegs(int ant, WorldInfo world) {
         boolean[] registerFile = world.getAnt(ant).getRegister();
