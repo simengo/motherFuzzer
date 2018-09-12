@@ -1,10 +1,12 @@
 package saarland.cispa.sopra.systemtests.sensetests;
 
+import org.junit.jupiter.api.Test;
 import saarland.cispa.sopra.systemtests.GameInfo;
 import saarland.cispa.sopra.systemtests.SystemTest;
 import saarland.cispa.sopra.systemtests.WorldInfo;
 
 public class UnmarkTest extends SystemTest {
+
     @Override
     protected void test(GameInfo gameInfo) {
         String map = "4\n4\n" +
