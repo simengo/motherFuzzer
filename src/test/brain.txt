@@ -1,5 +1,4 @@
-brain "licht" {
-//jnknjkn
-/* huhih */  sense here foe else 1
-jump 0
+brain "sample" {
+move else 1
+jump 1
 }

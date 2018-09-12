@@ -1,5 +1,5 @@
 grammar Acola;
-brain : SPACE* 'brain' SPACE* '"' SPACE* IDENTIFIER SPACE* '"' SPACE* '{' SPACE* NEWLINE SPACE* (SPACE* instruction NEWLINE)+ SPACE* '}' EOF;
+brain : SPACE* 'brain' SPACE* '"' SPACE* IDENTIFIER SPACE* '"' SPACE* '{' SPACE* NEWLINE SPACE* (SPACE* instruction NEWLINE)+ '}' EOF;
 instruction : mark
               |unmark
               |turn
