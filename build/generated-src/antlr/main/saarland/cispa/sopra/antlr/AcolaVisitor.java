@@ -23,6 +23,42 @@ public interface AcolaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInstruction(AcolaParser.InstructionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AcolaParser#turn}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTurn(AcolaParser.TurnContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AcolaParser#mark}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMark(AcolaParser.MarkContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AcolaParser#unmark}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnmark(AcolaParser.UnmarkContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AcolaParser#set}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSet(AcolaParser.SetContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AcolaParser#unset}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnset(AcolaParser.UnsetContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AcolaParser#jump}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJump(AcolaParser.JumpContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AcolaParser#sensemarker}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -76,40 +112,4 @@ public interface AcolaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBreed(AcolaParser.BreedContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AcolaParser#turn}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTurn(AcolaParser.TurnContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AcolaParser#mark}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMark(AcolaParser.MarkContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AcolaParser#unmark}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUnmark(AcolaParser.UnmarkContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AcolaParser#set}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSet(AcolaParser.SetContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AcolaParser#unset}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUnset(AcolaParser.UnsetContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AcolaParser#jump}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJump(AcolaParser.JumpContext ctx);
 }
