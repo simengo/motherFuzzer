@@ -16,10 +16,15 @@ public class IlligalRandomSeed extends SystemTest {
 
         try {
             gameInfo.simulate(1, -1, map1, brain, brain);
-        } catch (IllegalArgumentException x){
-            fail("negative seed is legal");
+        } catch (IllegalArgumentException x) {
+            fail("Kacke verdammte");
         }
-        expect(IllegalArgumentException.class, () -> gameInfo.simulate(-1, 1, map1, brain, brain));
+
+            expect(IllegalArgumentException.class, () -> gameInfo.simulate(-1, 1, map1, brain, brain));
+
+
 
     }
+
+
 }

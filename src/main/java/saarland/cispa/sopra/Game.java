@@ -28,8 +28,8 @@ public class Game implements GameInfo {
 
     @Override
     public WorldInfo simulate(int rounds, long seed, File world1, File... brains) {
-        if (rounds < 0){
-            throw new IllegalArgumentException();
+        if (rounds < 0 ) {
+            throw new IllegalArgumentException("Illegal Number of Rounds");
         }
         initialize(seed, world1, brains);
         for (int count = 0; count < rounds; count++) {
@@ -42,7 +42,6 @@ public class Game implements GameInfo {
 
     @Override
     public WorldInfo simulate(int rounds, long seed, String world, String... brains) {
-
 
         File[] filearray = new File[brains.length];
 
