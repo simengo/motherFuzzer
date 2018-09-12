@@ -1,14 +1,17 @@
 import org.junit.jupiter.api.Test;
 import saarland.cispa.sopra.*;
 import saarland.cispa.sopra.systemtests.FieldInfo;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import saarland.cispa.sopra.*;
 import saarland.cispa.sopra.systemtests.FieldInfo;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +20,6 @@ public class WorldParserTest {
     @Test
     public void smallMapTest() {
         String map = "2\n2\nAA\nBB";
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
         Instruction[] brainB = new Instruction[1];
@@ -28,7 +30,7 @@ public class WorldParserTest {
         swarms.put('A', swarmA);
         swarms.put('B', swarmB);
 
-        World world = WorldParser.parseMap(mapFile, 42, swarms);
+        World world = WorldParser.parseMap(map, 42, swarms);
 
 
         assert (world != null);
@@ -37,7 +39,6 @@ public class WorldParserTest {
     @Test
     public void bigMapTest() {
         String map = "8\n6\n........\n...BB...\n........\n........\n...AA...\n........";
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
         Instruction[] brainB = new Instruction[1];
@@ -49,14 +50,13 @@ public class WorldParserTest {
         swarms.put('B', swarmB);
 
 
-        World world = WorldParser.parseMap(mapFile, 42, swarms);
+        World world = WorldParser.parseMap(map, 42, swarms);
         assert (world != null);
     }
 
     @Test
     public void unevenMapTest() {
         String map = "5\n6\n.....\n...BB\n.....\n.....\nAA...\n.....";
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
         Instruction[] brainB = new Instruction[1];
@@ -69,7 +69,7 @@ public class WorldParserTest {
         boolean fail = false;
 
         try {
-            World world = WorldParser.parseMap(mapFile, 42, swarms);
+            World world = WorldParser.parseMap(map, 42, swarms);
         } catch (IllegalArgumentException e) {
             fail = true;
         }
@@ -79,7 +79,6 @@ public class WorldParserTest {
     @Test
     public void emptyMapTest() {
         String map = "";
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
         Instruction[] brainB = new Instruction[1];
@@ -92,7 +91,7 @@ public class WorldParserTest {
         boolean fail = false;
 
         try {
-            World world = WorldParser.parseMap(mapFile, 42, swarms);
+            World world = WorldParser.parseMap(map, 42, swarms);
         } catch (IllegalArgumentException e) {
             fail = true;
         }
@@ -229,7 +228,6 @@ public class WorldParserTest {
             "..................................................................................................................................\n" +
             "..................................................................................................................................";
 
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
         Instruction[] brainB = new Instruction[1];
@@ -242,7 +240,7 @@ public class WorldParserTest {
         boolean fail = false;
 
         try {
-            World world = WorldParser.parseMap(mapFile, 42, swarms);
+            World world = WorldParser.parseMap(map, 42, swarms);
         } catch (IllegalArgumentException e) {
             fail = true;
         }
@@ -252,7 +250,6 @@ public class WorldParserTest {
     @Test
     public void invalidCharsMapTest() {
         String map = "2\n2\nA)\nB.";
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
         Instruction[] brainB = new Instruction[1];
@@ -265,7 +262,7 @@ public class WorldParserTest {
         boolean fail = false;
 
         try {
-            World world = WorldParser.parseMap(mapFile, 42, swarms);
+            World world = WorldParser.parseMap(map, 42, swarms);
         } catch (IllegalArgumentException e) {
             fail = true;
         }
@@ -275,7 +272,6 @@ public class WorldParserTest {
     @Test
     public void wrongHeaderMapTest() {
         String map = "4\n4\n..\nAB";
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
         Instruction[] brainB = new Instruction[1];
@@ -288,7 +284,7 @@ public class WorldParserTest {
         boolean fail = false;
 
         try {
-            World world = WorldParser.parseMap(mapFile, 42, swarms);
+            World world = WorldParser.parseMap(map, 42, swarms);
 
         } catch (IllegalArgumentException e) {
             fail = true;
@@ -299,7 +295,6 @@ public class WorldParserTest {
     @Test
     public void variousMapTest() {
         String map = "4\n4\n.AA.\n1234\n====\n.BB.";
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
         Instruction[] brainB = new Instruction[1];
@@ -310,7 +305,7 @@ public class WorldParserTest {
         swarms.put('A', swarmA);
         swarms.put('B', swarmB);
 
-        World world = WorldParser.parseMap(mapFile, 42, swarms);
+        World world = WorldParser.parseMap(map, 42, swarms);
 
         assert (world.getAnts().size() == 4);
         assert (world.getFieldAt(0, 0).getType() == '.');
@@ -335,7 +330,6 @@ public class WorldParserTest {
     @Test
     public void basesNotConnectedMapTest() {
         String map = "4\n4\n....\n.AB.\n...A\n....";
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
         Instruction[] brainB = new Instruction[1];
@@ -348,7 +342,7 @@ public class WorldParserTest {
         boolean fail = false;
 
         try {
-            World world = WorldParser.parseMap(mapFile, 42, swarms);
+            World world = WorldParser.parseMap(map, 42, swarms);
 
         } catch (IllegalArgumentException e) {
             fail = true;
@@ -359,7 +353,6 @@ public class WorldParserTest {
     @Test
     public void inconsistentMapTest() {
         String map = "2\n2\nAC\n..";
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
         Instruction[] brainC = new Instruction[1];
@@ -372,7 +365,7 @@ public class WorldParserTest {
         boolean fail = false;
 
         try {
-            World world = WorldParser.parseMap(mapFile, 42, swarms);
+            World world = WorldParser.parseMap(map, 42, swarms);
         } catch (IllegalArgumentException e) {
             fail = true;
         }
@@ -382,7 +375,6 @@ public class WorldParserTest {
     @Test
     public void pointMapTest() {
         String map = "4\n4\n....\n....\n....\n....";
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
         Instruction[] brainB = new Instruction[1];
@@ -395,7 +387,7 @@ public class WorldParserTest {
         boolean fail = false;
 
         try {
-            World world = WorldParser.parseMap(mapFile, 42, swarms);
+            World world = WorldParser.parseMap(map, 42, swarms);
 
         } catch (IllegalArgumentException e) {
             fail = true;
@@ -406,7 +398,6 @@ public class WorldParserTest {
     @Test
     public void toSmallMapTest() {
         String map = "0\n0\n";
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
         Instruction[] brainB = new Instruction[1];
@@ -419,7 +410,7 @@ public class WorldParserTest {
         boolean fail = false;
 
         try {
-            World world = WorldParser.parseMap(mapFile, 42, swarms);
+            World world = WorldParser.parseMap(map, 42, swarms);
 
         } catch (IllegalArgumentException e) {
             fail = true;
@@ -430,7 +421,6 @@ public class WorldParserTest {
     @Test
     public void weirdMapTest() {
         String map = "g\n-4\n....\nAA..\nBB..\n....";
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
         Instruction[] brainB = new Instruction[1];
@@ -443,7 +433,7 @@ public class WorldParserTest {
         boolean fail = false;
 
         try {
-            World world = WorldParser.parseMap(mapFile, 42, swarms);
+            World world = WorldParser.parseMap(map, 42, swarms);
 
         } catch (IllegalArgumentException e) {
             fail = true;
@@ -454,7 +444,6 @@ public class WorldParserTest {
     @Test
     public void bomberMapTest() {
         String map = "16\n8\n################\n123456789.......\n.....AA.........\n.......C........\n......AAA.......\n................\n......BBB.......\n................";
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainA = new Instruction[1];
         Instruction[] brainC = new Instruction[1];
@@ -469,7 +458,7 @@ public class WorldParserTest {
         boolean fail = false;
 
         try {
-            World world = WorldParser.parseMap(mapFile, 42, swarms);
+            World world = WorldParser.parseMap(map, 42, swarms);
         } catch (IllegalArgumentException e) {
             fail = true;
         }
@@ -479,7 +468,6 @@ public class WorldParserTest {
     @Test
     public void smallWrongSwarmMapTest() {
         String map = "2\n2\n.A\nB.";
-        File mapFile = new File(map);
         Map<Character, Swarm> swarms = new HashMap<Character, Swarm>();
         Instruction[] brainG = new Instruction[1];
         Instruction[] brainB = new Instruction[1];
@@ -492,7 +480,7 @@ public class WorldParserTest {
         boolean fail = false;
 
         try {
-            World world = WorldParser.parseMap(mapFile, 42, swarms);
+            World world = WorldParser.parseMap(map, 42, swarms);
         } catch (IllegalArgumentException e) {
             fail = true;
         }
