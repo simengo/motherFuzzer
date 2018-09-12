@@ -203,10 +203,13 @@ public final class WorldParser {
     }
 
     private static Map<Integer, Ant> spawnAnts(Map<Character, Swarm> swarms, Field[][] fields) {
+        int height = fields[0].length;
+        int width = fields.length;
         HashMap<Integer, Ant> ants = new HashMap<>();
         Map<Character, boolean[]> marker = spawnMarker(swarms);
-        for (Field[] line : fields) {
-            for (Field field : line) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Field field = fields[x][y];
                 if (field instanceof Base) {
                     Ant ant = new Ant(swarms.get(field.getType()), ants.size(), field);
                     field.setAnt(ant);
