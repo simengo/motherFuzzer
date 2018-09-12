@@ -21,6 +21,6 @@ public class Direction extends Instruction {
     }
     @Override
     public String toString(){
-        return "direction" + directionToLookAt + "else" + jumpPC;
+        return "direction " + directionToLookAt + "else " + jumpPC;
     }
 }

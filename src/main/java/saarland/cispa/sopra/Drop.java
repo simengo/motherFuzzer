@@ -62,7 +62,7 @@ public class Drop extends Instruction {
 
     @Override
     public String toString(){
-        return "drop" + "else" + jumpPC;
+        return "drop " + "else " + jumpPC;
     }
     }
 

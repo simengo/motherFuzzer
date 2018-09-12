@@ -163,8 +163,5 @@ public abstract class Sense extends Instruction {
     @Override
     public abstract void execute(World world, Ant ant);
 
-    @Override
-    public String toString() {
-return "standard";
-    }
+
 }
