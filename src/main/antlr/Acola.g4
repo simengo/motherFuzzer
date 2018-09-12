@@ -1,5 +1,15 @@
 grammar Acola;
-brain : SPACE* 'brain' SPACE* '"' SPACE* IDENTIFIER SPACE* '"' SPACE* '{' SPACE* NEWLINE SPACE* (SPACE* instruction NEWLINE)+ SPACE* '}' EOF;
+
+@lexer::members
+{
+  @Override
+  public void recover(RecognitionException ex)
+  {
+    throw new IllegalArgumentException(ex.getMessage());
+  }
+}
+
+brain : SPACE* 'brain' SPACE* '"' SPACE* IDENTIFIER SPACE* '"' SPACE* '{' SPACE* ('\n'|'\r'|'\\n'|'\\r') SPACE* (SPACE* instruction SPACE* ('\n'|'\r'|'\\n'|'\\r'))+  '}' EOF;
 instruction : mark
               |unmark
               |turn
@@ -21,8 +31,8 @@ mark: 'mark' SPACE* (MARKER|REGISTER);
 unmark: 'unmark' SPACE* (MARKER|REGISTER);
 turn: 'turn' SPACE* ('left' | 'right');
 move: 'move' SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
-sense: 'sense' SPACE* FIELD SPACE* TARGET SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
-sensemarker: 'sense' SPACE* FIELD SPACE* 'marker' SPACE* (MARKER|REGISTER) SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
+sense: 'sense' SPACE* ('here' | 'ahead' | 'left' | 'right') SPACE* TARGET SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
+sensemarker: 'sense' SPACE* ('here' | 'ahead' | 'left' | 'right') SPACE* 'marker' SPACE* (MARKER|REGISTER) SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
 set: 'set' SPACE* REGISTER;
 unset: 'unset' SPACE* REGISTER;
 pickup: 'pickup' SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
@@ -33,13 +43,11 @@ test: 'test' SPACE* (NUMBER|MARKER|REGISTER) SPACE* 'else' SPACE* (NUMBER|MARKER
 direction: 'direction' SPACE* DIRECTION SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
 breed: 'breed' SPACE* 'else' SPACE* (NUMBER|MARKER|REGISTER);
 
-FIELD : 'here' | 'ahead' | 'left' | 'right';
 TARGET : 'foe' | 'foehome' | 'friend' | 'food' | 'antlion' | 'rock' | 'foefood' | 'foemarker' | 'home' | 'friendfood';
 DIRECTION :  'northwest' | 'west' | 'southwest' | 'southeast' | 'east' | 'northeast';
 REGISTER : [0-5];
 MARKER : [0-6];
 NUMBER : [0-9]+;
 IDENTIFIER : [a-zA-Z_.-][a-zA-Z0-9_.-]*;
-COMMENT : ('/*' .*? '*/' | '//' .*? NEWLINE) -> skip;
+COMMENT : ('/*' .*? '*/' | '//' .*? ('\n'|'\r'|'\\n'|'\\r')) -> skip;
 SPACE : ([ ]+);
-NEWLINE : ('\n'|'\r');
