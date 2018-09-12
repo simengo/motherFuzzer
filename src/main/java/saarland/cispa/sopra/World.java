@@ -57,7 +57,7 @@ public class World implements WorldInfo {
 
         for (Ant recentAnt : ants.values()) {
             char antSwarm = recentAnt.getSwarm();
-            if (antSwarm > 'Z' || antSwarm < 'A'){
+            if (antSwarm > 'Z' || antSwarm < 'A') {
                 throw new IllegalArgumentException();
             }
             int help = Character.getNumericValue(antSwarm) - 10; // A hat den Wert 10
@@ -290,20 +290,15 @@ public class World implements WorldInfo {
     @Override
     public Ant getAnt(int id) {
 
-        Ant antH = ants.get(id);
-        if (antH.isDead()){
-            throw new NoSuchElementException("No living ant with this id");
-        }
-
-        return antH;
+        return ants.get(id);
     }
 
     @Override
     public List<AntInfo> getAnts() {
 
         List<AntInfo> antIL = new ArrayList<>();
-        for(Ant ant: ants.values()){
-            if (!ant.isDead()){
+        for (Ant ant : ants.values()) {
+            if (!ant.isDead()) {
                 antIL.add((AntInfo) ant);
             }
         }
@@ -311,7 +306,7 @@ public class World implements WorldInfo {
 
     }
 
-    public List<AntInfo> getAllAnts(){
+    public List<AntInfo> getAllAnts() {
 
         return new ArrayList<>(ants.values());
     }
@@ -412,23 +407,19 @@ public class World implements WorldInfo {
     }
 
 
-
     public void addAnt(Ant ant) {
 
         ants.put(ants.size(), ant);
     }
 
 
-
-
-
-    public void printMap(){
+    public void printMap() {
 
         StringBuilder strB = new StringBuilder();
         strB.append('\n');
         Logger printSth = LoggerFactory.getLogger("World.class");
-        for(int i = 0; i < height; i++){
-            for(int x = 0; x < width; x++){
+        for (int i = 0; i < height; i++) {
+            for (int x = 0; x < width; x++) {
 
                 Field field = fields[x][i];
 
@@ -441,9 +432,6 @@ public class World implements WorldInfo {
         printSth.info(strB.toString());
 
     }
-
-
-
 
 
 }
