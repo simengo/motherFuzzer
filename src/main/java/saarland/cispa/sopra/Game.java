@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Game implements GameInfo {
 
-    private LoggerInfo logger;
+    private LoggerInfo logger = new NOPLogger(); // TODO soll eig in Main mit setLogger gemacht werden aber Systemtests auf game
     private World world;
 
 

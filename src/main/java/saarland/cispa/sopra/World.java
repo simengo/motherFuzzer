@@ -57,6 +57,9 @@ public class World implements WorldInfo {
 
         for (Ant recentAnt : ants.values()) {
             char antSwarm = recentAnt.getSwarm();
+            if (antSwarm > 'Z' || antSwarm < 'A'){
+                throw new IllegalArgumentException();
+            }
             int help = Character.getNumericValue(antSwarm) - 10; // A hat den Wert 10
             numOfAnts[help] += 1;
         }

@@ -1,5 +1,6 @@
 package saarland.cispa.sopra;
 
+
 import java.util.Map;
 import java.util.Optional;
 
@@ -82,7 +83,8 @@ public abstract class Field implements FieldInfo {
     }
 
     public void setMarker(char ident, int num, boolean bool) {
-        this.marker.get(ident)[num] = bool;
+        boolean[] markerFS = this.marker.get(ident);
+        markerFS[num] = bool;
     }
 
     public void setNextToAntlion(boolean nextToAntlion) {
