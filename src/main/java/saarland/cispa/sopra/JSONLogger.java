@@ -144,7 +144,7 @@ public class JSONLogger implements LoggerInfo {
                 jsOb.add("x", x);
                 jsOb.add("y", y);
                 jsOb.add("markers", createMarkerArray(field));
-                jsOb.add("type", field.getType());
+                jsOb.add("type", Character.toString(field.getType()));
 
                 if (field.getFood() != 0) {
 
@@ -230,7 +230,7 @@ public class JSONLogger implements LoggerInfo {
         JsonObjectBuilder jsBuilder = Json.createObjectBuilder();
         int antId = antI.getId();
         int antPc = antI.getPc();
-        int swarmId = antI.getSwarm();
+        String swarmId = Character.toString(antI.getSwarm());
         boolean carriesFood = antI.hasFood();
         String direction = antI.getDirection();
         int restTime = antI.getRestTime();
