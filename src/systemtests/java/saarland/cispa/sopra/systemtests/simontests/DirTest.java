@@ -1,4 +1,4 @@
-package saarland.cispa.sopra.systemtests.simonTests.directionTests;
+package saarland.cispa.sopra.systemtests.simontests;
 
 
 import saarland.cispa.sopra.systemtests.GameInfo;
@@ -21,7 +21,7 @@ public class DirTest extends SystemTest {
         brain = "brain \"sample\" {\nturn left\ndirection northwest else 0\nturn right\njump 0\n}";
         world = gameInfo.simulate(2, 42, map, brain, brain);
         if (dir.equals(world.getAnt(0).getDirection())) {
-            fail("ant was not pointing NW");
+            fail("ant was not pointing NW ");
         }
 
 

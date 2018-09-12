@@ -33,7 +33,6 @@ public class AcolaTest3 extends SystemTest {
         expect(IllegalArgumentException.class,()->gameInfo.simulate(1,42,map,fBrain,fBrain));
         String gBrain ="brain \"sample\" {\nmark 8\njump 0\n}";
         expect(IllegalArgumentException.class,()->gameInfo.simulate(1,42,map,gBrain,gBrain));
-
         String map1 = "...."+
             "AA..\n"+
             "BB..\n"+
