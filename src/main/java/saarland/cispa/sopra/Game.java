@@ -91,6 +91,7 @@ public class Game implements GameInfo {
             simulateOnce();
         }
 
+        logger.writeToFile();
         return world;
 
     }
