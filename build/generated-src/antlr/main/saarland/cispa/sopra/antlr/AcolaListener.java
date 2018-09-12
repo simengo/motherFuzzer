@@ -28,56 +28,6 @@ public interface AcolaListener extends ParseTreeListener {
 	 */
 	void exitInstruction(AcolaParser.InstructionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AcolaParser#mark}.
-	 * @param ctx the parse tree
-	 */
-	void enterMark(AcolaParser.MarkContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AcolaParser#mark}.
-	 * @param ctx the parse tree
-	 */
-	void exitMark(AcolaParser.MarkContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link AcolaParser#unmark}.
-	 * @param ctx the parse tree
-	 */
-	void enterUnmark(AcolaParser.UnmarkContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AcolaParser#unmark}.
-	 * @param ctx the parse tree
-	 */
-	void exitUnmark(AcolaParser.UnmarkContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link AcolaParser#turn}.
-	 * @param ctx the parse tree
-	 */
-	void enterTurn(AcolaParser.TurnContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AcolaParser#turn}.
-	 * @param ctx the parse tree
-	 */
-	void exitTurn(AcolaParser.TurnContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link AcolaParser#move}.
-	 * @param ctx the parse tree
-	 */
-	void enterMove(AcolaParser.MoveContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AcolaParser#move}.
-	 * @param ctx the parse tree
-	 */
-	void exitMove(AcolaParser.MoveContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link AcolaParser#sense}.
-	 * @param ctx the parse tree
-	 */
-	void enterSense(AcolaParser.SenseContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AcolaParser#sense}.
-	 * @param ctx the parse tree
-	 */
-	void exitSense(AcolaParser.SenseContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link AcolaParser#sensemarker}.
 	 * @param ctx the parse tree
 	 */
@@ -88,55 +38,15 @@ public interface AcolaListener extends ParseTreeListener {
 	 */
 	void exitSensemarker(AcolaParser.SensemarkerContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link AcolaParser#set}.
+	 * Enter a parse tree produced by {@link AcolaParser#sense}.
 	 * @param ctx the parse tree
 	 */
-	void enterSet(AcolaParser.SetContext ctx);
+	void enterSense(AcolaParser.SenseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AcolaParser#set}.
+	 * Exit a parse tree produced by {@link AcolaParser#sense}.
 	 * @param ctx the parse tree
 	 */
-	void exitSet(AcolaParser.SetContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link AcolaParser#unset}.
-	 * @param ctx the parse tree
-	 */
-	void enterUnset(AcolaParser.UnsetContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AcolaParser#unset}.
-	 * @param ctx the parse tree
-	 */
-	void exitUnset(AcolaParser.UnsetContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link AcolaParser#pickup}.
-	 * @param ctx the parse tree
-	 */
-	void enterPickup(AcolaParser.PickupContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AcolaParser#pickup}.
-	 * @param ctx the parse tree
-	 */
-	void exitPickup(AcolaParser.PickupContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link AcolaParser#drop}.
-	 * @param ctx the parse tree
-	 */
-	void enterDrop(AcolaParser.DropContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AcolaParser#drop}.
-	 * @param ctx the parse tree
-	 */
-	void exitDrop(AcolaParser.DropContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link AcolaParser#jump}.
-	 * @param ctx the parse tree
-	 */
-	void enterJump(AcolaParser.JumpContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link AcolaParser#jump}.
-	 * @param ctx the parse tree
-	 */
-	void exitJump(AcolaParser.JumpContext ctx);
+	void exitSense(AcolaParser.SenseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AcolaParser#flip}.
 	 * @param ctx the parse tree
@@ -168,6 +78,36 @@ public interface AcolaListener extends ParseTreeListener {
 	 */
 	void exitDirection(AcolaParser.DirectionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AcolaParser#pickup}.
+	 * @param ctx the parse tree
+	 */
+	void enterPickup(AcolaParser.PickupContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AcolaParser#pickup}.
+	 * @param ctx the parse tree
+	 */
+	void exitPickup(AcolaParser.PickupContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AcolaParser#drop}.
+	 * @param ctx the parse tree
+	 */
+	void enterDrop(AcolaParser.DropContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AcolaParser#drop}.
+	 * @param ctx the parse tree
+	 */
+	void exitDrop(AcolaParser.DropContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AcolaParser#move}.
+	 * @param ctx the parse tree
+	 */
+	void enterMove(AcolaParser.MoveContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AcolaParser#move}.
+	 * @param ctx the parse tree
+	 */
+	void exitMove(AcolaParser.MoveContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AcolaParser#breed}.
 	 * @param ctx the parse tree
 	 */
@@ -177,4 +117,64 @@ public interface AcolaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBreed(AcolaParser.BreedContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AcolaParser#turn}.
+	 * @param ctx the parse tree
+	 */
+	void enterTurn(AcolaParser.TurnContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AcolaParser#turn}.
+	 * @param ctx the parse tree
+	 */
+	void exitTurn(AcolaParser.TurnContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AcolaParser#mark}.
+	 * @param ctx the parse tree
+	 */
+	void enterMark(AcolaParser.MarkContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AcolaParser#mark}.
+	 * @param ctx the parse tree
+	 */
+	void exitMark(AcolaParser.MarkContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AcolaParser#unmark}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnmark(AcolaParser.UnmarkContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AcolaParser#unmark}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnmark(AcolaParser.UnmarkContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AcolaParser#set}.
+	 * @param ctx the parse tree
+	 */
+	void enterSet(AcolaParser.SetContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AcolaParser#set}.
+	 * @param ctx the parse tree
+	 */
+	void exitSet(AcolaParser.SetContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AcolaParser#unset}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnset(AcolaParser.UnsetContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AcolaParser#unset}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnset(AcolaParser.UnsetContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AcolaParser#jump}.
+	 * @param ctx the parse tree
+	 */
+	void enterJump(AcolaParser.JumpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AcolaParser#jump}.
+	 * @param ctx the parse tree
+	 */
+	void exitJump(AcolaParser.JumpContext ctx);
 }
