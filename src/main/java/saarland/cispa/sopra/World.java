@@ -327,10 +327,11 @@ public class World implements WorldInfo {
     public int getScore(char swarm) {
 
         if(points.get(swarm) == null) {
-            return points.get(swarm);
+            throw new IllegalArgumentException();
         }
         else{
-            throw new IllegalArgumentException();
+            return points.get(swarm);
+
         }
     }
 
