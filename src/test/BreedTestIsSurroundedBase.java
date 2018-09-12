@@ -104,7 +104,8 @@ public class BreedTestIsSurroundedBase {
         assert(field32.getChanged());
         assert(field31.getFood() == 0);
         assert(world.getScore('B') == 3);
-        assert(world.getAnt(7).isDead());
+        Ant ant = (Ant)world.getAllAnts().get(7);
+        assert(ant.isDead());
         assert(!antA0.hasFood());
         assert(!antA1.hasFood());
         // Do nothing
