@@ -64,7 +64,7 @@ public final class BrainParser {
         }
         HashMap<Character, Swarm> brainMap = new HashMap<>();
         for (int iterator = 0; iterator < brainArray.length; iterator++) {
-            brainMap.put((char) ('A' + iterator), new Swarm((char) iterator, brainArray[iterator], name.get(iterator)));
+            brainMap.put((char) ('A' + iterator), new Swarm((char) ('A' + iterator), brainArray[iterator], name.get(iterator)));
         }
         return brainMap;
     }
