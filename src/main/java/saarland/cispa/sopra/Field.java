@@ -1,6 +1,5 @@
 package saarland.cispa.sopra;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -12,7 +11,7 @@ public abstract class Field implements FieldInfo {
     private final int posX;
     private final int posY;
     private final char type;
-    private Map<Character, boolean[]> marker = new HashMap<Character, boolean[]>();
+    private Map<Character, boolean[]> marker;
     private AntInfo ant;
     private boolean isNextToAntlion;
     private boolean changed;
