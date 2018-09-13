@@ -10,6 +10,7 @@ import static com.ibm.icu.impl.Assert.fail;
 
 public class HugeTestSuite {
 
+
     @Test
     public void Test1Test() {
 
@@ -152,7 +153,7 @@ public class HugeTestSuite {
             gameInfo.simulate(2, 1, map, brain12, brain12);
             gameInfo.simulate(2, 1, map, brain13, brain13);
         } catch (IllegalArgumentException x) {
-            x.notifyAll();
+            x.printStackTrace();
         }
     }
 
@@ -239,6 +240,15 @@ public class HugeTestSuite {
         if (!(dir.equals(world.getAnt(0).getDirection()))) {
             fail("wrong instruction direction");
         }
+    }
+
+    @Test
+    public void testIllegalMap() {
+        String map = "4\n4\nA...\n.B..\n";
+        String brain = "brain \"sample\" {\nturn left\njump 0\n}";
+        Game game = new Game();
+        game.simulate(1, 1, map, brain, brain);
+
     }
 
     @Test
