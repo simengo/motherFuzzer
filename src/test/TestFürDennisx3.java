@@ -31,25 +31,47 @@ public class TestFürDennisx3 {
         swarms.put('A', swarmA);
         swarms.put('B', swarmB);
         World world = WorldParser.parseMap(map, 42, swarms);
-        AntInfo[] ants = world.getAnts().toArray(new AntInfo[0]);
+        AntInfo[] ants = new AntInfo[world.getAnts().size()];
+        int iter = 0;
+        for(AntInfo antI: world.getAnts()){
+            ants[iter] = antI;
+            iter++;
+        }
+
         for (int i = 0; i < 19; i++) {
             for (AntInfo ant : ants) {
                 Ant ant1 = (Ant) ant;
-                ant1.getNextInstruction().execute(world, ant1);
+                if (ant1.getRestTime() == 0){
+                    ant1.getNextInstruction().execute(world, ant1);
+                } else{
+                    ant1.decreaseResttime();
+                }
+
             }
         }
 
-        if (world.getAnt(0).getPc() != 5) {
+        assert("northeast".equals(world.getAnt(0).getDirection()));
+
+        if (world.getAnt(0).getPc() != 6) {
             fail("You should have sensed your marker");
         }
 
 
         world = WorldParser.parseMap(map, 42, swarms);
-        ants = world.getAnts().toArray(new AntInfo[0]);
+        AntInfo[] antsi = new AntInfo[world.getAnts().size()];
+         iter = 0;
+        for(AntInfo antI: world.getAnts()){
+            antsi[iter] = antI;
+            iter++;
+        }
         for (int i = 0; i < 41; i++) {
             for (AntInfo ant : ants) {
                 Ant ant1 = (Ant) ant;
-                ant1.getNextInstruction().execute(world, ant1);
+                if (ant1.getRestTime() == 0){
+                    ant1.getNextInstruction().execute(world, ant1);
+                } else{
+                    ant1.decreaseResttime();
+                }
             }
         }
         if (world.getAnt(0).getPc() != 9) {
