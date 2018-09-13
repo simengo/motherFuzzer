@@ -58,7 +58,7 @@ MARKER : [0-6];
 NUMBER : [0-9]+;
 KEYWORD : 'brain'|'mark'|'unmark'|'turn'|'move'|'sense'|'set'|'unset'|'pickup'|'drop'|'jump'|'flip'|'sensemarker'|'direction'|'test'|'breed';
 IDENTIFIER : [a-zA-Z_.-][a-zA-Z0-9_.-]+;
+SPACE : ([ 	]+)  {setText(" ");};
 COMMENTWITHNEWLINE : ('/*' ([.]*[\n]+)+ '*/' | '//' .*? ('\n'|'\r'|'\\n'|'\\r')) {setText(" \n");};
 COMMENTS : ('/*' .*? '*/') {setText(" ");};
-SPACE : ([ ]|[	]);
 NEWLINE : ('\n'|'\r'|'\\n'|'\\r');
