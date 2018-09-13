@@ -291,6 +291,21 @@ public class World implements WorldInfo {
 
     }
 
+    public void increaseNumOfAntsInSwarm(char swarm){
+
+        int count = this.numOfAntsInSwarm.get(swarm);
+        count += 1;
+        this.numOfAntsInSwarm.put(swarm,count);
+    }
+
+    public void decreaseNumOfAntsInSwarm(char swarm){
+
+        int count = this.numOfAntsInSwarm.get(swarm);
+        count -= 1;
+        this.numOfAntsInSwarm.put(swarm,count);
+    }
+
+
     @Override
     public Ant getAnt(int id) {
 
