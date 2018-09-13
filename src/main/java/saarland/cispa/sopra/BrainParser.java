@@ -45,9 +45,20 @@ public final class BrainParser {
             String[] instructionStringArr = visitor.visitBrain(brainContext).split("[\\n][ ]"); //
             int length = checkLength(instructionStringArr);
             int currentInstruction = 0;                         //iteration variable for initialising the brains array
-            brainArray[currentBrain] = new Instruction[length];
+            int x = 0;
+            for (String instr : instructionStringArr){
+                if("".equals(instr)){
+                    x++;
+                    continue;
+                }
+            }
+            brainArray[currentBrain] = new Instruction[length-x];
             for (String instr : instructionStringArr) {         //create all instructions and add them to the brain array
+                if("".equals(instr)){
+                    continue;
+                }
                 //String[] instrArray = addSpaces(instr);
+
                 String[] instrArray = instr.split(" ");
                 Instruction instruction;
                 instruction = switchInstruction(instrArray[0], instrArray, length);
@@ -55,7 +66,8 @@ public final class BrainParser {
                 brainArray[currentBrain][currentInstruction] = instruction;
                 currentInstruction++;
             }
-            if (brainArray[currentBrain][brainArray[currentBrain].length - 1].getClass() != Jump.class || brainArray[currentBrain].length > 2500) {
+            if (brainArray[currentBrain][brainArray[currentBrain].length-1].getClass() != Jump.class || brainArray[currentBrain].length > 2500) {
+
                 throw new IllegalArgumentException("last instruction wasn't a jump or brain was longer than 2500");
             }
             currentBrain++;
