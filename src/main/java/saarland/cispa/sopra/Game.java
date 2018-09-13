@@ -70,12 +70,18 @@ public class Game implements GameInfo {
     @Override
     public WorldInfo simulate(int rounds, long seed, File world1, File... brains) {
 
-        String world = convertFile(world1);
         String[] brainstrings = new String[brains.length];
+
         for (int i = 0; i < brains.length; i++) {
+
             brainstrings[i] = convertFile(brains[i]);
+            if (brainstrings[i].isEmpty()) {
+                throw new IllegalArgumentException("Game could not be simulated: Empty File");
+            }
+
         }
 
+        String world = convertFile(world1);
 
         return simulate(rounds, seed, world, brainstrings);
     }
