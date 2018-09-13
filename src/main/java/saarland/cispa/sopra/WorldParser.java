@@ -9,6 +9,15 @@ public final class WorldParser {
 
     }
 
+    private static void checkValidMap(int width, String[] splittedlines) {
+
+        for (int i = 2; i < splittedlines.length; i++) {
+            if (splittedlines[i].length() != width) {
+                throw new IllegalArgumentException("Width doesnt match header");
+            }
+        }
+
+    }
 
     public static World parseMap(String mapFile, long seed, Map<Character, Swarm> swarms) {
 
@@ -23,7 +32,6 @@ public final class WorldParser {
         int width = checkNumber(splittedlines[0].toCharArray());
         int height = checkNumber(splittedlines[1].toCharArray());
         checkSize(width, height);
-
         List<String> cleanedlines = new LinkedList<>(Arrays.asList(splittedlines));
 
         if (cleanedlines.get(cleanedlines.size() - 1).isEmpty()) {
@@ -31,9 +39,11 @@ public final class WorldParser {
         }
 
         String[] finishedLines = cleanedlines.toArray(new String[0]);
+        checkValidMap(width, splittedlines);
 
+        int arrayheight = finishedLines.length;
 
-        if (finishedLines.length > (height + 2) || ((finishedLines.length - 2) % 2) != 0 || finishedLines.length - 2 > 128) {
+        if (arrayheight - 2 != height || ((arrayheight - 2) % 2) != 0 || arrayheight - 2 > 128) {
             throw new IllegalArgumentException("Map could not be parsed correctly");
         }
 

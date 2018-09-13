@@ -25,7 +25,7 @@ public class HugeTestSuite {
     @Test
     public void testChanges() {
 
-        String map = String.format("2%n2%n.A%n.B");
+        String map = String.format("2%n4%n.A%n.B");
 
         String brainZuTest1 = "brain \"sample\" {\nset 0\ntest 0 else 3\njump 2\njump 3\n}";
         Game game = new Game();
