@@ -1,7 +1,5 @@
 package saarland.cispa.sopra;
 
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,26 +42,28 @@ public final class BrainParser {
             AcolaParser.BrainContext brainContext = parser.brain();
 
             name.add(brainContext.IDENTIFIER().getText());      // add the name of the brain to the name array
-            int currentInstruction = 0;                         //iteration variable for initialising the brains array
             String[] instructionStringArr = visitor.visitBrain(brainContext).split("[\\n][ ]"); //
             int length = instructionStringArr.length;
+            if (length == 0) {
+                throw new IllegalArgumentException("");
+            }
+            if ("".equals(instructionStringArr[0])) {
+                throw new IllegalArgumentException("");
+            }
+            int currentInstruction = 0;                         //iteration variable for initialising the brains array
             brainArray[currentBrain] = new Instruction[length];
             for (String instr : instructionStringArr) {         //create all instructions and add them to the brain array
                 //String[] instrArray = addSpaces(instr);
                 String[] instrArray = instr.split(" ");
                 Instruction instruction;
-                try {
-                    instruction = switchInstruction(instrArray[0], instrArray, length);
-                } catch (IOException ioex) {
-                    throw new IllegalArgumentException(ioex);
-                }
-                if (instruction == null) {
-                    throw new IllegalArgumentException("instruction is null");
-                }
+                instruction = switchInstruction(instrArray[0], instrArray, length);
+
                 brainArray[currentBrain][currentInstruction] = instruction;
                 currentInstruction++;
             }
-            helpPMD(currentBrain,brainArray);
+            if (brainArray[currentBrain][brainArray[currentBrain].length - 1].getClass() != Jump.class || brainArray[currentBrain].length > 2500) {
+                throw new IllegalArgumentException("last instruction wasn't a jump or brain was longer than 2500");
+            }
             currentBrain++;
         }
         HashMap<Character, Swarm> brainMap = new HashMap<>();
@@ -73,15 +73,7 @@ public final class BrainParser {
         return brainMap;
     }
 
-//TODO nur auf die schnelle hinzugefuegt
-    private static void helpPMD(int currentBrain, Instruction[][] brainArray ){
-        if (brainArray[currentBrain][brainArray[currentBrain].length - 1].getClass() != Jump.class || brainArray[currentBrain].length > 2500) {
-            throw new IllegalArgumentException("last instruction wasn't a jump or brain was longer than 2500");
-        }
-
-    }
-
-    private static Instruction switchTarget(String dir, Target target, int jumpPC) throws IOException {
+    private static Instruction switchTarget(String dir, Target target, int jumpPC) {
         switch (target) {
             case foe:
                 return new SenseAnt(dir, target, jumpPC);
@@ -102,23 +94,25 @@ public final class BrainParser {
             case food:
                 return new SenseFood(dir, target, jumpPC);
             default:
-                throw new IOException();
+                throw new IllegalArgumentException();
         }
     }
 
-    private static Instruction switchInstruction(String instr, String[] instructionStringArr, int length) throws IOException {
+    private static Instruction switchInstruction(String instr, String[] instructionStringArr, int length) {
         switch (instr) {
             case "move":
-                checkOutOfBounds(Integer.parseInt(instructionStringArr[2]), length);
+                checkForIllegal(Integer.parseInt(instructionStringArr[2]), length - 1);
                 return new Move(Integer.parseInt(instructionStringArr[2]));
             case "sense":
                 return createSense(instructionStringArr, length);
             case "flip":
-                checkOutOfBounds(Integer.parseInt(instructionStringArr[3]), length);
+                checkForIllegal(Integer.parseInt(instructionStringArr[3]), length - 1);
                 return new Flip(Integer.parseInt(instructionStringArr[1]), Integer.parseInt(instructionStringArr[3]));
             case "mark":
+                checkForIllegal(Integer.parseInt(instructionStringArr[1]), 6);
                 return new Mark(Integer.parseInt(instructionStringArr[1]));
             case "unmark":
+                checkForIllegal(Integer.parseInt(instructionStringArr[1]), 6);
                 return new Unmark(Integer.parseInt(instructionStringArr[1]));
             default:
                 return switchInstruction2(instr, instructionStringArr, length);
@@ -128,23 +122,25 @@ public final class BrainParser {
     private static Instruction switchInstruction2(String instr, String[] instructionStringArr, int length) {
         switch (instr) {
             case "set":
+                checkForIllegal(Integer.parseInt(instructionStringArr[1]), 5);
                 return new Set(Integer.parseInt(instructionStringArr[1]));
             case "unset":
+                checkForIllegal(Integer.parseInt(instructionStringArr[1]), 5);
                 return new Unset(Integer.parseInt(instructionStringArr[1]));
             case "drop":
-                checkOutOfBounds(Integer.parseInt(instructionStringArr[2]), length);
+                checkForIllegal(Integer.parseInt(instructionStringArr[2]), length - 1);
                 return new Drop(Integer.parseInt(instructionStringArr[2]));
             case "pickup":
-                checkOutOfBounds(Integer.parseInt(instructionStringArr[2]), length);
+                checkForIllegal(Integer.parseInt(instructionStringArr[2]), length - 1);
                 return new Pickup(Integer.parseInt(instructionStringArr[2]));
             case "direction":
-                checkOutOfBounds(Integer.parseInt(instructionStringArr[3]), length);
+                checkForIllegal(Integer.parseInt(instructionStringArr[3]), length - 1);
                 return new Direction(Integer.parseInt(instructionStringArr[3]), instructionStringArr[1]);
             case "jump":
-                checkOutOfBounds(Integer.parseInt(instructionStringArr[1]), length);
+                checkForIllegal(Integer.parseInt(instructionStringArr[1]), length - 1);
                 return new Jump(Integer.parseInt(instructionStringArr[1]));
             case "breed":
-                checkOutOfBounds(Integer.parseInt(instructionStringArr[2]), length);
+                checkForIllegal(Integer.parseInt(instructionStringArr[2]), length - 1);
                 return new Breed(Integer.parseInt(instructionStringArr[2]));
             case "turn":
                 if ("left".equals(instructionStringArr[1])) {
@@ -153,13 +149,15 @@ public final class BrainParser {
                     return new Turn(TurnDirection.right);
                 }
             case "test":
+                checkForIllegal(Integer.parseInt(instructionStringArr[1]), 6);
+                checkForIllegal(Integer.parseInt(instructionStringArr[3]), length - 1);
                 return new Test(Integer.parseInt(instructionStringArr[1]), Integer.parseInt(instructionStringArr[3]));
             default:
                 throw new IllegalArgumentException();
         }
     }
 
-    private static Instruction createSense(String[] instructionStringArr, int length) throws IOException {
+    private static Instruction createSense(String[] instructionStringArr, int length) {
         Target target;
         switch (instructionStringArr[2]) {
             case "foe":
@@ -185,10 +183,10 @@ public final class BrainParser {
                 break;
         }
         if ("marker".equals(instructionStringArr[2])) {
-            checkOutOfBounds(Integer.parseInt(instructionStringArr[5]), length);
+            checkForIllegal(Integer.parseInt(instructionStringArr[5]), length - 1);
             return new SenseMarker(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[5]));
         } else {
-            checkOutOfBounds(Integer.parseInt(instructionStringArr[4]), length);
+            checkForIllegal(Integer.parseInt(instructionStringArr[4]), length - 1);
             return switchTarget(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[4]));
         }
     }
@@ -206,13 +204,13 @@ public final class BrainParser {
             case "friend":
                 return Target.friend;
             default:
-                throw new IllegalArgumentException("illigal target");
+                throw new IllegalArgumentException("illegal target");
         }
     }
 
-    private static void checkOutOfBounds(int x, int instructionStringArrLength) {
-        if (x >= instructionStringArrLength || x < 0) {
-            throw new IllegalArgumentException("index out of bounds");
+    private static void checkForIllegal(int x, int max) {
+        if (x < 0 || x > max) {
+            throw new IllegalArgumentException("illegal integer given to brain");
         }
     }
 
