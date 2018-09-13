@@ -90,13 +90,6 @@ public class AcolaParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-
-	  @Override
-	  public void notifyErrorListeners(Token offendingToken, String msg, RecognitionException ex)
-	  {
-	    throw new RuntimeException(msg);
-	  }
-
 	public AcolaParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
