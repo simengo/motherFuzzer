@@ -1,14 +1,10 @@
 package saarland.cispa.sopra;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.TokenStream;
-import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.atn.ATNConfigSet;
+import org.antlr.v4.runtime.dfa.DFA;
 import saarland.cispa.sopra.antlr.AcolaLexer;
 import saarland.cispa.sopra.antlr.AcolaParser;
 
@@ -33,6 +29,27 @@ public final class BrainParser {
             input = CharStreams.fromString(brain);
 
             AcolaLexer lexer = new AcolaLexer(input);
+            lexer.addErrorListener(new ANTLRErrorListener() {
+                @Override
+                public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException exc) {
+                    throw new IllegalArgumentException(exc);
+                }
+
+                @Override
+                public void reportAmbiguity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, boolean exact, BitSet ambigAlts, ATNConfigSet configs) {
+       //             throw new IllegalArgumentException("");
+                }
+
+                @Override
+                public void reportAttemptingFullContext(Parser recognizer, DFA dfa, int startIndex, int stopIndex, BitSet conflictingAlts, ATNConfigSet configs) {
+       //             throw new IllegalArgumentException("");
+                }
+
+                @Override
+                public void reportContextSensitivity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, int prediction, ATNConfigSet configs) {
+       //             throw new IllegalArgumentException("");
+                }
+            });
             TokenStream tokens = new CommonTokenStream(lexer);
             AcolaParser parser = new AcolaParser(tokens);
             if (parser.getNumberOfSyntaxErrors() != 0) {
