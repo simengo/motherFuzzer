@@ -91,6 +91,7 @@ public class World implements WorldInfo {
         return this.numOfAntsInSwarm;
     }
 
+
     public Field[][] getFields() {
 
         Field[][] copiedFields = new Field[width][height];
