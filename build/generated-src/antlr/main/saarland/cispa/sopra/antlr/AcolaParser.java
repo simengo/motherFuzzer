@@ -90,6 +90,13 @@ public class AcolaParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
+
+	  @Override
+	  public void notifyErrorListeners(Token offendingToken, String msg, RecognitionException ex)
+	  {
+	    throw new IllegalArgumentException(msg);
+	  }
+
 	public AcolaParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
@@ -2803,18 +2810,12 @@ public class AcolaParser extends Parser {
 	}
 
 	public static class TestContext extends ParserRuleContext {
-		public List<TerminalNode> NUMBER() { return getTokens(AcolaParser.NUMBER); }
-		public TerminalNode NUMBER(int i) {
-			return getToken(AcolaParser.NUMBER, i);
-		}
-		public List<TerminalNode> MARKER() { return getTokens(AcolaParser.MARKER); }
-		public TerminalNode MARKER(int i) {
-			return getToken(AcolaParser.MARKER, i);
-		}
 		public List<TerminalNode> REGISTER() { return getTokens(AcolaParser.REGISTER); }
 		public TerminalNode REGISTER(int i) {
 			return getToken(AcolaParser.REGISTER, i);
 		}
+		public TerminalNode NUMBER() { return getToken(AcolaParser.NUMBER, 0); }
+		public TerminalNode MARKER() { return getToken(AcolaParser.MARKER, 0); }
 		public List<TerminalNode> COMMENTWITHNEWLINE() { return getTokens(AcolaParser.COMMENTWITHNEWLINE); }
 		public TerminalNode COMMENTWITHNEWLINE(int i) {
 			return getToken(AcolaParser.COMMENTWITHNEWLINE, i);
@@ -2915,15 +2916,7 @@ public class AcolaParser extends Parser {
 				break;
 			}
 			setState(692);
-			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << REGISTER) | (1L << MARKER) | (1L << NUMBER))) != 0)) ) {
-			_errHandler.recoverInline(this);
-			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
-			}
+			match(REGISTER);
 			setState(711);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,124,_ctx) ) {
@@ -4698,8 +4691,8 @@ public class AcolaParser extends Parser {
 		"\2\2\u02ad\u02ab\3\2\2\2\u02ae\u02b0\7$\2\2\u02af\u02ae\3\2\2\2\u02b0"+
 		"\u02b3\3\2\2\2\u02b1\u02af\3\2\2\2\u02b1\u02b2\3\2\2\2\u02b2\u02b5\3\2"+
 		"\2\2\u02b3\u02b1\3\2\2\2\u02b4\u02a5\3\2\2\2\u02b4\u02ab\3\2\2\2\u02b4"+
-		"\u02b1\3\2\2\2\u02b5\u02b6\3\2\2\2\u02b6\u02c9\t\b\2\2\u02b7\u02b9\7\""+
-		"\2\2\u02b8\u02b7\3\2\2\2\u02b9\u02bc\3\2\2\2\u02ba\u02b8\3\2\2\2\u02ba"+
+		"\u02b1\3\2\2\2\u02b5\u02b6\3\2\2\2\u02b6\u02c9\7\35\2\2\u02b7\u02b9\7"+
+		"\"\2\2\u02b8\u02b7\3\2\2\2\u02b9\u02bc\3\2\2\2\u02ba\u02b8\3\2\2\2\u02ba"+
 		"\u02bb\3\2\2\2\u02bb\u02ca\3\2\2\2\u02bc\u02ba\3\2\2\2\u02bd\u02bf\7#"+
 		"\2\2\u02be\u02bd\3\2\2\2\u02bf\u02c2\3\2\2\2\u02c0\u02be\3\2\2\2\u02c0"+
 		"\u02c1\3\2\2\2\u02c1\u02ca\3\2\2\2\u02c2\u02c0\3\2\2\2\u02c3\u02c5\7$"+
