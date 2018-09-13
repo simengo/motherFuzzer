@@ -39,7 +39,7 @@ public final class WorldParser {
         }
 
         String[] finishedLines = cleanedlines.toArray(new String[0]);
-        checkValidMap(width, splittedlines);
+        checkValidMap(width, finishedLines);
 
         int arrayheight = finishedLines.length;
 
