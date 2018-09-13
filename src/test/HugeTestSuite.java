@@ -30,10 +30,10 @@ public class HugeTestSuite {
 
         Game gameInfo = new Game();
 
-        gameInfo.simulate(5, 42, map, kapBrain1, brainZuTest1);
-        gameInfo.simulate(5, 42, map, kapBrain2, brainZuTest1);
-        gameInfo.simulate(5, 42, map, kapBrain12, brainZuTest1);
-        gameInfo.simulate(5, 42, map, kapBrain23, brainZuTest1);
+//        gameInfo.simulate(5, 42, map, kapBrain1, brainZuTest1);
+//        gameInfo.simulate(5, 42, map, kapBrain2, brainZuTest1);
+//        gameInfo.simulate(5, 42, map, kapBrain12, brainZuTest1);
+//        gameInfo.simulate(5, 42, map, kapBrain23, brainZuTest1);
 
 
         WorldInfo world = gameInfo.simulate(2, 42, map, brainZuTest1, brainZuTest2);
@@ -371,7 +371,7 @@ public class HugeTestSuite {
             "...B";
 
         String brainA = "brain \"sample\" {\n jump 0\n}";
-        String brainB = "brain \"sample\" {\n pickup else 1 \n drop else 2 \n jump 2\n}";
+        String brainB = "brain \"sample\" {\n pickup  else 1 \n drop else 2 \n jump 2\n}";
 
         Game game = new Game();
         WorldInfo winfo = game.simulate(1, 4, map, brainA, brainB);
