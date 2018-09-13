@@ -95,6 +95,8 @@ public final class BrainParser {
                 return new SenseFood(dir, target, jumpPC);
             case foefood:
                 return new SenseFood(dir, target, jumpPC);
+            case foemarker:
+                return new SenseFood(dir, target, jumpPC);
             case food:
                 return new SenseFood(dir, target, jumpPC);
             default:
