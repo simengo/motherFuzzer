@@ -15,6 +15,7 @@ public class FoodTest3 extends BaseTest {
             "...1\n" +
             "...B";
 
+
         String brainA = "brain \"sample\" {\n jump 0\n}";
         String brainB = "brain \"sample\" {\n pickup  else 1 \n drop else 2 \n jump 2\n}";
 
