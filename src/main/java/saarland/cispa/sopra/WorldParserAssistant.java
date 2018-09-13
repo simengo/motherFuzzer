@@ -63,7 +63,7 @@ public final class WorldParserAssistant {
 
     public static String[] convertMap(String map) {
 
-        String[] splittedmap = map.split("(?=\r|\n)");
+        String[] splittedmap = map.split("(\r\n|\n)");
         String[] cleanedmap = new String[splittedmap.length];
         int counter = 0;
         for (String line : splittedmap) {
