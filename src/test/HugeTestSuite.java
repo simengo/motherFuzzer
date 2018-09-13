@@ -3,6 +3,7 @@ import saarland.cispa.sopra.*;
 import saarland.cispa.sopra.systemtests.WorldInfo;
 
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
@@ -10,6 +11,16 @@ import static com.ibm.icu.impl.Assert.fail;
 
 public class HugeTestSuite {
 
+    @Test
+    public void testBackslashN() {
+
+        String map = String.format("4%n4%n....%nAAAA%n====%nBBBB%n....");
+        String brainZuTest1 = "brain \"sample\" {\nset 0\ntest 0 else 3\njump 2\njump 3\n}";
+        Game game = new Game();
+        game.simulate(1, 1, map, brainZuTest1, brainZuTest1);
+
+
+    }
 
     @Test
     public void Test1Test() {
@@ -240,6 +251,17 @@ public class HugeTestSuite {
         if (!(dir.equals(world.getAnt(0).getDirection()))) {
             fail("wrong instruction direction");
         }
+    }
+
+    @Test
+    public void testNullPointer() {
+
+        Game game = new Game();
+        String map = "4\n4\nA...\n.B..\n";
+        String brain = "brain \"sample\" {\nturn left\njump 0\n}";
+        game.simulate(1, 1, new File(""), new File(""), new File(""));
+
+
     }
 
     @Test

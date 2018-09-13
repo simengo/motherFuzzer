@@ -1,14 +1,10 @@
 package saarland.cispa.sopra;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.TokenStream;
-import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.atn.ATNConfigSet;
+import org.antlr.v4.runtime.dfa.DFA;
 import saarland.cispa.sopra.antlr.AcolaLexer;
 import saarland.cispa.sopra.antlr.AcolaParser;
 
@@ -19,9 +15,10 @@ public final class BrainParser {
 
     public static Map<Character, Swarm> parse(String[] brains) {
         int maxBrains = 26;
-        if (brains.length > maxBrains) {
-            throw new IllegalArgumentException("to many brains");
+        if (brains.length > maxBrains||brains.length<2) {
+            throw new IllegalArgumentException("num of brains error");
         }
+        checkBrainContent(brains);
         int currentBrain = 0;
         List<String> name = new ArrayList<>(2);
         Instruction[][] brainArray;
@@ -33,6 +30,27 @@ public final class BrainParser {
             input = CharStreams.fromString(brain);
 
             AcolaLexer lexer = new AcolaLexer(input);
+            lexer.addErrorListener(new ANTLRErrorListener() {
+                @Override
+                public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException exc) {
+                    throw new IllegalArgumentException(exc);
+                }
+
+                @Override
+                public void reportAmbiguity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, boolean exact, BitSet ambigAlts, ATNConfigSet configs) {
+       //             throw new IllegalArgumentException("");
+                }
+
+                @Override
+                public void reportAttemptingFullContext(Parser recognizer, DFA dfa, int startIndex, int stopIndex, BitSet conflictingAlts, ATNConfigSet configs) {
+       //             throw new IllegalArgumentException("");
+                }
+
+                @Override
+                public void reportContextSensitivity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, int prediction, ATNConfigSet configs) {
+       //             throw new IllegalArgumentException("");
+                }
+            });
             TokenStream tokens = new CommonTokenStream(lexer);
             AcolaParser parser = new AcolaParser(tokens);
             if (parser.getNumberOfSyntaxErrors() != 0) {
@@ -68,13 +86,6 @@ public final class BrainParser {
         }
         HashMap<Character, Swarm> brainMap = new HashMap<>();
         return checkForBrokenBrain(brainArray,brainMap, name);
-    }
-
-    private static Map<Character,Swarm> checkForBrokenBrain(Instruction[][] brainArray, Map<Character,Swarm> brainMap, List<String> name){
-        for (int iterator = 0; iterator < brainArray.length; iterator++) {
-            brainMap.put((char) ('A' + iterator), new Swarm((char) ('A' + iterator), brainArray[iterator], name.get(iterator)));
-        }
-        return brainMap;
     }
 
     private static Instruction switchTarget(String dir, Target target, int jumpPC) {
@@ -229,6 +240,21 @@ public final class BrainParser {
             throw new IllegalArgumentException("");
         }
         return length;
+    }
+
+    private static Map<Character,Swarm> checkForBrokenBrain(Instruction[][] brainArray, Map<Character,Swarm> brainMap, List<String> name){
+        for (int iterator = 0; iterator < brainArray.length; iterator++) {
+            brainMap.put((char) ('A' + iterator), new Swarm((char) ('A' + iterator), brainArray[iterator], name.get(iterator)));
+        }
+        return brainMap;
+    }
+
+    private static void checkBrainContent(String[] brains){
+        for (String brain : brains){
+            if ("".equals(brain)){
+                throw new IllegalArgumentException("empty brain was submitted");
+            }
+        }
     }
 
 //    private static String[] addSpaces(String instructioninput) {
