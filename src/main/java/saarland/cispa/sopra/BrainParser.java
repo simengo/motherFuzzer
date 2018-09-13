@@ -37,17 +37,17 @@ public final class BrainParser {
 
                 @Override
                 public void reportAmbiguity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, boolean exact, BitSet ambigAlts, ATNConfigSet configs) {
-                    throw new IllegalArgumentException("");
+       //             throw new IllegalArgumentException("");
                 }
 
                 @Override
                 public void reportAttemptingFullContext(Parser recognizer, DFA dfa, int startIndex, int stopIndex, BitSet conflictingAlts, ATNConfigSet configs) {
-                    throw new IllegalArgumentException("");
+       //             throw new IllegalArgumentException("");
                 }
 
                 @Override
                 public void reportContextSensitivity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, int prediction, ATNConfigSet configs) {
-                    throw new IllegalArgumentException("");
+       //             throw new IllegalArgumentException("");
                 }
             });
             TokenStream tokens = new CommonTokenStream(lexer);
