@@ -43,13 +43,7 @@ public final class BrainParser {
 
             name.add(brainContext.IDENTIFIER().getText());      // add the name of the brain to the name array
             String[] instructionStringArr = visitor.visitBrain(brainContext).split("[\\n][ ]"); //
-            int length = instructionStringArr.length;
-            if (length == 0) {
-                throw new IllegalArgumentException("");
-            }
-            if ("".equals(instructionStringArr[0])) {
-                throw new IllegalArgumentException("");
-            }
+            int length = checkLength(instructionStringArr);
             int currentInstruction = 0;                         //iteration variable for initialising the brains array
             brainArray[currentBrain] = new Instruction[length];
             for (String instr : instructionStringArr) {         //create all instructions and add them to the brain array
@@ -212,6 +206,17 @@ public final class BrainParser {
         if (x < 0 || x > max) {
             throw new IllegalArgumentException("illegal integer given to brain");
         }
+    }
+
+    private static int checkLength(String[] instructionStringArr){
+        int length = instructionStringArr.length;
+        if (length == 0) {
+            throw new IllegalArgumentException("");
+        }
+        if ("".equals(instructionStringArr[0])) {
+            throw new IllegalArgumentException("");
+        }
+        return length;
     }
 
 //    private static String[] addSpaces(String instructioninput) {

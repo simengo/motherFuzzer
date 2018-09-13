@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 import saarland.cispa.sopra.*;
 import saarland.cispa.sopra.systemtests.WorldInfo;
-import saarland.cispa.sopra.systemtests.milantests.InitTests;
+
 
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -80,7 +80,9 @@ public class HugeTestSuite {
     public void Illegal2Stuff() {
 
 
-        String map = InitTests.miniMarkerFood();
+        String map = "2\n2\n" +
+            "11\n" +
+            "AB";
         String brain = "brain \"stan11dby\" {\nset -1\npickup else 2\ndrop else 2\njump 0\n}";
         String brain1 = "brain \"stan11dby\" {" +
             "\nset 6\npickup else 2\ndrop else 2\njump 0\n}";
