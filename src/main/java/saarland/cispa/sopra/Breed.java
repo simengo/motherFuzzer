@@ -44,14 +44,16 @@ public class Breed extends Killable {
                 ant.increasePC();
             } else {
                 ant.setPc(getJumpPc());
-                killcheck(world,java.util.Optional.ofNullable(ant));
+                killcheck(world,java.util.Optional.ofNullable(null));
             }
 
 
         } else {
             ant.setPc(getJumpPc());
-            killcheck(world,java.util.Optional.ofNullable(ant));
+            killcheck(world,java.util.Optional.ofNullable(null));
         }
+
+
     }
 
 
@@ -60,6 +62,7 @@ public class Breed extends Killable {
         world.addAnt(spawnedAnt);
         field.setAnt(spawnedAnt);
         field.setChanged(true);
+        world.increaseNumOfAntsInSwarm(swarm.getIdent());
         return spawnedAnt;
     }
 
