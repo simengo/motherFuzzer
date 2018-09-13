@@ -56,7 +56,7 @@ public class BreedBabyKills {
         brainB[0] = new Jump(1);
         brainB[1] = new Jump(0);
 
-        Swarm swarmA = new Swarm('A', brainA, "brainA");
+        Swarm swarmA = new Swarm('A', brainA, "brainAA");
         HashMap<Character, Swarm> swarms = new HashMap<>();
         Swarm swarmB = new Swarm('B', brainB, "brainB");
         swarms.put('A',swarmA);
