@@ -37,17 +37,17 @@ public final class BrainParser {
 
                 @Override
                 public void reportAmbiguity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, boolean exact, BitSet ambigAlts, ATNConfigSet configs) {
-       //             throw new IllegalArgumentException("");
+                    //             throw new IllegalArgumentException("");
                 }
 
                 @Override
                 public void reportAttemptingFullContext(Parser recognizer, DFA dfa, int startIndex, int stopIndex, BitSet conflictingAlts, ATNConfigSet configs) {
-       //             throw new IllegalArgumentException("");
+                    //             throw new IllegalArgumentException("");
                 }
 
                 @Override
                 public void reportContextSensitivity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, int prediction, ATNConfigSet configs) {
-       //             throw new IllegalArgumentException("");
+                    //             throw new IllegalArgumentException("");
                 }
             });
             TokenStream tokens = new CommonTokenStream(lexer);
@@ -84,10 +84,10 @@ public final class BrainParser {
             currentBrain++;
         }
         HashMap<Character, Swarm> brainMap = new HashMap<>();
-        return checkForBrokenBrain(brainArray,brainMap, name);
+        return checkForBrokenBrain(brainArray, brainMap, name);
     }
 
-    private static Map<Character,Swarm> checkForBrokenBrain(Instruction[][] brainArray, Map<Character,Swarm> brainMap, List<String> name){
+    private static Map<Character, Swarm> checkForBrokenBrain(Instruction[][] brainArray, Map<Character, Swarm> brainMap, List<String> name) {
         for (int iterator = 0; iterator < brainArray.length; iterator++) {
             brainMap.put((char) ('A' + iterator), new Swarm((char) ('A' + iterator), brainArray[iterator], name.get(iterator)));
         }
