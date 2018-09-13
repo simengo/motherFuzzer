@@ -63,6 +63,6 @@ public final class WorldParserAssistant {
 
     public static String[] convertMap(String map) {
 
-        return map.split("[\\\\r\\\\n\n]");
+        return map.split("[\r\n]+");
     }
 }
