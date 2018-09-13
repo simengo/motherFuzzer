@@ -18,7 +18,7 @@ grammar Acola;
   }
 }
 
-brain : 'brain' SPACE+ (COMMENTWITHNEWLINE|COMMENTS|SPACE|NEWLINE)* '"' IDENTIFIER '"' (COMMENTWITHNEWLINE|COMMENTS|SPACE|NEWLINE)* '{' (SPACE)* NEWLINE+ ((COMMENTWITHNEWLINE|COMMENTS|SPACE|NEWLINE)* instruction ((COMMENTS|SPACE)* (COMMENTWITHNEWLINE|NEWLINE)+)*)+  '}' (COMMENTWITHNEWLINE|COMMENTS|NEWLINE)* EOF;
+brain : 'brain' (COMMENTWITHNEWLINE|COMMENTS|SPACE|NEWLINE)* '"' IDENTIFIER '"' (COMMENTWITHNEWLINE|COMMENTS|SPACE|NEWLINE)* '{' ((COMMENTWITHNEWLINE|COMMENTS|SPACE|NEWLINE)* instruction ((COMMENTS|SPACE)* (COMMENTWITHNEWLINE|NEWLINE)+)*)+  '}' (COMMENTWITHNEWLINE|COMMENTS|NEWLINE)* EOF;
 instruction : mark
               |unmark
               |turn
@@ -45,7 +45,7 @@ sensemarker: 'sense'     (COMMENTWITHNEWLINE|COMMENTS|SPACE)* ('here'|'ahead'|'l
 sense:       'sense'     (COMMENTWITHNEWLINE|COMMENTS|SPACE)* ('here'|'ahead'|'left'|'right') (COMMENTWITHNEWLINE|COMMENTS|SPACE)* TARGET   (COMMENTWITHNEWLINE|COMMENTS|SPACE)*                                                        'else' (COMMENTWITHNEWLINE|COMMENTS|SPACE)* (NUMBER|MARKER|REGISTER) (COMMENTWITHNEWLINE|COMMENTS|SPACE)* ;
 flip:        'flip'      (COMMENTWITHNEWLINE|COMMENTS|SPACE)* (NUMBER|MARKER|REGISTER)        (COMMENTWITHNEWLINE|COMMENTS|SPACE)*                                                                                                      'else' (COMMENTWITHNEWLINE|COMMENTS|SPACE)* (NUMBER|MARKER|REGISTER) (COMMENTWITHNEWLINE|COMMENTS|SPACE)* ;
 test:        'test'      (COMMENTWITHNEWLINE|COMMENTS|SPACE)* REGISTER                        (COMMENTWITHNEWLINE|COMMENTS|SPACE)*                                                                                                      'else' (COMMENTWITHNEWLINE|COMMENTS|SPACE)* (NUMBER|MARKER|REGISTER) (COMMENTWITHNEWLINE|COMMENTS|SPACE)* ;
-direction:   'direction' (COMMENTWITHNEWLINE|COMMENTS|SPACE)* DIRECTION                       (COMMENTWITHNEWLINE|COMMENTS|SPACE)*                                                                                                      'else' (COMMENTWITHNEWLINE|COMMENTS|SPACE)* (NUMBER|MARKER|REGISTER)                   ;
+direction:   'direction' (COMMENTWITHNEWLINE|COMMENTS|SPACE)* DIRECTION                       (COMMENTWITHNEWLINE|COMMENTS|SPACE)*                                                                                                      'else' (COMMENTWITHNEWLINE|COMMENTS|SPACE)* (NUMBER|MARKER|REGISTER) ;
 pickup:      'pickup'    (COMMENTWITHNEWLINE|COMMENTS|SPACE)*                                                                                                                                                                           'else' (COMMENTWITHNEWLINE|COMMENTS|SPACE)* (NUMBER|MARKER|REGISTER) (COMMENTWITHNEWLINE|COMMENTS|SPACE)* ;
 drop:        'drop'      (COMMENTWITHNEWLINE|COMMENTS|SPACE)*                                                                                                                                                                           'else' (COMMENTWITHNEWLINE|COMMENTS|SPACE)* (NUMBER|MARKER|REGISTER) (COMMENTWITHNEWLINE|COMMENTS|SPACE)* ;
 move:        'move'      (COMMENTWITHNEWLINE|COMMENTS|SPACE)*                                                                                                                                                                           'else' (COMMENTWITHNEWLINE|COMMENTS|SPACE)* (NUMBER|MARKER|REGISTER) (COMMENTWITHNEWLINE|COMMENTS|SPACE)* ;
