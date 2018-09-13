@@ -1,3 +1,4 @@
+saarland.cispa.sopra.systemtests.BreedTest
 saarland.cispa.sopra.systemtests.MarkEasyTest
 saarland.cispa.sopra.systemtests.SampleTest
 saarland.cispa.sopra.systemtests.mischatests.SimpleMoves0
@@ -69,6 +70,7 @@ saarland.cispa.sopra.systemtests.mischatests.ScoreTest4
 saarland.cispa.sopra.systemtests.mischatests.ScoreTest5
 saarland.cispa.sopra.systemtests.mischatests.ScoreTest6
 saarland.cispa.sopra.systemtests.mischatests.ComplexMoves8
+
 saarland.cispa.sopra.systemtests.mischatests.SimpleMoves5
 saarland.cispa.sopra.systemtests.dennistests.MoveTests
 saarland.cispa.sopra.systemtests.dennistests.MoveTests2
@@ -101,6 +103,7 @@ saarland.cispa.sopra.systemtests.dennistests.GetFieldTest
 saarland.cispa.sopra.systemtests.dennistests.marktests.ABMarkSameFieldTest
 saarland.cispa.sopra.systemtests.dennistests.DirectionTest
 saarland.cispa.sopra.systemtests.dennistests.GetXYTest
+
 saarland.cispa.sopra.systemtests.testcommandtests.TestCommandTest
 saarland.cispa.sopra.systemtests.testcommandtests.TestCommandTest2
 saarland.cispa.sopra.systemtests.testcommandtests.TestCommandTest3
