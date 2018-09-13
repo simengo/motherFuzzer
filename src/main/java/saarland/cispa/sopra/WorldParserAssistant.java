@@ -63,6 +63,15 @@ public final class WorldParserAssistant {
 
     public static String[] convertMap(String map) {
 
-        return map.split("[\r\n]+");
+        String[] splittedmap = map.split("(?=\r|\n)");
+        String[] cleanedmap = new String[splittedmap.length];
+        int counter = 0;
+        for (String line : splittedmap) {
+
+            cleanedmap[counter] = line.replaceAll("[\n\r]", "");
+            counter++;
+
+        }
+        return cleanedmap;
     }
 }

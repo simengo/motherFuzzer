@@ -12,13 +12,38 @@ import static com.ibm.icu.impl.Assert.fail;
 public class HugeTestSuite {
 
     @Test
+    public void testRegex() {
+
+        String map = "2\n2\nAB\n..\n\n";
+        String brainZuTest1 = "brain \"sample\" {\nset 0\ntest 0 else 3\njump 2\njump 3\n}";
+        Game game = new Game();
+        game.simulate(1, 1, map, brainZuTest1, brainZuTest1);
+
+
+    }
+
+    @Test
+    public void testChanges() {
+
+        String map = "4\n4\n" +
+            "..A.\n" +
+            "....\n" +
+            "....\n" +
+            ".AAB\n";
+
+        String brainZuTest1 = "brain \"sample\" {\nset 0\ntest 0 else 3\njump 2\njump 3\n}";
+        Game game = new Game();
+        game.simulate(1, 1, map, brainZuTest1, brainZuTest1);
+
+    }
+
+    @Test
     public void testBackslashN() {
 
         String map = String.format("4%n4%n....%nAAAA%n====%nBBBB%n....");
         String brainZuTest1 = "brain \"sample\" {\nset 0\ntest 0 else 3\njump 2\njump 3\n}";
         Game game = new Game();
         game.simulate(1, 1, map, brainZuTest1, brainZuTest1);
-
 
     }
 
