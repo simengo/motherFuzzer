@@ -146,13 +146,15 @@ public abstract class Sense extends Instruction {
 
     }
 
-    public void senseFoeMarkers(World world, Field field, Ant ant,int marker) {
+    public void senseFoeMarkers(Field field, Ant ant) {
         Map<Character, boolean[]> markers = field.getMarkers();
         for (Character key : markers.keySet()) {
             if (key != ant.getSwarm()) {
-                if (field.getMarker(key, marker)) {
-                    ant.increasePC();
-                    return;
+                for(int iter = 0; iter < 7 ; iter++) {
+                    if (field.getMarker(key, iter)) {
+                        ant.increasePC();
+                        return;
+                    }
                 }
             }
         }
