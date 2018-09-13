@@ -1,5 +1,23 @@
 grammar Acola;
 
+@parser::members
+{
+  @Override
+  public void notifyErrorListeners(Token offendingToken, String msg, RecognitionException ex)
+  {
+    throw new IllegalArgumentException(msg);
+  }
+}
+
+@lexer::members
+{
+  @Override
+  public void recover(RecognitionException ex)
+  {
+    throw new IllegalArgumentException(ex.getMessage());
+  }
+}
+
 brain : 'brain' (COMMENTWITHNEWLINE|COMMENTS|SPACE|NEWLINE)* '"' IDENTIFIER '"' (COMMENTWITHNEWLINE|COMMENTS|SPACE|NEWLINE)* '{' ((COMMENTWITHNEWLINE|COMMENTS|SPACE|NEWLINE)* instruction ((COMMENTS|SPACE)* (COMMENTWITHNEWLINE|NEWLINE)+))+  '}' (COMMENTWITHNEWLINE|COMMENTS|NEWLINE)* EOF;
 instruction : mark
               |unmark
