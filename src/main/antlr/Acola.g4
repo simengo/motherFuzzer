@@ -1,13 +1,13 @@
 grammar Acola;
 
-//@parser::members
-//{
-//  @Override
-//  public void notifyErrorListeners(Token offendingToken, String msg, RecognitionException ex)
-//  {
-//    throw new IllegalArgumentException(msg);
-//  }
-//}
+@parser::members
+{
+  @Override
+  public void notifyErrorListeners(Token offendingToken, String msg, RecognitionException ex)
+  {
+    throw new IllegalArgumentException(msg);
+  }
+}
 
 @lexer::members
 {
@@ -35,8 +35,8 @@ instruction : mark
               |test
               |breed;
 
-turn:        'turn'      (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) ('left'|'right')                (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*);
-mark:        'mark'      (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (MARKER|REGISTER)               (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*);
+turn:        'turn'      (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) ('left'|'right')               (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*);
+mark:        'mark'      (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (MARKER|REGISTER)              (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*);
 unmark:      'unmark'    (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (MARKER|REGISTER)               (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*);
 set:         'set'       (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) REGISTER                        (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*);
 unset:       'unset'     (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) REGISTER                        (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*);
@@ -44,7 +44,7 @@ jump:        'jump'      (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (NUMBER|MARKER|R
 sensemarker: 'sense'     (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) ('here'|'ahead'|'left'|'right') (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) 'marker' (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (MARKER|REGISTER) (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) 'else' (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (NUMBER|MARKER|REGISTER) (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) ;
 sense:       'sense'     (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) ('here'|'ahead'|'left'|'right') (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) TARGET   (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*)                                                          'else' (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (NUMBER|MARKER|REGISTER) (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) ;
 flip:        'flip'      (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (NUMBER|MARKER|REGISTER)        (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*)                                                                                                          'else' (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (NUMBER|MARKER|REGISTER) (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) ;
-test:        'test'      (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (NUMBER|MARKER|REGISTER)        (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*)                                                                                                          'else' (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (NUMBER|MARKER|REGISTER) (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) ;
+test:        'test'      (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) REGISTER                        (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*)                                                                                                          'else' (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (NUMBER|MARKER|REGISTER) (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) ;
 direction:   'direction' (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) DIRECTION                       (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*)                                                                                                          'else' (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (NUMBER|MARKER|REGISTER)                   ;
 pickup:      'pickup'    (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*)                                                                                                                                                                                 'else' (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (NUMBER|MARKER|REGISTER) (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) ;
 drop:        'drop'      (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*)                                                                                                                                                                                 'else' (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) (NUMBER|MARKER|REGISTER) (COMMENTWITHNEWLINE*|COMMENTS*|SPACE*) ;
