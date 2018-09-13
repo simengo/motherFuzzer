@@ -31,7 +31,7 @@ public final class WorldParser {
 
         Field[][] fields = new Field[width][height];
 
-        return WorldParserAssistant.finishing(splittedlines, fields, width, seed, swarms);
+        return WorldParserAssistant.finishing(splittedlines, fields, width, height, seed, swarms);
     }
 
 
@@ -46,12 +46,16 @@ public final class WorldParser {
         }
     }
 
-    public static void spawnMap(String[] splittedlines, Field[][] fields, int width, Map<Character, Swarm> swarms) {
+    public static void spawnMap(String[] splittedlines, Field[][] fields, int width, int height, Map<Character, Swarm> swarms) {
+
+        if (splittedlines.length - 2 != height) {
+            throw new IllegalArgumentException("Real height doesnt match the header");
+        }
         for (int i = 2; i < splittedlines.length; i++) {
 
             char[] actualLine = splittedlines[i].toCharArray();
 
-            if (actualLine.length % 2 != 0 || actualLine.length > 128 || actualLine.length != width) {
+            if (actualLine.length % 2 != 0 || actualLine.length > 128 || actualLine.length != width || i - 2 >= height) {
                 throw new IllegalArgumentException("Invalid width of line");
             }
 
@@ -62,6 +66,8 @@ public final class WorldParser {
                 x++;
             }
         }
+
+
     }
 
     private static Base spawnBase(char fieldType, Map<Character, Swarm> swarms, int x, int y) {
