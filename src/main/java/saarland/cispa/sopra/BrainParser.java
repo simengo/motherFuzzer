@@ -15,7 +15,7 @@ public final class BrainParser {
 
     public static Map<Character, Swarm> parse(String[] brains) {
         int maxBrains = 26;
-        if (brains.length > maxBrains||brains.length<2) {
+        if (brains.length > maxBrains || brains.length < 2) {
             throw new IllegalArgumentException("num of brains error");
         }
         checkBrainContent(brains);
@@ -38,17 +38,17 @@ public final class BrainParser {
 
                 @Override
                 public void reportAmbiguity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, boolean exact, BitSet ambigAlts, ATNConfigSet configs) {
-       //             throw new IllegalArgumentException("");
+                    //             throw new IllegalArgumentException("");
                 }
 
                 @Override
                 public void reportAttemptingFullContext(Parser recognizer, DFA dfa, int startIndex, int stopIndex, BitSet conflictingAlts, ATNConfigSet configs) {
-       //             throw new IllegalArgumentException("");
+                    //             throw new IllegalArgumentException("");
                 }
 
                 @Override
                 public void reportContextSensitivity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, int prediction, ATNConfigSet configs) {
-       //             throw new IllegalArgumentException("");
+                    //             throw new IllegalArgumentException("");
                 }
             });
             TokenStream tokens = new CommonTokenStream(lexer);
@@ -75,6 +75,7 @@ public final class BrainParser {
                     continue;
                 }
                 String[] instrArray = instr.split(" ");
+                instrArray = removeEmpty(instrArray);
 
                 brainArray[currentBrain][currentInstruction] = switchInstruction(instrArray[0], instrArray, length);
                 currentInstruction++;
@@ -85,7 +86,7 @@ public final class BrainParser {
             currentBrain++;
         }
         HashMap<Character, Swarm> brainMap = new HashMap<>();
-        return checkForBrokenBrain(brainArray,brainMap, name);
+        return checkForBrokenBrain(brainArray, brainMap, name);
     }
 
     private static Instruction switchTarget(String dir, Target target, int jumpPC) {
@@ -105,8 +106,6 @@ public final class BrainParser {
             case friendfood:
                 return new SenseFood(dir, target, jumpPC);
             case foefood:
-                return new SenseFood(dir, target, jumpPC);
-            case foemarker:
                 return new SenseFood(dir, target, jumpPC);
             case food:
                 return new SenseFood(dir, target, jumpPC);
@@ -199,12 +198,17 @@ public final class BrainParser {
                 target = createSense2(instructionStringArr);
                 break;
         }
+
         if ("marker".equals(instructionStringArr[2])) {
             checkForIllegal(Integer.parseInt(instructionStringArr[5]), length - 1);
             return new SenseMarker(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[5]));
         } else {
-            checkForIllegal(Integer.parseInt(instructionStringArr[4]), length - 1);
-            return switchTarget(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[4]));
+            if ("foemarker".equals(instructionStringArr[2])) {
+                return new SenseMarker(instructionStringArr[1], target,0, Integer.parseInt(instructionStringArr[4]));
+            } else{
+                checkForIllegal(Integer.parseInt(instructionStringArr[4]), length - 1);
+                return switchTarget(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[4]));
+            }
         }
     }
 
@@ -242,19 +246,35 @@ public final class BrainParser {
         return length;
     }
 
-    private static Map<Character,Swarm> checkForBrokenBrain(Instruction[][] brainArray, Map<Character,Swarm> brainMap, List<String> name){
+    private static Map<Character, Swarm> checkForBrokenBrain(Instruction[][] brainArray, Map<Character, Swarm> brainMap, List<String> name) {
         for (int iterator = 0; iterator < brainArray.length; iterator++) {
             brainMap.put((char) ('A' + iterator), new Swarm((char) ('A' + iterator), brainArray[iterator], name.get(iterator)));
         }
         return brainMap;
     }
 
-    private static void checkBrainContent(String[] brains){
-        for (String brain : brains){
-            if ("".equals(brain)){
+    private static void checkBrainContent(String[] brains) {
+        for (String brain : brains) {
+            if ("".equals(brain)) {
                 throw new IllegalArgumentException("empty brain was submitted");
             }
         }
+    }
+
+    private static String[] removeEmpty(String[] instrArray) {
+        ArrayList<String> temp = new ArrayList<>();
+        for (String x : instrArray) {
+            if (!("".equals(x) || " ".equals(x))) {
+                temp.add(x);
+            }
+        }
+        String[] retList = new String[temp.size()];
+        int iter = 0;
+        for (String x : temp) {
+            retList[iter] = x;
+            iter++;
+        }
+        return retList;
     }
 
 //    private static String[] addSpaces(String instructioninput) {
