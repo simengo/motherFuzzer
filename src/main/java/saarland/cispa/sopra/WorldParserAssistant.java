@@ -49,9 +49,9 @@ public final class WorldParserAssistant {
     }
 
 
-    public static World finishing(String[] splittedlines, Field[][] fields, int width, long seed, Map<Character, Swarm> swarms) {
+    public static World finishing(String[] splittedlines, Field[][] fields, int width, int height, long seed, Map<Character, Swarm> swarms) {
 
-        WorldParser.spawnMap(splittedlines, fields, width, swarms);
+        WorldParser.spawnMap(splittedlines, fields, width, height, swarms);
         Map<Integer, Ant> ants = WorldParser.spawnAnts(swarms, fields);
         WorldParser.checkSwarmConsistency(swarms);
         World welt = new World(fields, seed, ants, swarms);
@@ -63,6 +63,6 @@ public final class WorldParserAssistant {
 
     public static String[] convertMap(String map) {
 
-        return map.split("[\\\\r\\\\n\n]+");
+        return map.split("[\\\\r\\\\n\n]");
     }
 }
