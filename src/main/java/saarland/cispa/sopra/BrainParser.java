@@ -46,33 +46,31 @@ public final class BrainParser {
             int length = checkLength(instructionStringArr);
             int currentInstruction = 0;                         //iteration variable for initialising the brains array
             int x = 0;
-            for (String instr : instructionStringArr){
-                if("".equals(instr)){
+            for (String instr : instructionStringArr) {
+                if ("".equals(instr)) {
                     x++;
-                    continue;
                 }
             }
-            brainArray[currentBrain] = new Instruction[length-x];
+            brainArray[currentBrain] = new Instruction[length - x];
             for (String instr : instructionStringArr) {         //create all instructions and add them to the brain array
-                if("".equals(instr)){
+                if ("".equals(instr)) {
                     continue;
                 }
-                //String[] instrArray = addSpaces(instr);
-
                 String[] instrArray = instr.split(" ");
-                Instruction instruction;
-                instruction = switchInstruction(instrArray[0], instrArray, length);
 
-                brainArray[currentBrain][currentInstruction] = instruction;
+                brainArray[currentBrain][currentInstruction] = switchInstruction(instrArray[0], instrArray, length);
                 currentInstruction++;
             }
-            if (brainArray[currentBrain][brainArray[currentBrain].length-1].getClass() != Jump.class || brainArray[currentBrain].length > 2500) {
-
+            if (brainArray[currentBrain][brainArray[currentBrain].length - 1].getClass() != Jump.class || brainArray[currentBrain].length > 2500) {
                 throw new IllegalArgumentException("last instruction wasn't a jump or brain was longer than 2500");
             }
             currentBrain++;
         }
         HashMap<Character, Swarm> brainMap = new HashMap<>();
+        return checkForBrokenBrain(brainArray,brainMap, name);
+    }
+
+    private static Map<Character,Swarm> checkForBrokenBrain(Instruction[][] brainArray, Map<Character,Swarm> brainMap, List<String> name){
         for (int iterator = 0; iterator < brainArray.length; iterator++) {
             brainMap.put((char) ('A' + iterator), new Swarm((char) ('A' + iterator), brainArray[iterator], name.get(iterator)));
         }
@@ -220,7 +218,7 @@ public final class BrainParser {
         }
     }
 
-    private static int checkLength(String[] instructionStringArr){
+    private static int checkLength(String[] instructionStringArr) {
         int length = instructionStringArr.length;
         if (length == 0) {
             throw new IllegalArgumentException("");
