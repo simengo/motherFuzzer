@@ -1,5 +1,6 @@
 package saarland.cispa.sopra;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import saarland.cispa.sopra.systemtests.AntInfo;
 import saarland.cispa.sopra.systemtests.GameInfo;
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Map;
 
 
@@ -92,7 +94,62 @@ public class Game implements GameInfo {
         }
 
         logger.writeToFile();
+        logPoints();
         return world;
+
+    }
+
+
+    private void logPoints() {
+
+        int winnerpoints = 0;
+        char winnerident = 'A';
+        ArrayList<Character> drawidents = new ArrayList<>();
+        boolean draw = false;
+        boolean win = false;
+
+        StringBuilder result = new StringBuilder();
+
+        for (Map.Entry<Character, Integer> pair : world.getPoints().entrySet()) {
+
+            if (pair.getValue() > winnerpoints) {
+                win = true;
+                draw = false;
+                winnerpoints = pair.getValue();
+                winnerident = pair.getKey();
+            } else {
+                if (pair.getValue() == winnerpoints) {
+                    win = false;
+                    draw = true;
+                    drawidents.add(pair.getKey());
+                }
+            }
+
+            result.append(pair.getKey());
+            result.append(": ");
+            result.append(world.getPoints().get(pair.getKey()));
+            result.append('/');
+            result.append(world.getNumOfAntsInSwarm().get(pair.getKey()));
+            result.append('\n');
+
+        }
+
+        if (win) {
+            result.append("Winner: ");
+            result.append(winnerident);
+        } else {
+            if (draw) {
+                result.append("Draw: ");
+                for (char ident : drawidents) {
+                    result.append(ident);
+                    result.append(' ');
+                }
+            }
+        }
+
+        Logger logger = LoggerFactory.getLogger("results");
+        logger.info(result.toString());
+
 
     }
 
