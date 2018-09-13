@@ -279,7 +279,7 @@ public class JSONLogger implements LoggerInfo {
             char swarmId = 'A';
             JsonObjectBuilder jsB = Json.createObjectBuilder();
             jsB.add("name", swarms.get(swarmId).getSwarmName());
-            jsB.add(swarmHelp, swarmId);
+            jsB.add(swarmHelp, Character.toString(swarmId));
             jsB.add("instructions", createJsInstructions(swarms.get(swarmId))); // soll SwarmObject zurueckgeben
 
 
