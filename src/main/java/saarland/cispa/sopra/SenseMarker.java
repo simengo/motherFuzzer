@@ -26,7 +26,7 @@ public class SenseMarker extends Sense{
         }
         if(getTargetS() == Target.foemarker){
 
-            senseFoeMarkers(world,field,ant,marker);
+            senseFoeMarkers(field,ant);
 
             Field field1 = (Field) ant.getField();
             field1.setChanged(true);}
