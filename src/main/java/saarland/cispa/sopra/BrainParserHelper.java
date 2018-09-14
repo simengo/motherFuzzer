@@ -42,6 +42,7 @@ abstract class BrainParserHelper {
 
     protected static String[] removeEmpty(String[] instrArray) {
         ArrayList<String> temp = new ArrayList<>();
+        String asdf = "\\";
         for (String x : instrArray) {
             String str1 = "";
             String str2 = " ";
@@ -50,7 +51,7 @@ abstract class BrainParserHelper {
                 continue;
             }
             if (!x.isEmpty()){
-                if(!"\\".equals(x.substring(0,1))){
+                if(!asdf.equals(x.substring(0,1))){
                     temp.add(x);
                 }
             }
