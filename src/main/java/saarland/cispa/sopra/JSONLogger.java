@@ -317,7 +317,7 @@ public class JSONLogger implements LoggerInfo {
         for (int i = 0; i < this.numOfSwarms; i++) {
 
             JsonObjectBuilder jsOB = Json.createObjectBuilder();
-            jsOB.add(swarmHelp, recentSwarm);
+            jsOB.add(swarmHelp, Character.toString(recentSwarm));
             jsOB.add("score", points.get(recentSwarm));
             jsOB.add("ants", numOfAntsInSwarm.get(recentSwarm));
 
@@ -354,7 +354,7 @@ public class JSONLogger implements LoggerInfo {
             jsO.add("x", field.getX());
             jsO.add("y", field.getY());
             jsO.add("markers", createMarkerArray(field));
-            jsO.add("type", field.getType());
+            jsO.add("type", Character.toString(field.getType()));
 
             if (field.getFood() != 0) {
 
