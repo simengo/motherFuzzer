@@ -14,7 +14,7 @@ abstract class BrainParserHelper {
         }
     }
 
-     protected static int checkLength(String[] instructionStringArr) {
+    protected static int checkLength(String[] instructionStringArr) {
         int length = instructionStringArr.length;
         if (length == 0) {
             throw new IllegalArgumentException("");
@@ -25,14 +25,14 @@ abstract class BrainParserHelper {
         return length;
     }
 
-     protected static Map<Character, Swarm> checkForBrokenBrain(Instruction[][] brainArray, Map<Character, Swarm> brainMap, List<String> name) {
+    protected static Map<Character, Swarm> checkForBrokenBrain(Instruction[][] brainArray, Map<Character, Swarm> brainMap, List<String> name) {
         for (int iterator = 0; iterator < brainArray.length; iterator++) {
             brainMap.put((char) ('A' + iterator), new Swarm((char) ('A' + iterator), brainArray[iterator], name.get(iterator)));
         }
         return brainMap;
     }
 
-     protected static void checkBrainContent(String[] brains) {
+    protected static void checkBrainContent(String[] brains) {
         for (String brain : brains) {
             if ("".equals(brain)) {
                 throw new IllegalArgumentException("empty brain was submitted");
@@ -40,11 +40,19 @@ abstract class BrainParserHelper {
         }
     }
 
-     protected static String[] removeEmpty(String[] instrArray) {
+    protected static String[] removeEmpty(String[] instrArray) {
         ArrayList<String> temp = new ArrayList<>();
         for (String x : instrArray) {
-            if (!("".equals(x) || " ".equals(x))) {
-                temp.add(x);
+            String str1 = "";
+            String str2 = " ";
+            String str3 = " ";
+            if (str1.equals(x) || str2.equals(x) || str3.equals(x)) {
+                continue;
+            }
+            if (!x.isEmpty()){
+                if(!"\\".equals(x.substring(0,1))){
+                    temp.add(x);
+                }
             }
         }
         String[] retList = new String[temp.size()];
