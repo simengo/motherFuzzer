@@ -50,27 +50,16 @@ public final class BrainParser {
             });
             TokenStream tokens = new CommonTokenStream(lexer);
             AcolaParser parser = new AcolaParser(tokens);
-            if (parser.getNumberOfSyntaxErrors() != 0) {
-                throw new IllegalArgumentException("brain has syntax errors");
-            }
-
             AcolaParser.BrainContext brainContext = parser.brain();
 
             name.add(brainContext.IDENTIFIER().getText());      // add the name of the brain to the name array
-            String[] instructionStringArr = visitor.visitBrain(brainContext).split("[\\n][ ]"); //
-            int length = BrainParserHelper.checkLength(instructionStringArr);
+            String[] instructionStringArr = visitor.visitBrain(brainContext).split("[\n]"); //
             int currentInstruction = 0;                         //iteration variable for initialising the brains array
-            int x = 0;
-            for (String instr : instructionStringArr) {
-                if ("".equals(instr)) {
-                    x++;
-                }
-            }
-            brainArray[currentBrain] = new Instruction[length - x];
+            instructionStringArr = BrainParserHelper.removeEmpty(instructionStringArr);
+            int length = BrainParserHelper.checkLength(instructionStringArr);
+
+            brainArray[currentBrain] = new Instruction[length];
             for (String instr : instructionStringArr) {         //create all instructions and add them to the brain array
-                if ("".equals(instr)) {
-                    continue;
-                }
                 String[] instrArray = instr.split(" ");
                 instrArray = BrainParserHelper.removeEmpty(instrArray);
 
