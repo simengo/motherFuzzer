@@ -1,7 +1,5 @@
+package saarland.cispa.sopra.systemtests;
 
-import saarland.cispa.sopra.systemtests.GameInfo;
-import saarland.cispa.sopra.systemtests.SystemTest;
-import saarland.cispa.sopra.systemtests.WorldInfo;
 
 import java.util.NoSuchElementException;
 
@@ -12,7 +10,7 @@ public class BreedLolTest extends SystemTest {
             "#AA#\n" +
             "AB=#\n" +
             "#A#A\n" +
-            "####";
+            "#AA#";
 
         String brainA = "brain \"sample\" {\nmove else 0\njump 0\n}";
         String brainB = "brain \"sample\" {\njump 0\n}";
