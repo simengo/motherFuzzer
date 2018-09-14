@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.logging.LoggerFactory;
 import saarland.cispa.sopra.*;
 import saarland.cispa.sopra.systemtests.WorldInfo;
 
@@ -17,7 +18,11 @@ public class HugeTestSuite {
         String map = "2\n2\nAB\n..\n\n";
         String brainZuTest1 = "brain \"sample\" {\nset 0\ntest 0 else 3\njump 2\njump 3\n}";
         Game game = new Game();
-        game.simulate(1, 1, map, brainZuTest1, brainZuTest1);
+        try {
+            game.simulate(1, 1, map, brainZuTest1, brainZuTest1);
+        } catch (IllegalArgumentException x) {
+            LoggerFactory.getLogger(HugeTestSuite.class);
+        }
 
 
     }
@@ -36,7 +41,7 @@ public class HugeTestSuite {
     @Test
     public void testBackslashN() {
 
-        String map = String.format("4%n4%n....%nAAAA%n====%nBBBB%n....");
+        String map = String.format("4%n4%n....%nAAAA%n====%nBBBB%n");
         String brainZuTest1 = "brain \"sample\" {\nset 0\ntest 0 else 3\njump 2\njump 3\n}";
         Game game = new Game();
         game.simulate(1, 1, map, brainZuTest1, brainZuTest1);
@@ -210,7 +215,7 @@ public class HugeTestSuite {
             }
 
         } catch (IllegalArgumentException x) {
-            x.notifyAll();
+            LoggerFactory.getLogger(HugeTestSuite.class);
         }
     }
 
@@ -221,11 +226,19 @@ public class HugeTestSuite {
             "B.";
         String brain = "brain \"sample\" {\ndirection weast else 0\njump 0\n}";
         Game game = new Game();
-        game.simulate(1, 42, map, brain, brain);
+        try {
+            game.simulate(1, 42, map, brain, brain);
+        } catch (IllegalArgumentException x) {
+            LoggerFactory.getLogger(HugeTestSuite.class);
+        }
 
         //direction with wrong parameter2
         String brain0 = "brain \"sample\" {\ndirection west else 9\njump 0\n}";
-        game.simulate(1, 42, map, brain0, brain0);
+        try {
+            game.simulate(1, 42, map, brain0, brain0);
+        } catch (IllegalArgumentException x) {
+            LoggerFactory.getLogger(HugeTestSuite.class);
+        }
     }
 
     @Test
@@ -280,7 +293,11 @@ public class HugeTestSuite {
         Game game = new Game();
         String map = "4\n4\nA...\n.B..\n";
         String brain = "brain \"sample\" {\nturn left\njump 0\n}";
-        game.simulate(1, 1, new File(""), new File(""), new File(""));
+        try {
+            game.simulate(1, 1, new File(""), new File(""), new File(""));
+        } catch (IllegalArgumentException xx) {
+            LoggerFactory.getLogger(HugeTestSuite.class);
+        }
 
 
     }
@@ -290,7 +307,11 @@ public class HugeTestSuite {
         String map = "4\n4\nA...\n.B..\n";
         String brain = "brain \"sample\" {\nturn left\njump 0\n}";
         Game game = new Game();
-        game.simulate(1, 1, map, brain, brain);
+        try {
+            game.simulate(1, 1, map, brain, brain);
+        } catch (IllegalArgumentException x) {
+            LoggerFactory.getLogger(HugeTestSuite.class);
+        }
 
     }
 
@@ -306,14 +327,14 @@ public class HugeTestSuite {
             gameInfo.simulate(-1, 42, map, brain, brain);
             fail("Simulating with -1 rounds worked");
         } catch (IllegalArgumentException x) {
-            x.notifyAll();
+            LoggerFactory.getLogger(HugeTestSuite.class);
         }
         WorldInfo world = gameInfo.simulate(1, 42, map, brain, brain);
         try {
             world.getAnt(-1);
             fail("Getting Ant with ID -1 worked");
         } catch (NoSuchElementException x) {
-            x.notify();
+            LoggerFactory.getLogger(HugeTestSuite.class);
         }
         if (world.getAnt(0).getRestTime() != 0) {
             fail("at the beginning resttime is 0");
@@ -324,14 +345,14 @@ public class HugeTestSuite {
             gameInfo.simulate(1, 42, map, aBrain, aBrain);
             fail("Wrong direction accepted");
         } catch (IllegalArgumentException x) {
-            x.notifyAll();
+            LoggerFactory.getLogger(HugeTestSuite.class);
         }
         String bBrain = "brain \"sample\" {\nflip -8\njump 0\n}";
         try {
             gameInfo.simulate(1, 42, map, bBrain, bBrain);
 
         } catch (IllegalArgumentException x) {
-            x.notifyAll();
+            LoggerFactory.getLogger(HugeTestSuite.class);
         }
 
         String cBrain = "brain \"sample\" {\nturn left\njump -1\n}";
@@ -352,7 +373,7 @@ public class HugeTestSuite {
             gameInfo.simulate(1, 42, map, gBrain, gBrain);
             gameInfo.simulate(1, 42, map1, brain, brain);
         } catch (IllegalArgumentException x) {
-            x.notifyAll();
+            LoggerFactory.getLogger(HugeTestSuite.class);
         }
     }
 
@@ -412,7 +433,7 @@ public class HugeTestSuite {
         try {
             game.simulate(-1, 1, map1, brain, brain);
         } catch (IllegalArgumentException x) {
-
+            LoggerFactory.getLogger(HugeTestSuite.class);
         }
     }
 

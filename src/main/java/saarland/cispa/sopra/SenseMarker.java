@@ -36,7 +36,10 @@ public class SenseMarker extends Sense{
     @Override
     public String toString(){
 
-            return "sense " + getDirectionS() + "marker " + marker + "else " + getJumpPC();
+        if(getTargetS() == Target.foemarker){
+            return "sense " + getDirectionS() + "foemarker " + "else " + getJumpPC();
+        }
+            return "sense " + getDirectionS() + "marker " + marker + " else " + getJumpPC();
 
     }
 }
