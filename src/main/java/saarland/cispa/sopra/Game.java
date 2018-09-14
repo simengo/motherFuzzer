@@ -131,7 +131,7 @@ public class Game implements GameInfo {
                         winnerpoints = pair.getValue();
                         winnerident = pair.getKey();
                     } else {
-                        if (world.getNumOfAntsInSwarm().get(pair.getKey()) == world.getNumOfAntsInSwarm().get(winnerident)) {
+                        if (world.getNumOfAntsInSwarm().get(pair.getKey()).equals(world.getNumOfAntsInSwarm().get(winnerident))) {
                             win = false;
                             draw = true;
                             drawidents.add(pair.getKey());
