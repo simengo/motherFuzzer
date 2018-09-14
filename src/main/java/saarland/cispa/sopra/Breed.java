@@ -44,13 +44,13 @@ public class Breed extends Killable {
                 ant.increasePC();
             } else {
                 ant.setPc(getJumpPc());
-                killcheck(world,java.util.Optional.ofNullable(null));
+                killcheck(world,java.util.Optional.ofNullable(ant));
             }
 
 
         } else {
             ant.setPc(getJumpPc());
-            killcheck(world,java.util.Optional.ofNullable(null));
+            killcheck(world,java.util.Optional.ofNullable(ant));
         }
 
 
