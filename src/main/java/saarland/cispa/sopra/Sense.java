@@ -148,10 +148,10 @@ public abstract class Sense extends Instruction {
 
     public void senseFoeMarkers(Field field, Ant ant) {
         Map<Character, boolean[]> markers = field.getMarkers();
-        for (Character key : markers.keySet()) {
+        for (char key : markers.keySet()) {
             if (key != ant.getSwarm()) {
-                for(int iter = 0; iter < 7 ; iter++) {
-                    if (field.getMarker(key, iter)) {
+                for(boolean marker : markers.get(key)) {
+                    if (marker) {
                         ant.increasePC();
                         return;
                     }
