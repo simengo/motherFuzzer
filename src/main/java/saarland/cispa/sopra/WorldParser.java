@@ -9,6 +9,15 @@ public final class WorldParser {
 
     }
 
+    private static void checkValidMap(int width, String[] splittedlines) {
+
+        for (int i = 2; i < splittedlines.length; i++) {
+            if (splittedlines[i].length() != width) {
+                throw new IllegalArgumentException("Width doesnt match header");
+            }
+        }
+
+    }
 
     public static World parseMap(String mapFile, long seed, Map<Character, Swarm> swarms) {
 
@@ -22,16 +31,27 @@ public final class WorldParser {
 
         int width = checkNumber(splittedlines[0].toCharArray());
         int height = checkNumber(splittedlines[1].toCharArray());
-
         checkSize(width, height);
+        List<String> cleanedlines = new LinkedList<>(Arrays.asList(splittedlines));
 
-        if (splittedlines.length > (height + 2) || ((splittedlines.length - 2) % 2) != 0 || splittedlines.length - 2 > 128) {
+        if (cleanedlines.get(cleanedlines.size() - 1).isEmpty()) {
+            cleanedlines.remove(cleanedlines.size() - 1);
+        }
+
+        String[] finishedLines = cleanedlines.toArray(new String[0]);
+        checkValidMap(width, finishedLines);
+
+        int arrayheight = finishedLines.length;
+
+        if (arrayheight - 2 != height || ((arrayheight - 2) % 2) != 0 || arrayheight - 2 > 128) {
             throw new IllegalArgumentException("Map could not be parsed correctly");
         }
 
+
         Field[][] fields = new Field[width][height];
 
-        return WorldParserAssistant.finishing(splittedlines, fields, width, height, seed, swarms);
+        return WorldParserAssistant.finishing(finishedLines, fields, width, height, seed, swarms);
+
     }
 
 
@@ -48,9 +68,7 @@ public final class WorldParser {
 
     public static void spawnMap(String[] splittedlines, Field[][] fields, int width, int height, Map<Character, Swarm> swarms) {
 
-        if (splittedlines.length - 2 != height) {
-            throw new IllegalArgumentException("Real height doesnt match the header");
-        }
+
         for (int i = 2; i < splittedlines.length; i++) {
 
             char[] actualLine = splittedlines[i].toCharArray();
