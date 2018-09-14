@@ -29,6 +29,9 @@ abstract class Killable extends saarland.cispa.sopra.Instruction {
                 Ant thisAnt = ant.get();
                 if (suspect.getId() == thisAnt.getId()) {
                     checkAnt(world, suspect);
+                    if(suspect.isDead()){
+                        continue;
+                    }
                 }
             }
             if (isSurrounded(world, suspect)) {
