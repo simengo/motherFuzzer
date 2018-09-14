@@ -125,9 +125,19 @@ public class Game implements GameInfo {
                 winnerident = pair.getKey();
             } else {
                 if (pair.getValue() == winnerpoints) {
-                    win = false;
-                    draw = true;
-                    drawidents.add(pair.getKey());
+                    if (world.getNumOfAntsInSwarm().get(pair.getKey()) > world.getNumOfAntsInSwarm().get(winnerident)) {
+                        win = true;
+                        draw = false;
+                        winnerpoints = pair.getValue();
+                        winnerident = pair.getKey();
+                    } else {
+                        if (world.getNumOfAntsInSwarm().get(pair.getKey()) == world.getNumOfAntsInSwarm().get(winnerident)) {
+                            win = false;
+                            draw = true;
+                            drawidents.add(pair.getKey());
+                        }
+
+                    }
                 }
             }
 
