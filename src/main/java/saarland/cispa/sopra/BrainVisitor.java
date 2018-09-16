@@ -23,10 +23,18 @@ public class BrainVisitor extends AcolaBaseVisitor<String> {
         visitChildren(ctx);
         StringBuilder result = new StringBuilder();
         int num = ctx.getChildCount();
+        String childString;
+        String comment = "/";
+        String tab = "\t";
         for (int iterator = 0; iterator < num; iterator++) {
             ParseTree tree = ctx.getChild(iterator);
-            String childResult = tree.getText();
-            result.append(childResult).append(' ');
+            for (int x=0; x<tree.getChildCount();x++){
+                childString = tree.getChild(x).getText();
+                if(comment.equals(childString.substring(0,1))||tab.equals(childString.substring(0,1))){
+                    continue;
+                }
+                result.append(childString).append(' ');
+            }
         }
         return result.toString();
     }

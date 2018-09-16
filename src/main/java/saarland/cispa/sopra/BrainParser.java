@@ -53,7 +53,9 @@ public final class BrainParser {
             AcolaParser.BrainContext brainContext = parser.brain();
 
             name.add(brainContext.IDENTIFIER().getText());      // add the name of the brain to the name array
-            String[] instructionStringArr = visitor.visitBrain(brainContext).replaceAll("\\/\\*[\\s\\S]*?\\*\\/|\\/\\/.*"," ").replaceAll("\\t"," ").split("\n"); //
+//            String[] instructionStringArr = visitor.visitBrain(brainContext).replaceAll("\\/\\*[\\s\\S]*?\\*\\/|\\/\\/.*"," ")
+//              .replaceAll("\\t"," ").split("\n"); //
+            String[] instructionStringArr = visitor.visitBrain(brainContext).split("\n"); //
             int currentInstruction = 0;                         //iteration variable for initialising the brains array
             instructionStringArr = BrainParserHelper.removeEmpty(instructionStringArr);
             int length = BrainParserHelper.checkLength(instructionStringArr);
