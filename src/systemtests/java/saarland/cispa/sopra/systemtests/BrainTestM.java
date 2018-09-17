@@ -40,6 +40,7 @@ public class BrainTestM extends SystemTest {
         String brainZ = "brain \"sam\nple\" {\njump 0\n}"; //f
         String brainA2 = "brain \"name\" {\r\n\r\njump 0\n}"; //r
         String brainB2 = "brain \"sam ple\" {\njump 0\n}"; //f
+        String brainC2 = "brain \"aa\" { jump 0\n\n\n\njump \t0\n }"; //r
 
         gameInfo.simulate(10,23,map,brainA,brainB);
         gameInfo.simulate(10,23,map,brainC,brainB);
@@ -68,6 +69,7 @@ public class BrainTestM extends SystemTest {
         expect(IllegalArgumentException.class, () -> gameInfo.simulate(10, 10,map,brainZ,brainB));
         gameInfo.simulate(10,23,map,brainA2,brainB);
         expect(IllegalArgumentException.class, () -> gameInfo.simulate(10, 10,map,brainB2,brainB));
+        gameInfo.simulate(10,23,map,brainC2,brainC2);
 
     }
 
