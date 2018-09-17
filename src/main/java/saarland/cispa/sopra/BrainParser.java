@@ -26,9 +26,7 @@ public final class BrainParser {
         brainArray = new Instruction[brains.length][];  //create the brains array
         CharStream input;
         for (String brain : brains) {
-
             input = CharStreams.fromString(brain);
-
             AcolaLexer lexer = new AcolaLexer(input);
             lexer.addErrorListener(new ANTLRErrorListener() {
                 @Override
@@ -55,19 +53,15 @@ public final class BrainParser {
             AcolaParser parser = new AcolaParser(tokens);
             AcolaParser.BrainContext brainContext = parser.brain();
 
-            name.add(brainContext.IDENTIFIER().getText());      // add the name of the brain to the name array
-//            String[] instructionStringArr = visitor.visitBrain(brainContext).replaceAll("\\/\\*[\\s\\S]*?\\*\\/|\\/\\/.*"," ")
-//              .replaceAll("\\t"," ").split("\n"); //
+            name.add(brainContext.IDENTIFIER().getText());
             String[] instructionStringArr = visitor.visitBrain(brainContext).split("\n"); //
             int currentInstruction = 0;                         //iteration variable for initialising the brains array
             instructionStringArr = BrainParserHelper.removeEmpty(instructionStringArr);
             int length = BrainParserHelper.checkLength(instructionStringArr);
-
             brainArray[currentBrain] = new Instruction[length];
             for (String instr : instructionStringArr) {         //create all instructions and add them to the brain array
                 String[] instrArray = instr.split(" ");
                 instrArray = BrainParserHelper.removeEmpty(instrArray);
-
                 brainArray[currentBrain][currentInstruction] = switchInstruction(instrArray[0], instrArray, length);
                 currentInstruction++;
             }
@@ -189,7 +183,6 @@ public final class BrainParser {
                 target = createSense2(instructionStringArr);
                 break;
         }
-
         if ("marker".equals(instructionStringArr[2])) {
             BrainParserHelper.checkForIllegal(Integer.parseInt(instructionStringArr[5]), length - 1);
             return new SenseMarker(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[5]));
@@ -219,145 +212,4 @@ public final class BrainParser {
                 throw new IllegalArgumentException("illegal target");
         }
     }
-
-
-//    private static String[] addSpaces(String instructioninput) {
-//        String[] instrArray;
-//        String instruction = instructioninput.replace(" ", "");
-//
-//        instrArray = instruction.split("sense");
-//        if (instrArray.length == 2) {
-//            return addSenseSpaces(instrArray);
-//        }
-//        instrArray = instruction.split("jump");
-//        if (instrArray.length == 2) {
-//            return splitjump(instruction, "jump");
-//        }
-//        instrArray = instruction.split("unset");
-//        if (instrArray.length == 2) {
-//            return splitjump(instruction, "unset");
-//        }
-//        instrArray = instruction.split("set");
-//        if (instrArray.length == 2) {
-//            return splitjump(instruction, "set");
-//        }
-//        instrArray = instruction.split("turn");
-//        if (instrArray.length == 2) {
-//            return splitjump(instruction, "turn");
-//        }
-//        instrArray = instruction.split("move");
-//        if (instrArray.length == 2) {
-//            return splitmove(instruction, "move");
-//        }
-//        instrArray = instruction.split("pickup");
-//        if (instrArray.length == 2) {
-//            return splitmove(instruction, "pickup");
-//        }
-//        return addSpaces2(instruction);
-//    }
-//
-//
-//    private static String[] addSpaces2(String instruction) {
-//        String[] instrArray;
-//
-//        instrArray = instruction.split("drop");
-//        if (instrArray.length == 2) {
-//            return splitmove(instruction, "drop");
-//        }
-//        instrArray = instruction.split("breed");
-//        if (instrArray.length == 2) {
-//            return splitmove(instruction, "breed");
-//        }
-//
-//        instrArray = instruction.split("flip");
-//        if (instrArray.length == 2) {
-//            return splitflip(instruction, "flip");
-//        }
-//        instrArray = instruction.split("test");
-//        if (instrArray.length == 2) {
-//            return splitflip(instruction, "test");
-//        }
-//        instrArray = instruction.split("direction");
-//        if (instrArray.length == 2) {
-//            return splitflip(instruction, "direction");
-//        }
-//
-//        instrArray = instruction.split("unmark");
-//        if (instrArray.length == 2) {
-//            return splitjump(instruction, "unmark");
-//        }
-//        instrArray = instruction.split("mark");
-//        if (instrArray.length == 2) {
-//            return splitjump(instruction, "mark");
-//        }
-//        throw new IllegalArgumentException("no such instruction");
-//    }
-//
-//
-//    private static String[] addSenseSpaces(String[] instrArrayinput) {
-//        String sense = "sense";
-//        instrArrayinput[0] = sense;
-//        String instrBody = instrArrayinput[1];
-//
-//        String[] instrArray = new String[5];
-//        instrArray[0] = sense;
-//        instrArray[1] = instrBody;
-//
-//        splitTarDir("ahead", instrArray, 1);
-//        splitTarDir("here", instrArray, 1);
-//        splitTarDir("left", instrArray, 1);
-//        splitTarDir("right", instrArray, 1);
-//
-//        splitTarDir("foehome", instrArray, 2);
-//        splitTarDir("foemarker", instrArray, 2);
-//        splitTarDir("foefood", instrArray, 2);
-//        splitTarDir("foe", instrArray, 2);
-//        splitTarDir("home", instrArray, 2);
-//        splitTarDir("food", instrArray, 2);
-//        splitTarDir("friendfood", instrArray, 2);
-//        splitTarDir("friend", instrArray, 2);
-//        splitTarDir("antlion", instrArray, 2);
-//        splitTarDir("rock", instrArray, 2);
-//        splitTarDir("marker", instrArray, 2);
-//
-//        String els = "else";
-//        instrArray[4] = instrArray[3].split(els)[1];
-//        instrArray[3] = instrArray[3].split(els)[0];
-//        return instrArray;
-//    }
-//
-//
-//    private static String[] splitjump(String instruction, String regex) {
-//        String[] instrArray = new String[2];
-//        instrArray[0] = regex;
-//        instrArray[1] = instruction.split(regex)[0];
-//        instrArray[1] = instruction.split(regex)[1];
-//        return instrArray;
-//    }
-//
-//    private static String[] splitmove(String instruction, String regex) {
-//        String[] instrArray = new String[3];
-//        instrArray[0] = regex;
-//        instrArray[1] = instruction.split(regex)[1];
-//        instrArray[1] = instrArray[1].split("else")[1];
-//        return instrArray;
-//    }
-//
-//    private static String[] splitflip(String instruction, String regex) {
-//        String[] instrArray = new String[3];
-//        instrArray[0] = regex;
-//        instrArray[1] = instruction.split(regex)[1];
-//        String els = "else";
-//        instrArray[2] = instrArray[1].split(els)[1];
-//        instrArray[1] = instrArray[1].split(els)[0];
-//        return instrArray;
-//    }
-//
-//    private static void splitTarDir(String target, String[] instrArray, int index) {
-//        String[] tester = instrArray[index].split(target);
-//        if (tester.length > 1) {
-//            instrArray[index + 1] = tester[1];
-//            instrArray[index] = target;
-//        }
-//    }
 }
