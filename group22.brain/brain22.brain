@@ -1,0 +1,120 @@
+brain "group22" {
+                 flip 2 else 5
+                 turn left
+                 flip 2 else 50
+                 turn left
+                 jump 50
+                 turn right
+                 flip 2 else 50
+                 turn right
+                 jump 50
+                 turn right
+                 jump 110
+                 turn right
+                 jump 113
+                 turn right
+                 jump 107
+                 turn right
+                 jump 116
+                 turn right
+                 jump 104
+                 turn right
+                 jump 101
+                 mark 1
+                 jump 88
+                 mark 2
+                 jump 88
+                 mark 3
+                 jump 88
+                 mark 4
+                 jump 88
+                 mark 5
+                 jump 88
+                 mark 6
+                 jump 88
+                 mark 1
+                 jump 93
+                 mark 2
+                 jump 93
+                 mark 3
+                 jump 93
+                 mark 4
+                 jump 93
+                 mark 5
+                 jump 93
+                 mark 6
+                 jump 93
+                 flip 2 else 47
+                 turn left
+                 jump 50
+                 turn right
+                 jump 50
+                 sense ahead antlion else 56
+                 flip 2 else 53
+                 turn right
+                 jump 50
+                 turn left
+                 jump 50
+                 move else 45
+                 direction northwest else 59
+                 jump 21
+                 direction northeast else 61
+                 jump 23
+                 direction east else 63
+                 jump 25
+                 direction southeast else 65
+                 jump 27
+                 direction southwest else 67
+                 jump 29
+                 direction west else 69
+                 jump 31
+                 direction northwest else 71
+                 jump 33
+                 direction northeast else 73
+                 jump 35
+                 direction east else 75
+                 jump 37
+                 direction southeast else 77
+                 jump 39
+                 direction southwest else 79
+                 jump 41
+                 direction west else 81
+                 jump 43
+                 move else 83
+                 jump 93
+                 turn left
+                 move else 86
+                 jump 69
+                 turn right
+                 jump 69
+                 sense here food else 50
+                 pickup else 90
+                 turn left
+                 turn left
+                 turn left
+                 sense here home else 100
+                 breed else 95
+                 drop else 96
+                 turn left
+                 turn left
+                 turn left
+                 jump 50
+                 sense here marker 1 else 103
+                 direction southeast else 19
+                 jump 81
+                 sense here marker 2 else 106
+                 direction southwest else 17
+                 jump 81
+                 sense here marker 3 else 109
+                 direction west else 13
+                 jump 81
+                 sense here marker 4 else 112
+                 direction northwest else 9
+                 jump 81
+                 sense here marker 5 else 115
+                 direction northeast else 11
+                 jump 81
+                 sense here marker 6 else 100
+                 direction east else 15
+                 jump 81
+}
