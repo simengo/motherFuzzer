@@ -35,14 +35,17 @@ public final class BrainParser {
                 public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException exc) {
                     throw new IllegalArgumentException(exc);
                 }
+
                 @Override
                 public void reportAmbiguity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, boolean exact, BitSet ambigAlts, ATNConfigSet configs) {
                     //             throw new IllegalArgumentException("");
                 }
+
                 @Override
                 public void reportAttemptingFullContext(Parser recognizer, DFA dfa, int startIndex, int stopIndex, BitSet conflictingAlts, ATNConfigSet configs) {
                     //             throw new IllegalArgumentException("");
                 }
+
                 @Override
                 public void reportContextSensitivity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, int prediction, ATNConfigSet configs) {
                     //             throw new IllegalArgumentException("");
@@ -192,8 +195,8 @@ public final class BrainParser {
             return new SenseMarker(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[3]), Integer.parseInt(instructionStringArr[5]));
         } else {
             if ("foemarker".equals(instructionStringArr[2])) {
-                return new SenseMarker(instructionStringArr[1], target,0, Integer.parseInt(instructionStringArr[4]));
-            } else{
+                return new SenseMarker(instructionStringArr[1], target, 0, Integer.parseInt(instructionStringArr[4]));
+            } else {
                 BrainParserHelper.checkForIllegal(Integer.parseInt(instructionStringArr[4]), length - 1);
                 return switchTarget(instructionStringArr[1], target, Integer.parseInt(instructionStringArr[4]));
             }
