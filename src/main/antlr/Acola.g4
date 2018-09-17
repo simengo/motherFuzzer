@@ -18,7 +18,7 @@ grammar Acola;
   }
 }
 
-brain : 'brain' (COMMENTS|SPACE|NEWLINE)+ '"' IDENTIFIER '"' (COMMENTS|SPACE|NEWLINE)* '{' ((NEWLINE|COMMENTS|SPACE)* instruction ((COMMENTS|SPACE)* (NEWLINE)+)+)+  '}' (NEWLINE|COMMENTS|SPACE)* EOF;
+brain : 'brain' (COMMENTS|SPACE|NEWLINE)+ '"' IDENTIFIER '"' (COMMENTS|SPACE|NEWLINE)* '{' ((NEWLINE|COMMENTS|SPACE)* instruction ((COMMENTS|SPACE)* (NEWLINE)+ (COMMENTS|SPACE)*)+)+  '}' (NEWLINE|COMMENTS|SPACE)* EOF;
 instruction : mark
               |unmark
               |turn
