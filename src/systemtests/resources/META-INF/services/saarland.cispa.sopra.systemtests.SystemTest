@@ -70,7 +70,6 @@ saarland.cispa.sopra.systemtests.mischatests.ScoreTest4
 saarland.cispa.sopra.systemtests.mischatests.ScoreTest5
 saarland.cispa.sopra.systemtests.mischatests.ScoreTest6
 saarland.cispa.sopra.systemtests.mischatests.ComplexMoves8
-
 saarland.cispa.sopra.systemtests.mischatests.SimpleMoves5
 saarland.cispa.sopra.systemtests.dennistests.MoveTests
 saarland.cispa.sopra.systemtests.dennistests.MoveTests2
@@ -103,7 +102,6 @@ saarland.cispa.sopra.systemtests.dennistests.GetFieldTest
 saarland.cispa.sopra.systemtests.dennistests.marktests.ABMarkSameFieldTest
 saarland.cispa.sopra.systemtests.dennistests.DirectionTest
 saarland.cispa.sopra.systemtests.dennistests.GetXYTest
-
 saarland.cispa.sopra.systemtests.testcommandtests.TestCommandTest
 saarland.cispa.sopra.systemtests.testcommandtests.TestCommandTest2
 saarland.cispa.sopra.systemtests.testcommandtests.TestCommandTest3
@@ -164,7 +162,6 @@ saarland.cispa.sopra.systemtests.sensetests.UnmarkTest2
 saarland.cispa.sopra.systemtests.sensetests.SenseHalucinationsTest
 saarland.cispa.sopra.systemtests.technicaltests.CommentTest
 saarland.cispa.sopra.systemtests.technicaltests.IlligalRandomSeed
-
 saarland.cispa.sopra.systemtests.milantests.InitTests
 saarland.cispa.sopra.systemtests.milantests.FoodTest1
 saarland.cispa.sopra.systemtests.milantests.FoodTest2
@@ -231,7 +228,6 @@ saarland.cispa.sopra.systemtests.milantests.SimonSense7
 saarland.cispa.sopra.systemtests.milantests.WrongMap1
 saarland.cispa.sopra.systemtests.milantests.WrongMap2
 saarland.cispa.sopra.systemtests.SampleTest
-
 saarland.cispa.sopra.systemtests.simontests.MapTest
 saarland.cispa.sopra.systemtests.simontests.TooBigMapTest
 saarland.cispa.sopra.systemtests.simontests.TooSmallMapTest
