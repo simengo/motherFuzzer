@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Utils {
 
@@ -44,5 +46,18 @@ public class Utils {
         }
 
         return builder.toString();
+    }
+
+    public static ArrayList<Instruction[]> swarmsToBrainList(HashMap<Character, Swarm> swarms) {
+
+        ArrayList<Instruction[]> brainList = new ArrayList<>();
+
+        for (Swarm swarm : swarms.values()) {
+            brainList.add(swarm.getBrain());
+        }
+
+        return brainList;
+
+
     }
 }

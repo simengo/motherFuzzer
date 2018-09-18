@@ -17,5 +17,12 @@ public class Fuzzer {
         }
 
         HashMap<Character, Swarm> swarms = (HashMap<Character, Swarm>) BrainParser.parse((String[]) brains.toArray());
+
+        ArrayList<Instruction[]> finishedBrains = Utils.swarmsToBrainList(swarms);
+
+        Matchmaker.makeMatch(finishedBrains);
+
+
+
     }
 }
