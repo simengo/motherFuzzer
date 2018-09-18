@@ -108,7 +108,7 @@ public final class Matchmaker {
             prewinnerA = worldofgame1.getSwarms().get('B').getBrain();
         }
 
-        if (worldofgame1.getScore('B') < worldofgame2.getScore('A')) {
+        if (worldofgame2.getScore('B') < worldofgame2.getScore('A')) {
             prewinnerB = worldofgame2.getSwarms().get('A').getBrain();
             preloserB = worldofgame2.getSwarms().get('B').getBrain();
         } else {
