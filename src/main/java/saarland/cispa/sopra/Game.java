@@ -66,6 +66,7 @@ public class Game implements GameInfo {
             String swarmname = "Swarm " + counter;
             Swarm swarm = new Swarm(counter, brain, swarmname);
             swarms.put(counter, swarm);
+            counter++;
         }
         return swarms;
     }
@@ -77,7 +78,6 @@ public class Game implements GameInfo {
             oneAnt((Ant) ant);
         }
 
-        logger.addRoundInfo(world.logChanges(), world.getPoints(), world.getNumOfAntsInSwarm());
     }
 
     private void oneAnt(Ant ant) {

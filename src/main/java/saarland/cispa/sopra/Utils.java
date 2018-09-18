@@ -9,8 +9,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Utils {
+
+    private static Random generator = new Random();
 
     public static String convertFile(File file) {
 
@@ -48,16 +51,53 @@ public class Utils {
         return builder.toString();
     }
 
-    public static ArrayList<Instruction[]> swarmsToBrainList(HashMap<Character, Swarm> swarms) {
+    public static ArrayList<Brain> swarmsToBrainList(HashMap<Character, Swarm> swarms) {
 
-        ArrayList<Instruction[]> brainList = new ArrayList<>();
+        ArrayList<Brain> brainList = new ArrayList<>();
 
+        int counter = 0;
         for (Swarm swarm : swarms.values()) {
-            brainList.add(swarm.getBrain());
+            brainList.add(new Brain(swarm.getBrain(), counter));
+            counter++;
         }
 
         return brainList;
 
+    }
 
+    public static ArrayList<Integer> makeMatchup(Integer... ids) {
+
+        ArrayList<Integer> foundIDs = new ArrayList<>();
+
+        for (int i = 0; i < ids.length; i++) {
+            int number = generator.nextInt(ids.length);
+            while (foundIDs.contains(number)) {
+                number = generator.nextInt(ids.length);
+            }
+            foundIDs.add(number);
+
+        }
+
+        return foundIDs;
+
+    }
+
+    public static Brain matchBrain(ArrayList<Brain> brains, Instruction[] treasure) {
+
+        Brain result = null;
+        for (Brain brain : brains) {
+            if (brain.getBrain() == treasure) {
+                result = brain;
+                break;
+            }
+        }
+        return result;
+    }
+
+    public static void clearPoints(ArrayList<Brain> brains) {
+
+        for (Brain brain : brains) {
+            brain.setPoints(0);
+        }
     }
 }

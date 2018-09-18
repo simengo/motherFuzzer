@@ -9,21 +9,41 @@ public class Fuzzer {
     private ArrayList<String> maps = new ArrayList<>();
     private ArrayList<String> brains = new ArrayList<>();
 
-    public void fuzz(File... brainFiles) {
 
+    public void initializeMaps(File... mapfiles) {
 
-        ArrayList<String> brains = new ArrayList<>();
-
-        for (File brainFile : brainFiles) {
-            brains.add(Utils.convertFile(brainFile));
+        for (File map : mapfiles) {
+            maps.add(Utils.convertFile(map));
         }
+    }
 
-        HashMap<Character, Swarm> swarms = (HashMap<Character, Swarm>) BrainParser.parse((String[]) brains.toArray());
+    public void initializeBrains(File... brainfiles) {
 
-        ArrayList<Instruction[]> finishedBrains = Utils.swarmsToBrainList(swarms);
+        for (File brain : brainfiles) {
+            brains.add(Utils.convertFile(brain));
+        }
+    }
 
-        Matchmaker.makeMatch(finishedBrains);
+    public void fuzz() {
 
+        String[] convertedBrains = brains.toArray(new String[brains.size()]);
+
+        HashMap<Character, Swarm> swarms = (HashMap<Character, Swarm>) BrainParser.parse(convertedBrains);
+
+        ArrayList<Brain> finishedBrains = Utils.swarmsToBrainList(swarms);
+
+        int counter = 0;
+
+        while (true) {
+            finishedBrains = Matchmaker.makeMatch(finishedBrains, maps);
+            counter++;
+            if (counter % 1000 == 0) {
+                for (Brain brain : finishedBrains) {
+                    System.out.println(brain.toString());
+                    System.out.println(" ");
+                }
+            }
+        }
 
     }
 }

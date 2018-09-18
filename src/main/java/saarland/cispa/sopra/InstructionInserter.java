@@ -6,13 +6,26 @@ public final class InstructionInserter {
 
     private static Random generator = new Random();
 
-    public static Instruction[] insertInstruction(Instruction[] instructions, Instruction instruction) {
+    public static void insertInstruction(Brain brain, Instruction instruction) {
 
-        int maxPC = instructions.length;
+        int maxPC = brain.getBrain().length;
+        if (maxPC > 500) {
+            deleteInstruction(brain);
+        }
         int insertPC = generator.nextInt(maxPC);
-        List<Instruction> instructionList = Arrays.asList(instructions);
+        List<Instruction> instructionList = Arrays.asList(brain.getBrain());
         instructionList.add(insertPC, checkInstruction(instruction, maxPC));
-        return (Instruction[]) instructionList.toArray();
+        brain.setBrain((Instruction[]) instructionList.toArray());
+    }
+
+    private static void deleteInstruction(Brain brain) {
+
+        int deletePC = generator.nextInt(brain.getBrain().length);
+        List<Instruction> instructionList = Arrays.asList(brain.getBrain());
+        instructionList.remove(deletePC);
+        brain.setBrain((Instruction[]) instructionList.toArray());
+
+
     }
 
     private static Instruction checkInstruction(Instruction instruction, int maxPC) {

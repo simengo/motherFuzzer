@@ -2,9 +2,9 @@ package saarland.cispa.sopra;
 
 public class Swarm {
 
-    private char ident;
     private final Instruction[] brain;
     private final String name;
+    private char ident;
 
     public Swarm(char ident, Instruction[] brain, String name) {
 
@@ -36,7 +36,7 @@ public class Swarm {
     }
 
     public Instruction[] getBrain() {
-        return brain.clone();
+        return brain;
     }
 
     @Override

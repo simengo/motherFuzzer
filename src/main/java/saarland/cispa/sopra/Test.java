@@ -28,6 +28,9 @@ public class Test extends Instruction {
         field.setChanged(true);
 
     }
+
+
+
     @Override
     public String toString(){
         return "test " + register + "else " + jumpPC;
