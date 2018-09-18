@@ -11,12 +11,12 @@ public final class Mutationapplyer {
 
         int position = generator.nextInt(brains.get(3).length);
 
-        Instruction winnerinstruction = brains.get(3)[position];
+        Instruction winnerInstruction = brains.get(3)[position];
         Instruction mutatedInstruction = InstructionGenerator.createInstruction(brains.get(3).length);
 
-        InstructionInserter.insertInstruction(brains.get(0), winnerinstruction);
-        InstructionInserter.insertInstruction(brains.get(1), winnerinstruction);
-        InstructionInserter.insertInstruction(brains.get(2), winnerinstruction);
+        InstructionInserter.insertInstruction(brains.get(0), winnerInstruction);
+        InstructionInserter.insertInstruction(brains.get(1), winnerInstruction);
+        InstructionInserter.insertInstruction(brains.get(2), winnerInstruction);
         InstructionInserter.insertInstruction(brains.get(3), mutatedInstruction);
 
         return brains;
