@@ -1,1 +1,0 @@
-brain "beso" {\nsense here marker 0 else 2\nset 0\nsense ahead friend else 4\nset 1\nsense right friend else 6\nset 2\nturn left\njump 6\n}
