@@ -2,20 +2,15 @@ package saarland.cispa.sopra;
 
 public class Swarm {
 
-    private final String name;
     private char ident;
-    private Instruction[] brain;
+    private final Instruction[] brain;
+    private final String name;
 
     public Swarm(char ident, Instruction[] brain, String name) {
 
         this.ident = ident;
         this.brain = brain.clone();
         this.name = name;
-    }
-
-
-    public String getName() {
-        return name;
     }
 
     public char getIdent() {
@@ -41,7 +36,7 @@ public class Swarm {
     }
 
     public Instruction[] getBrain() {
-        return brain;
+        return brain.clone();
     }
 
     @Override

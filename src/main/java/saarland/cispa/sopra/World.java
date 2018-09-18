@@ -22,7 +22,8 @@ public class World implements WorldInfo {
     private final Random randGen;
     private final Map<Character, Integer> numOfAntsInSwarm;
     //private LoggerInfo logger;
-    private Map<Character, Swarm> swarms;
+    //private final Map<Character,Swarm> swarms;
+
 
     public World(Field[][] fields, long seed, Map<Integer, Ant> ants, Map<Character, Swarm> swarms) {
 
@@ -56,7 +57,7 @@ public class World implements WorldInfo {
 
         for (Ant recentAnt : ants.values()) {
             char antSwarm = recentAnt.getSwarm();
-            if (antSwarm > 'Z' || antSwarm < 'A') {
+            if (antSwarm > 'Z' || antSwarm < 'A'){
                 throw new IllegalArgumentException();
             }
             int help = Character.getNumericValue(antSwarm) - 10; // A hat den Wert 10
@@ -73,14 +74,6 @@ public class World implements WorldInfo {
         this.seed = seed;
         randGen = new Random(this.seed);
         //this.swarms = swarms;
-    }
-
-    public Map<Character, Swarm> getSwarms() {
-        return swarms;
-    }
-
-    public void setSwarms(Map<Character, Swarm> swarms) {
-        this.swarms = swarms;
     }
 
     @Override
@@ -125,7 +118,7 @@ public class World implements WorldInfo {
     @Override
     public FieldInfo getFieldAt(int x, int y) {
 
-        if (x < 0 || y < 0 || x >= width || y >= height) {
+        if(x<0 || y<0 || x>=width || y >= height){
             throw new NoSuchElementException();
         }
         return (FieldInfo) fields[x][y];
@@ -298,30 +291,32 @@ public class World implements WorldInfo {
 
     }
 
-    public void increaseNumOfAntsInSwarm(char swarm) {
+    public void increaseNumOfAntsInSwarm(char swarm){
 
         int count = this.numOfAntsInSwarm.get(swarm);
         count += 1;
-        this.numOfAntsInSwarm.put(swarm, count);
+        this.numOfAntsInSwarm.put(swarm,count);
     }
 
-    public void decreaseNumOfAntsInSwarm(char swarm) {
+    public void decreaseNumOfAntsInSwarm(char swarm){
 
         int count = this.numOfAntsInSwarm.get(swarm);
         count -= 1;
-        this.numOfAntsInSwarm.put(swarm, count);
+        this.numOfAntsInSwarm.put(swarm,count);
     }
 
 
     @Override
     public Ant getAnt(int id) {
 
-        if (id >= ants.size() || id < 0) {
+        if(id >= ants.size()|| id < 0){
             throw new NoSuchElementException();
         }
 
-
         Ant antH = ants.get(id);
+        if (antH.isDead()){
+            throw new NoSuchElementException("No living ant with this id");
+        }
 
         return antH;
     }
@@ -339,7 +334,7 @@ public class World implements WorldInfo {
 
     }
 
-    public List<AntInfo> getAllAnts() {
+    public List<AntInfo> getAllAnts(){
 
         return new ArrayList<>(ants.values());
     }
@@ -347,9 +342,10 @@ public class World implements WorldInfo {
     @Override
     public int getScore(char swarm) {
 
-        if (points.get(swarm) == null) {
+        if(points.get(swarm) == null) {
             throw new IllegalArgumentException();
-        } else {
+        }
+        else{
             return points.get(swarm);
 
         }
@@ -360,15 +356,6 @@ public class World implements WorldInfo {
         return points;
     }
 
-    public HashMap<Integer, Instruction[]> getBrainPoints(char identifier) {
-
-        HashMap<Integer, Instruction[]> result = new HashMap<>();
-        int points = getPoints().get(identifier);
-        Instruction[] brain = getSwarms().get(identifier).getBrain();
-        result.put(points, brain);
-
-        return result;
-    }
 
     public void increasePoints(char swarm, int plus) {
 
@@ -454,19 +441,23 @@ public class World implements WorldInfo {
     }
 
 
+
     public void addAnt(Ant ant) {
 
         ants.put(ants.size(), ant);
     }
 
 
-    public void printMap() {
+
+
+
+    public void printMap(){
 
         StringBuilder strB = new StringBuilder();
         strB.append('\n');
         Logger printSth = LoggerFactory.getLogger("World.class");
-        for (int i = 0; i < height; i++) {
-            for (int x = 0; x < width; x++) {
+        for(int i = 0; i < height; i++){
+            for(int x = 0; x < width; x++){
 
                 Field field = fields[x][i];
 
@@ -479,6 +470,9 @@ public class World implements WorldInfo {
         printSth.info(strB.toString());
 
     }
+
+
+
 
 
 }

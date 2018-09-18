@@ -23,10 +23,6 @@ public class Ant implements AntInfo {
         this.pc = 0;
     }
 
-    public Instruction[] getBrain() {
-        return swarm.getBrain();
-    }
-
     public boolean getRegister(int location) {
 
 

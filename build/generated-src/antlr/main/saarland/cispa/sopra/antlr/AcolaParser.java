@@ -110,13 +110,6 @@ public class AcolaParser extends Parser {
 		public InstructionContext instruction(int i) {
 			return getRuleContext(InstructionContext.class,i);
 		}
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -124,6 +117,10 @@ public class AcolaParser extends Parser {
 		public List<TerminalNode> SPACE() { return getTokens(AcolaParser.SPACE); }
 		public TerminalNode SPACE(int i) {
 			return getToken(AcolaParser.SPACE, i);
+		}
+		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
+		public TerminalNode NEWLINE(int i) {
+			return getToken(AcolaParser.NEWLINE, i);
 		}
 		public BrainContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -206,11 +203,7 @@ public class AcolaParser extends Parser {
 			}
 			setState(49);
 			match(T__2);
-<<<<<<< Updated upstream
 			setState(78); 
-=======
-			setState(72); 
->>>>>>> Stashed changes
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
@@ -240,11 +233,7 @@ public class AcolaParser extends Parser {
 				}
 				setState(56);
 				instruction();
-<<<<<<< Updated upstream
 				setState(74); 
-=======
-				setState(68); 
->>>>>>> Stashed changes
 				_errHandler.sync(this);
 				_alt = 1;
 				do {
@@ -273,7 +262,6 @@ public class AcolaParser extends Parser {
 							setState(62);
 							_errHandler.sync(this);
 							_la = _input.LA(1);
-<<<<<<< Updated upstream
 						}
 						setState(64); 
 						_errHandler.sync(this);
@@ -318,36 +306,13 @@ public class AcolaParser extends Parser {
 							setState(73);
 							_errHandler.sync(this);
 							_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
-=======
->>>>>>> Stashed changes
 						}
-						setState(64); 
-						_errHandler.sync(this);
-						_alt = 1;
-						do {
-							switch (_alt) {
-							case 1:
-								{
-								{
-								setState(63);
-								match(NEWLINE);
-								}
-								}
-								break;
-							default:
-								throw new NoViableAltException(this);
-							}
-							setState(66); 
-							_errHandler.sync(this);
-							_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
-						} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 						}
 						}
 						break;
 					default:
 						throw new NoViableAltException(this);
 					}
-<<<<<<< Updated upstream
 					setState(76); 
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
@@ -369,29 +334,6 @@ public class AcolaParser extends Parser {
 				setState(83);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
-=======
-					setState(70); 
-					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
-				} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-				}
-				}
-				setState(74); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__4) | (1L << T__7) | (1L << T__8) | (1L << T__9) | (1L << T__10) | (1L << T__11) | (1L << T__12) | (1L << T__17) | (1L << T__18) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0) );
-			setState(76);
-			match(T__3);
-			setState(80);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==NEWLINE || _la==COMMENTS) {
-				{
-				{
-				setState(77);
-				_la = _input.LA(1);
-				if ( !(_la==NEWLINE || _la==COMMENTS) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -401,19 +343,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(88);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
 			setState(89);
-=======
-				setState(82);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(83);
->>>>>>> Stashed changes
 			match(EOF);
 			}
 		}
@@ -497,7 +431,6 @@ public class AcolaParser extends Parser {
 		InstructionContext _localctx = new InstructionContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_instruction);
 		try {
-<<<<<<< Updated upstream
 			setState(106);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
@@ -505,169 +438,104 @@ public class AcolaParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(91);
-=======
-			setState(100);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
-			case 1:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(85);
->>>>>>> Stashed changes
 				mark();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-<<<<<<< Updated upstream
 				setState(92);
-=======
-				setState(86);
->>>>>>> Stashed changes
 				unmark();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-<<<<<<< Updated upstream
 				setState(93);
-=======
-				setState(87);
->>>>>>> Stashed changes
 				turn();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-<<<<<<< Updated upstream
 				setState(94);
-=======
-				setState(88);
->>>>>>> Stashed changes
 				move();
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-<<<<<<< Updated upstream
 				setState(95);
-=======
-				setState(89);
->>>>>>> Stashed changes
 				sense();
 				}
 				break;
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
-<<<<<<< Updated upstream
 				setState(96);
-=======
-				setState(90);
->>>>>>> Stashed changes
 				set();
 				}
 				break;
 			case 7:
 				enterOuterAlt(_localctx, 7);
 				{
-<<<<<<< Updated upstream
 				setState(97);
-=======
-				setState(91);
->>>>>>> Stashed changes
 				unset();
 				}
 				break;
 			case 8:
 				enterOuterAlt(_localctx, 8);
 				{
-<<<<<<< Updated upstream
 				setState(98);
-=======
-				setState(92);
->>>>>>> Stashed changes
 				pickup();
 				}
 				break;
 			case 9:
 				enterOuterAlt(_localctx, 9);
 				{
-<<<<<<< Updated upstream
 				setState(99);
-=======
-				setState(93);
->>>>>>> Stashed changes
 				drop();
 				}
 				break;
 			case 10:
 				enterOuterAlt(_localctx, 10);
 				{
-<<<<<<< Updated upstream
 				setState(100);
-=======
-				setState(94);
->>>>>>> Stashed changes
 				jump();
 				}
 				break;
 			case 11:
 				enterOuterAlt(_localctx, 11);
 				{
-<<<<<<< Updated upstream
 				setState(101);
-=======
-				setState(95);
->>>>>>> Stashed changes
 				flip();
 				}
 				break;
 			case 12:
 				enterOuterAlt(_localctx, 12);
 				{
-<<<<<<< Updated upstream
 				setState(102);
-=======
-				setState(96);
->>>>>>> Stashed changes
 				sensemarker();
 				}
 				break;
 			case 13:
 				enterOuterAlt(_localctx, 13);
 				{
-<<<<<<< Updated upstream
 				setState(103);
-=======
-				setState(97);
->>>>>>> Stashed changes
 				direction();
 				}
 				break;
 			case 14:
 				enterOuterAlt(_localctx, 14);
 				{
-<<<<<<< Updated upstream
 				setState(104);
-=======
-				setState(98);
->>>>>>> Stashed changes
 				test();
 				}
 				break;
 			case 15:
 				enterOuterAlt(_localctx, 15);
 				{
-<<<<<<< Updated upstream
 				setState(105);
-=======
-				setState(99);
->>>>>>> Stashed changes
 				breed();
 				}
 				break;
@@ -685,13 +553,6 @@ public class AcolaParser extends Parser {
 	}
 
 	public static class TurnContext extends ParserRuleContext {
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -726,7 +587,6 @@ public class AcolaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-<<<<<<< Updated upstream
 			setState(108);
 			match(T__4);
 			setState(110); 
@@ -738,19 +598,6 @@ public class AcolaParser extends Parser {
 				setState(109);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(102);
-			match(T__4);
-			setState(106);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(103);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -760,19 +607,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(112); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(114);
-=======
-				setState(108);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(109);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !(_la==T__5 || _la==T__6) ) {
 			_errHandler.recoverInline(this);
@@ -798,13 +637,6 @@ public class AcolaParser extends Parser {
 	public static class MarkContext extends ParserRuleContext {
 		public TerminalNode MARKER() { return getToken(AcolaParser.MARKER, 0); }
 		public TerminalNode REGISTER() { return getToken(AcolaParser.REGISTER, 0); }
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -839,7 +671,6 @@ public class AcolaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-<<<<<<< Updated upstream
 			setState(116);
 			match(T__7);
 			setState(118); 
@@ -851,19 +682,6 @@ public class AcolaParser extends Parser {
 				setState(117);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(111);
-			match(T__7);
-			setState(115);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(112);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -873,19 +691,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(120); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(122);
-=======
-				setState(117);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(118);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !(_la==REGISTER || _la==MARKER) ) {
 			_errHandler.recoverInline(this);
@@ -911,13 +721,6 @@ public class AcolaParser extends Parser {
 	public static class UnmarkContext extends ParserRuleContext {
 		public TerminalNode MARKER() { return getToken(AcolaParser.MARKER, 0); }
 		public TerminalNode REGISTER() { return getToken(AcolaParser.REGISTER, 0); }
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -952,7 +755,6 @@ public class AcolaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-<<<<<<< Updated upstream
 			setState(124);
 			match(T__8);
 			setState(126); 
@@ -964,19 +766,6 @@ public class AcolaParser extends Parser {
 				setState(125);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(120);
-			match(T__8);
-			setState(124);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(121);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -986,19 +775,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(128); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(130);
-=======
-				setState(126);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(127);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !(_la==REGISTER || _la==MARKER) ) {
 			_errHandler.recoverInline(this);
@@ -1023,13 +804,6 @@ public class AcolaParser extends Parser {
 
 	public static class SetContext extends ParserRuleContext {
 		public TerminalNode REGISTER() { return getToken(AcolaParser.REGISTER, 0); }
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -1064,7 +838,6 @@ public class AcolaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-<<<<<<< Updated upstream
 			setState(132);
 			match(T__9);
 			setState(134); 
@@ -1076,19 +849,6 @@ public class AcolaParser extends Parser {
 				setState(133);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(129);
-			match(T__9);
-			setState(133);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(130);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1098,19 +858,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(136); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(138);
-=======
-				setState(135);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(136);
->>>>>>> Stashed changes
 			match(REGISTER);
 			}
 		}
@@ -1127,13 +879,6 @@ public class AcolaParser extends Parser {
 
 	public static class UnsetContext extends ParserRuleContext {
 		public TerminalNode REGISTER() { return getToken(AcolaParser.REGISTER, 0); }
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -1168,7 +913,6 @@ public class AcolaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-<<<<<<< Updated upstream
 			setState(140);
 			match(T__10);
 			setState(142); 
@@ -1180,19 +924,6 @@ public class AcolaParser extends Parser {
 				setState(141);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(138);
-			match(T__10);
-			setState(142);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(139);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1202,19 +933,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(144); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(146);
-=======
-				setState(144);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(145);
->>>>>>> Stashed changes
 			match(REGISTER);
 			}
 		}
@@ -1233,13 +956,6 @@ public class AcolaParser extends Parser {
 		public TerminalNode NUMBER() { return getToken(AcolaParser.NUMBER, 0); }
 		public TerminalNode MARKER() { return getToken(AcolaParser.MARKER, 0); }
 		public TerminalNode REGISTER() { return getToken(AcolaParser.REGISTER, 0); }
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -1274,7 +990,6 @@ public class AcolaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-<<<<<<< Updated upstream
 			setState(148);
 			match(T__11);
 			setState(150); 
@@ -1286,19 +1001,6 @@ public class AcolaParser extends Parser {
 				setState(149);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(147);
-			match(T__11);
-			setState(151);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(148);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1308,17 +1010,10 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(152); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
-=======
-				setState(153);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
->>>>>>> Stashed changes
 			setState(154);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << REGISTER) | (1L << MARKER) | (1L << NUMBER))) != 0)) ) {
@@ -1352,13 +1047,6 @@ public class AcolaParser extends Parser {
 			return getToken(AcolaParser.REGISTER, i);
 		}
 		public TerminalNode NUMBER() { return getToken(AcolaParser.NUMBER, 0); }
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -1395,26 +1083,15 @@ public class AcolaParser extends Parser {
 			{
 			setState(156);
 			match(T__12);
-<<<<<<< Updated upstream
 			setState(158); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
-=======
-			setState(160);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
->>>>>>> Stashed changes
 				{
 				{
 				setState(157);
 				_la = _input.LA(1);
-<<<<<<< Updated upstream
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1424,19 +1101,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(160); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(162);
-=======
-				setState(162);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(163);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__5) | (1L << T__6) | (1L << T__13) | (1L << T__14))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1446,7 +1115,6 @@ public class AcolaParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-<<<<<<< Updated upstream
 			setState(164); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -1456,17 +1124,6 @@ public class AcolaParser extends Parser {
 				setState(163);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(167);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(164);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1476,7 +1133,6 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(166); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -1492,23 +1148,6 @@ public class AcolaParser extends Parser {
 				setState(169);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-				setState(169);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(170);
-			match(T__15);
-			setState(174);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(171);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1518,19 +1157,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(172); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(174);
-=======
-				setState(176);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(177);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !(_la==REGISTER || _la==MARKER) ) {
 			_errHandler.recoverInline(this);
@@ -1540,7 +1171,6 @@ public class AcolaParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-<<<<<<< Updated upstream
 			setState(176); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -1550,17 +1180,6 @@ public class AcolaParser extends Parser {
 				setState(175);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(181);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(178);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1570,7 +1189,6 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(178); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -1586,23 +1204,6 @@ public class AcolaParser extends Parser {
 				setState(181);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-				setState(183);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(184);
-			match(T__16);
-			setState(188);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(185);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1612,19 +1213,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(184); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(186);
-=======
-				setState(190);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(191);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << REGISTER) | (1L << MARKER) | (1L << NUMBER))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1652,13 +1245,6 @@ public class AcolaParser extends Parser {
 		public TerminalNode NUMBER() { return getToken(AcolaParser.NUMBER, 0); }
 		public TerminalNode MARKER() { return getToken(AcolaParser.MARKER, 0); }
 		public TerminalNode REGISTER() { return getToken(AcolaParser.REGISTER, 0); }
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -1693,7 +1279,6 @@ public class AcolaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-<<<<<<< Updated upstream
 			setState(188);
 			match(T__12);
 			setState(190); 
@@ -1705,19 +1290,6 @@ public class AcolaParser extends Parser {
 				setState(189);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(193);
-			match(T__12);
-			setState(197);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(194);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1727,19 +1299,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(192); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(194);
-=======
-				setState(199);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(200);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__5) | (1L << T__6) | (1L << T__13) | (1L << T__14))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1749,7 +1313,6 @@ public class AcolaParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-<<<<<<< Updated upstream
 			setState(196); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -1759,17 +1322,6 @@ public class AcolaParser extends Parser {
 				setState(195);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(204);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(201);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1779,7 +1331,6 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(198); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -1795,23 +1346,6 @@ public class AcolaParser extends Parser {
 				setState(201);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-				setState(206);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(207);
-			match(TARGET);
-			setState(211);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(208);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1821,7 +1355,6 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(204); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -1837,23 +1370,6 @@ public class AcolaParser extends Parser {
 				setState(207);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-				setState(213);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(214);
-			match(T__16);
-			setState(218);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(215);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1863,19 +1379,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(210); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(212);
-=======
-				setState(220);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(221);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << REGISTER) | (1L << MARKER) | (1L << NUMBER))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1911,13 +1419,6 @@ public class AcolaParser extends Parser {
 		public TerminalNode REGISTER(int i) {
 			return getToken(AcolaParser.REGISTER, i);
 		}
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -1952,7 +1453,6 @@ public class AcolaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-<<<<<<< Updated upstream
 			setState(214);
 			match(T__17);
 			setState(216); 
@@ -1964,19 +1464,6 @@ public class AcolaParser extends Parser {
 				setState(215);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(223);
-			match(T__17);
-			setState(227);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(224);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1986,19 +1473,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(218); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(220);
-=======
-				setState(229);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(230);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << REGISTER) | (1L << MARKER) | (1L << NUMBER))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -2008,7 +1487,6 @@ public class AcolaParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-<<<<<<< Updated upstream
 			setState(222); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -2018,17 +1496,6 @@ public class AcolaParser extends Parser {
 				setState(221);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(234);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(231);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2038,7 +1505,6 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(224); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -2054,23 +1520,6 @@ public class AcolaParser extends Parser {
 				setState(227);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-				setState(236);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(237);
-			match(T__16);
-			setState(241);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(238);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2080,19 +1529,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(230); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(232);
-=======
-				setState(243);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(244);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << REGISTER) | (1L << MARKER) | (1L << NUMBER))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -2122,13 +1563,6 @@ public class AcolaParser extends Parser {
 		}
 		public TerminalNode NUMBER() { return getToken(AcolaParser.NUMBER, 0); }
 		public TerminalNode MARKER() { return getToken(AcolaParser.MARKER, 0); }
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -2163,7 +1597,6 @@ public class AcolaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-<<<<<<< Updated upstream
 			setState(234);
 			match(T__18);
 			setState(236); 
@@ -2175,19 +1608,6 @@ public class AcolaParser extends Parser {
 				setState(235);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(246);
-			match(T__18);
-			setState(250);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(247);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2197,7 +1617,6 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(238); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -2213,23 +1632,6 @@ public class AcolaParser extends Parser {
 				setState(241);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-				setState(252);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(253);
-			match(REGISTER);
-			setState(257);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(254);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2239,7 +1641,6 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(244); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -2255,23 +1656,6 @@ public class AcolaParser extends Parser {
 				setState(247);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-				setState(259);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(260);
-			match(T__16);
-			setState(264);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(261);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2281,19 +1665,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(250); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(252);
-=======
-				setState(266);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(267);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << REGISTER) | (1L << MARKER) | (1L << NUMBER))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -2321,13 +1697,6 @@ public class AcolaParser extends Parser {
 		public TerminalNode NUMBER() { return getToken(AcolaParser.NUMBER, 0); }
 		public TerminalNode MARKER() { return getToken(AcolaParser.MARKER, 0); }
 		public TerminalNode REGISTER() { return getToken(AcolaParser.REGISTER, 0); }
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -2362,7 +1731,6 @@ public class AcolaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-<<<<<<< Updated upstream
 			setState(254);
 			match(T__19);
 			setState(256); 
@@ -2374,19 +1742,6 @@ public class AcolaParser extends Parser {
 				setState(255);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(269);
-			match(T__19);
-			setState(273);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(270);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2396,7 +1751,6 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(258); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -2412,23 +1766,6 @@ public class AcolaParser extends Parser {
 				setState(261);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-				setState(275);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(276);
-			match(DIRECTION);
-			setState(280);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(277);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2438,7 +1775,6 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(264); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -2454,23 +1790,6 @@ public class AcolaParser extends Parser {
 				setState(267);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-				setState(282);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(283);
-			match(T__16);
-			setState(287);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(284);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2480,19 +1799,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(270); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(272);
-=======
-				setState(289);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(290);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << REGISTER) | (1L << MARKER) | (1L << NUMBER))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -2519,13 +1830,6 @@ public class AcolaParser extends Parser {
 		public TerminalNode NUMBER() { return getToken(AcolaParser.NUMBER, 0); }
 		public TerminalNode MARKER() { return getToken(AcolaParser.MARKER, 0); }
 		public TerminalNode REGISTER() { return getToken(AcolaParser.REGISTER, 0); }
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -2560,7 +1864,6 @@ public class AcolaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-<<<<<<< Updated upstream
 			setState(274);
 			match(T__20);
 			setState(276); 
@@ -2572,19 +1875,6 @@ public class AcolaParser extends Parser {
 				setState(275);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(292);
-			match(T__20);
-			setState(296);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(293);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2594,7 +1884,6 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(278); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -2610,23 +1899,6 @@ public class AcolaParser extends Parser {
 				setState(281);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-				setState(298);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(299);
-			match(T__16);
-			setState(303);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(300);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2636,19 +1908,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(284); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(286);
-=======
-				setState(305);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(306);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << REGISTER) | (1L << MARKER) | (1L << NUMBER))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -2675,13 +1939,6 @@ public class AcolaParser extends Parser {
 		public TerminalNode NUMBER() { return getToken(AcolaParser.NUMBER, 0); }
 		public TerminalNode MARKER() { return getToken(AcolaParser.MARKER, 0); }
 		public TerminalNode REGISTER() { return getToken(AcolaParser.REGISTER, 0); }
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -2716,7 +1973,6 @@ public class AcolaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-<<<<<<< Updated upstream
 			setState(288);
 			match(T__21);
 			setState(290); 
@@ -2728,19 +1984,6 @@ public class AcolaParser extends Parser {
 				setState(289);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(308);
-			match(T__21);
-			setState(312);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(309);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2750,7 +1993,6 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(292); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -2766,23 +2008,6 @@ public class AcolaParser extends Parser {
 				setState(295);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-				setState(314);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(315);
-			match(T__16);
-			setState(319);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(316);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2792,19 +2017,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(298); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(300);
-=======
-				setState(321);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(322);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << REGISTER) | (1L << MARKER) | (1L << NUMBER))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -2831,13 +2048,6 @@ public class AcolaParser extends Parser {
 		public TerminalNode NUMBER() { return getToken(AcolaParser.NUMBER, 0); }
 		public TerminalNode MARKER() { return getToken(AcolaParser.MARKER, 0); }
 		public TerminalNode REGISTER() { return getToken(AcolaParser.REGISTER, 0); }
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -2872,7 +2082,6 @@ public class AcolaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-<<<<<<< Updated upstream
 			setState(302);
 			match(T__22);
 			setState(304); 
@@ -2884,19 +2093,6 @@ public class AcolaParser extends Parser {
 				setState(303);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(324);
-			match(T__22);
-			setState(328);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(325);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2906,7 +2102,6 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(306); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -2922,23 +2117,6 @@ public class AcolaParser extends Parser {
 				setState(309);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-				setState(330);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(331);
-			match(T__16);
-			setState(335);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(332);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2948,19 +2126,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(312); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(314);
-=======
-				setState(337);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(338);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << REGISTER) | (1L << MARKER) | (1L << NUMBER))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -2987,13 +2157,6 @@ public class AcolaParser extends Parser {
 		public TerminalNode NUMBER() { return getToken(AcolaParser.NUMBER, 0); }
 		public TerminalNode MARKER() { return getToken(AcolaParser.MARKER, 0); }
 		public TerminalNode REGISTER() { return getToken(AcolaParser.REGISTER, 0); }
-<<<<<<< Updated upstream
-=======
-		public List<TerminalNode> NEWLINE() { return getTokens(AcolaParser.NEWLINE); }
-		public TerminalNode NEWLINE(int i) {
-			return getToken(AcolaParser.NEWLINE, i);
-		}
->>>>>>> Stashed changes
 		public List<TerminalNode> COMMENTS() { return getTokens(AcolaParser.COMMENTS); }
 		public TerminalNode COMMENTS(int i) {
 			return getToken(AcolaParser.COMMENTS, i);
@@ -3028,7 +2191,6 @@ public class AcolaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-<<<<<<< Updated upstream
 			setState(316);
 			match(T__23);
 			setState(318); 
@@ -3040,19 +2202,6 @@ public class AcolaParser extends Parser {
 				setState(317);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-			setState(340);
-			match(T__23);
-			setState(344);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(341);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -3062,7 +2211,6 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(320); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -3078,23 +2226,6 @@ public class AcolaParser extends Parser {
 				setState(323);
 				_la = _input.LA(1);
 				if ( !(_la==SPACE || _la==COMMENTS) ) {
-=======
-				setState(346);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(347);
-			match(T__16);
-			setState(351);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) {
-				{
-				{
-				setState(348);
-				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SPACE) | (1L << NEWLINE) | (1L << COMMENTS))) != 0)) ) {
->>>>>>> Stashed changes
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -3104,19 +2235,11 @@ public class AcolaParser extends Parser {
 				}
 				}
 				}
-<<<<<<< Updated upstream
 				setState(326); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==SPACE || _la==COMMENTS );
 			setState(328);
-=======
-				setState(353);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(354);
->>>>>>> Stashed changes
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << REGISTER) | (1L << MARKER) | (1L << NUMBER))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -3140,16 +2263,11 @@ public class AcolaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-<<<<<<< Updated upstream
 		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3$\u014d\4\2\t\2\4"+
-=======
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3$\u0167\4\2\t\2\4"+
->>>>>>> Stashed changes
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\3\2\3\2\6\2\'\n\2\r\2\16\2(\3\2\3\2\3\2\3\2\7\2/\n\2\f\2\16\2\62\13\2"+
 		"\3\2\3\2\7\2\66\n\2\f\2\16\29\13\2\3\2\3\2\7\2=\n\2\f\2\16\2@\13\2\3\2"+
-<<<<<<< Updated upstream
 		"\6\2C\n\2\r\2\16\2D\3\2\7\2H\n\2\f\2\16\2K\13\2\6\2M\n\2\r\2\16\2N\6\2"+
 		"Q\n\2\r\2\16\2R\3\2\3\2\7\2W\n\2\f\2\16\2Z\13\2\3\2\3\2\3\3\3\3\3\3\3"+
 		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3m\n\3\3\4\3\4\6\4q\n"+
@@ -3265,132 +2383,6 @@ public class AcolaParser extends Parser {
 		"\u00a2\u00a8\u00ae\u00b4\u00ba\u00c2\u00c8\u00ce\u00d4\u00dc\u00e2\u00e8"+
 		"\u00f0\u00f6\u00fc\u0104\u010a\u0110\u0118\u011e\u0126\u012c\u0134\u013a"+
 		"\u0142\u0148";
-=======
-		"\6\2C\n\2\r\2\16\2D\6\2G\n\2\r\2\16\2H\6\2K\n\2\r\2\16\2L\3\2\3\2\7\2"+
-		"Q\n\2\f\2\16\2T\13\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
-		"\3\3\3\3\3\3\3\3\3\5\3g\n\3\3\4\3\4\7\4k\n\4\f\4\16\4n\13\4\3\4\3\4\3"+
-		"\5\3\5\7\5t\n\5\f\5\16\5w\13\5\3\5\3\5\3\6\3\6\7\6}\n\6\f\6\16\6\u0080"+
-		"\13\6\3\6\3\6\3\7\3\7\7\7\u0086\n\7\f\7\16\7\u0089\13\7\3\7\3\7\3\b\3"+
-		"\b\7\b\u008f\n\b\f\b\16\b\u0092\13\b\3\b\3\b\3\t\3\t\7\t\u0098\n\t\f\t"+
-		"\16\t\u009b\13\t\3\t\3\t\3\n\3\n\7\n\u00a1\n\n\f\n\16\n\u00a4\13\n\3\n"+
-		"\3\n\7\n\u00a8\n\n\f\n\16\n\u00ab\13\n\3\n\3\n\7\n\u00af\n\n\f\n\16\n"+
-		"\u00b2\13\n\3\n\3\n\7\n\u00b6\n\n\f\n\16\n\u00b9\13\n\3\n\3\n\7\n\u00bd"+
-		"\n\n\f\n\16\n\u00c0\13\n\3\n\3\n\3\13\3\13\7\13\u00c6\n\13\f\13\16\13"+
-		"\u00c9\13\13\3\13\3\13\7\13\u00cd\n\13\f\13\16\13\u00d0\13\13\3\13\3\13"+
-		"\7\13\u00d4\n\13\f\13\16\13\u00d7\13\13\3\13\3\13\7\13\u00db\n\13\f\13"+
-		"\16\13\u00de\13\13\3\13\3\13\3\f\3\f\7\f\u00e4\n\f\f\f\16\f\u00e7\13\f"+
-		"\3\f\3\f\7\f\u00eb\n\f\f\f\16\f\u00ee\13\f\3\f\3\f\7\f\u00f2\n\f\f\f\16"+
-		"\f\u00f5\13\f\3\f\3\f\3\r\3\r\7\r\u00fb\n\r\f\r\16\r\u00fe\13\r\3\r\3"+
-		"\r\7\r\u0102\n\r\f\r\16\r\u0105\13\r\3\r\3\r\7\r\u0109\n\r\f\r\16\r\u010c"+
-		"\13\r\3\r\3\r\3\16\3\16\7\16\u0112\n\16\f\16\16\16\u0115\13\16\3\16\3"+
-		"\16\7\16\u0119\n\16\f\16\16\16\u011c\13\16\3\16\3\16\7\16\u0120\n\16\f"+
-		"\16\16\16\u0123\13\16\3\16\3\16\3\17\3\17\7\17\u0129\n\17\f\17\16\17\u012c"+
-		"\13\17\3\17\3\17\7\17\u0130\n\17\f\17\16\17\u0133\13\17\3\17\3\17\3\20"+
-		"\3\20\7\20\u0139\n\20\f\20\16\20\u013c\13\20\3\20\3\20\7\20\u0140\n\20"+
-		"\f\20\16\20\u0143\13\20\3\20\3\20\3\21\3\21\7\21\u0149\n\21\f\21\16\21"+
-		"\u014c\13\21\3\21\3\21\7\21\u0150\n\21\f\21\16\21\u0153\13\21\3\21\3\21"+
-		"\3\22\3\22\7\22\u0159\n\22\f\22\16\22\u015c\13\22\3\22\3\22\7\22\u0160"+
-		"\n\22\f\22\16\22\u0163\13\22\3\22\3\22\3\22\2\2\23\2\4\6\b\n\f\16\20\22"+
-		"\24\26\30\32\34\36 \"\2\t\3\2\"$\4\2\"\"$$\3\2#$\3\2\b\t\3\2\35\36\3\2"+
-		"\35\37\4\2\b\t\20\21\2\u018b\2$\3\2\2\2\4f\3\2\2\2\6h\3\2\2\2\bq\3\2\2"+
-		"\2\nz\3\2\2\2\f\u0083\3\2\2\2\16\u008c\3\2\2\2\20\u0095\3\2\2\2\22\u009e"+
-		"\3\2\2\2\24\u00c3\3\2\2\2\26\u00e1\3\2\2\2\30\u00f8\3\2\2\2\32\u010f\3"+
-		"\2\2\2\34\u0126\3\2\2\2\36\u0136\3\2\2\2 \u0146\3\2\2\2\"\u0156\3\2\2"+
-		"\2$&\7\3\2\2%\'\t\2\2\2&%\3\2\2\2\'(\3\2\2\2(&\3\2\2\2()\3\2\2\2)*\3\2"+
-		"\2\2*+\7\4\2\2+,\7!\2\2,\60\7\4\2\2-/\t\2\2\2.-\3\2\2\2/\62\3\2\2\2\60"+
-		".\3\2\2\2\60\61\3\2\2\2\61\63\3\2\2\2\62\60\3\2\2\2\63J\7\5\2\2\64\66"+
-		"\t\2\2\2\65\64\3\2\2\2\669\3\2\2\2\67\65\3\2\2\2\678\3\2\2\28:\3\2\2\2"+
-		"9\67\3\2\2\2:F\5\4\3\2;=\t\3\2\2<;\3\2\2\2=@\3\2\2\2><\3\2\2\2>?\3\2\2"+
-		"\2?B\3\2\2\2@>\3\2\2\2AC\7#\2\2BA\3\2\2\2CD\3\2\2\2DB\3\2\2\2DE\3\2\2"+
-		"\2EG\3\2\2\2F>\3\2\2\2GH\3\2\2\2HF\3\2\2\2HI\3\2\2\2IK\3\2\2\2J\67\3\2"+
-		"\2\2KL\3\2\2\2LJ\3\2\2\2LM\3\2\2\2MN\3\2\2\2NR\7\6\2\2OQ\t\4\2\2PO\3\2"+
-		"\2\2QT\3\2\2\2RP\3\2\2\2RS\3\2\2\2SU\3\2\2\2TR\3\2\2\2UV\7\2\2\3V\3\3"+
-		"\2\2\2Wg\5\b\5\2Xg\5\n\6\2Yg\5\6\4\2Zg\5 \21\2[g\5\24\13\2\\g\5\f\7\2"+
-		"]g\5\16\b\2^g\5\34\17\2_g\5\36\20\2`g\5\20\t\2ag\5\26\f\2bg\5\22\n\2c"+
-		"g\5\32\16\2dg\5\30\r\2eg\5\"\22\2fW\3\2\2\2fX\3\2\2\2fY\3\2\2\2fZ\3\2"+
-		"\2\2f[\3\2\2\2f\\\3\2\2\2f]\3\2\2\2f^\3\2\2\2f_\3\2\2\2f`\3\2\2\2fa\3"+
-		"\2\2\2fb\3\2\2\2fc\3\2\2\2fd\3\2\2\2fe\3\2\2\2g\5\3\2\2\2hl\7\7\2\2ik"+
-		"\t\2\2\2ji\3\2\2\2kn\3\2\2\2lj\3\2\2\2lm\3\2\2\2mo\3\2\2\2nl\3\2\2\2o"+
-		"p\t\5\2\2p\7\3\2\2\2qu\7\n\2\2rt\t\2\2\2sr\3\2\2\2tw\3\2\2\2us\3\2\2\2"+
-		"uv\3\2\2\2vx\3\2\2\2wu\3\2\2\2xy\t\6\2\2y\t\3\2\2\2z~\7\13\2\2{}\t\2\2"+
-		"\2|{\3\2\2\2}\u0080\3\2\2\2~|\3\2\2\2~\177\3\2\2\2\177\u0081\3\2\2\2\u0080"+
-		"~\3\2\2\2\u0081\u0082\t\6\2\2\u0082\13\3\2\2\2\u0083\u0087\7\f\2\2\u0084"+
-		"\u0086\t\2\2\2\u0085\u0084\3\2\2\2\u0086\u0089\3\2\2\2\u0087\u0085\3\2"+
-		"\2\2\u0087\u0088\3\2\2\2\u0088\u008a\3\2\2\2\u0089\u0087\3\2\2\2\u008a"+
-		"\u008b\7\35\2\2\u008b\r\3\2\2\2\u008c\u0090\7\r\2\2\u008d\u008f\t\2\2"+
-		"\2\u008e\u008d\3\2\2\2\u008f\u0092\3\2\2\2\u0090\u008e\3\2\2\2\u0090\u0091"+
-		"\3\2\2\2\u0091\u0093\3\2\2\2\u0092\u0090\3\2\2\2\u0093\u0094\7\35\2\2"+
-		"\u0094\17\3\2\2\2\u0095\u0099\7\16\2\2\u0096\u0098\t\2\2\2\u0097\u0096"+
-		"\3\2\2\2\u0098\u009b\3\2\2\2\u0099\u0097\3\2\2\2\u0099\u009a\3\2\2\2\u009a"+
-		"\u009c\3\2\2\2\u009b\u0099\3\2\2\2\u009c\u009d\t\7\2\2\u009d\21\3\2\2"+
-		"\2\u009e\u00a2\7\17\2\2\u009f\u00a1\t\2\2\2\u00a0\u009f\3\2\2\2\u00a1"+
-		"\u00a4\3\2\2\2\u00a2\u00a0\3\2\2\2\u00a2\u00a3\3\2\2\2\u00a3\u00a5\3\2"+
-		"\2\2\u00a4\u00a2\3\2\2\2\u00a5\u00a9\t\b\2\2\u00a6\u00a8\t\2\2\2\u00a7"+
-		"\u00a6\3\2\2\2\u00a8\u00ab\3\2\2\2\u00a9\u00a7\3\2\2\2\u00a9\u00aa\3\2"+
-		"\2\2\u00aa\u00ac\3\2\2\2\u00ab\u00a9\3\2\2\2\u00ac\u00b0\7\22\2\2\u00ad"+
-		"\u00af\t\2\2\2\u00ae\u00ad\3\2\2\2\u00af\u00b2\3\2\2\2\u00b0\u00ae\3\2"+
-		"\2\2\u00b0\u00b1\3\2\2\2\u00b1\u00b3\3\2\2\2\u00b2\u00b0\3\2\2\2\u00b3"+
-		"\u00b7\t\6\2\2\u00b4\u00b6\t\2\2\2\u00b5\u00b4\3\2\2\2\u00b6\u00b9\3\2"+
-		"\2\2\u00b7\u00b5\3\2\2\2\u00b7\u00b8\3\2\2\2\u00b8\u00ba\3\2\2\2\u00b9"+
-		"\u00b7\3\2\2\2\u00ba\u00be\7\23\2\2\u00bb\u00bd\t\2\2\2\u00bc\u00bb\3"+
-		"\2\2\2\u00bd\u00c0\3\2\2\2\u00be\u00bc\3\2\2\2\u00be\u00bf\3\2\2\2\u00bf"+
-		"\u00c1\3\2\2\2\u00c0\u00be\3\2\2\2\u00c1\u00c2\t\7\2\2\u00c2\23\3\2\2"+
-		"\2\u00c3\u00c7\7\17\2\2\u00c4\u00c6\t\2\2\2\u00c5\u00c4\3\2\2\2\u00c6"+
-		"\u00c9\3\2\2\2\u00c7\u00c5\3\2\2\2\u00c7\u00c8\3\2\2\2\u00c8\u00ca\3\2"+
-		"\2\2\u00c9\u00c7\3\2\2\2\u00ca\u00ce\t\b\2\2\u00cb\u00cd\t\2\2\2\u00cc"+
-		"\u00cb\3\2\2\2\u00cd\u00d0\3\2\2\2\u00ce\u00cc\3\2\2\2\u00ce\u00cf\3\2"+
-		"\2\2\u00cf\u00d1\3\2\2\2\u00d0\u00ce\3\2\2\2\u00d1\u00d5\7\33\2\2\u00d2"+
-		"\u00d4\t\2\2\2\u00d3\u00d2\3\2\2\2\u00d4\u00d7\3\2\2\2\u00d5\u00d3\3\2"+
-		"\2\2\u00d5\u00d6\3\2\2\2\u00d6\u00d8\3\2\2\2\u00d7\u00d5\3\2\2\2\u00d8"+
-		"\u00dc\7\23\2\2\u00d9\u00db\t\2\2\2\u00da\u00d9\3\2\2\2\u00db\u00de\3"+
-		"\2\2\2\u00dc\u00da\3\2\2\2\u00dc\u00dd\3\2\2\2\u00dd\u00df\3\2\2\2\u00de"+
-		"\u00dc\3\2\2\2\u00df\u00e0\t\7\2\2\u00e0\25\3\2\2\2\u00e1\u00e5\7\24\2"+
-		"\2\u00e2\u00e4\t\2\2\2\u00e3\u00e2\3\2\2\2\u00e4\u00e7\3\2\2\2\u00e5\u00e3"+
-		"\3\2\2\2\u00e5\u00e6\3\2\2\2\u00e6\u00e8\3\2\2\2\u00e7\u00e5\3\2\2\2\u00e8"+
-		"\u00ec\t\7\2\2\u00e9\u00eb\t\2\2\2\u00ea\u00e9\3\2\2\2\u00eb\u00ee\3\2"+
-		"\2\2\u00ec\u00ea\3\2\2\2\u00ec\u00ed\3\2\2\2\u00ed\u00ef\3\2\2\2\u00ee"+
-		"\u00ec\3\2\2\2\u00ef\u00f3\7\23\2\2\u00f0\u00f2\t\2\2\2\u00f1\u00f0\3"+
-		"\2\2\2\u00f2\u00f5\3\2\2\2\u00f3\u00f1\3\2\2\2\u00f3\u00f4\3\2\2\2\u00f4"+
-		"\u00f6\3\2\2\2\u00f5\u00f3\3\2\2\2\u00f6\u00f7\t\7\2\2\u00f7\27\3\2\2"+
-		"\2\u00f8\u00fc\7\25\2\2\u00f9\u00fb\t\2\2\2\u00fa\u00f9\3\2\2\2\u00fb"+
-		"\u00fe\3\2\2\2\u00fc\u00fa\3\2\2\2\u00fc\u00fd\3\2\2\2\u00fd\u00ff\3\2"+
-		"\2\2\u00fe\u00fc\3\2\2\2\u00ff\u0103\7\35\2\2\u0100\u0102\t\2\2\2\u0101"+
-		"\u0100\3\2\2\2\u0102\u0105\3\2\2\2\u0103\u0101\3\2\2\2\u0103\u0104\3\2"+
-		"\2\2\u0104\u0106\3\2\2\2\u0105\u0103\3\2\2\2\u0106\u010a\7\23\2\2\u0107"+
-		"\u0109\t\2\2\2\u0108\u0107\3\2\2\2\u0109\u010c\3\2\2\2\u010a\u0108\3\2"+
-		"\2\2\u010a\u010b\3\2\2\2\u010b\u010d\3\2\2\2\u010c\u010a\3\2\2\2\u010d"+
-		"\u010e\t\7\2\2\u010e\31\3\2\2\2\u010f\u0113\7\26\2\2\u0110\u0112\t\2\2"+
-		"\2\u0111\u0110\3\2\2\2\u0112\u0115\3\2\2\2\u0113\u0111\3\2\2\2\u0113\u0114"+
-		"\3\2\2\2\u0114\u0116\3\2\2\2\u0115\u0113\3\2\2\2\u0116\u011a\7\34\2\2"+
-		"\u0117\u0119\t\2\2\2\u0118\u0117\3\2\2\2\u0119\u011c\3\2\2\2\u011a\u0118"+
-		"\3\2\2\2\u011a\u011b\3\2\2\2\u011b\u011d\3\2\2\2\u011c\u011a\3\2\2\2\u011d"+
-		"\u0121\7\23\2\2\u011e\u0120\t\2\2\2\u011f\u011e\3\2\2\2\u0120\u0123\3"+
-		"\2\2\2\u0121\u011f\3\2\2\2\u0121\u0122\3\2\2\2\u0122\u0124\3\2\2\2\u0123"+
-		"\u0121\3\2\2\2\u0124\u0125\t\7\2\2\u0125\33\3\2\2\2\u0126\u012a\7\27\2"+
-		"\2\u0127\u0129\t\2\2\2\u0128\u0127\3\2\2\2\u0129\u012c\3\2\2\2\u012a\u0128"+
-		"\3\2\2\2\u012a\u012b\3\2\2\2\u012b\u012d\3\2\2\2\u012c\u012a\3\2\2\2\u012d"+
-		"\u0131\7\23\2\2\u012e\u0130\t\2\2\2\u012f\u012e\3\2\2\2\u0130\u0133\3"+
-		"\2\2\2\u0131\u012f\3\2\2\2\u0131\u0132\3\2\2\2\u0132\u0134\3\2\2\2\u0133"+
-		"\u0131\3\2\2\2\u0134\u0135\t\7\2\2\u0135\35\3\2\2\2\u0136\u013a\7\30\2"+
-		"\2\u0137\u0139\t\2\2\2\u0138\u0137\3\2\2\2\u0139\u013c\3\2\2\2\u013a\u0138"+
-		"\3\2\2\2\u013a\u013b\3\2\2\2\u013b\u013d\3\2\2\2\u013c\u013a\3\2\2\2\u013d"+
-		"\u0141\7\23\2\2\u013e\u0140\t\2\2\2\u013f\u013e\3\2\2\2\u0140\u0143\3"+
-		"\2\2\2\u0141\u013f\3\2\2\2\u0141\u0142\3\2\2\2\u0142\u0144\3\2\2\2\u0143"+
-		"\u0141\3\2\2\2\u0144\u0145\t\7\2\2\u0145\37\3\2\2\2\u0146\u014a\7\31\2"+
-		"\2\u0147\u0149\t\2\2\2\u0148\u0147\3\2\2\2\u0149\u014c\3\2\2\2\u014a\u0148"+
-		"\3\2\2\2\u014a\u014b\3\2\2\2\u014b\u014d\3\2\2\2\u014c\u014a\3\2\2\2\u014d"+
-		"\u0151\7\23\2\2\u014e\u0150\t\2\2\2\u014f\u014e\3\2\2\2\u0150\u0153\3"+
-		"\2\2\2\u0151\u014f\3\2\2\2\u0151\u0152\3\2\2\2\u0152\u0154\3\2\2\2\u0153"+
-		"\u0151\3\2\2\2\u0154\u0155\t\7\2\2\u0155!\3\2\2\2\u0156\u015a\7\32\2\2"+
-		"\u0157\u0159\t\2\2\2\u0158\u0157\3\2\2\2\u0159\u015c\3\2\2\2\u015a\u0158"+
-		"\3\2\2\2\u015a\u015b\3\2\2\2\u015b\u015d\3\2\2\2\u015c\u015a\3\2\2\2\u015d"+
-		"\u0161\7\23\2\2\u015e\u0160\t\2\2\2\u015f\u015e\3\2\2\2\u0160\u0163\3"+
-		"\2\2\2\u0161\u015f\3\2\2\2\u0161\u0162\3\2\2\2\u0162\u0164\3\2\2\2\u0163"+
-		"\u0161\3\2\2\2\u0164\u0165\t\7\2\2\u0165#\3\2\2\2+(\60\67>DHLRflu~\u0087"+
-		"\u0090\u0099\u00a2\u00a9\u00b0\u00b7\u00be\u00c7\u00ce\u00d5\u00dc\u00e5"+
-		"\u00ec\u00f3\u00fc\u0103\u010a\u0113\u011a\u0121\u012a\u0131\u013a\u0141"+
-		"\u014a\u0151\u015a\u0161";
->>>>>>> Stashed changes
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
