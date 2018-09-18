@@ -13,6 +13,24 @@ import static com.ibm.icu.impl.Assert.fail;
 public class HugeTestSuite {
 
     @Test
+    public void instructionGeneratorTest() {
+
+        for (int i = 0; i < 3000; i++) {
+            String generated = InstructionGenerator.createInstruction(1);
+            String testbrain = "brain \"sample\" {\n" + generated + "jump 0\n}";
+            String[] brains = new String[2];
+            brains[0] = testbrain;
+            brains[1] = testbrain;
+            try {
+                BrainParser.parse(brains);
+            } catch (IllegalArgumentException x) {
+                fail(testbrain + "wasn't accepted");
+
+            }
+        }
+    }
+
+    @Test
     public void testRegex() {
 
         String map = "2\n2\nAB\n..\n\n";

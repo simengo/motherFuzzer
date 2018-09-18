@@ -6,7 +6,7 @@ package saarland.cispa.sopra;
 import java.util.Map;
 
 public class Drop extends Instruction {
-    private final int jumpPC;
+    private int jumpPC;
 
     public Drop(int jumpPC) {
         this.jumpPC = jumpPC;
@@ -59,6 +59,10 @@ public class Drop extends Instruction {
             Field field = (Field) ant.getField();
             field.setChanged(true);
         }
+
+    public void setJumpPC(int jumpPC) {
+        this.jumpPC = jumpPC;
+    }
 
     @Override
     public String toString(){

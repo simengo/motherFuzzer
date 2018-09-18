@@ -5,6 +5,10 @@ public class Breed extends Killable {
         super(jumpPc);
     }
 
+    public void setJumpPC(int jumpPC) {
+        super.setJumpPc(jumpPC);
+    }
+
     @Override
     public void execute(World world, Ant ant) {
         Field field = (Field) ant.getField();
@@ -44,13 +48,13 @@ public class Breed extends Killable {
                 ant.increasePC();
             } else {
                 ant.setPc(getJumpPc());
-                killcheck(world,java.util.Optional.ofNullable(null));
+                killcheck(world, java.util.Optional.ofNullable(null));
             }
 
 
         } else {
             ant.setPc(getJumpPc());
-            killcheck(world,java.util.Optional.ofNullable(null));
+            killcheck(world, java.util.Optional.ofNullable(null));
         }
 
 

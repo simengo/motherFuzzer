@@ -2,10 +2,14 @@ package saarland.cispa.sopra;
 
 public class Direction extends Instruction {
     private final String directionToLookAt;
-    private final int jumpPC;
+    private int jumpPC;
     public Direction(int jumpPC,String dir) {
         this.jumpPC=jumpPC;
         this.directionToLookAt = dir;
+    }
+
+    public void setJumpPC(int jumpPC) {
+        this.jumpPC = jumpPC;
     }
 
     @Override

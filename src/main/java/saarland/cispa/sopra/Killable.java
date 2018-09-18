@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 abstract class Killable extends saarland.cispa.sopra.Instruction {
-    private final int jumpPc;
+    private int jumpPc;
 
     public Killable(int jumpPc) {
 
@@ -29,7 +29,7 @@ abstract class Killable extends saarland.cispa.sopra.Instruction {
                 Ant thisAnt = ant.get();
                 if (suspect.getId() == thisAnt.getId()) {
                     checkAnt(world, suspect);
-                    if(suspect.isDead()){
+                    if (suspect.isDead()) {
                         continue;
                     }
                 }
@@ -61,7 +61,6 @@ abstract class Killable extends saarland.cispa.sopra.Instruction {
             }
         }
     }
-
 
     public void checkAnt(World world, Ant ant) {
         char antLionField = '=';
@@ -95,7 +94,7 @@ abstract class Killable extends saarland.cispa.sopra.Instruction {
 
         for (Field neighbour : neighbours) {
 
-            if(!neighbour.getAnt().isPresent()){
+            if (!neighbour.getAnt().isPresent()) {
                 continue;
             }
             if (neighbour.getAnt().get().getSwarm() != ant.getSwarm()) {
@@ -108,6 +107,10 @@ abstract class Killable extends saarland.cispa.sopra.Instruction {
 
     public int getJumpPc() {
         return jumpPc;
+    }
+
+    public void setJumpPc(int jumpPc) {
+        this.jumpPc = jumpPc;
     }
 
 }
