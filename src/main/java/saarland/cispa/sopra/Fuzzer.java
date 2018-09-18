@@ -6,6 +6,8 @@ import java.util.HashMap;
 
 public class Fuzzer {
 
+    private ArrayList<String> maps = new ArrayList<>();
+    private ArrayList<String> brains = new ArrayList<>();
 
     public void fuzz(File... brainFiles) {
 
@@ -21,7 +23,6 @@ public class Fuzzer {
         ArrayList<Instruction[]> finishedBrains = Utils.swarmsToBrainList(swarms);
 
         Matchmaker.makeMatch(finishedBrains);
-
 
 
     }

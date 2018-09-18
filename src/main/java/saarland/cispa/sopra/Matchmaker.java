@@ -23,8 +23,11 @@ public final class Matchmaker {
         }
 
         ArrayList<Instruction[]> mutatedBrains = Mutationapplyer.applyMutations(convertedBrains);
+
         ArrayList<HashMap<Integer, Instruction[]>> mutatedPointList = makeTournament(mutatedBrains);
+
         ArrayList<Integer> mutatedPoints = convertPoints(mutatedPointList);
+
         ArrayList<Instruction[]> remakeList = new ArrayList<>();
 
         for (int i = 0; i < mutatedPoints.size(); i++) {
@@ -84,8 +87,8 @@ public final class Matchmaker {
         Instruction[] participantC = participants.get(teamID3);
         Instruction[] participantD = participants.get(teamID4);
 
-        World world1 = (World) preGame1.simulate(10000, 42, "", participantA, participantB);
-        World world2 = (World) preGame2.simulate(10000, 42, "", participantC, participantD);
+        World world1 = (World) preGame1.simulate(10000, generator.nextInt(10000), "", participantA, participantB);
+        World world2 = (World) preGame2.simulate(10000, generator.nextInt(10000), "", participantC, participantD);
 
         Instruction[] preWinner1;
         Instruction[] preWinner2;
