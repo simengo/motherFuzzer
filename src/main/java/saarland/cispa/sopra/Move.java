@@ -7,10 +7,6 @@ public class Move extends Killable {
         super(jumpPc);
     }
 
-    public void setJumpPC(int jumpPC) {
-        super.setJumpPc(jumpPC);
-    }
-
     @Override
     public void execute(World world, Ant ant) {
         Field field = (Field) ant.getField();
@@ -34,7 +30,7 @@ public class Move extends Killable {
     }
 
     @Override
-    public String toString() {
+    public String toString(){
 
         return "move else " + this.getJumpPc();
     }

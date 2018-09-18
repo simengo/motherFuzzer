@@ -7,10 +7,6 @@ public class SenseFood extends Sense{
 
     }
 
-    public void setJumpPC(int jumpPC) {
-        super.setJumpPC(jumpPC);
-    }
-
     @Override
     public void execute(World world, Ant ant) {
 
