@@ -51,7 +51,7 @@ public final class Matchmaker {
 
             int points = 0;
             for (int point : participantPoints.keySet()) {
-                points++;
+                points += point;
             }
             result.add(points);
         }
@@ -87,8 +87,8 @@ public final class Matchmaker {
         Instruction[] participantC = participants.get(teamID3);
         Instruction[] participantD = participants.get(teamID4);
 
-        World worldofgame1 = (World) pregame1.simulate(10000, 42, "", participantA, participantB);
-        World worldofgame2 = (World) pregame2.simulate(10000, 42, "", participantC, participantD);
+        World worldofgame1 = (World) pregame1.simulate(10000, generator.nextInt(10000), "", participantA, participantB);
+        World worldofgame2 = (World) pregame2.simulate(10000, generator.nextInt(10000), "", participantC, participantD);
 
         Instruction[] prewinnerA;
         Instruction[] prewinnerB;
