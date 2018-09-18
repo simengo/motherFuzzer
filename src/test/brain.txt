@@ -1,3 +1,0 @@
-brain "sample" {
-jump 3
-}
