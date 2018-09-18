@@ -7,13 +7,13 @@ import java.util.HashMap;
 public class Fuzzer {
 
 
-    public void fuzz(File... brainfiles) {
+    public void fuzz(File... brainFiles) {
 
 
         ArrayList<String> brains = new ArrayList<>();
 
-        for (File brainfile : brainfiles) {
-            brains.add(Utils.convertFile(brainfile));
+        for (File brainFile : brainFiles) {
+            brains.add(Utils.convertFile(brainFile));
         }
 
         HashMap<Character, Swarm> swarms = (HashMap<Character, Swarm>) BrainParser.parse((String[]) brains.toArray());

@@ -11,23 +11,20 @@ public final class Matchmaker {
 
     public static ArrayList<Instruction[]> makeMatch(ArrayList<Instruction[]> participants) {
 
-        ArrayList<HashMap<Integer, Instruction[]>> unmutatedPointList = makeTournament(participants);
+        ArrayList<HashMap<Integer, Instruction[]>> PointList = makeTournament(participants);
 
-        ArrayList<Integer> convertedPoints = convertPoints(unmutatedPointList);
+        ArrayList<Integer> convertedPoints = convertPoints(PointList);
         ArrayList<Instruction[]> convertedBrains = new ArrayList<>();
 
-        for (int i = 0; i < unmutatedPointList.size(); i++) {
-            HashMap<Integer, Instruction[]> pointbrainset = unmutatedPointList.get(i);
-            Instruction[] brainobject = pointbrainset.get(convertedPoints.get(i));
-            convertedBrains.add(brainobject);
+        for (int i = 0; i < PointList.size(); i++) {
+            HashMap<Integer, Instruction[]> pointBrainSet = PointList.get(i);
+            Instruction[] brainObject = pointBrainSet.get(convertedPoints.get(i));
+            convertedBrains.add(brainObject);
         }
 
         ArrayList<Instruction[]> mutatedBrains = Mutationapplyer.applyMutations(convertedBrains);
-
         ArrayList<HashMap<Integer, Instruction[]>> mutatedPointList = makeTournament(mutatedBrains);
-
         ArrayList<Integer> mutatedPoints = convertPoints(mutatedPointList);
-
         ArrayList<Instruction[]> remakeList = new ArrayList<>();
 
         for (int i = 0; i < mutatedPoints.size(); i++) {
@@ -50,8 +47,8 @@ public final class Matchmaker {
         for (HashMap<Integer, Instruction[]> participantPoints : pointList) {
 
             int points = 0;
-            for (int point : participantPoints.keySet()) {
-                points+=point;
+            for (int key : participantPoints.keySet()) {
+                points += key;
             }
             result.add(points);
         }
@@ -77,71 +74,71 @@ public final class Matchmaker {
         teamID4 = generator.nextInt(1);
         teamIDs.remove(teamID4);
 
-        Game pregame1 = new Game();
-        Game pregame2 = new Game();
-        Game finalgame = new Game();
-        Game thirdplacegame = new Game();
+        Game preGame1 = new Game();
+        Game preGame2 = new Game();
+        Game finalGame = new Game();
+        Game thirdPlaceGame = new Game();
 
         Instruction[] participantA = participants.get(teamID1);
         Instruction[] participantB = participants.get(teamID2);
         Instruction[] participantC = participants.get(teamID3);
         Instruction[] participantD = participants.get(teamID4);
 
-        World worldofgame1 = (World) pregame1.simulate(10000, 42, "", participantA, participantB);
-        World worldofgame2 = (World) pregame2.simulate(10000, 42, "", participantC, participantD);
+        World world1 = (World) preGame1.simulate(10000, 42, "", participantA, participantB);
+        World world2 = (World) preGame2.simulate(10000, 42, "", participantC, participantD);
 
-        Instruction[] prewinnerA;
-        Instruction[] prewinnerB;
-        Instruction[] preloserA;
-        Instruction[] preloserB;
+        Instruction[] preWinner1;
+        Instruction[] preWinner2;
+        Instruction[] preLoser1;
+        Instruction[] preLoser2;
 
-        HashMap<Integer, Instruction[]> loserpoints;
-        HashMap<Integer, Instruction[]> thirdpoints;
-        HashMap<Integer, Instruction[]> secondpoints;
-        HashMap<Integer, Instruction[]> winnerpoints;
+        HashMap<Integer, Instruction[]> loserPoints;
+        HashMap<Integer, Instruction[]> thirdPoints;
+        HashMap<Integer, Instruction[]> secondPoints;
+        HashMap<Integer, Instruction[]> winnerPoints;
 
-        if (worldofgame1.getScore('A') > worldofgame1.getScore('B')) {
-            preloserA = worldofgame1.getSwarms().get('B').getBrain();
-            prewinnerA = worldofgame1.getSwarms().get('A').getBrain();
+        if (world1.getScore('A') > world1.getScore('B')) {
+            preLoser1 = world1.getSwarms().get('B').getBrain();
+            preWinner1 = world1.getSwarms().get('A').getBrain();
         } else {
-            preloserA = worldofgame1.getSwarms().get('A').getBrain();
-            prewinnerA = worldofgame1.getSwarms().get('B').getBrain();
+            preLoser1 = world1.getSwarms().get('A').getBrain();
+            preWinner1 = world1.getSwarms().get('B').getBrain();
         }
 
-        if (worldofgame2.getScore('B') < worldofgame2.getScore('A')) {
-            prewinnerB = worldofgame2.getSwarms().get('A').getBrain();
-            preloserB = worldofgame2.getSwarms().get('B').getBrain();
+        if (world2.getScore('B') < world2.getScore('A')) {
+            preWinner2 = world2.getSwarms().get('A').getBrain();
+            preLoser2 = world2.getSwarms().get('B').getBrain();
         } else {
-            preloserB = worldofgame2.getSwarms().get('A').getBrain();
-            prewinnerB = worldofgame2.getSwarms().get('B').getBrain();
+            preLoser2 = world2.getSwarms().get('A').getBrain();
+            preWinner2 = world2.getSwarms().get('B').getBrain();
         }
 
-        World losergame = (World) thirdplacegame.simulate(10000, 42, "", preloserA, preloserB);
+        World loserWorld = (World) thirdPlaceGame.simulate(10000, 42, "", preLoser1, preLoser2);
 
-        if (losergame.getScore('A') > losergame.getScore('B')) {
-            thirdpoints = losergame.getBrainPoints('A');
-            loserpoints = losergame.getBrainPoints('B');
+        if (loserWorld.getScore('A') > loserWorld.getScore('B')) {
+            thirdPoints = loserWorld.getBrainPoints('A');
+            loserPoints = loserWorld.getBrainPoints('B');
         } else {
-            thirdpoints = losergame.getBrainPoints('B');
-            loserpoints = losergame.getBrainPoints('A');
+            thirdPoints = loserWorld.getBrainPoints('B');
+            loserPoints = loserWorld.getBrainPoints('A');
         }
 
-        World finalworld = (World) finalgame.simulate(10000, 42, "", prewinnerA, prewinnerB);
+        World finalWorld = (World) finalGame.simulate(10000, 42, "", preWinner1, preWinner2);
 
-        if (finalworld.getScore('A') > finalworld.getScore('B')) {
-            winnerpoints = finalworld.getBrainPoints('A');
-            secondpoints = finalworld.getBrainPoints('B');
+        if (finalWorld.getScore('A') > finalWorld.getScore('B')) {
+            winnerPoints = finalWorld.getBrainPoints('A');
+            secondPoints = finalWorld.getBrainPoints('B');
         } else {
-            secondpoints = finalworld.getBrainPoints('A');
-            winnerpoints = finalworld.getBrainPoints('B');
+            secondPoints = finalWorld.getBrainPoints('A');
+            winnerPoints = finalWorld.getBrainPoints('B');
         }
 
         ArrayList<HashMap<Integer, Instruction[]>> result = new ArrayList<>();
 
-        result.add(loserpoints);
-        result.add(thirdpoints);
-        result.add(secondpoints);
-        result.add(winnerpoints);
+        result.add(loserPoints);
+        result.add(thirdPoints);
+        result.add(secondPoints);
+        result.add(winnerPoints);
 
         return result;
     }

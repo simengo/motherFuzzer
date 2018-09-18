@@ -10,10 +10,9 @@ public final class InstructionInserter {
 
         int maxPC = instructions.length;
         int insertPC = generator.nextInt(maxPC);
-        List<Instruction> instructionlist = Arrays.asList(instructions);
-        instructionlist.add(insertPC, checkInstruction(instruction, maxPC));
-        return (Instruction[]) instructionlist.toArray();
-
+        List<Instruction> instructionList = Arrays.asList(instructions);
+        instructionList.add(insertPC, checkInstruction(instruction, maxPC));
+        return (Instruction[]) instructionList.toArray();
     }
 
     private static Instruction checkInstruction(Instruction instruction, int maxPC) {
