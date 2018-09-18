@@ -6,7 +6,7 @@ public abstract class Sense extends Instruction {
 
     private final String direction;
     private final Target target;
-    private final int jumpPC;
+    private int jumpPC;
 
     public Sense(String dir, Target target, int jumpPC) {
 
@@ -15,8 +15,9 @@ public abstract class Sense extends Instruction {
         this.jumpPC = jumpPC;
     }
 
-
-
+    public void setJumpPC(int pc){
+        this.jumpPC=pc;
+    }
 
     public int getJumpPC() {
         return jumpPC;

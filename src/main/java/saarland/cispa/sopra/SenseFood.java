@@ -7,6 +7,10 @@ public class SenseFood extends Sense{
 
     }
 
+    public void setJumpPC(int jumpPC) {
+        super.setJumpPC(jumpPC);
+    }
+
     @Override
     public void execute(World world, Ant ant) {
 
@@ -33,8 +37,8 @@ public class SenseFood extends Sense{
 
             Field field1 = (Field) ant.getField();
             field1.setChanged(true);
+        }
     }
-}
     @Override
     public String toString(){
 

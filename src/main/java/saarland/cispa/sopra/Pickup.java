@@ -4,7 +4,11 @@ package saarland.cispa.sopra;
 
 public class Pickup extends Instruction {
 
-    private final int jumpPC;
+    private int jumpPC;
+
+    public void setJumpPC(int jumpPC) {
+        this.jumpPC = jumpPC;
+    }
 
     public Pickup(int jumpPC){this.jumpPC = jumpPC;}
     @Override

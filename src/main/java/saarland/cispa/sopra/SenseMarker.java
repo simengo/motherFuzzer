@@ -9,6 +9,10 @@ public class SenseMarker extends Sense{
 
     }
 
+    public void setJumpPC(int jumpPC) {
+        super.setJumpPC(jumpPC);
+    }
+
     @Override
     public void execute(World world, Ant ant) {
 
@@ -19,7 +23,7 @@ public class SenseMarker extends Sense{
                 ant.increasePC();
 
             }
-         else{ant.setPc(getJumpPC());}
+            else{ant.setPc(getJumpPC());}
 
             Field field1 = (Field) ant.getField();
             field1.setChanged(true);
@@ -39,7 +43,7 @@ public class SenseMarker extends Sense{
         if(getTargetS() == Target.foemarker){
             return "sense " + getDirectionS() + "foemarker " + "else " + getJumpPC();
         }
-            return "sense " + getDirectionS() + "marker " + marker + " else " + getJumpPC();
+        return "sense " + getDirectionS() + "marker " + marker + " else " + getJumpPC();
 
     }
 }
