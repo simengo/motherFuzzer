@@ -6,7 +6,7 @@ public class CheckMapPosition extends SystemTest {
     public void test(GameInfo gameInfo) {
         String map = "4\n4\n" +
             "BBB.\n" +
-            "....\n" +
+            ".....\n" +
             "....\n" +
             "AAA.\n";
 
