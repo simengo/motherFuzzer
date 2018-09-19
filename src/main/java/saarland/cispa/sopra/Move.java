@@ -34,6 +34,11 @@ public class Move extends Killable {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
     public String toString() {
 
         return "move else " + this.getJumpPc();

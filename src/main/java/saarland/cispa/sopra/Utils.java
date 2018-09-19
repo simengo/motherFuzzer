@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -86,7 +87,7 @@ public class Utils {
 
         Brain result = null;
         for (Brain brain : brains) {
-            if (brain.getBrain() == treasure) {
+            if (Arrays.equals(brain.getBrain(), treasure)) {
                 result = brain;
                 break;
             }

@@ -13,18 +13,18 @@ public final class InstructionInserter {
             deleteInstruction(brain);
         }
         int insertPC = generator.nextInt(maxPC);
-        List<Instruction> instructionList = Arrays.asList(brain.getBrain());
-        instructionList.add(insertPC, checkInstruction(instruction, maxPC));
-        brain.setBrain((Instruction[]) instructionList.toArray());
+        LinkedList<Instruction> instructionList = new LinkedList<>(Arrays.asList(brain.getBrain()));
+        Instruction insert = checkInstruction(instruction, maxPC);
+        instructionList.add(insertPC, insert);
+        brain.setBrain(instructionList.toArray(new Instruction[instructionList.size()]));
     }
 
     private static void deleteInstruction(Brain brain) {
 
         int deletePC = generator.nextInt(brain.getBrain().length);
-        List<Instruction> instructionList = Arrays.asList(brain.getBrain());
+        LinkedList<Instruction> instructionList = new LinkedList<>(Arrays.asList(brain.getBrain()));
         instructionList.remove(deletePC);
-        brain.setBrain((Instruction[]) instructionList.toArray());
-
+        brain.setBrain(instructionList.toArray(new Instruction[instructionList.size()]));
 
     }
 

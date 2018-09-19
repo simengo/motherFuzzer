@@ -37,13 +37,13 @@ public class Fuzzer {
         while (true) {
             finishedBrains = Matchmaker.makeMatch(finishedBrains, maps);
             counter++;
-            if (counter % 1000 == 0) {
-                for (Brain brain : finishedBrains) {
-                    System.out.println(brain.toString());
-                    System.out.println(" ");
-                }
+            if (counter % 5 == 0) {
+                System.out.println(finishedBrains.get(3).toString());
+                System.out.printf("\n\n\n\n\n");
+
             }
         }
-
     }
+
 }
+

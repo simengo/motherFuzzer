@@ -23,6 +23,10 @@ public final class InstructionGenerator {
 
         switch (instruction) {
 
+            case ("jump"):
+                jumpPC = generator.nextInt(maxPC);
+                result = new Jump(jumpPC);
+                break;
             case ("drop"):
                 jumpPC = generator.nextInt(maxPC);
                 result = new Drop(jumpPC);
@@ -80,43 +84,32 @@ public final class InstructionGenerator {
                 jumpPC = generator.nextInt(maxPC);
                 String senserichtung = sensedirections[generator.nextInt(4)];
                 Target senseobjekt = senseobjects[generator.nextInt(11)];
-                Instruction ergebnis;
+
                 switch (senseobjekt) {
                     case marker:
-                        ergebnis = new SenseMarker(senserichtung, senseobjekt, generator.nextInt(7), jumpPC);
-                        break;
+                        return new SenseMarker(senserichtung, senseobjekt, generator.nextInt(7), jumpPC);
 
                     case foemarker:
-                        ergebnis = new SenseMarker(senserichtung, senseobjekt, generator.nextInt(7), jumpPC);
-                        break;
+                        return new SenseMarker(senserichtung, senseobjekt, generator.nextInt(7), jumpPC);
 
                     case foe:
-                        ergebnis = new SenseAnt(senserichtung, senseobjekt, jumpPC);
-                        break;
+                        return new SenseAnt(senserichtung, senseobjekt, jumpPC);
                     case home:
-                        result = new SenseField(senserichtung, senseobjekt, jumpPC);
-                        break;
+                        return new SenseField(senserichtung, senseobjekt, jumpPC);
                     case rock:
-                        result = new SenseField(senserichtung, senseobjekt, jumpPC);
-                        break;
+                        return new SenseField(senserichtung, senseobjekt, jumpPC);
                     case friend:
-                        result = new SenseAnt(senserichtung, senseobjekt, jumpPC);
-                        break;
+                        return new SenseAnt(senserichtung, senseobjekt, jumpPC);
                     case antlion:
-                        result = new SenseField(senserichtung, senseobjekt, jumpPC);
-                        break;
+                        return new SenseField(senserichtung, senseobjekt, jumpPC);
                     case foehome:
-                        result = new SenseField(senserichtung, senseobjekt, jumpPC);
-                        break;
+                        return new SenseField(senserichtung, senseobjekt, jumpPC);
                     case food:
-                        result = new SenseFood(senserichtung, senseobjekt, jumpPC);
-                        break;
+                        return new SenseFood(senserichtung, senseobjekt, jumpPC);
                     case foefood:
-                        result = new SenseFood(senserichtung, senseobjekt, jumpPC);
-                        break;
+                        return new SenseFood(senserichtung, senseobjekt, jumpPC);
                     case friendfood:
-                        result = new SenseFood(senserichtung, senseobjekt, jumpPC);
-                        break;
+                        return new SenseFood(senserichtung, senseobjekt, jumpPC);
                 }
 
 
@@ -131,7 +124,8 @@ public final class InstructionGenerator {
                 break;
 
             default:
-                result = null;
+
+                throw new IllegalArgumentException("Unimplemented method " + instruction.toString());
         }
 
         return result;

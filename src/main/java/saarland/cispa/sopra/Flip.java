@@ -1,5 +1,7 @@
 package saarland.cispa.sopra;
 
+import java.util.Objects;
+
 public class Flip extends Instruction {
 
     private final int maxNum;
@@ -32,6 +34,20 @@ public class Flip extends Instruction {
 
         Field field = (Field) ant.getField();
         field.setChanged(true);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flip flip = (Flip) o;
+        return maxNum == flip.maxNum &&
+            jumpPC == flip.jumpPC;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(maxNum, jumpPC);
     }
 
     @Override

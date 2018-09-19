@@ -1,6 +1,7 @@
 package saarland.cispa.sopra;
 
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class Sense extends Instruction {
 
@@ -15,16 +16,18 @@ public abstract class Sense extends Instruction {
         this.jumpPC = jumpPC;
     }
 
-    public void setJumpPC(int pc){
-        this.jumpPC=pc;
-    }
-
     public int getJumpPC() {
         return jumpPC;
     }
+
+    public void setJumpPC(int pc) {
+        this.jumpPC = pc;
+    }
+
     public Target getTargetS() {
         return target;
     }
+
     public String getDirectionS() {
         return direction;
     }
@@ -131,7 +134,7 @@ public abstract class Sense extends Instruction {
     public void senseFriendOrFoe(Ant ant, Field field, boolean friendFoe) {
         //wenn true dann wird nach freund geschaut, bei false nach feind
         if (friendFoe) {
-            if(field.getAnt().isPresent()) {
+            if (field.getAnt().isPresent()) {
                 if (field.getAnt().get().getSwarm() == ant.getSwarm()) {
                     ant.increasePC();
                     return;
@@ -151,7 +154,7 @@ public abstract class Sense extends Instruction {
         Map<Character, boolean[]> markers = field.getMarkers();
         for (char key : markers.keySet()) {
             if (key != ant.getSwarm()) {
-                for(boolean marker : markers.get(key)) {
+                for (boolean marker : markers.get(key)) {
                     if (marker) {
                         ant.increasePC();
                         return;
@@ -162,6 +165,20 @@ public abstract class Sense extends Instruction {
         ant.setPc(jumpPC);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Sense)) return false;
+        Sense sense = (Sense) o;
+        return jumpPC == sense.jumpPC &&
+            Objects.equals(direction, sense.direction) &&
+            target == sense.target;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(direction, target, jumpPC);
+    }
 
     @Override
     public abstract void execute(World world, Ant ant);

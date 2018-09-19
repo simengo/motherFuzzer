@@ -113,8 +113,9 @@ public final class Matchmaker {
         result.add(participantC);
         result.add(participantD);
 
-        result.sort(Comparator.comparing(Brain::getBrainID));
+        result.sort(Comparator.comparing(Brain::getPoints));
 
-        return result;
+        ArrayList<Brain> resultclone = new ArrayList<>(result);
+        return resultclone;
     }
 }
