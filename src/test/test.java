@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
 import saarland.cispa.sopra.Instruction;
 import saarland.cispa.sopra.InstructionGenerator;
-
 import java.util.ArrayList;
 
 public class test {
@@ -15,5 +14,4 @@ public class test {
             instructions.add(instruction);
         }
     }
-
 }
