@@ -1,17 +1,20 @@
 package saarland.cispa.sopra;
 
+import java.util.Objects;
+
 public class Turn extends Instruction {
     private final TurnDirection direction;
+
     public Turn(TurnDirection dir) {
-        this.direction=dir;
+        this.direction = dir;
     }
 
-    private void turnToTheRight(Ant ant,  String[] dirs){
+    private void turnToTheRight(Ant ant, String[] dirs) {
         String antDir = ant.getDirection();
         String end;
 
 
-        switch (antDir){
+        switch (antDir) {
             case "northwest":
                 end = dirs[1];
                 break;
@@ -30,7 +33,8 @@ public class Turn extends Instruction {
             case "west":
                 end = dirs[0];
                 break;
-            default: throw new IllegalArgumentException();
+            default:
+                throw new IllegalArgumentException();
 
 
         }
@@ -39,11 +43,11 @@ public class Turn extends Instruction {
 
     }
 
-    private void turnToTheLeft(Ant ant,String[] dirs){
+    private void turnToTheLeft(Ant ant, String[] dirs) {
         String antDir = ant.getDirection();
         String end;
 
-        switch (antDir){
+        switch (antDir) {
             case "northwest":
                 end = dirs[5];
                 break;
@@ -62,13 +66,12 @@ public class Turn extends Instruction {
             case "west":
                 end = dirs[4];
                 break;
-            default: throw new IllegalArgumentException();
+            default:
+                throw new IllegalArgumentException();
 
         }
         ant.setDirection(end);
     }
-
-
 
 
     @Override
@@ -83,11 +86,11 @@ public class Turn extends Instruction {
         directions[4] = "southwest";
         directions[5] = "west";
 
-        if(direction == TurnDirection.left){
-            turnToTheLeft(ant,directions);
+        if (direction == TurnDirection.left) {
+            turnToTheLeft(ant, directions);
+        } else {
+            turnToTheRight(ant, directions);
         }
-else
-        {turnToTheRight(ant,directions);}
 
 
         ant.increasePC();
@@ -96,8 +99,22 @@ else
         field.setChanged(true);
 
     }
+
     @Override
-    public String toString(){
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Turn turn = (Turn) o;
+        return direction == turn.direction;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(direction);
+    }
+
+    @Override
+    public String toString() {
         return "turn " + direction;
     }
 }

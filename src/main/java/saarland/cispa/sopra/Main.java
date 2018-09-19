@@ -18,7 +18,7 @@ public final class Main {
         File smallestMap = new File("C:/Users/Miles/Documents/Sopra/Maps/1616map.txt");
         File smallMap = new File("C:/Users/Miles/Documents/Sopra/Maps/6464map.txt");
         File mediumMap = new File("C:/Users/Miles/Documents/Sopra/Maps/9696map.txt");
-        File bigMap = new File("C:/Users/Miles/Documents/Sopra/Maps/128128map");
+        File bigMap = new File("C:/Users/Miles/Documents/Sopra/Maps/128128map.txt");
 
 
         Fuzzer fuzzer = new Fuzzer();

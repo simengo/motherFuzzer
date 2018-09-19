@@ -5,6 +5,7 @@ import saarland.cispa.sopra.systemtests.AntInfo;
 
 import java.util.List;
 
+import java.util.Objects;
 import java.util.Optional;
 
 abstract class Killable extends saarland.cispa.sopra.Instruction {
@@ -103,6 +104,19 @@ abstract class Killable extends saarland.cispa.sopra.Instruction {
         }
         return enemies >= 5;
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Killable)) return false;
+        Killable killable = (Killable) o;
+        return jumpPc == killable.jumpPc;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(jumpPc);
     }
 
     public int getJumpPc() {

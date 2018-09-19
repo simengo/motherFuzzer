@@ -70,6 +70,10 @@ public class Breed extends Killable {
         return spawnedAnt;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 
     @Override
     public String toString() {
