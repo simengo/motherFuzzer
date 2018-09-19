@@ -10,6 +10,9 @@ public class SenseField extends Sense {
     public void setJumpPC(int jumpPC) {
         super.setJumpPC(jumpPC);
     }
+    public int getJumpPC() {
+        return super.getJumpPC();
+    }
 
     @Override
     public void execute(World world, Ant ant) {

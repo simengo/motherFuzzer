@@ -12,6 +12,13 @@ public class SenseMarker extends Sense{
     public void setJumpPC(int jumpPC) {
         super.setJumpPC(jumpPC);
     }
+    public int getJumpPC() {
+        return super.getJumpPC();
+    }
+
+    public int getMarker() {
+        return marker;
+    }
 
     @Override
     public void execute(World world, Ant ant) {

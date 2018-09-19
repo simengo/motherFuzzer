@@ -12,6 +12,14 @@ public class Direction extends Instruction {
         this.jumpPC = jumpPC;
     }
 
+    public String getDirectionToLookAt() {
+        return directionToLookAt;
+    }
+
+    public int getJumpPC() {
+        return jumpPC;
+    }
+
     @Override
     public void execute(World world, Ant ant) {
         if(ant.getDirection().equals(directionToLookAt)){

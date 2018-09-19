@@ -10,7 +10,9 @@ public class Move extends Killable {
     public void setJumpPC(int jumpPC) {
         super.setJumpPc(jumpPC);
     }
-
+    public int getJumpPC() {
+        return super.getJumpPc();
+    }
     @Override
     public void execute(World world, Ant ant) {
         Field field = (Field) ant.getField();

@@ -17,6 +17,10 @@ public class Test extends Instruction {
         this.jumpPC = jumpPC;
     }
 
+    public int getJumpPC() {
+        return jumpPC;
+    }
+
     @Override
     public void execute(World world, Ant ant) {
 

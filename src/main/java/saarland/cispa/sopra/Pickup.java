@@ -11,6 +11,10 @@ public class Pickup extends Instruction {
         this.jumpPC = jumpPC;
     }
 
+    public int getJumpPC() {
+        return jumpPC;
+    }
+
     public void setJumpPC(int jumpPC) {
         this.jumpPC = jumpPC;
     }
